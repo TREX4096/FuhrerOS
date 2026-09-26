@@ -151,7 +151,29 @@ map is configuration, not code, and is revised from the data (D-006). Bugs
 found along the way are recorded as F-001…F-005 in
 `research-log/failures/`, each with its root cause, fix and lesson.
 
-## 8. Honest limits
+## 8. What the experiments found
+
+These were measured in E-001…E-004; details are in `docs/experiments.md`.
+
+- **Static ground truth (E-002).** SPECIALIZED was the best static policy for random *and*
+  sequential I/O on this platform. My "sequential → BATCHED" hypothesis was wrong
+  (775 vs 96 MB/s).
+- **Where the gain comes from (A6).** Almost entirely from the libfuhrer I/O path (io_uring,
+  32 in flight, O_DIRECT). Random read gained about +1,000 %; the kernel knobs alone gave only
+  +10–25 %. Unmodified applications benefit much less than Fuhrer-aware ones. This is
+  the main caveat of the project.
+- **Map revised, then validated (E-003).** With IO_SEQUENTIAL → SPECIALIZED, adaptive
+  matches the best static policy on all four storage workloads (random read +0.9 %,
+  sequential read +6 %, sequential write +12 % vs B3). Before the revision it was −87 % and
+  −92 % on sequential I/O.
+- **Reaction (E-002/E-004).** The right policy is reached 3–4 s after a workload change
+  (3 samples × 1 s). Faster settings react in 1 s; a 5 s interval misses 10 s phases entirely.
+- **Overhead.** The profiler uses 0.087 % CPU at 1 s, 0.69 % at 100 ms and 5.1 % at 10 ms. A
+  policy switch takes 23–120 ms, mostly from changing the I/O scheduler.
+- **Compatibility.** 26/26 self-test checks pass on the desktop image, including Firefox.
+  The self-booting disk boots under both BIOS and UEFI.
+
+## 9. Honest limits
 
 - The benchmarks run under **nested virtualization** (Windows → WSL2 →
   KVM). Only relative comparisons within one run are meaningful, not

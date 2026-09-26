@@ -21,6 +21,7 @@ export FUHRER_VM=${FUHRER_VM:-bench}
 
 SUITE=main REPS=${FUHRER_REPS:-3} TIME=${FUHRER_TIME:-10} WARMUP=5
 WORKLOADS=randread,seqread,randwrite,seqwrite,cpu,memory,netlat,netbw
+STATIC_CONFIGS=(normal batched specialized adaptive knobs-batched knobs-specialized lib-batched lib-specialized)
 while [ $# -gt 0 ]; do
 	case $1 in
 	--suite) SUITE=$2; shift ;;
@@ -35,7 +36,6 @@ while [ $# -gt 0 ]; do
 	shift
 done
 IFS=, read -r -a WLS <<<"$WORKLOADS"
-STATIC_CONFIGS=(normal batched specialized adaptive knobs-batched knobs-specialized lib-batched lib-specialized)
 
 command -v python3 >/dev/null || fu_die "python3 needed on the host for analysis"
 fu_vm_running && fu_die "a VM is already running; ./scripts/reset.sh --stop first"

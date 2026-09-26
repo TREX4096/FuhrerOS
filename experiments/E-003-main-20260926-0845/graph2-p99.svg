@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" font-family="sans-serif" font-size="12">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="450.0" y="24" text-anchor="middle" font-size="15" font-weight="bold">Graph 2 — P99 latency (us), lower is better</text>
+<text x="16" y="190.0" transform="rotate(-90 16 190.0)" text-anchor="middle">microseconds</text>
+<line x1="70" x2="880" y1="330.0" y2="330.0" stroke="#e3e3e3"/>
+<text x="64" y="334.0" text-anchor="end" fill="#555">0.000</text>
+<line x1="70" x2="880" y1="274.0" y2="274.0" stroke="#e3e3e3"/>
+<text x="64" y="278.0" text-anchor="end" fill="#555">74,809</text>
+<line x1="70" x2="880" y1="218.0" y2="218.0" stroke="#e3e3e3"/>
+<text x="64" y="222.0" text-anchor="end" fill="#555">149,617</text>
+<line x1="70" x2="880" y1="162.0" y2="162.0" stroke="#e3e3e3"/>
+<text x="64" y="166.0" text-anchor="end" fill="#555">224,426</text>
+<line x1="70" x2="880" y1="106.0" y2="106.0" stroke="#e3e3e3"/>
+<text x="64" y="110.0" text-anchor="end" fill="#555">299,235</text>
+<line x1="70" x2="880" y1="50.0" y2="50.0" stroke="#e3e3e3"/>
+<text x="64" y="54.0" text-anchor="end" fill="#555">374,043</text>
+<rect x="90.2" y="327.9" width="30.4" height="2.1" fill="#5B6C8F"><title>randread B0 Linux: 2,856</title></rect>
+<rect x="122.7" y="324.3" width="30.4" height="5.7" fill="#8FA3BF"><title>randread B1 static normal: 7,617</title></rect>
+<rect x="155.1" y="322.9" width="30.4" height="7.1" fill="#C9A66B"><title>randread static batched: 9,527</title></rect>
+<rect x="187.4" y="322.4" width="30.4" height="7.6" fill="#7FA37A"><title>randread static specialized: 10,171</title></rect>
+<rect x="219.8" y="323.7" width="30.4" height="6.3" fill="#B5646B"><title>randread B2 adaptive: 8,440</title></rect>
+<text x="171.2" y="346" text-anchor="middle">randread</text>
+<rect x="292.8" y="329.6" width="30.4" height="0.4" fill="#5B6C8F"><title>randwrite B0 Linux: 526.1</title></rect>
+<rect x="325.1" y="327.0" width="30.4" height="3.0" fill="#8FA3BF"><title>randwrite B1 static normal: 3,960</title></rect>
+<rect x="357.6" y="324.4" width="30.4" height="5.6" fill="#C9A66B"><title>randwrite static batched: 7,467</title></rect>
+<rect x="389.9" y="320.3" width="30.4" height="9.7" fill="#7FA37A"><title>randwrite static specialized: 12,963</title></rect>
+<rect x="422.4" y="324.0" width="30.4" height="6.0" fill="#B5646B"><title>randwrite B2 adaptive: 8,071</title></rect>
+<text x="373.8" y="346" text-anchor="middle">randwrite</text>
+<rect x="495.2" y="250.8" width="30.4" height="79.2" fill="#5B6C8F"><title>seqread B0 Linux: 105,827</title></rect>
+<rect x="527.6" y="80.0" width="30.4" height="250.0" fill="#8FA3BF"><title>seqread B1 static normal: 333,967</title></rect>
+<rect x="560.0" y="173.4" width="30.4" height="156.6" fill="#C9A66B"><title>seqread static batched: 209,168</title></rect>
+<rect x="592.5" y="322.8" width="30.4" height="7.2" fill="#7FA37A"><title>seqread static specialized: 9,602</title></rect>
+<rect x="624.9" y="324.2" width="30.4" height="5.8" fill="#B5646B"><title>seqread B2 adaptive: 7,813</title></rect>
+<text x="576.2" y="346" text-anchor="middle">seqread</text>
+<rect x="697.8" y="256.9" width="30.4" height="73.1" fill="#5B6C8F"><title>seqwrite B0 Linux: 97,616</title></rect>
+<rect x="730.1" y="150.7" width="30.4" height="179.3" fill="#8FA3BF"><title>seqwrite B1 static normal: 239,551</title></rect>
+<rect x="762.5" y="252.5" width="30.4" height="77.5" fill="#C9A66B"><title>seqwrite static batched: 103,520</title></rect>
+<rect x="795.0" y="321.3" width="30.4" height="8.7" fill="#7FA37A"><title>seqwrite static specialized: 11,618</title></rect>
+<rect x="827.4" y="322.2" width="30.4" height="7.8" fill="#B5646B"><title>seqwrite B2 adaptive: 10,368</title></rect>
+<text x="778.8" y="346" text-anchor="middle">seqwrite</text>
+<rect x="70" y="380" width="12" height="12" fill="#5B6C8F"/>
+<text x="86" y="390">B0 Linux</text>
+<rect x="148.0" y="380" width="12" height="12" fill="#8FA3BF"/>
+<text x="164.0" y="390">B1 static normal</text>
+<rect x="286.0" y="380" width="12" height="12" fill="#C9A66B"/>
+<text x="302.0" y="390">static batched</text>
+<rect x="409.0" y="380" width="12" height="12" fill="#7FA37A"/>
+<text x="425.0" y="390">static specialized</text>
+<rect x="562.0" y="380" width="12" height="12" fill="#B5646B"/>
+<text x="578.0" y="390">B2 adaptive</text>
+</svg>

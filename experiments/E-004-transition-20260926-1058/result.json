@@ -1,0 +1,209 @@
+{
+  "experiment": "E-004",
+  "config": {
+    "experiment": "E-004",
+    "suite": "transition",
+    "date": "2026-09-26T10:58:48Z",
+    "commit": "129fe41-dirty",
+    "host": "Linux 6.6.87.2-microsoft-standard-WSL2 x86_64",
+    "host_cpu": "AMD Ryzen 5 7520U with Radeon Graphics",
+    "host_mem_mb": 4918,
+    "host_note": "WSL2 (Hyper-V) host, KVM nested inside WSL2 when accel=kvm",
+    "qemu": "QEMU emulator version 10.2.1 (Debian 1:10.2.1+ds-1ubuntu3.1)",
+    "accel": "kvm",
+    "vm_config": "bench",
+    "vcpus": 4,
+    "memory_mb": 4096,
+    "disk_gb": 40,
+    "disk": "virtio-blk, qcow2 overlay on ext4 (WSL2 vhdx), cache=none",
+    "network": "virtio-net, QEMU user-mode (slirp)",
+    "profile": "base",
+    "image": {
+      "profile": "base",
+      "build_date": "2026-09-26T08:41:39Z",
+      "git_rev": "d4f167e-dirty",
+      "alpine": "3.22.6",
+      "kernel": "6.12.111-0-virt",
+      "disk_gb": 20,
+      "packages": 210,
+      "rootfs_used_mb": 475
+    },
+    "reps": 3,
+    "time_s": 10,
+    "warmup_s": 5,
+    "workloads": "randread,seqread,randwrite,seqwrite,cpu,memory,netlat,netbw",
+    "sampling_interval_ms": 1000,
+    "hysteresis": 3,
+    "min_dwell_ms": 3000,
+    "policy_map": "v2"
+  },
+  "transition": {
+    "normal": [
+      {
+        "delays_s": {
+          "idle": 1.0,
+          "cpu": 1.0,
+          "idle#2": 1.0
+        },
+        "switches": 0,
+        "phase_mean": {
+          "idle": 0.0,
+          "cpu": 1067990000.0,
+          "randread": 3.1798888888888888,
+          "seqread": 142.67944444444444
+        }
+      },
+      {
+        "delays_s": {
+          "idle": 1.0,
+          "cpu": 1.0,
+          "idle#2": 1.0
+        },
+        "switches": 0,
+        "phase_mean": {
+          "idle": 0.0,
+          "cpu": 1085000000.0,
+          "randread": 3.337333333333333,
+          "seqread": 166.80244444444443
+        }
+      },
+      {
+        "delays_s": {
+          "idle": 1.0,
+          "cpu": 1.0,
+          "idle#2": 1.0
+        },
+        "switches": 0,
+        "phase_mean": {
+          "idle": 0.0,
+          "cpu": 1106440000.0,
+          "randread": 3.481222222222222,
+          "seqread": 103.76555555555555
+        }
+      }
+    ],
+    "batched": [
+      {
+        "delays_s": {},
+        "switches": 0,
+        "phase_mean": {
+          "idle": 0.0,
+          "cpu": 1089210000.0,
+          "randread": 31.022333333333332,
+          "seqread": 206.2231111111111
+        }
+      },
+      {
+        "delays_s": {},
+        "switches": 0,
+        "phase_mean": {
+          "idle": 0.0,
+          "cpu": 1071210000.0,
+          "randread": 33.494,
+          "seqread": 161.78555555555556
+        }
+      },
+      {
+        "delays_s": {},
+        "switches": 0,
+        "phase_mean": {
+          "idle": 0.0,
+          "cpu": 1097780000.0,
+          "randread": 34.73088888888889,
+          "seqread": 152.21
+        }
+      }
+    ],
+    "specialized": [
+      {
+        "delays_s": {
+          "randread": 1.0,
+          "seqread": 1.0
+        },
+        "switches": 0,
+        "phase_mean": {
+          "idle": 0.0,
+          "cpu": 846930000.0,
+          "randread": 26.002333333333333,
+          "seqread": 569.3707777777778
+        }
+      },
+      {
+        "delays_s": {
+          "randread": 1.0,
+          "seqread": 1.0
+        },
+        "switches": 0,
+        "phase_mean": {
+          "idle": 0.0,
+          "cpu": 1059280000.0,
+          "randread": 34.048,
+          "seqread": 564.2108888888889
+        }
+      },
+      {
+        "delays_s": {
+          "randread": 1.0,
+          "seqread": 1.0
+        },
+        "switches": 0,
+        "phase_mean": {
+          "idle": 0.0,
+          "cpu": 1091670000.0,
+          "randread": 37.827,
+          "seqread": 586.9513333333333
+        }
+      }
+    ],
+    "adaptive": [
+      {
+        "delays_s": {
+          "idle": 2.0,
+          "cpu": 1.0,
+          "randread": 4.039999999999999,
+          "seqread": 1.0,
+          "idle#2": 4.0
+        },
+        "switches": 3,
+        "phase_mean": {
+          "idle": 0.0,
+          "cpu": 959510000.0,
+          "randread": 25.20788888888889,
+          "seqread": 551.8093333333334
+        }
+      },
+      {
+        "delays_s": {
+          "idle": 2.0,
+          "cpu": 1.0,
+          "randread": 3.0199999999999996,
+          "seqread": 1.0,
+          "idle#2": 5.0
+        },
+        "switches": 3,
+        "phase_mean": {
+          "idle": 0.0,
+          "cpu": 1026890000.0,
+          "randread": 21.425444444444445,
+          "seqread": 523.0616666666667
+        }
+      },
+      {
+        "delays_s": {
+          "idle": 1.0,
+          "cpu": 1.0,
+          "randread": 4.02,
+          "seqread": 1.0,
+          "idle#2": 4.0
+        },
+        "switches": 2,
+        "phase_mean": {
+          "idle": 0.0,
+          "cpu": 1099970000.0,
+          "randread": 23.946444444444445,
+          "seqread": 585.4376666666667
+        }
+      }
+    ]
+  }
+}

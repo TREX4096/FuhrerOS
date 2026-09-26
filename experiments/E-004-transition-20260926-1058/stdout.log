@@ -1,0 +1,60 @@
+  [specialized rep1] transition: idle -> cpu -> randread -> seqread -> idle, 10s each; timeline /var/tmp/fuhrer-exp/specialized/transition/rep1.timeline.csv
+  [specialized rep1] done: backend switches seen by libfuhrer: 0
+  [adaptive rep1] transition: idle -> cpu -> randread -> seqread -> idle, 10s each; timeline /var/tmp/fuhrer-exp/adaptive/transition/rep1.timeline.csv
+  [adaptive rep1] done: backend switches seen by libfuhrer: 0
+  [batched rep1] transition: idle -> cpu -> randread -> seqread -> idle, 10s each; timeline /var/tmp/fuhrer-exp/batched/transition/rep1.timeline.csv
+  [batched rep1] done: backend switches seen by libfuhrer: 0
+  [normal rep1] transition: idle -> cpu -> randread -> seqread -> idle, 10s each; timeline /var/tmp/fuhrer-exp/normal/transition/rep1.timeline.csv
+  [normal rep1] done: backend switches seen by libfuhrer: 0
+  [normal rep2] transition: idle -> cpu -> randread -> seqread -> idle, 10s each; timeline /var/tmp/fuhrer-exp/normal/transition/rep2.timeline.csv
+  [normal rep2] done: backend switches seen by libfuhrer: 0
+  [batched rep2] transition: idle -> cpu -> randread -> seqread -> idle, 10s each; timeline /var/tmp/fuhrer-exp/batched/transition/rep2.timeline.csv
+  [batched rep2] done: backend switches seen by libfuhrer: 0
+  [specialized rep2] transition: idle -> cpu -> randread -> seqread -> idle, 10s each; timeline /var/tmp/fuhrer-exp/specialized/transition/rep2.timeline.csv
+  [specialized rep2] done: backend switches seen by libfuhrer: 0
+  [adaptive rep2] transition: idle -> cpu -> randread -> seqread -> idle, 10s each; timeline /var/tmp/fuhrer-exp/adaptive/transition/rep2.timeline.csv
+  [adaptive rep2] done: backend switches seen by libfuhrer: 0
+  [adaptive rep3] transition: idle -> cpu -> randread -> seqread -> idle, 10s each; timeline /var/tmp/fuhrer-exp/adaptive/transition/rep3.timeline.csv
+  [adaptive rep3] done: backend switches seen by libfuhrer: 0
+  [normal rep3] transition: idle -> cpu -> randread -> seqread -> idle, 10s each; timeline /var/tmp/fuhrer-exp/normal/transition/rep3.timeline.csv
+  [normal rep3] done: backend switches seen by libfuhrer: 0
+  [specialized rep3] transition: idle -> cpu -> randread -> seqread -> idle, 10s each; timeline /var/tmp/fuhrer-exp/specialized/transition/rep3.timeline.csv
+  [specialized rep3] done: backend switches seen by libfuhrer: 0
+  [batched rep3] transition: idle -> cpu -> randread -> seqread -> idle, 10s each; timeline /var/tmp/fuhrer-exp/batched/transition/rep3.timeline.csv
+  [batched rep3] done: backend switches seen by libfuhrer: 0
+# E-004 — suite `transition`
+
+- Date: 2026-09-26T10:58:48Z  commit `129fe41-dirty`
+- Host: Linux 6.6.87.2-microsoft-standard-WSL2 x86_64 / AMD Ryzen 5 7520U with Radeon Graphics (WSL2 (Hyper-V) host, KVM nested inside WSL2 when accel=kvm)
+- QEMU: QEMU emulator version 10.2.1 (Debian 1:10.2.1+ds-1ubuntu3.1)  accel **kvm**
+- VM `bench`: 4 vCPU, 4096 MB, 40 GB virtio-blk, qcow2 overlay on ext4 (WSL2 vhdx), cache=none
+- Kernel: 6.12.111-0-virt; reps=3, time=10s, warmup=5s
+
+## Workload transitions (Graph 3)
+
+| config | rep | switches | time-to-policy randread (s) | seqread (s) | cpu (s) | randread MB/s | seqread MB/s | cpu ops/s |
+|---|---|---|---|---|---|---|---|---|
+| B1 static normal | 1 | 0 | NOT RUN | NOT RUN | 1.000 | 3.180 | 142.7 | 1,067,990,000 |
+| B1 static normal | 2 | 0 | NOT RUN | NOT RUN | 1.000 | 3.337 | 166.8 | 1,085,000,000 |
+| B1 static normal | 3 | 0 | NOT RUN | NOT RUN | 1.000 | 3.481 | 103.8 | 1,106,440,000 |
+| static batched | 1 | 0 | NOT RUN | NOT RUN | NOT RUN | 31.0 | 206.2 | 1,089,210,000 |
+| static batched | 2 | 0 | NOT RUN | NOT RUN | NOT RUN | 33.5 | 161.8 | 1,071,210,000 |
+| static batched | 3 | 0 | NOT RUN | NOT RUN | NOT RUN | 34.7 | 152.2 | 1,097,780,000 |
+| static specialized | 1 | 0 | 1.000 | 1.000 | NOT RUN | 26.0 | 569.4 | 846,930,000 |
+| static specialized | 2 | 0 | 1.000 | 1.000 | NOT RUN | 34.0 | 564.2 | 1,059,280,000 |
+| static specialized | 3 | 0 | 1.000 | 1.000 | NOT RUN | 37.8 | 587.0 | 1,091,670,000 |
+| B2 adaptive | 1 | 3 | 4.040 | 1.000 | 1.000 | 25.2 | 551.8 | 959,510,000 |
+| B2 adaptive | 2 | 3 | 3.020 | 1.000 | 1.000 | 21.4 | 523.1 | 1,026,890,000 |
+| B2 adaptive | 3 | 2 | 4.020 | 1.000 | 1.000 | 23.9 | 585.4 | 1,099,970,000 |
+
+Time-to-policy counts from the phase start until fuhrerd's published policy equals the policy the default map assigns to that phase; NOT RUN = never reached (expected for static configs).
+
+![Graph 3](graph3-adaptation.svg)
+
+## Threats to validity (this run)
+
+- Nested virtualisation (Windows Hyper-V → WSL2 → KVM): absolute numbers are not representative of bare metal; only relative comparisons inside one run are meaningful.
+- Disk is a qcow2 overlay on a WSL2 virtual disk; host page cache bypassed (cache=none) but the WSL2 vhdx layer is not.
+- Network workloads use guest loopback; they exercise the guest stack, not virtio-net.
+- Small sample size (reps=3); see CV% for run-to-run variance.
+

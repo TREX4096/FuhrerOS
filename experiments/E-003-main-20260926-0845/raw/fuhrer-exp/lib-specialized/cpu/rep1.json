@@ -1,0 +1,11 @@
+{
+  "tool": "fuhrer-bench",
+  "workload": "cpu",
+  "kernel": "6.12.111-0-virt",
+  "ncpus": 4,
+  "daemon_policy_at_start": 0,
+  "daemon_mode_at_start": 2,
+  "timestamp": 1790413178,
+  "threads": 4,
+  "mops_per_s": {"n": 10, "mean": 1716.91, "stdev": 413.549, "p50": 1798.8, "p95": 2044.8, "p99": 2044.8, "max": 2076.5}
+}

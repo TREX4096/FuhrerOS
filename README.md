@@ -81,12 +81,22 @@ Credentials (development VM only): `root/fuhrer`, `fuhrer/fuhrer`; SSH with
 | M12 adaptive cache (read-ahead) | ⚙️ first cut | read-ahead is a policy knob; no dedicated experiment yet |
 | M13 kernel integration | ⏳ not started | by design: userspace first |
 | M14 compatibility: curl, Python, GCC, Git, editor, text browser, **Firefox** | ✅ | selftest; screenshot above |
-| M15 full benchmark | ✅ first campaign | [docs/experiments.md](docs/experiments.md) |
+| M15 full benchmark | ✅ E-001…E-004 | [docs/experiments.md](docs/experiments.md) |
+| Bare-metal image | ⚙️ BIOS+UEFI boot verified in QEMU | `scripts/build-bootable.sh --kernel lts`; real hardware NOT RUN |
 
 Results are summarised in [docs/experiments.md](docs/experiments.md). The raw
 data and per-experiment reports are in `experiments/E-*/summary.md`. No
 number anywhere in this repository was produced other than by running the
 benchmark.
+
+## Key results (nested KVM on a laptop; see docs/experiments.md)
+
+- SPECIALIZED is the best static policy for all storage workloads here. The gain comes
+  almost entirely from libfuhrer's io_uring/O_DIRECT path, not from the kernel knobs.
+- With the evidence-revised map, adaptive **matches the best static policy** on every
+  storage workload (E-003).
+- It reacts in **3–4 s** (1 s at a 100 ms interval), and costs **0.09 % CPU** at 1 s sampling.
+- A self-booting GPT disk (`scripts/build-bootable.sh`) boots via GRUB under **BIOS and UEFI**.
 
 ## Repository
 
