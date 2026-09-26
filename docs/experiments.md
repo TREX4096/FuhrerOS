@@ -7,7 +7,7 @@ better than fixed policies?** Every number below is copied from a run's
 command. Values that were not measured are written as NOT RUN.
 
 Final runs: **E-117 (sched), E-118 (cache), E-119 (transition), E-120
-(ablation)**, all on one binary built from commit `e942a12`. Their configs
+(ablation)**, all on one binary built from commit `e942a12` (now `96b4fa6`; hashes changed when commit messages were rewritten, see [research-log/commit-map.md](../research-log/commit-map.md)). Their configs
 say `e942a12-dirty` only because research-log/ and tools/ documentation files
 were edited while the campaign ran. No kernel, user-space or rootfs file
 differed from the commit.
