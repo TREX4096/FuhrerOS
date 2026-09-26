@@ -1,0 +1,37 @@
+#!/sbin/openrc-run
+# FuhrerOS adaptive policy controller.
+
+name="fuhrerd"
+description="FuhrerOS workload profiler and adaptive policy engine"
+command="/usr/sbin/fuhrerd"
+command_args="-c ${FUHRERD_CONFIG:-/etc/fuhrer/fuhrer.conf} ${FUHRERD_ARGS}"
+command_background="yes"
+pidfile="/run/${RC_SVCNAME}.pid"
+output_log="/var/log/fuhrer/fuhrerd.log"
+error_log="/var/log/fuhrer/fuhrerd.log"
+retry="TERM/10/KILL/5"
+extra_started_commands="reload"
+
+depend() {
+	need localmount sysfs
+	after bootmisc modules networking
+}
+
+start_pre() {
+	# Baseline B0 ("native Linux"): boot with fuhrer.disable=1.
+	if grep -qw 'fuhrer.disable=1' /proc/cmdline; then
+		ewarn "fuhrerd disabled by kernel command line (fuhrer.disable=1)"
+		return 1
+	fi
+	checkpath -d -m 0755 /run/fuhrer /var/log/fuhrer
+	# The CPU policy tunes the EEVDF slice through debugfs.
+	if [ ! -d /sys/kernel/debug/sched ]; then
+		mount -t debugfs debugfs /sys/kernel/debug 2>/dev/null || true
+	fi
+}
+
+reload() {
+	ebegin "Reloading ${RC_SVCNAME} configuration"
+	kill -HUP "$(cat /run/fuhrer/fuhrerd.pid)"
+	eend $?
+}

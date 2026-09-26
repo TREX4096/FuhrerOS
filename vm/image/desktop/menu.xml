@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openbox_menu xmlns="http://openbox.org/3.4/menu">
+  <menu id="root-menu" label="FuhrerOS">
+    <item label="Terminal"><action name="Execute"><command>xterm</command></action></item>
+    <item label="Firefox"><action name="Execute"><command>firefox-esr</command></action></item>
+    <item label="NetSurf (light browser)"><action name="Execute"><command>netsurf-gtk3</command></action></item>
+    <item label="Files"><action name="Execute"><command>pcmanfm</command></action></item>
+    <item label="Fuhrer dashboard"><action name="Execute"><command>xterm -e sh -c 'watch -n1 -t fuhrer status'</command></action></item>
+    <separator />
+    <item label="Log out"><action name="Exit" /></item>
+  </menu>
+</openbox_menu>

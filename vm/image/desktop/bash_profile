@@ -1,0 +1,5 @@
+[ -f /etc/profile ] && . /etc/profile
+# Start the graphical session automatically on tty1.
+if [ -z "$DISPLAY" ] && [ "$(tty)" = /dev/tty1 ]; then
+	exec startx
+fi

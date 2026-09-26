@@ -1,0 +1,7 @@
+.env
+out/
+build/
+*.qcow2
+*.img
+*.o
+__pycache__/

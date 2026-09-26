@@ -1,0 +1,3 @@
+virtio_net
+virtio_rng
+af_packet

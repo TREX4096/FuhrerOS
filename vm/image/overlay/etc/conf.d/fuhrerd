@@ -1,0 +1,4 @@
+# Configuration file for /etc/init.d/fuhrerd
+#FUHRERD_CONFIG=/etc/fuhrer/fuhrer.conf
+# Extra arguments, e.g. "-m observe" or "-m static:batched"
+#FUHRERD_ARGS=""

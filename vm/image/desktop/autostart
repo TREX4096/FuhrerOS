@@ -1,0 +1,2 @@
+tint2 &
+xterm -geometry 110x32+40+40 -title "FuhrerOS dashboard" -e sh -c 'watch -n1 -t fuhrer status' &

@@ -1,0 +1,7 @@
+NAME="FuhrerOS"
+ID=fuhreros
+ID_LIKE=alpine
+VERSION_ID=0.4
+VERSION="0.4 (Adaptive)"
+PRETTY_NAME="FuhrerOS 0.4 (Adaptive OS specialization research prototype)"
+HOME_URL="https://example.invalid/fuhreros"

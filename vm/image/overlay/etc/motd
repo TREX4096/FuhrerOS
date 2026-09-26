@@ -1,0 +1,9 @@
+Welcome to FuhrerOS — Linux + adaptive policy layer.
+
+  fuhrer status        research dashboard (workload class, active policy)
+  fuhrer profile       live workload profile
+  fuhrer policy <p>    auto | observe | off | normal | batched | specialized
+  fuhrer log           adaptation decisions
+  fuhrer benchmark     storage / cpu / memory / net / transition benchmarks
+  fuhrer-selftest      compatibility and acceptance checks
+

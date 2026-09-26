@@ -1,0 +1,4 @@
+#!/bin/sh
+# Machine-readable marker for scripts/test.sh (serial console).
+. /etc/fuhreros-release
+echo "FUHREROS-BOOT-COMPLETE version=$FUHREROS_VERSION kernel=$(uname -r)" > /dev/console

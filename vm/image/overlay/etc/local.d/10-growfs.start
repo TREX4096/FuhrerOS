@@ -1,0 +1,11 @@
+#!/bin/sh
+# Grow the root filesystem when the VM disk is larger than the base image
+# (the bench/stress VMs get 40/50 GB overlays over the 20 GB base).
+dev=$(findmnt -no SOURCE /)
+case $dev in /dev/vd*) ;; *) exit 0 ;; esac
+disk_b=$(( $(cat /sys/class/block/${dev#/dev/}/size) * 512 ))
+fs_b=$(dumpe2fs -h "$dev" 2>/dev/null | awk -F: '/^Block count/{c=$2} /^Block size/{s=$2} END{print c*s}')
+if [ "$disk_b" -gt $((fs_b + 64 * 1024 * 1024)) ]; then
+	echo "growing $dev: $((fs_b >> 30)) GiB -> $((disk_b >> 30)) GiB"
+	resize2fs "$dev" >/dev/null 2>&1 || echo "resize2fs failed"
+fi

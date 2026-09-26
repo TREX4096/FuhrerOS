@@ -1,0 +1,4 @@
+#!/bin/sh
+# FuhrerOS desktop session
+xsetroot -solid '#1d2330' 2>/dev/null
+exec dbus-launch --exit-with-session openbox-session
