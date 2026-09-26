@@ -1,0 +1,11 @@
+[1;34m[fuhreros][0m experiment /mnt/d/SEM7/FuhrerOS/experiments/E-001-main-20260926-0630
+[1;34m[fuhreros][0m B0: native Linux (fuhrer.disable=1)
+Acceleration: KVM
+[1;34m[fuhreros][0m creating VM disk /home/fuhrer4096/.cache/fuhreros/out/vm-bench-base.qcow2 (backing: fuhreros-base.qcow2, 40G)
+[1;34m[fuhreros][0m booting (pid 4185), serial log: /home/fuhrer4096/.cache/fuhreros/out/vm-bench-base.serial.log
+[1;34m[fuhreros][0m guest up in 30s (ssh after 30s)
+[1;34m[fuhreros][0m B1/B2/B3: FuhrerOS static and adaptive
+Acceleration: KVM
+[1;34m[fuhreros][0m booting (pid 4577), serial log: /home/fuhrer4096/.cache/fuhreros/out/vm-bench-base.serial.log
+[1;34m[fuhreros][0m guest up in 24s (ssh after 24s)
+[1;34m[fuhreros][0m results: /mnt/d/SEM7/FuhrerOS/experiments/E-001-main-20260926-0630/summary.md

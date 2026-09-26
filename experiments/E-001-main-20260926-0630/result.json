@@ -1,0 +1,495 @@
+{
+  "experiment": "E-001",
+  "config": {
+    "experiment": "E-001",
+    "suite": "main",
+    "date": "2026-09-26T06:30:49Z",
+    "commit": "unknown-dirty",
+    "host": "Linux 6.6.87.2-microsoft-standard-WSL2 x86_64",
+    "host_cpu": "AMD Ryzen 5 7520U with Radeon Graphics",
+    "host_mem_mb": 4918,
+    "host_note": "WSL2 (Hyper-V) host, KVM nested inside WSL2 when accel=kvm",
+    "qemu": "QEMU emulator version 10.2.1 (Debian 1:10.2.1+ds-1ubuntu3.1)",
+    "accel": "kvm",
+    "vm_config": "bench",
+    "vcpus": 4,
+    "memory_mb": 4096,
+    "disk_gb": 40,
+    "disk": "virtio-blk, qcow2 overlay on ext4 (WSL2 vhdx), cache=none",
+    "network": "virtio-net, QEMU user-mode (slirp)",
+    "profile": "base",
+    "image": {
+      "profile": "base",
+      "build_date": "2026-09-26T06:30:10Z",
+      "git_rev": "unknown-dirty",
+      "alpine": "3.22.6",
+      "kernel": "6.12.111-0-virt",
+      "disk_gb": 20,
+      "packages": 210,
+      "rootfs_used_mb": 475
+    },
+    "reps": 1,
+    "time_s": 5,
+    "warmup_s": 4,
+    "workloads": "randread,seqread,cpu,netlat",
+    "sampling_interval_ms": 1000,
+    "hysteresis": 3,
+    "min_dwell_ms": 3000
+  },
+  "main": {
+    "randread": {
+      "B0": {
+        "primary": {
+          "n": 1,
+          "median": 1084.11,
+          "min": 1084.11,
+          "max": 1084.11,
+          "stdev": 0.0,
+          "cv_pct": 0.0,
+          "raw": [
+            1084.11
+          ]
+        },
+        "p99": {
+          "n": 1,
+          "median": 1909.22,
+          "min": 1909.22,
+          "max": 1909.22,
+          "stdev": 0.0,
+          "cv_pct": 0.0,
+          "raw": [
+            1909.22
+          ]
+        }
+      },
+      "normal": {
+        "primary": {
+          "n": 1,
+          "median": 1041.47,
+          "min": 1041.47,
+          "max": 1041.47,
+          "stdev": 0.0,
+          "cv_pct": 0.0,
+          "raw": [
+            1041.47
+          ]
+        },
+        "p99": {
+          "n": 1,
+          "median": 2038.9,
+          "min": 2038.9,
+          "max": 2038.9,
+          "stdev": 0.0,
+          "cv_pct": 0.0,
+          "raw": [
+            2038.9
+          ]
+        }
+      },
+      "batched": {
+        "primary": {
+          "n": 1,
+          "median": 9087.3,
+          "min": 9087.3,
+          "max": 9087.3,
+          "stdev": 0.0,
+          "cv_pct": 0.0,
+          "raw": [
+            9087.3
+          ]
+        },
+        "p99": {
+          "n": 1,
+          "median": 7048.79,
+          "min": 7048.79,
+          "max": 7048.79,
+          "stdev": 0.0,
+          "cv_pct": 0.0,
+          "raw": [
+            7048.79
+          ]
+        }
+      },
+      "specialized": {
+        "primary": {
+          "n": 1,
+          "median": 14529.4,
+          "min": 14529.4,
+          "max": 14529.4,
+          "stdev": 0.0,
+          "cv_pct": 0.0,
+          "raw": [
+            14529.4
+          ]
+        },
+        "p99": {
+          "n": 1,
+          "median": 4293.65,
+          "min": 4293.65,
+          "max": 4293.65,
+          "stdev": 0.0,
+          "cv_pct": 0.0,
+          "raw": [
+            4293.65
+          ]
+        }
+      },
+      "adaptive": {
+        "primary": {
+          "n": 1,
+          "median": 11884.1,
+          "min": 11884.1,
+          "max": 11884.1,
+          "stdev": 0.0,
+          "cv_pct": 0.0,
+          "raw": [
+            11884.1
+          ]
+        },
+        "p99": {
+          "n": 1,
+          "median": 7898.42,
+          "min": 7898.42,
+          "max": 7898.42,
+          "stdev": 0.0,
+          "cv_pct": 0.0,
+          "raw": [
+            7898.42
+          ]
+        }
+      },
+      "B3": {
+        "config": "specialized",
+        "median": 14529.4
+      }
+    },
+    "seqread": {
+      "B0": {
+        "primary": {
+          "n": 1,
+          "median": 25.6187,
+          "min": 25.6187,
+          "max": 25.6187,
+          "stdev": 0.0,
+          "cv_pct": 0.0,
+          "raw": [
+            25.6187
+          ]
+        },
+        "p99": {
+          "n": 1,
+          "median": 180154.0,
+          "min": 180154.0,
+          "max": 180154.0,
+          "stdev": 0.0,
+          "cv_pct": 0.0,
+          "raw": [
+            180154.0
+          ]
+        }
+      },
+      "normal": {
+        "primary": {
+          "n": 1,
+          "median": 40.6275,
+          "min": 40.6275,
+          "max": 40.6275,
+          "stdev": 0.0,
+          "cv_pct": 0.0,
+          "raw": [
+            40.6275
+          ]
+        },
+        "p99": {
+          "n": 1,
+          "median": 81307.0,
+          "min": 81307.0,
+          "max": 81307.0,
+          "stdev": 0.0,
+          "cv_pct": 0.0,
+          "raw": [
+            81307.0
+          ]
+        }
+      },
+      "batched": {
+        "primary": {
+          "n": 1,
+          "median": 49.879,
+          "min": 49.879,
+          "max": 49.879,
+          "stdev": 0.0,
+          "cv_pct": 0.0,
+          "raw": [
+            49.879
+          ]
+        },
+        "p99": {
+          "n": 1,
+          "median": 181675.0,
+          "min": 181675.0,
+          "max": 181675.0,
+          "stdev": 0.0,
+          "cv_pct": 0.0,
+          "raw": [
+            181675.0
+          ]
+        }
+      },
+      "specialized": {
+        "primary": {
+          "n": 1,
+          "median": 658.031,
+          "min": 658.031,
+          "max": 658.031,
+          "stdev": 0.0,
+          "cv_pct": 0.0,
+          "raw": [
+            658.031
+          ]
+        },
+        "p99": {
+          "n": 1,
+          "median": 16497.8,
+          "min": 16497.8,
+          "max": 16497.8,
+          "stdev": 0.0,
+          "cv_pct": 0.0,
+          "raw": [
+            16497.8
+          ]
+        }
+      },
+      "adaptive": {
+        "primary": {
+          "n": 1,
+          "median": 125.869,
+          "min": 125.869,
+          "max": 125.869,
+          "stdev": 0.0,
+          "cv_pct": 0.0,
+          "raw": [
+            125.869
+          ]
+        },
+        "p99": {
+          "n": 1,
+          "median": 208867.0,
+          "min": 208867.0,
+          "max": 208867.0,
+          "stdev": 0.0,
+          "cv_pct": 0.0,
+          "raw": [
+            208867.0
+          ]
+        }
+      },
+      "B3": {
+        "config": "specialized",
+        "median": 658.031
+      }
+    },
+    "cpu": {
+      "B0": {
+        "primary": {
+          "n": 1,
+          "median": 1114.2,
+          "min": 1114.2,
+          "max": 1114.2,
+          "stdev": 0.0,
+          "cv_pct": 0.0,
+          "raw": [
+            1114.2
+          ]
+        },
+        "p99": null
+      },
+      "normal": {
+        "primary": {
+          "n": 1,
+          "median": 1750.0,
+          "min": 1750.0,
+          "max": 1750.0,
+          "stdev": 0.0,
+          "cv_pct": 0.0,
+          "raw": [
+            1750.0
+          ]
+        },
+        "p99": null
+      },
+      "batched": {
+        "primary": {
+          "n": 1,
+          "median": 1721.1,
+          "min": 1721.1,
+          "max": 1721.1,
+          "stdev": 0.0,
+          "cv_pct": 0.0,
+          "raw": [
+            1721.1
+          ]
+        },
+        "p99": null
+      },
+      "specialized": {
+        "primary": {
+          "n": 1,
+          "median": 1983.5,
+          "min": 1983.5,
+          "max": 1983.5,
+          "stdev": 0.0,
+          "cv_pct": 0.0,
+          "raw": [
+            1983.5
+          ]
+        },
+        "p99": null
+      },
+      "adaptive": {
+        "primary": {
+          "n": 1,
+          "median": 1732.1,
+          "min": 1732.1,
+          "max": 1732.1,
+          "stdev": 0.0,
+          "cv_pct": 0.0,
+          "raw": [
+            1732.1
+          ]
+        },
+        "p99": null
+      },
+      "B3": {
+        "config": "specialized",
+        "median": 1983.5
+      }
+    },
+    "netlat": {
+      "B0": {
+        "primary": {
+          "n": 1,
+          "median": 26.853,
+          "min": 26.853,
+          "max": 26.853,
+          "stdev": 0.0,
+          "cv_pct": 0.0,
+          "raw": [
+            26.853
+          ]
+        },
+        "p99": {
+          "n": 1,
+          "median": 184.936,
+          "min": 184.936,
+          "max": 184.936,
+          "stdev": 0.0,
+          "cv_pct": 0.0,
+          "raw": [
+            184.936
+          ]
+        }
+      },
+      "normal": {
+        "primary": {
+          "n": 1,
+          "median": 23.232,
+          "min": 23.232,
+          "max": 23.232,
+          "stdev": 0.0,
+          "cv_pct": 0.0,
+          "raw": [
+            23.232
+          ]
+        },
+        "p99": {
+          "n": 1,
+          "median": 192.07,
+          "min": 192.07,
+          "max": 192.07,
+          "stdev": 0.0,
+          "cv_pct": 0.0,
+          "raw": [
+            192.07
+          ]
+        }
+      },
+      "batched": {
+        "primary": {
+          "n": 1,
+          "median": 26.059,
+          "min": 26.059,
+          "max": 26.059,
+          "stdev": 0.0,
+          "cv_pct": 0.0,
+          "raw": [
+            26.059
+          ]
+        },
+        "p99": {
+          "n": 1,
+          "median": 316.674,
+          "min": 316.674,
+          "max": 316.674,
+          "stdev": 0.0,
+          "cv_pct": 0.0,
+          "raw": [
+            316.674
+          ]
+        }
+      },
+      "specialized": {
+        "primary": {
+          "n": 1,
+          "median": 24.414,
+          "min": 24.414,
+          "max": 24.414,
+          "stdev": 0.0,
+          "cv_pct": 0.0,
+          "raw": [
+            24.414
+          ]
+        },
+        "p99": {
+          "n": 1,
+          "median": 205.91,
+          "min": 205.91,
+          "max": 205.91,
+          "stdev": 0.0,
+          "cv_pct": 0.0,
+          "raw": [
+            205.91
+          ]
+        }
+      },
+      "adaptive": {
+        "primary": {
+          "n": 1,
+          "median": 23.935,
+          "min": 23.935,
+          "max": 23.935,
+          "stdev": 0.0,
+          "cv_pct": 0.0,
+          "raw": [
+            23.935
+          ]
+        },
+        "p99": {
+          "n": 1,
+          "median": 206.144,
+          "min": 206.144,
+          "max": 206.144,
+          "stdev": 0.0,
+          "cv_pct": 0.0,
+          "raw": [
+            206.144
+          ]
+        }
+      },
+      "B3": {
+        "config": "normal",
+        "median": 23.232
+      }
+    }
+  }
+}

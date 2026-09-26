@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" font-family="sans-serif" font-size="12">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="450.0" y="24" text-anchor="middle" font-size="15" font-weight="bold">Graph 1 — performance normalised to B0 (native Linux), higher is better</text>
+<text x="16" y="190.0" transform="rotate(-90 16 190.0)" text-anchor="middle">relative to B0</text>
+<line x1="70" x2="880" y1="330.0" y2="330.0" stroke="#e3e3e3"/>
+<text x="64" y="334.0" text-anchor="end" fill="#555">0.000</text>
+<line x1="70" x2="880" y1="274.0" y2="274.0" stroke="#e3e3e3"/>
+<text x="64" y="278.0" text-anchor="end" fill="#555">5.754</text>
+<line x1="70" x2="880" y1="218.0" y2="218.0" stroke="#e3e3e3"/>
+<text x="64" y="222.0" text-anchor="end" fill="#555">11.5</text>
+<line x1="70" x2="880" y1="162.0" y2="162.0" stroke="#e3e3e3"/>
+<text x="64" y="166.0" text-anchor="end" fill="#555">17.3</text>
+<line x1="70" x2="880" y1="106.0" y2="106.0" stroke="#e3e3e3"/>
+<text x="64" y="110.0" text-anchor="end" fill="#555">23.0</text>
+<line x1="70" x2="880" y1="50.0" y2="50.0" stroke="#e3e3e3"/>
+<text x="64" y="54.0" text-anchor="end" fill="#555">28.8</text>
+<line x1="70" x2="880" y1="320.3" y2="320.3" stroke="#333" stroke-dasharray="4 3"/>
+<rect x="90.2" y="320.3" width="30.4" height="9.7" fill="#5B6C8F"><title>randread B0 Linux: 1.000</title></rect>
+<rect x="122.7" y="320.6" width="30.4" height="9.4" fill="#8FA3BF"><title>randread B1 static normal: 0.961</title></rect>
+<rect x="155.1" y="248.4" width="30.4" height="81.6" fill="#C9A66B"><title>randread static batched: 8.382</title></rect>
+<rect x="187.4" y="199.6" width="30.4" height="130.4" fill="#7FA37A"><title>randread static specialized: 13.4</title></rect>
+<rect x="219.8" y="223.3" width="30.4" height="106.7" fill="#B5646B"><title>randread B2 adaptive: 11.0</title></rect>
+<text x="171.2" y="346" text-anchor="middle">randread</text>
+<rect x="292.8" y="320.3" width="30.4" height="9.7" fill="#5B6C8F"><title>seqread B0 Linux: 1.000</title></rect>
+<rect x="325.1" y="314.6" width="30.4" height="15.4" fill="#8FA3BF"><title>seqread B1 static normal: 1.586</title></rect>
+<rect x="357.6" y="311.0" width="30.4" height="19.0" fill="#C9A66B"><title>seqread static batched: 1.947</title></rect>
+<rect x="389.9" y="80.0" width="30.4" height="250.0" fill="#7FA37A"><title>seqread static specialized: 25.7</title></rect>
+<rect x="422.4" y="282.2" width="30.4" height="47.8" fill="#B5646B"><title>seqread B2 adaptive: 4.913</title></rect>
+<text x="373.8" y="346" text-anchor="middle">seqread</text>
+<rect x="495.2" y="320.3" width="30.4" height="9.7" fill="#5B6C8F"><title>cpu B0 Linux: 1.000</title></rect>
+<rect x="527.6" y="314.7" width="30.4" height="15.3" fill="#8FA3BF"><title>cpu B1 static normal: 1.571</title></rect>
+<rect x="560.0" y="315.0" width="30.4" height="15.0" fill="#C9A66B"><title>cpu static batched: 1.545</title></rect>
+<rect x="592.5" y="312.7" width="30.4" height="17.3" fill="#7FA37A"><title>cpu static specialized: 1.780</title></rect>
+<rect x="624.9" y="314.9" width="30.4" height="15.1" fill="#B5646B"><title>cpu B2 adaptive: 1.555</title></rect>
+<text x="576.2" y="346" text-anchor="middle">cpu</text>
+<rect x="697.8" y="320.3" width="30.4" height="9.7" fill="#5B6C8F"><title>netlat B0 Linux: 1.000</title></rect>
+<rect x="730.1" y="318.7" width="30.4" height="11.3" fill="#8FA3BF"><title>netlat B1 static normal: 1.156</title></rect>
+<rect x="762.5" y="320.0" width="30.4" height="10.0" fill="#C9A66B"><title>netlat static batched: 1.030</title></rect>
+<rect x="795.0" y="319.3" width="30.4" height="10.7" fill="#7FA37A"><title>netlat static specialized: 1.100</title></rect>
+<rect x="827.4" y="319.1" width="30.4" height="10.9" fill="#B5646B"><title>netlat B2 adaptive: 1.122</title></rect>
+<text x="778.8" y="346" text-anchor="middle">netlat</text>
+<rect x="70" y="380" width="12" height="12" fill="#5B6C8F"/>
+<text x="86" y="390">B0 Linux</text>
+<rect x="148.0" y="380" width="12" height="12" fill="#8FA3BF"/>
+<text x="164.0" y="390">B1 static normal</text>
+<rect x="286.0" y="380" width="12" height="12" fill="#C9A66B"/>
+<text x="302.0" y="390">static batched</text>
+<rect x="409.0" y="380" width="12" height="12" fill="#7FA37A"/>
+<text x="425.0" y="390">static specialized</text>
+<rect x="562.0" y="380" width="12" height="12" fill="#B5646B"/>
+<text x="578.0" y="390">B2 adaptive</text>
+</svg>

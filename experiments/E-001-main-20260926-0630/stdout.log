@@ -1,0 +1,51 @@
+preparing 5889 MiB data file
+  [B0 rep1] storage rand-read bs=4096 depth=32 backend=normal: 1084 IOPS, 4.44 MB/s
+  [B0 rep1] storage seq-read bs=1048576 depth=4 backend=normal: 24 IOPS, 25.62 MB/s
+  [B0 rep1] cpu threads=4: median 1114.2 Mops/s (p5..max spread stdev 504.39)
+  [B0 rep1] net latency msg=64: 25483 round-trips/s, RTT us p50=26.9 p95=88.5 p99=184.9
+  [adaptive rep1] storage rand-read bs=4096 depth=32 backend=auto: 11884 IOPS, 48.68 MB/s
+  [adaptive rep1] storage seq-read bs=1048576 depth=4 backend=auto: 120 IOPS, 125.87 MB/s
+  [adaptive rep1] cpu threads=4: median 1732.1 Mops/s (p5..max spread stdev 252.58)
+  [adaptive rep1] net latency msg=64: 25974 round-trips/s, RTT us p50=23.9 p95=88.3 p99=206.1
+  [specialized rep1] storage rand-read bs=4096 depth=32 backend=specialized: 14529 IOPS, 59.51 MB/s
+  [specialized rep1] storage seq-read bs=1048576 depth=4 backend=specialized: 628 IOPS, 658.03 MB/s
+  [specialized rep1] cpu threads=4: median 1983.5 Mops/s (p5..max spread stdev 96.82)
+  [specialized rep1] net latency msg=64: 25896 round-trips/s, RTT us p50=24.4 p95=88.1 p99=205.9
+  [batched rep1] storage rand-read bs=4096 depth=32 backend=batched: 9087 IOPS, 37.22 MB/s
+  [batched rep1] storage seq-read bs=1048576 depth=4 backend=batched: 48 IOPS, 49.88 MB/s
+  [batched rep1] cpu threads=4: median 1721.1 Mops/s (p5..max spread stdev 115.63)
+  [batched rep1] net latency msg=64: 21189 round-trips/s, RTT us p50=26.1 p95=114.3 p99=316.7
+  [normal rep1] storage rand-read bs=4096 depth=32 backend=normal: 1041 IOPS, 4.27 MB/s
+  [normal rep1] storage seq-read bs=1048576 depth=4 backend=normal: 39 IOPS, 40.63 MB/s
+  [normal rep1] cpu threads=4: median 1750.0 Mops/s (p5..max spread stdev 236.63)
+  [normal rep1] net latency msg=64: 26995 round-trips/s, RTT us p50=23.2 p95=79.7 p99=192.1
+# E-001 — suite `main`
+
+- Date: 2026-09-26T06:30:49Z  commit `unknown-dirty`
+- Host: Linux 6.6.87.2-microsoft-standard-WSL2 x86_64 / AMD Ryzen 5 7520U with Radeon Graphics (WSL2 (Hyper-V) host, KVM nested inside WSL2 when accel=kvm)
+- QEMU: QEMU emulator version 10.2.1 (Debian 1:10.2.1+ds-1ubuntu3.1)  accel **kvm**
+- VM `bench`: 4 vCPU, 4096 MB, 40 GB virtio-blk, qcow2 overlay on ext4 (WSL2 vhdx), cache=none
+- Kernel: 6.12.111-0-virt; reps=1, time=5s, warmup=4s
+
+## Static vs adaptive (median of reps; CV% in parentheses)
+
+| workload | metric | B0 Linux | B1 static normal | static batched | static specialized | B2 adaptive | B3 best static | adaptive vs B1 | adaptive vs B3 |
+|---|---|---|---|---|---|---|---|---|---|
+| randread | IOPS (IOPS) | 1,084 (0%) | 1,041 (0%) | 9,087 (0%) | 14,529 (0%) | 11,884 (0%) | 14,529 (specialized) | +1041.1% | -18.2% |
+| seqread | MB/s (MB/s) | 25.6 (0%) | 40.6 (0%) | 49.9 (0%) | 658.0 (0%) | 125.9 (0%) | 658.0 (specialized) | +209.8% | -80.9% |
+| cpu | Mops/s (Mops/s) | 1,114 (0%) | 1,750 (0%) | 1,721 (0%) | 1,984 (0%) | 1,732 (0%) | 1,984 (specialized) | -1.0% | -12.7% |
+| netlat | RTT p50 (us) | 26.9 (0%) | 23.2 (0%) | 26.1 (0%) | 24.4 (0%) | 23.9 (0%) | 23.2 (normal) | -2.9% | -2.9% |
+
+Relative columns: positive = adaptive better. Latency workloads compare inversely.
+
+![Graph 1](graph1-throughput.svg)
+
+![Graph 2](graph2-p99.svg)
+
+## Threats to validity (this run)
+
+- Nested virtualisation (Windows Hyper-V → WSL2 → KVM): absolute numbers are not representative of bare metal; only relative comparisons inside one run are meaningful.
+- Disk is a qcow2 overlay on a WSL2 virtual disk; host page cache bypassed (cache=none) but the WSL2 vhdx layer is not.
+- Network workloads use guest loopback; they exercise the guest stack, not virtio-net.
+- Small sample size (reps=1); see CV% for run-to-run variance.
+
