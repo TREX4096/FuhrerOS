@@ -1,0 +1,198 @@
+
+FuhrerOS: kernel entry reached (serial up)
+
+================================
+        FUHREROS KERNEL
+================================
+
+Architecture : x86_64
+Bootloader   : Limine 11.4.1
+Kernel       : FuhrerOS 0.1.0 (from-scratch)
+Status       : BOOTED
+
+[boot  ] bootloader: Limine 11.4.1 (BIOS firmware)
+[boot  ] cmdline: 'bench=stress'
+[boot  ] kernel: phys 0x000000007fd0b000 virt 0xffffffff80000000 size 1056 KiB
+[boot  ] hhdm offset: 0xffff800000000000, rsdp: 0x00000000000f5260
+[boot  ] memory map (25 entries):
+[boot  ]   0000000000001000-0000000000061000 bootloader     384 KiB
+[boot  ]   0000000000061000-000000000009f000 usable         248 KiB
+[boot  ]   000000000009fc00-00000000000a0000 reserved       1 KiB
+[boot  ]   00000000000f0000-00000000000f5000 reserved       20 KiB
+[boot  ]   00000000000f5000-00000000000f6000 reserved       4 KiB
+[boot  ]   00000000000f6000-0000000000100000 reserved       40 KiB
+[boot  ]   0000000000100000-000000007f7d0000 usable         2087744 KiB
+[boot  ]   000000007f7d0000-000000007fcfd000 kernel+modules 5300 KiB
+[boot  ]   000000007fcfd000-000000007fcfe000 bootloader     4 KiB
+[boot  ]   000000007fcfe000-000000007fd01000 usable         12 KiB
+[boot  ]   000000007fd01000-000000007fd0b000 bootloader     40 KiB
+[boot  ]   000000007fd0b000-000000007fe13000 kernel+modules 1056 KiB
+[boot  ]   000000007fe13000-000000007ff38000 bootloader     1172 KiB
+[boot  ]   000000007ff38000-000000007ff55000 usable         116 KiB
+[boot  ]   000000007ff55000-000000007ffdc000 bootloader     540 KiB
+[boot  ]   000000007ffdc000-000000007ffe0000 reserved       16 KiB
+[boot  ]   000000007ffe0000-000000007ffe3000 reserved       12 KiB
+[boot  ]   000000007ffe3000-0000000080000000 reserved       116 KiB
+[boot  ]   00000000b0000000-00000000c0000000 reserved       262144 KiB
+[boot  ]   00000000fd000000-00000000fd3e8000 framebuffer    4000 KiB
+[boot  ]   00000000fed1c000-00000000fed20000 reserved       16 KiB
+[boot  ]   00000000feffc000-00000000ff000000 reserved       16 KiB
+[boot  ]   00000000fffc0000-0000000100000000 reserved       256 KiB
+[boot  ]   0000000100000000-0000000180000000 usable         2097152 KiB
+[boot  ]   000000fd00000000-0000010000000000 reserved       12582912 KiB
+[boot  ] usable memory: 4087 MiB
+[boot  ] framebuffer: 1280x800 32bpp pitch 5120 at phys 0x00000000fd000000
+[boot  ] module: /boot/initrd.tar (5427200 bytes) 'initrd'
+[boot  ] cpu: AuthenticAMD / AMD Ryzen 5 7520U with Radeon Graphics         
+[pmm   ] 1572864 frames tracked, 1046208 free (4086 MiB), bitmap 192 KiB at 0x0000000000100000
+[vmm   ] kernel page tables active (pml4 0x0000000000130000, NX on)
+[heap  ] slab classes 16..2048 B, large allocations from vmalloc
+[pmm   ] reclaimed 2140 KiB of bootloader memory
+[acpi  ] OEM 'BOCHS ', 4 CPU(s), LAPIC 0x00000000fee00000, 1 IOAPIC(s) (first 0x00000000fec00000 gsi 0), ECAM 0x00000000b0000000
+[acpi  ] PM1a_CNT 0x604, S5 found (SLP_TYPa 0), reset register yes, PM timer 0x608 (24-bit)
+[apic  ] local APIC id 0 enabled
+[apic  ] I/O APIC with 24 inputs
+[time  ] TSC 2791.740 MHz, LAPIC timer 62593 kHz (div 16), calibrated with the PIT channel 2
+[time  ] LAPIC periodic timer at 1000 Hz (vector 0x20)
+[sched ] policy -> adaptive
+[sched ] scheduler ready, policy adaptive, 4 policies available
+[init  ] kinit running as task 2 under policy 'adaptive'
+[ps2   ] keyboard ready, mouse ready (4-byte packets, wheel)
+[proc  ] process subsystem ready (ELF64 loader, spawn/wait)
+[syscall] syscall/sysret MSRs programmed, 64 syscall numbers
+[pci   ] 00:00.0 8086:29c0 host bridge
+[pci   ] 00:01.0 1234:1111 display
+[pci   ] 00:02.0 1af4:1041 network
+[vnet  ] eth0 MAC 52:54:00:12:34:56
+[pci   ] 00:03.0 1af4:1042 storage
+[blk   ] vda: 20480 MiB (41943040 sectors of 512 B)
+[pci   ] 00:1f.0 8086:2918 ISA bridge
+[pci   ] 00:1f.2 8086:2922 SATA controller
+[pci   ] 00:1f.3 8086:2930 SMBus
+[bcache] 2048 x 4 KiB buffers, policy adaptive
+[net   ] sockets: TCP, UDP, ICMP echo
+[tty   ] console tty on framebuffer + COM1 (serial input enabled)
+[net   ] DHCP: 10.0.2.15/255.255.255.0 gw 10.0.2.2 dns 10.0.2.3
+[ffs0  ] 'fuhreros' on vda: 5242880 blocks (5241185 free), 4096 inodes (4027 free), mount #1
+[vfs   ] mounted vda (ffs0) on /
+[tarfs ] initrd: 61 files, 5300 KiB
+[vfs   ] mounted initrd (tarfs) on /initrd
+[vfs   ] mounted - (devfs) on /dev
+[vfs   ] mounted - (procfs) on /proc
+[vfs   ] mounted - (ramfs) on /tmp
+[vfs   ] root filesystem: FFS0 (virtio-blk vda)
+[init  ] started /bin/init as pid 1 - kernel handing over to user space
+[1;36mFuhrerOS init[0m (pid 1): user space is running outside kernel privilege
+init: running benchmark suite /etc/bench/stress.sh
+BENCH-BEGIN stress
+[sched ] policy -> round_robin
+httpd: serving /www on port 8081
+httpd: GET /index.html -> 200 (260 bytes)
+DESKSTRESS {"name":"stress-r1","policy":"round_robin","seconds":10,"samples":335,"dispatch_p50_us":19267,"dispatch_p99_us":20056,"wake_p50_us":20006,"wake_p99_us":20783,"build_jobs_per_s_x100":69928,"copy_mb_per_s_x100":21,"web_req_per_s_x100":9,"web_failures":0,"net_mb_per_s_x100":207,"ctx_switches_per_s":340,"system_class":"CPU_BOUND","threads":"8:0:IDLE,10:0:INTERACTIVE,11:0:INTERACTIVE,12:0:CPU_BOUND,13:0:CPU_BOUND,14:0:INTERACTIVE,15:0:IDLE,16:0:IO_BOUND","media":"NOT RUN"}
+[sched ] policy -> priority
+httpd: cannot listen on 8081: error
+DESKSTRESS {"name":"stress-r1","policy":"priority","seconds":10,"samples":338,"dispatch_p50_us":19258,"dispatch_p99_us":19878,"wake_p50_us":20007,"wake_p99_us":20660,"build_jobs_per_s_x100":69665,"copy_mb_per_s_x100":22,"web_req_per_s_x100":0,"web_failures":161,"net_mb_per_s_x100":211,"ctx_switches_per_s":368,"system_class":"CPU_BOUND","threads":"17:16:IDLE,19:16:INTERACTIVE,20:16:INTERACTIVE,21:16:CPU_BOUND,22:16:CPU_BOUND,23:16:INTERACTIVE,24:16:INTERACTIVE,25:16:IO_BOUND","media":"NOT RUN"}
+[sched ] policy -> low_latency
+httpd: serving /www on port 8081
+httpd: GET /index.html -> 200 (260 bytes)
+httpd: GET /index.html -> 200 (260 bytes)
+httpd: GET /index.html -> 200 (260 bytes)
+httpd: GET /index.html -> 200 (260 bytes)
+httpd: GET /index.html -> 200 (260 bytes)
+httpd: GET /index.html -> 200 (260 bytes)
+httpd: GET /index.html -> 200 (260 bytes)
+httpd: GET /index.html -> 200 (260 bytes)
+httpd: GET /index.html -> 200 (260 bytes)
+httpd: GET /index.html -> 200 (260 bytes)
+httpd: GET /index.html -> 200 (260 bytes)
+httpd: GET /index.html -> 200 (260 bytes)
+httpd: GET /index.html -> 200 (260 bytes)
+httpd: GET /index.html -> 200 (260 bytes)
+httpd: GET /index.html -> 200 (260 bytes)
+httpd: GET /index.html -> 200 (260 bytes)
+DESKSTRESS {"name":"stress-r1","policy":"low_latency","seconds":10,"samples":913,"dispatch_p50_us":6,"dispatch_p99_us":32,"wake_p50_us":872,"wake_p99_us":8728,"build_jobs_per_s_x100":28237,"copy_mb_per_s_x100":1169,"web_req_per_s_x100":159,"web_failures":0,"net_mb_per_s_x100":6247,"ctx_switches_per_s":8334,"system_class":"IO_BOUND","threads":"26:0:IDLE,28:0:IO_BOUND,29:0:INTERACTIVE,30:0:CPU_BOUND,31:0:CPU_BOUND,32:0:IO_BOUND,33:0:IDLE,34:0:IO_BOUND","media":"NOT RUN"}
+[sched ] policy -> adaptive
+httpd: cannot listen on 8081: error
+DESKSTRESS {"name":"stress-r1","policy":"adaptive","seconds":10,"samples":919,"dispatch_p50_us":11,"dispatch_p99_us":4114,"wake_p50_us":898,"wake_p99_us":6974,"build_jobs_per_s_x100":4518,"copy_mb_per_s_x100":611,"web_req_per_s_x100":0,"web_failures":482,"net_mb_per_s_x100":10801,"ctx_switches_per_s":9149,"system_class":"IO_BOUND","threads":"35:4:IDLE,37:8:IO_BOUND,38:4:INTERACTIVE,39:12:MIXED,40:12:MIXED,41:8:IO_BOUND,42:4:INTERACTIVE,43:8:IO_BOUND","media":"NOT RUN"}
+[sched ] policy -> priority
+httpd: serving /www on port 8081
+httpd: GET /index.html -> 200 (260 bytes)
+DESKSTRESS {"name":"stress-r2","policy":"priority","seconds":10,"samples":300,"dispatch_p50_us":20581,"dispatch_p99_us":37396,"wake_p50_us":21914,"wake_p99_us":40309,"build_jobs_per_s_x100":33349,"copy_mb_per_s_x100":13,"web_req_per_s_x100":9,"web_failures":0,"net_mb_per_s_x100":186,"ctx_switches_per_s":262,"system_class":"CPU_BOUND","threads":"44:16:IDLE,46:16:INTERACTIVE,47:16:INTERACTIVE,48:16:CPU_BOUND,49:16:CPU_BOUND,50:16:INTERACTIVE,51:16:IDLE,52:16:IO_BOUND","media":"NOT RUN"}
+[sched ] policy -> low_latency
+httpd: serving /www on port 8081
+httpd: GET /index.html -> 200 (260 bytes)
+httpd: GET /index.html -> 200 (260 bytes)
+httpd: GET /index.html -> 200 (260 bytes)
+httpd: GET /index.html -> 200 (260 bytes)
+DESKSTRESS {"name":"stress-r2","policy":"low_latency","seconds":10,"samples":597,"dispatch_p50_us":27,"dispatch_p99_us":292,"wake_p50_us":5661,"wake_p99_us":24117,"build_jobs_per_s_x100":13387,"copy_mb_per_s_x100":56,"web_req_per_s_x100":39,"web_failures":0,"net_mb_per_s_x100":1488,"ctx_switches_per_s":1255,"system_class":"IO_BOUND","threads":"53:0:IDLE,55:0:IO_BOUND,56:0:INTERACTIVE,57:0:CPU_BOUND,58:0:CPU_BOUND,59:0:IDLE,60:0:IDLE,61:0:IO_BOUND","media":"NOT RUN"}
+[sched ] policy -> adaptive
+httpd: serving /www on port 8081
+httpd: GET /index.html -> 200 (260 bytes)
+httpd: GET /index.html -> 200 (260 bytes)
+httpd: GET /index.html -> 200 (260 bytes)
+httpd: GET /index.html -> 200 (260 bytes)
+httpd: GET /index.html -> 200 (260 bytes)
+httpd: GET /index.html -> 200 (260 bytes)
+DESKSTRESS {"name":"stress-r2","policy":"adaptive","seconds":10,"samples":697,"dispatch_p50_us":27,"dispatch_p99_us":10062,"wake_p50_us":4286,"wake_p99_us":21656,"build_jobs_per_s_x100":4826,"copy_mb_per_s_x100":147,"web_req_per_s_x100":59,"web_failures":0,"net_mb_per_s_x100":3606,"ctx_switches_per_s":3021,"system_class":"IO_BOUND","threads":"62:4:IDLE,64:8:IO_BOUND,65:4:INTERACTIVE,66:12:MIXED,67:12:MIXED,68:8:IO_BOUND,69:12:IDLE,70:8:IO_BOUND","media":"NOT RUN"}
+[sched ] policy -> round_robin
+httpd: cannot listen on 8081: error
+DESKSTRESS {"name":"stress-r2","policy":"round_robin","seconds":10,"samples":250,"dispatch_p50_us":26702,"dispatch_p99_us":51674,"wake_p50_us":29768,"wake_p99_us":56978,"build_jobs_per_s_x100":24680,"copy_mb_per_s_x100":12,"web_req_per_s_x100":0,"web_failures":90,"net_mb_per_s_x100":156,"ctx_switches_per_s":227,"system_class":"CPU_BOUND","threads":"71:0:IDLE,73:0:INTERACTIVE,74:0:INTERACTIVE,75:0:CPU_BOUND,76:0:CPU_BOUND,77:0:INTERACTIVE,78:0:INTERACTIVE,79:0:IO_BOUND","media":"NOT RUN"}
+[sched ] policy -> low_latency
+httpd: serving /www on port 8081
+httpd: GET /index.html -> 200 (260 bytes)
+httpd: GET /index.html -> 200 (260 bytes)
+httpd: GET /index.html -> 200 (260 bytes)
+httpd: GET /index.html -> 200 (260 bytes)
+DESKSTRESS {"name":"stress-r3","policy":"low_latency","seconds":10,"samples":639,"dispatch_p50_us":23,"dispatch_p99_us":535,"wake_p50_us":2519,"wake_p99_us":32351,"build_jobs_per_s_x100":13877,"copy_mb_per_s_x100":95,"web_req_per_s_x100":39,"web_failures":0,"net_mb_per_s_x100":1589,"ctx_switches_per_s":1496,"system_class":"IO_BOUND","threads":"80:0:IDLE,82:0:IO_BOUND,83:0:INTERACTIVE,84:0:CPU_BOUND,85:0:CPU_BOUND,86:0:INTERACTIVE,87:0:IDLE,88:0:IO_BOUND","media":"NOT RUN"}
+[sched ] policy -> adaptive
+httpd: cannot listen on 8081: error
+DESKSTRESS {"name":"stress-r3","policy":"adaptive","seconds":10,"samples":876,"dispatch_p50_us":27,"dispatch_p99_us":6815,"wake_p50_us":889,"wake_p99_us":10288,"build_jobs_per_s_x100":4289,"copy_mb_per_s_x100":323,"web_req_per_s_x100":0,"web_failures":471,"net_mb_per_s_x100":6571,"ctx_switches_per_s":5616,"system_class":"IO_BOUND","threads":"89:4:IDLE,91:8:IO_BOUND,92:4:INTERACTIVE,93:12:MIXED,94:12:MIXED,95:8:IO_BOUND,96:4:INTERACTIVE,97:8:IO_BOUND","media":"NOT RUN"}
+[sched ] policy -> round_robin
+httpd: serving /www on port 8081
+httpd: GET /index.html -> 200 (260 bytes)
+DESKSTRESS {"name":"stress-r3","policy":"round_robin","seconds":10,"samples":334,"dispatch_p50_us":19297,"dispatch_p99_us":25541,"wake_p50_us":20032,"wake_p99_us":27855,"build_jobs_per_s_x100":60943,"copy_mb_per_s_x100":21,"web_req_per_s_x100":9,"web_failures":0,"net_mb_per_s_x100":207,"ctx_switches_per_s":337,"system_class":"CPU_BOUND","threads":"98:0:IDLE,100:0:INTERACTIVE,101:0:INTERACTIVE,102:0:CPU_BOUND,103:0:CPU_BOUND,104:0:INTERACTIVE,105:0:IDLE,106:0:IO_BOUND","media":"NOT RUN"}
+[sched ] policy -> priority
+httpd: cannot listen on 8081: error
+DESKSTRESS {"name":"stress-r3","policy":"priority","seconds":10,"samples":335,"dispatch_p50_us":19294,"dispatch_p99_us":25662,"wake_p50_us":20037,"wake_p99_us":25890,"build_jobs_per_s_x100":60974,"copy_mb_per_s_x100":21,"web_req_per_s_x100":0,"web_failures":157,"net_mb_per_s_x100":212,"ctx_switches_per_s":360,"system_class":"CPU_BOUND","threads":"107:16:IDLE,109:16:INTERACTIVE,110:16:INTERACTIVE,111:16:CPU_BOUND,112:16:CPU_BOUND,113:16:INTERACTIVE,114:16:INTERACTIVE,115:16:IO_BOUND","media":"NOT RUN"}
+[sched ] policy -> adaptive
+policy: adaptive
+policies: round_robin priority low_latency adaptive
+context_switches: 318765
+preemptions: 78619
+sched_calls: 318769
+sched_overhead_ns: 96908797
+busy_ns: 136854372656
+idle_ns: 4219467723
+tasks: 7
+runnable: 0
+policy_switches: 14
+profiler: on
+window_ms: 100
+hysteresis: 2
+profiler_windows: 1239
+profiler_overhead_ns: 10481500
+---
+system_class: CPU_BOUND
+confidence: 93
+reason: dominant class (interactive tasks present)
+policy: adaptive
+stable_class: CPU_BOUND
+system_transitions: 30
+last_transition_ms_ago: 28
+last_transition: IDLE->CPU_BOUND
+profiler_overhead_ns: 10504308
+profiler_windows: 1242
+transitions: 556
+120.326 tid=104 deskstress UNKNOWN->INTERACTIVE conf=25% high wake-up frequency, low CPU
+120.326 tid=106 deskstress UNKNOWN->IO_BOUND conf=25% frequent I/O, short bursts
+120.426 tid=4 netd INTERACTIVE->MIXED conf=25% mixed behaviour
+120.426 tid=105 deskstress UNKNOWN->IDLE conf=25% not running
+120.526 tid=100 deskstress UNKNOWN->INTERACTIVE conf=37% high wake-up frequency, low CPU
+120.626 tid=4 netd MIXED->INTERACTIVE conf=75% high wake-up frequency, low CPU
+120.626 tid=99 httpd MIXED->INTERACTIVE conf=25% high wake-up frequency, low CPU
+120.827 tid=2 kinit MIXED->IDLE conf=50% not running
+121.228 tid=99 httpd INTERACTIVE->MIXED conf=37% mixed behaviour
+121.328 tid=100 deskstress INTERACTIVE->IO_BOUND conf=50% frequent I/O, BENCH-END stress
+init: benchmark suite finished (0)
+FuhrerOS: syncing filesystems and powering off
+POWEROFF

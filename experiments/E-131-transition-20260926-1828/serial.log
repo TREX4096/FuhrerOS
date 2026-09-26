@@ -1,0 +1,409 @@
+
+FuhrerOS: kernel entry reached (serial up)
+
+================================
+        FUHREROS KERNEL
+================================
+
+Architecture : x86_64
+Bootloader   : Limine 11.4.1
+Kernel       : FuhrerOS 0.1.0 (from-scratch)
+Status       : BOOTED
+
+[boot  ] bootloader: Limine 11.4.1 (BIOS firmware)
+[boot  ] cmdline: 'bench=transition'
+[boot  ] kernel: phys 0x000000007fd0b000 virt 0xffffffff80000000 size 1056 KiB
+[boot  ] hhdm offset: 0xffff800000000000, rsdp: 0x00000000000f5260
+[boot  ] memory map (25 entries):
+[boot  ]   0000000000001000-0000000000061000 bootloader     384 KiB
+[boot  ]   0000000000061000-000000000009f000 usable         248 KiB
+[boot  ]   000000000009fc00-00000000000a0000 reserved       1 KiB
+[boot  ]   00000000000f0000-00000000000f5000 reserved       20 KiB
+[boot  ]   00000000000f5000-00000000000f6000 reserved       4 KiB
+[boot  ]   00000000000f6000-0000000000100000 reserved       40 KiB
+[boot  ]   0000000000100000-000000007f7d0000 usable         2087744 KiB
+[boot  ]   000000007f7d0000-000000007fcfd000 kernel+modules 5300 KiB
+[boot  ]   000000007fcfd000-000000007fcfe000 bootloader     4 KiB
+[boot  ]   000000007fcfe000-000000007fd01000 usable         12 KiB
+[boot  ]   000000007fd01000-000000007fd0b000 bootloader     40 KiB
+[boot  ]   000000007fd0b000-000000007fe13000 kernel+modules 1056 KiB
+[boot  ]   000000007fe13000-000000007ff38000 bootloader     1172 KiB
+[boot  ]   000000007ff38000-000000007ff55000 usable         116 KiB
+[boot  ]   000000007ff55000-000000007ffdc000 bootloader     540 KiB
+[boot  ]   000000007ffdc000-000000007ffe0000 reserved       16 KiB
+[boot  ]   000000007ffe0000-000000007ffe3000 reserved       12 KiB
+[boot  ]   000000007ffe3000-0000000080000000 reserved       116 KiB
+[boot  ]   00000000b0000000-00000000c0000000 reserved       262144 KiB
+[boot  ]   00000000fd000000-00000000fd3e8000 framebuffer    4000 KiB
+[boot  ]   00000000fed1c000-00000000fed20000 reserved       16 KiB
+[boot  ]   00000000feffc000-00000000ff000000 reserved       16 KiB
+[boot  ]   00000000fffc0000-0000000100000000 reserved       256 KiB
+[boot  ]   0000000100000000-0000000180000000 usable         2097152 KiB
+[boot  ]   000000fd00000000-0000010000000000 reserved       12582912 KiB
+[boot  ] usable memory: 4087 MiB
+[boot  ] framebuffer: 1280x800 32bpp pitch 5120 at phys 0x00000000fd000000
+[boot  ] module: /boot/initrd.tar (5427200 bytes) 'initrd'
+[boot  ] cpu: AuthenticAMD / AMD Ryzen 5 7520U with Radeon Graphics         
+[pmm   ] 1572864 frames tracked, 1046208 free (4086 MiB), bitmap 192 KiB at 0x0000000000100000
+[vmm   ] kernel page tables active (pml4 0x0000000000130000, NX on)
+[heap  ] slab classes 16..2048 B, large allocations from vmalloc
+[pmm   ] reclaimed 2140 KiB of bootloader memory
+[acpi  ] OEM 'BOCHS ', 4 CPU(s), LAPIC 0x00000000fee00000, 1 IOAPIC(s) (first 0x00000000fec00000 gsi 0), ECAM 0x00000000b0000000
+[acpi  ] PM1a_CNT 0x604, S5 found (SLP_TYPa 0), reset register yes, PM timer 0x608 (24-bit)
+[apic  ] local APIC id 0 enabled
+[apic  ] I/O APIC with 24 inputs
+[time  ] TSC 2794.162 MHz, LAPIC timer 62623 kHz (div 16), calibrated with the PIT channel 2
+[time  ] LAPIC periodic timer at 1000 Hz (vector 0x20)
+[sched ] policy -> adaptive
+[sched ] scheduler ready, policy adaptive, 4 policies available
+[init  ] kinit running as task 2 under policy 'adaptive'
+[ps2   ] keyboard ready, mouse ready (4-byte packets, wheel)
+[proc  ] process subsystem ready (ELF64 loader, spawn/wait)
+[syscall] syscall/sysret MSRs programmed, 64 syscall numbers
+[pci   ] 00:00.0 8086:29c0 host bridge
+[pci   ] 00:01.0 1234:1111 display
+[pci   ] 00:02.0 1af4:1041 network
+[vnet  ] eth0 MAC 52:54:00:12:34:56
+[pci   ] 00:03.0 1af4:1042 storage
+[blk   ] vda: 20480 MiB (41943040 sectors of 512 B)
+[pci   ] 00:1f.0 8086:2918 ISA bridge
+[pci   ] 00:1f.2 8086:2922 SATA controller
+[pci   ] 00:1f.3 8086:2930 SMBus
+[bcache] 2048 x 4 KiB buffers, policy adaptive
+[net   ] sockets: TCP, UDP, ICMP echo
+[tty   ] console tty on framebuffer + COM1 (serial input enabled)
+[net   ] DHCP: 10.0.2.15/255.255.255.0 gw 10.0.2.2 dns 10.0.2.3
+[ffs0  ] 'fuhreros' on vda: 5242880 blocks (5241185 free), 4096 inodes (4027 free), mount #1
+[vfs   ] mounted vda (ffs0) on /
+[tarfs ] initrd: 61 files, 5300 KiB
+[vfs   ] mounted initrd (tarfs) on /initrd
+[vfs   ] mounted - (devfs) on /dev
+[vfs   ] mounted - (procfs) on /proc
+[vfs   ] mounted - (ramfs) on /tmp
+[vfs   ] root filesystem: FFS0 (virtio-blk vda)
+[init  ] started /bin/init as pid 1 - kernel handing over to user space
+[1;36mFuhrerOS init[0m (pid 1): user space is running outside kernel privilege
+init: running benchmark suite /etc/bench/transition.sh
+BENCH-BEGIN transition
+[bcache] policy -> adaptive
+policy: adaptive
+io_class: unknown
+capacity_blocks: 2048
+blocks: 186
+hits: 677
+misses: 15
+hit_rate_pm: 978
+readahead_issued: 171
+readahead_used: 105
+evictions: 0
+writebacks: 0
+memory_kb: 744
+adapt_changes: 0
+cpu_ns: 2019703
+iobench: creating 64 MiB test file...
+IOBENCH {"policy":"adaptive","workload":"random","file_mb":64,"cache_blocks":1024,"seconds":1,"reads":6172,"mb_per_s_x100":2410,"lat_mean_us":161,"lat_p50_us":151,"lat_p99_us":379,"hit_rate_pm":758,"readahead_issued":0,"readahead_used":0,"evictions":5863,"disk_reads":22574,"cache_cpu_us":4334,"cache_cpu_ns_per_read":702,"io_class":"random"}
+TL {"t_ms":250,"phase":"cpu","class":"CPU_BOUND","conf":90,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":2370}
+TL {"t_ms":534,"phase":"cpu","class":"CPU_BOUND","conf":90,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":2617}
+TL {"t_ms":817,"phase":"cpu","class":"CPU_BOUND","conf":90,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":2646}
+TL {"t_ms":1103,"phase":"cpu","class":"CPU_BOUND","conf":90,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":2035}
+TL {"t_ms":1387,"phase":"cpu","class":"CPU_BOUND","conf":90,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":2646}
+TL {"t_ms":1674,"phase":"cpu","class":"CPU_BOUND","conf":90,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":2396}
+TL {"t_ms":1959,"phase":"cpu","class":"CPU_BOUND","conf":90,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":1761}
+TL {"t_ms":2252,"phase":"cpu","class":"CPU_BOUND","conf":90,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":2288}
+TL {"t_ms":2539,"phase":"cpu","class":"CPU_BOUND","conf":90,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":2585}
+TL {"t_ms":2825,"phase":"cpu","class":"CPU_BOUND","conf":90,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":2691}
+TL {"t_ms":3128,"phase":"cpu","class":"CPU_BOUND","conf":90,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":2509}
+TL {"t_ms":3410,"phase":"cpu","class":"CPU_BOUND","conf":90,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":2430}
+TL {"t_ms":3694,"phase":"cpu","class":"CPU_BOUND","conf":90,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":2439}
+TL {"t_ms":3984,"phase":"cpu","class":"CPU_BOUND","conf":90,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":2504}
+TL {"t_ms":4284,"phase":"cpu","class":"CPU_BOUND","conf":90,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":2595}
+TL {"t_ms":4569,"phase":"cpu","class":"CPU_BOUND","conf":90,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":2636}
+TL {"t_ms":4854,"phase":"cpu","class":"CPU_BOUND","conf":91,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":2667}
+TL {"t_ms":5142,"phase":"cpu","class":"CPU_BOUND","conf":91,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":2631}
+TL {"t_ms":5425,"phase":"cpu","class":"CPU_BOUND","conf":90,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":2493}
+TL {"t_ms":5709,"phase":"cpu","class":"CPU_BOUND","conf":90,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":2579}
+TL {"t_ms":5998,"phase":"cpu","class":"CPU_BOUND","conf":90,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":2513}
+TL {"t_ms":6287,"phase":"cpu","class":"CPU_BOUND","conf":90,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":2486}
+TL {"t_ms":6570,"phase":"cpu","class":"CPU_BOUND","conf":90,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":2755}
+TL {"t_ms":6855,"phase":"cpu","class":"CPU_BOUND","conf":90,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":2767}
+TL {"t_ms":7140,"phase":"cpu","class":"CPU_BOUND","conf":90,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":2724}
+TL {"t_ms":7427,"phase":"cpu","class":"CPU_BOUND","conf":90,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":2543}
+TL {"t_ms":7711,"phase":"cpu","class":"CPU_BOUND","conf":91,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":2098}
+TL {"t_ms":7995,"phase":"cpu","class":"CPU_BOUND","conf":91,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":2607}
+TL {"t_ms":8278,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":1578}
+TL {"t_ms":8564,"phase":"random-io","class":"IO_BOUND","conf":99,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":1660}
+TL {"t_ms":8854,"phase":"random-io","class":"INTERACTIVE","conf":62,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":1614}
+TL {"t_ms":9152,"phase":"random-io","class":"INTERACTIVE","conf":63,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":1590}
+TL {"t_ms":9458,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":1583}
+TL {"t_ms":9744,"phase":"random-io","class":"IO_BOUND","conf":99,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":1543}
+TL {"t_ms":10035,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":1463}
+TL {"t_ms":10331,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":1251}
+TL {"t_ms":10623,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":1415}
+TL {"t_ms":10913,"phase":"random-io","class":"INTERACTIVE","conf":59,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":1447}
+TL {"t_ms":11204,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":1567}
+TL {"t_ms":11496,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":1543}
+TL {"t_ms":11782,"phase":"random-io","class":"IO_BOUND","conf":99,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":1626}
+TL {"t_ms":12107,"phase":"random-io","class":"IO_BOUND","conf":52,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":1150}
+TL {"t_ms":12403,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":1452}
+TL {"t_ms":12692,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":1646}
+TL {"t_ms":12981,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":1357}
+TL {"t_ms":13275,"phase":"random-io","class":"IO_BOUND","conf":99,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":1625}
+TL {"t_ms":13559,"phase":"random-io","class":"INTERACTIVE","conf":52,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":1605}
+TL {"t_ms":13850,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":1563}
+TL {"t_ms":14160,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":929}
+TL {"t_ms":14480,"phase":"random-io","class":"IO_BOUND","conf":99,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":1079}
+TL {"t_ms":14770,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":1554}
+TL {"t_ms":15055,"phase":"random-io","class":"IO_BOUND","conf":99,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":1564}
+TL {"t_ms":15339,"phase":"random-io","class":"IO_BOUND","conf":99,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":1612}
+TL {"t_ms":15629,"phase":"random-io","class":"IO_BOUND","conf":51,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":1592}
+TL {"t_ms":15915,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":1789}
+TL {"t_ms":16203,"phase":"random-io","class":"INTERACTIVE","conf":52,"sched":"adaptive","cache":"adaptive","io_class":"random","ops":1629}
+TL {"t_ms":16510,"phase":"sequential-io","class":"INTERACTIVE","conf":97,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":25509}
+TL {"t_ms":16806,"phase":"sequential-io","class":"INTERACTIVE","conf":99,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":29673}
+TL {"t_ms":17116,"phase":"sequential-io","class":"INTERACTIVE","conf":95,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":29679}
+TL {"t_ms":17414,"phase":"sequential-io","class":"INTERACTIVE","conf":99,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":28682}
+TL {"t_ms":17730,"phase":"sequential-io","class":"IO_BOUND","conf":99,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":28710}
+TL {"t_ms":18054,"phase":"sequential-io","class":"IO_BOUND","conf":99,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":31008}
+TL {"t_ms":18365,"phase":"sequential-io","class":"IO_BOUND","conf":99,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":29005}
+TL {"t_ms":18658,"phase":"sequential-io","class":"IO_BOUND","conf":99,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":27955}
+TL {"t_ms":18979,"phase":"sequential-io","class":"IO_BOUND","conf":99,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":30701}
+TL {"t_ms":19289,"phase":"sequential-io","class":"IO_BOUND","conf":99,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":28788}
+TL {"t_ms":19609,"phase":"sequential-io","class":"IO_BOUND","conf":99,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":30853}
+TL {"t_ms":19916,"phase":"sequential-io","class":"IO_BOUND","conf":99,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":27269}
+TL {"t_ms":20209,"phase":"sequential-io","class":"IO_BOUND","conf":99,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":27654}
+TL {"t_ms":20525,"phase":"sequential-io","class":"IO_BOUND","conf":99,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":28292}
+TL {"t_ms":20844,"phase":"sequential-io","class":"IO_BOUND","conf":99,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":29536}
+TL {"t_ms":21161,"phase":"sequential-io","class":"IO_BOUND","conf":99,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":30567}
+TL {"t_ms":21487,"phase":"sequential-io","class":"IO_BOUND","conf":99,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":31674}
+TL {"t_ms":21781,"phase":"sequential-io","class":"IO_BOUND","conf":99,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":27448}
+TL {"t_ms":22166,"phase":"sequential-io","class":"IO_BOUND","conf":99,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":24044}
+TL {"t_ms":22535,"phase":"sequential-io","class":"IO_BOUND","conf":99,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":25149}
+TL {"t_ms":22871,"phase":"sequential-io","class":"IO_BOUND","conf":99,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":25819}
+TL {"t_ms":23190,"phase":"sequential-io","class":"IO_BOUND","conf":99,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":22257}
+TL {"t_ms":23580,"phase":"sequential-io","class":"IO_BOUND","conf":99,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":25828}
+TL {"t_ms":23876,"phase":"sequential-io","class":"IO_BOUND","conf":99,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":25517}
+TL {"t_ms":24175,"phase":"sequential-io","class":"IO_BOUND","conf":99,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":20012}
+TL {"t_ms":24489,"phase":"sequential-io","class":"IO_BOUND","conf":99,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":28636}
+TL {"t_ms":24782,"phase":"network","class":"IO_BOUND","conf":85,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":2726}
+TL {"t_ms":25070,"phase":"network","class":"IO_BOUND","conf":93,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":2768}
+TL {"t_ms":25359,"phase":"network","class":"IO_BOUND","conf":93,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":2856}
+TL {"t_ms":25645,"phase":"network","class":"IO_BOUND","conf":93,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":2840}
+TL {"t_ms":25930,"phase":"network","class":"IO_BOUND","conf":93,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":2824}
+TL {"t_ms":26223,"phase":"network","class":"IO_BOUND","conf":93,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":2568}
+TL {"t_ms":26512,"phase":"network","class":"IO_BOUND","conf":93,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":2760}
+TL {"t_ms":26800,"phase":"network","class":"IO_BOUND","conf":93,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":2792}
+TL {"t_ms":27099,"phase":"network","class":"IO_BOUND","conf":93,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":2832}
+TL {"t_ms":27385,"phase":"network","class":"IO_BOUND","conf":93,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":2832}
+TL {"t_ms":27672,"phase":"network","class":"IO_BOUND","conf":93,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":2832}
+TL {"t_ms":27960,"phase":"network","class":"IO_BOUND","conf":93,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":2848}
+TL {"t_ms":28248,"phase":"network","class":"IO_BOUND","conf":93,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":2712}
+TL {"t_ms":28552,"phase":"network","class":"IO_BOUND","conf":93,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":2800}
+TL {"t_ms":28838,"phase":"network","class":"IO_BOUND","conf":93,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":2800}
+TL {"t_ms":29154,"phase":"network","class":"IO_BOUND","conf":93,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":2800}
+TL {"t_ms":29439,"phase":"network","class":"IO_BOUND","conf":93,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":2832}
+TL {"t_ms":29724,"phase":"network","class":"IO_BOUND","conf":93,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":2840}
+TL {"t_ms":30012,"phase":"network","class":"IO_BOUND","conf":93,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":2848}
+TL {"t_ms":30300,"phase":"network","class":"IO_BOUND","conf":93,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":2824}
+TL {"t_ms":30595,"phase":"network","class":"IO_BOUND","conf":93,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":2824}
+TL {"t_ms":30880,"phase":"network","class":"IO_BOUND","conf":93,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":2792}
+TL {"t_ms":31170,"phase":"network","class":"IO_BOUND","conf":93,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":2720}
+TL {"t_ms":31456,"phase":"network","class":"IO_BOUND","conf":93,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":2768}
+TL {"t_ms":31744,"phase":"network","class":"IO_BOUND","conf":93,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":2792}
+TL {"t_ms":32043,"phase":"network","class":"IO_BOUND","conf":93,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":2376}
+TL {"t_ms":32340,"phase":"network","class":"IO_BOUND","conf":93,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":2352}
+TL {"t_ms":32647,"phase":"network","class":"IO_BOUND","conf":93,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":2360}
+TL {"t_ms":32950,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":59}
+TL {"t_ms":33357,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":58}
+TL {"t_ms":33757,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":58}
+TL {"t_ms":34160,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":58}
+TL {"t_ms":34558,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":58}
+TL {"t_ms":34964,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":58}
+TL {"t_ms":35366,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":58}
+TL {"t_ms":35766,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":58}
+TL {"t_ms":36169,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":59}
+TL {"t_ms":36574,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":58}
+TL {"t_ms":36987,"phase":"interactive","class":"INTERACTIVE","conf":96,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":58}
+TL {"t_ms":37386,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":58}
+TL {"t_ms":37788,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":58}
+TL {"t_ms":38197,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":58}
+TL {"t_ms":38603,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":58}
+TL {"t_ms":39008,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":58}
+TL {"t_ms":39409,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":58}
+TL {"t_ms":39815,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":58}
+TL {"t_ms":40222,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":58}
+TL {"t_ms":40627,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"adaptive","cache":"adaptive","io_class":"sequential","ops":58}
+TRANSITION {"policy":"adaptive","phase_seconds":8,"detect_ms_cpu":284,"detect_ms_random-io":286,"detect_ms_sequential-io":1516,"detect_ms_network":289,"detect_ms_interactive":407}
+[bcache] policy -> lru
+policy: lru
+io_class: unknown
+capacity_blocks: 1024
+blocks: 1024
+hits: 2982759
+misses: 45624
+hit_rate_pm: 984
+readahead_issued: 681323
+readahead_used: 681230
+evictions: 726947
+writebacks: 0
+memory_kb: 4096
+adapt_changes: 4
+cpu_ns: 4752505481
+[sched ] policy -> round_robin
+TL {"t_ms":269,"phase":"cpu","class":"CPU_BOUND","conf":94,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2495}
+TL {"t_ms":563,"phase":"cpu","class":"CPU_BOUND","conf":95,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2624}
+TL {"t_ms":867,"phase":"cpu","class":"CPU_BOUND","conf":95,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1636}
+TL {"t_ms":1201,"phase":"cpu","class":"CPU_BOUND","conf":96,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2373}
+TL {"t_ms":1514,"phase":"cpu","class":"CPU_BOUND","conf":95,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2950}
+TL {"t_ms":1818,"phase":"cpu","class":"CPU_BOUND","conf":95,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2895}
+TL {"t_ms":2111,"phase":"cpu","class":"CPU_BOUND","conf":96,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2542}
+TL {"t_ms":2412,"phase":"cpu","class":"CPU_BOUND","conf":95,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2652}
+TL {"t_ms":2703,"phase":"cpu","class":"CPU_BOUND","conf":95,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2752}
+TL {"t_ms":2998,"phase":"cpu","class":"CPU_BOUND","conf":95,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2487}
+TL {"t_ms":3308,"phase":"cpu","class":"CPU_BOUND","conf":95,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2804}
+TL {"t_ms":3612,"phase":"cpu","class":"CPU_BOUND","conf":95,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2427}
+TL {"t_ms":3915,"phase":"cpu","class":"CPU_BOUND","conf":95,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2857}
+TL {"t_ms":4210,"phase":"cpu","class":"CPU_BOUND","conf":96,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2770}
+TL {"t_ms":4505,"phase":"cpu","class":"CPU_BOUND","conf":95,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2852}
+TL {"t_ms":4810,"phase":"cpu","class":"CPU_BOUND","conf":96,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2426}
+TL {"t_ms":5103,"phase":"cpu","class":"CPU_BOUND","conf":95,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2734}
+TL {"t_ms":5406,"phase":"cpu","class":"CPU_BOUND","conf":96,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2708}
+TL {"t_ms":5710,"phase":"cpu","class":"CPU_BOUND","conf":95,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2525}
+TL {"t_ms":6003,"phase":"cpu","class":"CPU_BOUND","conf":95,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2744}
+TL {"t_ms":6307,"phase":"cpu","class":"CPU_BOUND","conf":94,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2718}
+TL {"t_ms":6611,"phase":"cpu","class":"CPU_BOUND","conf":96,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1996}
+TL {"t_ms":6916,"phase":"cpu","class":"CPU_BOUND","conf":96,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2504}
+TL {"t_ms":7222,"phase":"cpu","class":"CPU_BOUND","conf":95,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2963}
+TL {"t_ms":7531,"phase":"cpu","class":"CPU_BOUND","conf":96,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2959}
+TL {"t_ms":7832,"phase":"cpu","class":"CPU_BOUND","conf":95,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2880}
+TL {"t_ms":8134,"phase":"cpu","class":"CPU_BOUND","conf":95,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2758}
+TL {"t_ms":8417,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1513}
+TL {"t_ms":8706,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1671}
+TL {"t_ms":8992,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1607}
+TL {"t_ms":9277,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1692}
+TL {"t_ms":9562,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1578}
+TL {"t_ms":9851,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1683}
+TL {"t_ms":10134,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1652}
+TL {"t_ms":10420,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1516}
+TL {"t_ms":10705,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1580}
+TL {"t_ms":10995,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":958}
+TL {"t_ms":11294,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1337}
+TL {"t_ms":11600,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1377}
+TL {"t_ms":11906,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1456}
+TL {"t_ms":12224,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1790}
+TL {"t_ms":12515,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1589}
+TL {"t_ms":12800,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1624}
+TL {"t_ms":13087,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1343}
+TL {"t_ms":13403,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1636}
+TL {"t_ms":13689,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1670}
+TL {"t_ms":13973,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1674}
+TL {"t_ms":14261,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1624}
+TL {"t_ms":14545,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1575}
+TL {"t_ms":14836,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1719}
+TL {"t_ms":15125,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1645}
+TL {"t_ms":15417,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1575}
+TL {"t_ms":15702,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1786}
+TL {"t_ms":15989,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1720}
+TL {"t_ms":16278,"phase":"random-io","class":"IO_BOUND","conf":67,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1748}
+TL {"t_ms":16564,"phase":"sequential-io","class":"IO_BOUND","conf":66,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1671}
+TL {"t_ms":16852,"phase":"sequential-io","class":"IO_BOUND","conf":66,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1522}
+TL {"t_ms":17141,"phase":"sequential-io","class":"IO_BOUND","conf":66,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1544}
+TL {"t_ms":17430,"phase":"sequential-io","class":"IO_BOUND","conf":66,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1447}
+TL {"t_ms":17718,"phase":"sequential-io","class":"IO_BOUND","conf":66,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1588}
+TL {"t_ms":18003,"phase":"sequential-io","class":"IO_BOUND","conf":66,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1536}
+TL {"t_ms":18288,"phase":"sequential-io","class":"IO_BOUND","conf":66,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1618}
+TL {"t_ms":18578,"phase":"sequential-io","class":"IO_BOUND","conf":66,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1616}
+TL {"t_ms":18864,"phase":"sequential-io","class":"IO_BOUND","conf":66,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1491}
+TL {"t_ms":19152,"phase":"sequential-io","class":"IO_BOUND","conf":66,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1642}
+TL {"t_ms":19440,"phase":"sequential-io","class":"IO_BOUND","conf":66,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":851}
+TL {"t_ms":19762,"phase":"sequential-io","class":"IO_BOUND","conf":66,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1241}
+TL {"t_ms":20057,"phase":"sequential-io","class":"IO_BOUND","conf":66,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1303}
+TL {"t_ms":20347,"phase":"sequential-io","class":"IO_BOUND","conf":66,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1633}
+TL {"t_ms":20632,"phase":"sequential-io","class":"IO_BOUND","conf":66,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1661}
+TL {"t_ms":20916,"phase":"sequential-io","class":"IO_BOUND","conf":66,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1121}
+TL {"t_ms":21284,"phase":"sequential-io","class":"IO_BOUND","conf":66,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1010}
+TL {"t_ms":21595,"phase":"sequential-io","class":"IO_BOUND","conf":66,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1510}
+TL {"t_ms":21883,"phase":"sequential-io","class":"IO_BOUND","conf":66,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1470}
+TL {"t_ms":22179,"phase":"sequential-io","class":"IO_BOUND","conf":66,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1199}
+TL {"t_ms":22485,"phase":"sequential-io","class":"IO_BOUND","conf":66,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1308}
+TL {"t_ms":22779,"phase":"sequential-io","class":"IO_BOUND","conf":66,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1269}
+TL {"t_ms":23068,"phase":"sequential-io","class":"IO_BOUND","conf":66,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1089}
+TL {"t_ms":23401,"phase":"sequential-io","class":"IO_BOUND","conf":66,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1124}
+TL {"t_ms":23697,"phase":"sequential-io","class":"IO_BOUND","conf":66,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1056}
+TL {"t_ms":24001,"phase":"sequential-io","class":"IO_BOUND","conf":66,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1311}
+TL {"t_ms":24296,"phase":"sequential-io","class":"IO_BOUND","conf":66,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":1282}
+TL {"t_ms":24589,"phase":"network","class":"IO_BOUND","conf":91,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2574}
+TL {"t_ms":24894,"phase":"network","class":"IO_BOUND","conf":91,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2600}
+TL {"t_ms":25187,"phase":"network","class":"IO_BOUND","conf":91,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2648}
+TL {"t_ms":25500,"phase":"network","class":"IO_BOUND","conf":91,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2432}
+TL {"t_ms":25795,"phase":"network","class":"IO_BOUND","conf":91,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2552}
+TL {"t_ms":26092,"phase":"network","class":"IO_BOUND","conf":91,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2656}
+TL {"t_ms":26387,"phase":"network","class":"IO_BOUND","conf":91,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2624}
+TL {"t_ms":26680,"phase":"network","class":"IO_BOUND","conf":91,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2624}
+TL {"t_ms":26971,"phase":"network","class":"IO_BOUND","conf":91,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2576}
+TL {"t_ms":27261,"phase":"network","class":"IO_BOUND","conf":91,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2792}
+TL {"t_ms":27568,"phase":"network","class":"IO_BOUND","conf":91,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2776}
+TL {"t_ms":27856,"phase":"network","class":"IO_BOUND","conf":91,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2768}
+TL {"t_ms":28168,"phase":"network","class":"IO_BOUND","conf":91,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2824}
+TL {"t_ms":28456,"phase":"network","class":"IO_BOUND","conf":91,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2832}
+TL {"t_ms":28741,"phase":"network","class":"IO_BOUND","conf":91,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2792}
+TL {"t_ms":29029,"phase":"network","class":"IO_BOUND","conf":91,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2776}
+TL {"t_ms":29335,"phase":"network","class":"IO_BOUND","conf":91,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2744}
+TL {"t_ms":29620,"phase":"network","class":"IO_BOUND","conf":91,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2664}
+TL {"t_ms":29907,"phase":"network","class":"IO_BOUND","conf":91,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2856}
+TL {"t_ms":30202,"phase":"network","class":"IO_BOUND","conf":91,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2720}
+TL {"t_ms":30486,"phase":"network","class":"IO_BOUND","conf":91,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2840}
+TL {"t_ms":30770,"phase":"network","class":"IO_BOUND","conf":91,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2856}
+TL {"t_ms":31068,"phase":"network","class":"IO_BOUND","conf":91,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2344}
+TL {"t_ms":31354,"phase":"network","class":"IO_BOUND","conf":91,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2640}
+TL {"t_ms":31639,"phase":"network","class":"IO_BOUND","conf":91,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2704}
+TL {"t_ms":31926,"phase":"network","class":"IO_BOUND","conf":91,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2840}
+TL {"t_ms":32221,"phase":"network","class":"IO_BOUND","conf":91,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2688}
+TL {"t_ms":32507,"phase":"network","class":"IO_BOUND","conf":91,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":2760}
+TL {"t_ms":32793,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":58}
+TL {"t_ms":33093,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":58}
+TL {"t_ms":33389,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":58}
+TL {"t_ms":33678,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":58}
+TL {"t_ms":33981,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":58}
+TL {"t_ms":34271,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":58}
+TL {"t_ms":34562,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":58}
+TL {"t_ms":34858,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":58}
+TL {"t_ms":35149,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":58}
+TL {"t_ms":35440,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":59}
+TL {"t_ms":35733,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":58}
+TL {"t_ms":36030,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":58}
+TL {"t_ms":36321,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":58}
+TL {"t_ms":36614,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":58}
+TL {"t_ms":36905,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":58}
+TL {"t_ms":37196,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":58}
+TL {"t_ms":37491,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":58}
+TL {"t_ms":37782,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":58}
+TL {"t_ms":38086,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":58}
+TL {"t_ms":38377,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":58}
+TL {"t_ms":38676,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":58}
+TL {"t_ms":38965,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":58}
+TL {"t_ms":39256,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":58}
+TL {"t_ms":39551,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":58}
+TL {"t_ms":39841,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":58}
+TL {"t_ms":40132,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":58}
+TL {"t_ms":40426,"phase":"interactive","class":"INTERACTIVE","conf":97,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":59}
+TL {"t_ms":40726,"phase":"interactive","class":"INTERACTIVE","conf":100,"sched":"round_robin","cache":"lru","io_class":"unknown","ops":58}
+TRANSITION {"policy":"round_robin","phase_seconds":8,"detect_ms_cpu":303,"detect_ms_random-io":289,"detect_ms_sequential-io":287,"detect_ms_network":304,"detect_ms_interactive":299}
+[bcache] policy -> adaptive
+policy: adaptive
+io_class: unknown
+capacity_blocks: 1024
+blocks: 1024
+hits: 3225190
+misses: 124473
+hit_rate_pm: 962
+readahead_issued: 681323
+readahead_used: 681230
+evictions: 805796
+writebacks: 0
+memory_kb: 4096
+adapt_changes: 4
+cpu_ns: 4816275526
+BENCH-END transition
+init: benchmark suite finished (0)
+FuhrerOS: syncing filesystems and powering off
+POWEROFF

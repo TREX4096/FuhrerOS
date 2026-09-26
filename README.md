@@ -1,4 +1,4 @@
-# FuhrerOS
+![FuhrerOS](logo.png)
 
 **An x86-64 operating system with its own kernel, written from scratch**, and a
 research platform for *workload-aware adaptive scheduling and caching* on
@@ -15,7 +15,12 @@ Kernel       : FuhrerOS 0.1.0 (from-scratch)
 Status       : BOOTED
 ```
 
-![FuhrerOS desktop](docs/images/desktop-tiling.png)
+![FuhrerOS desktop, tiling](docs/images/desktop-tiling.png)
+
+| | |
+|---|---|
+| ![launcher](docs/images/launcher.png) | ![Control Center](docs/images/control-center.png) |
+| ![light theme](docs/images/desktop-light.png) | ![settings](docs/images/settings-touchpad.png) |
 
 ## What is in it
 
@@ -26,10 +31,10 @@ Status       : BOOTED
 | memory | bitmap frame allocator, own 4-level page tables (NX, WP, guard pages), slab heap |
 | scheduling | kernel threads, preemptive context switching, **4 pluggable policies** (round-robin, priority, low-latency, **adaptive**), per-task **workload profiler** |
 | processes | ring-3 processes, ELF64 loader, 50+ native syscalls, threads, pipes, message ports |
-| storage | PCI, virtio-blk (MSI-X), **buffer cache with 5 policies incl. adaptive**, VFS, **FFS0** (own filesystem), tarfs, ramfs, devfs, procfs |
+| storage | PCI, virtio-blk (MSI-X, write cache + FLUSH), **buffer cache with 5 policies incl. adaptive**, VFS, **FFS0** (own filesystem), tarfs, ramfs, devfs, procfs |
 | network | virtio-net, Ethernet, ARP, IPv4, ICMP, UDP, DHCP, **TCP**, sockets; DNS, HTTP client and server in user space |
-| graphics & desktop | framebuffer, **compositor + window manager** (move/resize/snap/max/min, workspaces, overview, tiling, lock screen), taskbar + launcher |
-| input | PS/2 keyboard and mouse, **gesture recognizer** (1–4 finger gestures) |
+| graphics & desktop | framebuffer, **compositor + window manager**: top bar, dark/light themes, launcher + command palette, floating/tiling/focus layouts, up to 9 named workspaces, Alt+Tab, overview, notifications, lock screen |
+| input | PS/2 keyboard and mouse, **gesture recognizer** (1–4 finger swipes/taps, pinch) with configurable actions, tap-to-click, natural scrolling, disable-while-typing |
 | user space | libfu (libc subset + GUI toolkit), init, a shell with pipes/redirection/history, 45+ commands, 8 desktop apps |
 
 Desktop apps: Terminal, Files, **Fuhrer Control Center** (live view of the
@@ -45,8 +50,10 @@ Settings.
 ./scripts/test.sh       # self-test boot: every kernel stage + user space + network
 ```
 See [docs/development-environment.md](docs/development-environment.md).
-In the desktop: Super opens the launcher, Ctrl+Alt+T a terminal, Super+T
-tiling, Super+O the overview.
+In the desktop: Super opens the launcher / command palette, Ctrl+Alt+T a
+terminal, Super+T cycles floating/tiling/focus, Super+Tab the overview,
+Super+F the Control Center. Other checks: `./scripts/test-power.sh poweroff`,
+`./scripts/experiment.sh sched|cache|transition|ablation|micro|stress`.
 
 ## Status (NEW_EXPLANATION §34)
 
@@ -59,18 +66,18 @@ tiling, Super+O the overview.
 | M4 kernel tasks | ✅ | `sched.concurrent.*` for 4 policies, `sync.mutex`, `sync.waitqueue` |
 | M5 processes + syscalls | ✅ | ring-3 `cli` → #GP kills only the process; kernel-memory read → #PF |
 | M6 shell | ✅ | pipelines, redirection, history, 45+ commands |
-| M7 storage | ✅ | virtio-blk + VFS + FFS0 root |
+| M7 storage | ✅ | virtio-blk + VFS + FFS0 root; write 25 MB/s after F-123 (E-133) |
 | M8 file programs | ✅ | `usertest`: create, cp, mv, rm, 1 MiB file, rmdir |
 | M9 networking | ✅ | DHCP, own-stack TCP echo (20 000 B), DNS + HTTP to example.com |
 | M10 graphics | ✅ | compositor with damage tracking |
-| M11 desktop | ✅ | window manager, launcher, 8 apps (screenshots in docs/images) |
-| M12 input | ✅ / ⚠️ | keyboard, mouse, gesture recognizer (verified with synthetic touch frames; no real touchpad driver) |
+| M11 desktop | ✅ | redesigned per UI_SUGGESTION.md (UI-D-001..006), 8 themed apps; app launch 3–4 ms (E-133) |
+| M12 input | ✅ / ⚠️ | keyboard, mouse, gestures + touchpad options (16 `gesture.*` self-tests with synthetic frames; no real touchpad driver) |
 | M13 adaptive scheduler | ✅ | profiler + adaptive policy; see results |
 | M14 adaptive storage | ✅ | adaptive buffer cache; see results |
 | M15 network + browser foundation | ✅ / ⚠️ | HTTP client/server, FuhrerWeb viewer; no TLS, not a browser engine |
-| M16 research evaluation | ✅ | final runs E-117..E-120 (KVM), RQ1–RQ7 answered: [docs/experiments.md](docs/experiments.md) |
-| M17 desktop stress | ⚠️ partial | desktop + benchmarks exercised; no porting of real browser/compiler |
-| M18 real hardware | ⏳ | ISO is a hybrid BIOS/UEFI image; **not tried on hardware** |
+| M16 research evaluation | ✅ | final runs E-129..E-133 (KVM), RQ1–RQ7 answered: [docs/experiments.md](docs/experiments.md) |
+| M17 desktop stress | ✅ / ⚠️ | E-135: browser-like + build proxy + copy + network + probe per policy; adaptive keeps p50 at 14 µs but starves CPU work (finding); no real browser/compiler, media NOT RUN |
+| M18 real hardware | ⏳ prepared | ACPI poweroff/reset + PM-timer fallback verified in QEMU; safe USB writer; [procedure](docs/real-hardware.md); **NOT RUN on hardware** |
 
 ## Documentation
 [architecture](docs/architecture.md) ·
@@ -81,7 +88,8 @@ tiling, Super+O the overview.
 [input](docs/input.md) · [desktop](docs/desktop.md) ·
 [UI design](docs/ui-design.md) · [research design](docs/research-design.md) ·
 [experiments](docs/experiments.md) · [literature](docs/literature.md) ·
-[decisions](docs/decisions.md) · [failures](research-log/failures/README.md) ·
+[real hardware](docs/real-hardware.md) · [decisions](docs/decisions.md) ·
+[experiment records](research-log/experiments/README.md) · [failures](research-log/failures/README.md) ·
 [how it was built](EXPLANATION.md)
 
 The earlier Linux-based prototype (Linux + adaptive layer) is preserved in

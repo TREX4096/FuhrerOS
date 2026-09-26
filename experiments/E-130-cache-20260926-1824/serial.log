@@ -1,0 +1,188 @@
+
+FuhrerOS: kernel entry reached (serial up)
+
+================================
+        FUHREROS KERNEL
+================================
+
+Architecture : x86_64
+Bootloader   : Limine 11.4.1
+Kernel       : FuhrerOS 0.1.0 (from-scratch)
+Status       : BOOTED
+
+[boot  ] bootloader: Limine 11.4.1 (BIOS firmware)
+[boot  ] cmdline: 'bench=cache'
+[boot  ] kernel: phys 0x000000007fd0b000 virt 0xffffffff80000000 size 1056 KiB
+[boot  ] hhdm offset: 0xffff800000000000, rsdp: 0x00000000000f5260
+[boot  ] memory map (25 entries):
+[boot  ]   0000000000001000-0000000000061000 bootloader     384 KiB
+[boot  ]   0000000000061000-000000000009f000 usable         248 KiB
+[boot  ]   000000000009fc00-00000000000a0000 reserved       1 KiB
+[boot  ]   00000000000f0000-00000000000f5000 reserved       20 KiB
+[boot  ]   00000000000f5000-00000000000f6000 reserved       4 KiB
+[boot  ]   00000000000f6000-0000000000100000 reserved       40 KiB
+[boot  ]   0000000000100000-000000007f7d0000 usable         2087744 KiB
+[boot  ]   000000007f7d0000-000000007fcfd000 kernel+modules 5300 KiB
+[boot  ]   000000007fcfd000-000000007fcfe000 bootloader     4 KiB
+[boot  ]   000000007fcfe000-000000007fd01000 usable         12 KiB
+[boot  ]   000000007fd01000-000000007fd0b000 bootloader     40 KiB
+[boot  ]   000000007fd0b000-000000007fe13000 kernel+modules 1056 KiB
+[boot  ]   000000007fe13000-000000007ff38000 bootloader     1172 KiB
+[boot  ]   000000007ff38000-000000007ff55000 usable         116 KiB
+[boot  ]   000000007ff55000-000000007ffdc000 bootloader     540 KiB
+[boot  ]   000000007ffdc000-000000007ffe0000 reserved       16 KiB
+[boot  ]   000000007ffe0000-000000007ffe3000 reserved       12 KiB
+[boot  ]   000000007ffe3000-0000000080000000 reserved       116 KiB
+[boot  ]   00000000b0000000-00000000c0000000 reserved       262144 KiB
+[boot  ]   00000000fd000000-00000000fd3e8000 framebuffer    4000 KiB
+[boot  ]   00000000fed1c000-00000000fed20000 reserved       16 KiB
+[boot  ]   00000000feffc000-00000000ff000000 reserved       16 KiB
+[boot  ]   00000000fffc0000-0000000100000000 reserved       256 KiB
+[boot  ]   0000000100000000-0000000180000000 usable         2097152 KiB
+[boot  ]   000000fd00000000-0000010000000000 reserved       12582912 KiB
+[boot  ] usable memory: 4087 MiB
+[boot  ] framebuffer: 1280x800 32bpp pitch 5120 at phys 0x00000000fd000000
+[boot  ] module: /boot/initrd.tar (5427200 bytes) 'initrd'
+[boot  ] cpu: AuthenticAMD / AMD Ryzen 5 7520U with Radeon Graphics         
+[pmm   ] 1572864 frames tracked, 1046208 free (4086 MiB), bitmap 192 KiB at 0x0000000000100000
+[vmm   ] kernel page tables active (pml4 0x0000000000130000, NX on)
+[heap  ] slab classes 16..2048 B, large allocations from vmalloc
+[pmm   ] reclaimed 2140 KiB of bootloader memory
+[acpi  ] OEM 'BOCHS ', 4 CPU(s), LAPIC 0x00000000fee00000, 1 IOAPIC(s) (first 0x00000000fec00000 gsi 0), ECAM 0x00000000b0000000
+[acpi  ] PM1a_CNT 0x604, S5 found (SLP_TYPa 0), reset register yes, PM timer 0x608 (24-bit)
+[apic  ] local APIC id 0 enabled
+[apic  ] I/O APIC with 24 inputs
+[time  ] TSC 2793.708 MHz, LAPIC timer 62572 kHz (div 16), calibrated with the PIT channel 2
+[time  ] LAPIC periodic timer at 1000 Hz (vector 0x20)
+[sched ] policy -> adaptive
+[sched ] scheduler ready, policy adaptive, 4 policies available
+[init  ] kinit running as task 2 under policy 'adaptive'
+[ps2   ] keyboard ready, mouse ready (4-byte packets, wheel)
+[proc  ] process subsystem ready (ELF64 loader, spawn/wait)
+[syscall] syscall/sysret MSRs programmed, 64 syscall numbers
+[pci   ] 00:00.0 8086:29c0 host bridge
+[pci   ] 00:01.0 1234:1111 display
+[pci   ] 00:02.0 1af4:1041 network
+[vnet  ] eth0 MAC 52:54:00:12:34:56
+[pci   ] 00:03.0 1af4:1042 storage
+[blk   ] vda: 20480 MiB (41943040 sectors of 512 B)
+[pci   ] 00:1f.0 8086:2918 ISA bridge
+[pci   ] 00:1f.2 8086:2922 SATA controller
+[pci   ] 00:1f.3 8086:2930 SMBus
+[bcache] 2048 x 4 KiB buffers, policy adaptive
+[net   ] sockets: TCP, UDP, ICMP echo
+[tty   ] console tty on framebuffer + COM1 (serial input enabled)
+[net   ] DHCP: 10.0.2.15/255.255.255.0 gw 10.0.2.2 dns 10.0.2.3
+[ffs0  ] 'fuhreros' on vda: 5242880 blocks (5241185 free), 4096 inodes (4027 free), mount #1
+[vfs   ] mounted vda (ffs0) on /
+[tarfs ] initrd: 61 files, 5300 KiB
+[vfs   ] mounted initrd (tarfs) on /initrd
+[vfs   ] mounted - (devfs) on /dev
+[vfs   ] mounted - (procfs) on /proc
+[vfs   ] mounted - (ramfs) on /tmp
+[vfs   ] root filesystem: FFS0 (virtio-blk vda)
+[init  ] started /bin/init as pid 1 - kernel handing over to user space
+[1;36mFuhrerOS init[0m (pid 1): user space is running outside kernel privilege
+init: running benchmark suite /etc/bench/cache.sh
+BENCH-BEGIN cache
+iobench: creating 64 MiB test file...
+IOBENCH {"policy":"adaptive","workload":"seq","file_mb":64,"cache_blocks":1024,"seconds":1,"reads":91720,"mb_per_s_x100":35827,"lat_mean_us":10,"lat_p50_us":5,"lat_p99_us":63,"hit_rate_pm":999,"readahead_issued":90667,"readahead_used":90603,"evictions":90674,"disk_reads":107325,"cache_cpu_us":649625,"cache_cpu_ns_per_read":7082,"io_class":"sequential"}
+[bcache] policy -> lru
+IOBENCH {"policy":"lru","workload":"seq","file_mb":64,"cache_blocks":1024,"seconds":6,"reads":34700,"mb_per_s_x100":2259,"lat_mean_us":172,"lat_p50_us":148,"lat_p99_us":483,"hit_rate_pm":743,"readahead_issued":0,"readahead_used":0,"evictions":34742,"disk_reads":142128,"cache_cpu_us":13613,"cache_cpu_ns_per_read":392,"io_class":"unknown"}
+[bcache] policy -> fifo
+IOBENCH {"policy":"fifo","workload":"seq","file_mb":64,"cache_blocks":1024,"seconds":6,"reads":34279,"mb_per_s_x100":2231,"lat_mean_us":174,"lat_p50_us":150,"lat_p99_us":484,"hit_rate_pm":743,"readahead_issued":0,"readahead_used":0,"evictions":34415,"disk_reads":176577,"cache_cpu_us":13467,"cache_cpu_ns_per_read":392,"io_class":"unknown"}
+[bcache] policy -> clock
+IOBENCH {"policy":"clock","workload":"seq","file_mb":64,"cache_blocks":1024,"seconds":6,"reads":29656,"mb_per_s_x100":1930,"lat_mean_us":200,"lat_p50_us":170,"lat_p99_us":627,"hit_rate_pm":745,"readahead_issued":0,"readahead_used":0,"evictions":29692,"disk_reads":206303,"cache_cpu_us":21798,"cache_cpu_ns_per_read":735,"io_class":"unknown"}
+[bcache] policy -> readahead
+IOBENCH {"policy":"readahead","workload":"seq","file_mb":64,"cache_blocks":1024,"seconds":6,"reads":559569,"mb_per_s_x100":36430,"lat_mean_us":10,"lat_p50_us":5,"lat_p99_us":56,"hit_rate_pm":999,"readahead_issued":561201,"readahead_used":560081,"evictions":561276,"disk_reads":767613,"cache_cpu_us":3823287,"cache_cpu_ns_per_read":6832,"io_class":"unknown"}
+[bcache] policy -> adaptive
+IOBENCH {"policy":"adaptive","workload":"seq","file_mb":64,"cache_blocks":1024,"seconds":6,"reads":607978,"mb_per_s_x100":39581,"lat_mean_us":9,"lat_p50_us":5,"lat_p99_us":53,"hit_rate_pm":999,"readahead_issued":599679,"readahead_used":599615,"evictions":599744,"disk_reads":1367422,"cache_cpu_us":3865566,"cache_cpu_ns_per_read":6358,"io_class":"sequential"}
+[bcache] policy -> lru
+IOBENCH {"policy":"lru","workload":"random","file_mb":64,"cache_blocks":1024,"seconds":6,"reads":36974,"mb_per_s_x100":2407,"lat_mean_us":161,"lat_p50_us":147,"lat_p99_us":430,"hit_rate_pm":761,"readahead_issued":0,"readahead_used":0,"evictions":34774,"disk_reads":1402257,"cache_cpu_us":28834,"cache_cpu_ns_per_read":779,"io_class":"unknown"}
+[bcache] policy -> fifo
+IOBENCH {"policy":"fifo","workload":"random","file_mb":64,"cache_blocks":1024,"seconds":6,"reads":37255,"mb_per_s_x100":2425,"lat_mean_us":160,"lat_p50_us":144,"lat_p99_us":437,"hit_rate_pm":756,"readahead_issued":0,"readahead_used":0,"evictions":35684,"disk_reads":1437975,"cache_cpu_us":26365,"cache_cpu_ns_per_read":707,"io_class":"unknown"}
+[bcache] policy -> clock
+IOBENCH {"policy":"clock","workload":"random","file_mb":64,"cache_blocks":1024,"seconds":6,"reads":35434,"mb_per_s_x100":2306,"lat_mean_us":168,"lat_p50_us":151,"lat_p99_us":449,"hit_rate_pm":761,"readahead_issued":0,"readahead_used":0,"evictions":33268,"disk_reads":1471277,"cache_cpu_us":28828,"cache_cpu_ns_per_read":813,"io_class":"unknown"}
+[bcache] policy -> readahead
+IOBENCH {"policy":"readahead","workload":"random","file_mb":64,"cache_blocks":1024,"seconds":6,"reads":35829,"mb_per_s_x100":2332,"lat_mean_us":166,"lat_p50_us":152,"lat_p99_us":435,"hit_rate_pm":761,"readahead_issued":24,"readahead_used":2,"evictions":33743,"disk_reads":1505054,"cache_cpu_us":30594,"cache_cpu_ns_per_read":853,"io_class":"unknown"}
+[bcache] policy -> adaptive
+IOBENCH {"policy":"adaptive","workload":"random","file_mb":64,"cache_blocks":1024,"seconds":6,"reads":39917,"mb_per_s_x100":2598,"lat_mean_us":149,"lat_p50_us":140,"lat_p99_us":365,"hit_rate_pm":761,"readahead_issued":0,"readahead_used":0,"evictions":37511,"disk_reads":1542630,"cache_cpu_us":28364,"cache_cpu_ns_per_read":710,"io_class":"random"}
+[bcache] policy -> lru
+IOBENCH {"policy":"lru","workload":"hotset","file_mb":64,"cache_blocks":1024,"seconds":6,"reads":154013,"mb_per_s_x100":10026,"lat_mean_us":38,"lat_p50_us":1,"lat_p99_us":329,"hit_rate_pm":935,"readahead_issued":0,"readahead_used":0,"evictions":31523,"disk_reads":1574187,"cache_cpu_us":55498,"cache_cpu_ns_per_read":360,"io_class":"unknown"}
+[bcache] policy -> fifo
+IOBENCH {"policy":"fifo","workload":"hotset","file_mb":64,"cache_blocks":1024,"seconds":6,"reads":98786,"mb_per_s_x100":6431,"lat_mean_us":60,"lat_p50_us":1,"lat_p99_us":372,"hit_rate_pm":895,"readahead_issued":0,"readahead_used":0,"evictions":32648,"disk_reads":1606869,"cache_cpu_us":35301,"cache_cpu_ns_per_read":357,"io_class":"unknown"}
+[bcache] policy -> clock
+IOBENCH {"policy":"clock","workload":"hotset","file_mb":64,"cache_blocks":1024,"seconds":6,"reads":145711,"mb_per_s_x100":9486,"lat_mean_us":40,"lat_p50_us":1,"lat_p99_us":300,"hit_rate_pm":927,"readahead_issued":0,"readahead_used":0,"evictions":33377,"disk_reads":1640280,"cache_cpu_us":40135,"cache_cpu_ns_per_read":275,"io_class":"unknown"}
+[bcache] policy -> readahead
+IOBENCH {"policy":"readahead","workload":"hotset","file_mb":64,"cache_blocks":1024,"seconds":6,"reads":151481,"mb_per_s_x100":9861,"lat_mean_us":39,"lat_p50_us":1,"lat_p99_us":329,"hit_rate_pm":935,"readahead_issued":21,"readahead_used":15,"evictions":31064,"disk_reads":1671378,"cache_cpu_us":53402,"cache_cpu_ns_per_read":352,"io_class":"unknown"}
+[bcache] policy -> adaptive
+IOBENCH {"policy":"adaptive","workload":"hotset","file_mb":64,"cache_blocks":1024,"seconds":6,"reads":143311,"mb_per_s_x100":9329,"lat_mean_us":41,"lat_p50_us":1,"lat_p99_us":321,"hit_rate_pm":927,"readahead_issued":0,"readahead_used":0,"evictions":32767,"disk_reads":1704210,"cache_cpu_us":41587,"cache_cpu_ns_per_read":290,"io_class":"random"}
+[bcache] policy -> lru
+IOBENCH {"policy":"lru","workload":"scan","file_mb":64,"cache_blocks":1024,"seconds":6,"reads":54046,"mb_per_s_x100":3518,"lat_mean_us":110,"lat_p50_us":132,"lat_p99_us":401,"hit_rate_pm":814,"readahead_issued":0,"readahead_used":0,"evictions":34822,"disk_reads":1739066,"cache_cpu_us":27891,"cache_cpu_ns_per_read":516,"io_class":"unknown"}
+[bcache] policy -> fifo
+IOBENCH {"policy":"fifo","workload":"scan","file_mb":64,"cache_blocks":1024,"seconds":6,"reads":49580,"mb_per_s_x100":3227,"lat_mean_us":120,"lat_p50_us":134,"lat_p99_us":395,"hit_rate_pm":794,"readahead_issued":0,"readahead_used":0,"evictions":35321,"disk_reads":1774421,"cache_cpu_us":21393,"cache_cpu_ns_per_read":431,"io_class":"unknown"}
+[bcache] policy -> clock
+IOBENCH {"policy":"clock","workload":"scan","file_mb":64,"cache_blocks":1024,"seconds":6,"reads":51728,"mb_per_s_x100":3367,"lat_mean_us":115,"lat_p50_us":136,"lat_p99_us":375,"hit_rate_pm":806,"readahead_issued":0,"readahead_used":0,"evictions":34808,"disk_reads":1809263,"cache_cpu_us":25700,"cache_cpu_ns_per_read":496,"io_class":"unknown"}
+[bcache] policy -> readahead
+IOBENCH {"policy":"readahead","workload":"scan","file_mb":64,"cache_blocks":1024,"seconds":6,"reads":31741,"mb_per_s_x100":2066,"lat_mean_us":187,"lat_p50_us":162,"lat_p99_us":836,"hit_rate_pm":813,"readahead_issued":0,"readahead_used":0,"evictions":20553,"disk_reads":1829850,"cache_cpu_us":46984,"cache_cpu_ns_per_read":1480,"io_class":"unknown"}
+[bcache] policy -> adaptive
+IOBENCH {"policy":"adaptive","workload":"scan","file_mb":64,"cache_blocks":1024,"seconds":6,"reads":29780,"mb_per_s_x100":1937,"lat_mean_us":200,"lat_p50_us":183,"lat_p99_us":964,"hit_rate_pm":805,"readahead_issued":0,"readahead_used":0,"evictions":20143,"disk_reads":1850058,"cache_cpu_us":37128,"cache_cpu_ns_per_read":1246,"io_class":"random"}
+[bcache] policy -> adaptive
+IOBENCH {"policy":"adaptive","workload":"seq","file_mb":64,"cache_blocks":1024,"seconds":6,"reads":316833,"mb_per_s_x100":20627,"lat_mean_us":21,"lat_p50_us":7,"lat_p99_us":102,"hit_rate_pm":999,"readahead_issued":312602,"readahead_used":312538,"evictions":312631,"disk_reads":2162723,"cache_cpu_us":3284662,"cache_cpu_ns_per_read":10367,"io_class":"sequential"}
+[bcache] policy -> readahead
+IOBENCH {"policy":"readahead","workload":"seq","file_mb":64,"cache_blocks":1024,"seconds":6,"reads":494042,"mb_per_s_x100":32164,"lat_mean_us":10,"lat_p50_us":5,"lat_p99_us":54,"hit_rate_pm":999,"readahead_issued":495486,"readahead_used":494494,"evictions":495553,"disk_reads":2658337,"cache_cpu_us":3713983,"cache_cpu_ns_per_read":7517,"io_class":"unknown"}
+[bcache] policy -> clock
+IOBENCH {"policy":"clock","workload":"seq","file_mb":64,"cache_blocks":1024,"seconds":6,"reads":36508,"mb_per_s_x100":2376,"lat_mean_us":163,"lat_p50_us":145,"lat_p99_us":393,"hit_rate_pm":744,"readahead_issued":0,"readahead_used":0,"evictions":36552,"disk_reads":2694954,"cache_cpu_us":17328,"cache_cpu_ns_per_read":474,"io_class":"unknown"}
+[bcache] policy -> fifo
+IOBENCH {"policy":"fifo","workload":"seq","file_mb":64,"cache_blocks":1024,"seconds":6,"reads":34630,"mb_per_s_x100":2254,"lat_mean_us":172,"lat_p50_us":149,"lat_p99_us":444,"hit_rate_pm":743,"readahead_issued":0,"readahead_used":0,"evictions":34766,"disk_reads":2729754,"cache_cpu_us":14400,"cache_cpu_ns_per_read":415,"io_class":"unknown"}
+[bcache] policy -> lru
+IOBENCH {"policy":"lru","workload":"seq","file_mb":64,"cache_blocks":1024,"seconds":6,"reads":30370,"mb_per_s_x100":1977,"lat_mean_us":196,"lat_p50_us":163,"lat_p99_us":613,"hit_rate_pm":745,"readahead_issued":0,"readahead_used":0,"evictions":30407,"disk_reads":2760195,"cache_cpu_us":26452,"cache_cpu_ns_per_read":871,"io_class":"unknown"}
+[bcache] policy -> adaptive
+IOBENCH {"policy":"adaptive","workload":"random","file_mb":64,"cache_blocks":1024,"seconds":6,"reads":37656,"mb_per_s_x100":2451,"lat_mean_us":158,"lat_p50_us":146,"lat_p99_us":388,"hit_rate_pm":761,"readahead_issued":0,"readahead_used":0,"evictions":35326,"disk_reads":2795555,"cache_cpu_us":26833,"cache_cpu_ns_per_read":712,"io_class":"random"}
+[bcache] policy -> readahead
+IOBENCH {"policy":"readahead","workload":"random","file_mb":64,"cache_blocks":1024,"seconds":6,"reads":36342,"mb_per_s_x100":2366,"lat_mean_us":164,"lat_p50_us":147,"lat_p99_us":441,"hit_rate_pm":760,"readahead_issued":3,"readahead_used":0,"evictions":34244,"disk_reads":2829833,"cache_cpu_us":32921,"cache_cpu_ns_per_read":905,"io_class":"unknown"}
+[bcache] policy -> clock
+IOBENCH {"policy":"clock","workload":"random","file_mb":64,"cache_blocks":1024,"seconds":6,"reads":35698,"mb_per_s_x100":2324,"lat_mean_us":167,"lat_p50_us":152,"lat_p99_us":432,"hit_rate_pm":760,"readahead_issued":0,"readahead_used":0,"evictions":33604,"disk_reads":2863502,"cache_cpu_us":33063,"cache_cpu_ns_per_read":926,"io_class":"unknown"}
+[bcache] policy -> fifo
+IOBENCH {"policy":"fifo","workload":"random","file_mb":64,"cache_blocks":1024,"seconds":6,"reads":34278,"mb_per_s_x100":2231,"lat_mean_us":174,"lat_p50_us":156,"lat_p99_us":511,"hit_rate_pm":756,"readahead_issued":0,"readahead_used":0,"evictions":32813,"disk_reads":2896349,"cache_cpu_us":28837,"cache_cpu_ns_per_read":841,"io_class":"unknown"}
+[bcache] policy -> lru
+IOBENCH {"policy":"lru","workload":"random","file_mb":64,"cache_blocks":1024,"seconds":6,"reads":37325,"mb_per_s_x100":2429,"lat_mean_us":160,"lat_p50_us":148,"lat_p99_us":419,"hit_rate_pm":761,"readahead_issued":0,"readahead_used":0,"evictions":35072,"disk_reads":2931455,"cache_cpu_us":26892,"cache_cpu_ns_per_read":720,"io_class":"unknown"}
+[bcache] policy -> adaptive
+IOBENCH {"policy":"adaptive","workload":"hotset","file_mb":64,"cache_blocks":1024,"seconds":6,"reads":143865,"mb_per_s_x100":9365,"lat_mean_us":41,"lat_p50_us":1,"lat_p99_us":323,"hit_rate_pm":927,"readahead_issued":6,"readahead_used":1,"evictions":33018,"disk_reads":2964507,"cache_cpu_us":41098,"cache_cpu_ns_per_read":285,"io_class":"random"}
+[bcache] policy -> readahead
+IOBENCH {"policy":"readahead","workload":"hotset","file_mb":64,"cache_blocks":1024,"seconds":6,"reads":159523,"mb_per_s_x100":10385,"lat_mean_us":37,"lat_p50_us":1,"lat_p99_us":319,"hit_rate_pm":935,"readahead_issued":18,"readahead_used":11,"evictions":32599,"disk_reads":2997140,"cache_cpu_us":53317,"cache_cpu_ns_per_read":334,"io_class":"unknown"}
+[bcache] policy -> clock
+IOBENCH {"policy":"clock","workload":"hotset","file_mb":64,"cache_blocks":1024,"seconds":6,"reads":146769,"mb_per_s_x100":9555,"lat_mean_us":40,"lat_p50_us":1,"lat_p99_us":300,"hit_rate_pm":928,"readahead_issued":0,"readahead_used":0,"evictions":33466,"disk_reads":3030671,"cache_cpu_us":37403,"cache_cpu_ns_per_read":254,"io_class":"unknown"}
+[bcache] policy -> fifo
+IOBENCH {"policy":"fifo","workload":"hotset","file_mb":64,"cache_blocks":1024,"seconds":6,"reads":98142,"mb_per_s_x100":6389,"lat_mean_us":60,"lat_p50_us":1,"lat_p99_us":359,"hit_rate_pm":895,"readahead_issued":0,"readahead_used":0,"evictions":32543,"disk_reads":3063248,"cache_cpu_us":35006,"cache_cpu_ns_per_read":356,"io_class":"unknown"}
+[bcache] policy -> lru
+IOBENCH {"policy":"lru","workload":"hotset","file_mb":64,"cache_blocks":1024,"seconds":6,"reads":156003,"mb_per_s_x100":10156,"lat_mean_us":38,"lat_p50_us":1,"lat_p99_us":320,"hit_rate_pm":935,"readahead_issued":0,"readahead_used":0,"evictions":32049,"disk_reads":3095331,"cache_cpu_us":50906,"cache_cpu_ns_per_read":326,"io_class":"unknown"}
+[bcache] policy -> adaptive
+IOBENCH {"policy":"adaptive","workload":"scan","file_mb":64,"cache_blocks":1024,"seconds":6,"reads":51261,"mb_per_s_x100":3337,"lat_mean_us":116,"lat_p50_us":138,"lat_p99_us":376,"hit_rate_pm":805,"readahead_issued":0,"readahead_used":0,"evictions":34564,"disk_reads":3129929,"cache_cpu_us":25188,"cache_cpu_ns_per_read":491,"io_class":"random"}
+[bcache] policy -> readahead
+IOBENCH {"policy":"readahead","workload":"scan","file_mb":64,"cache_blocks":1024,"seconds":6,"reads":52919,"mb_per_s_x100":3445,"lat_mean_us":112,"lat_p50_us":132,"lat_p99_us":408,"hit_rate_pm":814,"readahead_issued":0,"readahead_used":0,"evictions":34145,"disk_reads":3164108,"cache_cpu_us":28813,"cache_cpu_ns_per_read":544,"io_class":"unknown"}
+[bcache] policy -> clock
+IOBENCH {"policy":"clock","workload":"scan","file_mb":64,"cache_blocks":1024,"seconds":6,"reads":52386,"mb_per_s_x100":3410,"lat_mean_us":114,"lat_p50_us":132,"lat_p99_us":395,"hit_rate_pm":805,"readahead_issued":0,"readahead_used":0,"evictions":35264,"disk_reads":3199437,"cache_cpu_us":26562,"cache_cpu_ns_per_read":507,"io_class":"unknown"}
+[bcache] policy -> fifo
+IOBENCH {"policy":"fifo","workload":"scan","file_mb":64,"cache_blocks":1024,"seconds":6,"reads":48244,"mb_per_s_x100":3140,"lat_mean_us":123,"lat_p50_us":140,"lat_p99_us":399,"hit_rate_pm":794,"readahead_issued":0,"readahead_used":0,"evictions":34366,"disk_reads":3233837,"cache_cpu_us":22608,"cache_cpu_ns_per_read":468,"io_class":"unknown"}
+[bcache] policy -> lru
+IOBENCH {"policy":"lru","workload":"scan","file_mb":64,"cache_blocks":1024,"seconds":6,"reads":53926,"mb_per_s_x100":3510,"lat_mean_us":110,"lat_p50_us":132,"lat_p99_us":390,"hit_rate_pm":814,"readahead_issued":0,"readahead_used":0,"evictions":34694,"disk_reads":3268565,"cache_cpu_us":26869,"cache_cpu_ns_per_read":498,"io_class":"unknown"}
+[bcache] policy -> adaptive
+policy: adaptive
+io_class: unknown
+capacity_blocks: 1024
+blocks: 1024
+hits: 152507
+misses: 34726
+hit_rate_pm: 814
+readahead_issued: 0
+readahead_used: 0
+evictions: 34726
+writebacks: 0
+memory_kb: 4096
+adapt_changes: 10
+cpu_ns: 26890718
+BENCH-END cache
+init: benchmark suite finished (0)
+FuhrerOS: syncing filesystems and powering off
+POWEROFF

@@ -99,7 +99,54 @@ NOTES = {
               "A4 6 µs; dispatch p99 A6-window500 12,028 µs and A7-hyst5 21,027 µs vs A6-window25 43 µs and "
               "A7-hyst1 44 µs.",
               "Superseded by the A5 layout.", "E-120"),
+    "E-117": ("Mixed: dispatch p50 B3 6 µs, B2 7 µs, B0/B1 29,062 µs; dispatch p99 B3 84 µs, B2 104 µs.",
+              "Superseded: ran with the aging defect later found by M17 (F-122) and the write-through disk "
+              "(F-123).", "E-129"),
+    "E-118": ("Adaptive sequential 311.58 MB/s vs read-ahead 321.13 and LRU 19.67; hotset adaptive 61.55 vs LRU "
+              "75.32.", "Superseded: F-123 (write-through disk) was still present.", "E-130"),
+    "E-119": ("Detection 284-401 ms under adaptive, 286-301 ms under round_robin+lru.",
+              "Superseded (F-122, F-123 fixed later).", "E-131"),
+    "E-120": ("A4 dispatch p99 56 µs, A5 71 µs, A6-window500 14,042 µs, A7-hyst5 11,990 µs; A2 dispatch p50 "
+              "11,205 µs.", "Superseded (F-122).", "E-132"),
 }
+
+TYPES = {"micro": ("NEW_EXPLANATION §35: reproducible CPU, memory, storage, network and desktop micro-benchmarks.",
+                   "No hypothesis: a baseline of what the system does.",
+                   "fubench cpu/mem/storage/net x3, then fubench desktop once (it starts the compositor).",
+                   "time, rate or latency per benchmark (units in summary.md); NOT RUN where impossible"),
+         "stress": ("M17 / §35 mixed workload / UI_SUGGESTION §41: does the adaptive scheduler keep the desktop "
+                    "responsive while browser-like, build-like, file and network work run at once?",
+                    "Adaptive keeps the interactive probe near low-latency levels without starving the rest.",
+                    "deskstress 10 s x 3 repetitions x 4 policies: HTTP client+server, two CPU-bound build-proxy "
+                    "workers, 8 MiB file copy loop, TCP stream, interactive probe; order rotated.",
+                    "probe dispatch/wake latency, per-component throughput, context switches, thread classes"),
+         "wdebug": ("Diagnostic: why are FFS0 writes slow (F-123)?", "-",
+                    "fubench storage with /proc/bcache, /proc/blk, /proc/sched before/after; E-126 with QEMU "
+                    "cache=unsafe, E-127 with cache=none, E-128 after the FLUSH fix.",
+                    "per-direction device latency, CPU busy/idle")}
+Q.update(TYPES)
+
+NOTES.update({
+    "E-121": ("seq_write 1.82 MB/s, seq_read 366.09 MB/s, rand_write 842 ops/s, small files 230/s; "
+              "UDP: 20000 sent, 32 received (unpaced sender).",
+              "Superseded. Exposed F-123 and the unpaced UDP benchmark.", "E-133"),
+    "E-122": ("Adaptive: probe dispatch p50 49,183 µs, file copy 0.06 MB/s (low-latency: 10 µs, 1.18 MB/s).",
+              "Superseded. Exposed F-122 (aging boost never expired). HTTP numbers unreliable (fixed port, "
+              "connection failures under every policy).", "E-134, E-135"),
+    "E-123": ("seq_write 1.88 MB/s; CPU busy 1.78 s vs idle 20.9 s; 10,562 writebacks.",
+              "Diagnostic: the kernel waits on the device.", "E-124"),
+    "E-124": ("29,535 requests, 39.0 s summed device time.", "Diagnostic.", "E-125"),
+    "E-125": ("Device latency: reads 243 µs, writes 3,196 µs.", "Diagnostic: writes are slow in the device.",
+              "E-126"),
+    "E-126": ("QEMU cache=unsafe: writes 162 µs, rand_write 5,848 ops/s.",
+              "Diagnostic: the host flushes every write (write-through device, F-123).", "E-127"),
+    "E-127": ("QEMU cache=none: writes 3,243 µs.", "Diagnostic.", "E-128"),
+    "E-128": ("After negotiating VIRTIO_BLK_F_FLUSH: writes 148 µs, seq_write 20.56 MB/s, rand_write 4,614 ops/s, "
+              "small files 2,246/s, 6 flushes.", "Confirms the F-123 fix.", "E-133"),
+    "E-134": ("After F-122: adaptive probe dispatch p50 27 µs (was 49,183). HTTP failures under several "
+              "policies (161/90/482 failed connects).", "Superseded: fixed web port made HTTP unreliable.",
+              "E-135"),
+})
 
 
 def record(d, final_notes=None):

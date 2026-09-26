@@ -1,0 +1,65 @@
+{"kind":"FUBENCH","data":{"group":"cpu","name":"prime","value":68,"unit":"ms","note":"25997 primes below 300000 (trial division)"}}
+{"kind":"FUBENCH","data":{"group":"cpu","name":"matrix","value":10,"unit":"ms","note":"4 x 160x160 int32 multiply, checksum 4988"}}
+{"kind":"FUBENCH","data":{"group":"cpu","name":"compilation","value":-1,"unit":"","status":"NOT RUN","note":"no compiler has been ported to FuhrerOS"}}
+{"kind":"FUBENCH","data":{"group":"mem","name":"alloc_free","value":19,"unit":"ns/pair","note":"malloc 16..4111 B + free, 64 live objects"}}
+{"kind":"FUBENCH","data":{"group":"mem","name":"copy","value":4536,"unit":"MB/s","note":"memcpy 4 MiB x 32 (libfu memcpy, no SSE)"}}
+{"kind":"FUBENCH","data":{"group":"mem","name":"working_set_16K","value":12,"unit":"ns/10 access","note":"dependent random loads (end 1990)"}}
+{"kind":"FUBENCH","data":{"group":"mem","name":"working_set_256K","value":36,"unit":"ns/10 access","note":"dependent random loads (end 32867)"}}
+{"kind":"FUBENCH","data":{"group":"mem","name":"working_set_4096K","value":937,"unit":"ns/10 access","note":"dependent random loads (end 611571)"}}
+{"kind":"FUBENCH","data":{"group":"mem","name":"working_set_32768K","value":1555,"unit":"ns/10 access","note":"dependent random loads (end 7222772)"}}
+{"kind":"FUBENCH","data":{"group":"storage","name":"seq_write","value":2534,"unit":"MB/s x100","note":"32 MiB in 64 KiB writes + sync"}}
+{"kind":"FUBENCH","data":{"group":"storage","name":"seq_read","value":23679,"unit":"MB/s x100","note":"cold cache, 64 KiB reads"}}
+{"kind":"FUBENCH","data":{"group":"storage","name":"rand_read","value":4429,"unit":"ops/s","note":"cold cache, 4 KiB"}}
+{"kind":"FUBENCH","data":{"group":"storage","name":"rand_write","value":4487,"unit":"ops/s","note":"4 KiB + final sync"}}
+{"kind":"FUBENCH","data":{"group":"storage","name":"small_file_create","value":2404,"unit":"files/s","note":"500 x 4 KiB create+write+close, then sync"}}
+{"kind":"FUBENCH","data":{"group":"storage","name":"small_file_delete","value":14883,"unit":"files/s","note":"500 unlinks, then sync"}}
+{"kind":"FUBENCH","data":{"group":"net","name":"tcp_throughput","value":16124,"unit":"MB/s x100","note":"32 MiB to the guest's own IP (loopback path of the own stack)"}}
+{"kind":"FUBENCH","data":{"group":"net","name":"tcp_rtt_p50","value":2,"unit":"us","note":"1-byte ping-pong x 2000, p99 4 us"}}
+{"kind":"FUBENCH","data":{"group":"net","name":"udp_delivered_rate","value":87913,"unit":"packets/s","note":"64 B datagrams, <=16 in flight: 20000 sent, 20000 delivered"}}
+{"kind":"FUBENCH","data":{"group":"cpu","name":"prime","value":62,"unit":"ms","note":"25997 primes below 300000 (trial division)"}}
+{"kind":"FUBENCH","data":{"group":"cpu","name":"matrix","value":7,"unit":"ms","note":"4 x 160x160 int32 multiply, checksum 4988"}}
+{"kind":"FUBENCH","data":{"group":"cpu","name":"compilation","value":-1,"unit":"","status":"NOT RUN","note":"no compiler has been ported to FuhrerOS"}}
+{"kind":"FUBENCH","data":{"group":"mem","name":"alloc_free","value":16,"unit":"ns/pair","note":"malloc 16..4111 B + free, 64 live objects"}}
+{"kind":"FUBENCH","data":{"group":"mem","name":"copy","value":5251,"unit":"MB/s","note":"memcpy 4 MiB x 32 (libfu memcpy, no SSE)"}}
+{"kind":"FUBENCH","data":{"group":"mem","name":"working_set_16K","value":12,"unit":"ns/10 access","note":"dependent random loads (end 1990)"}}
+{"kind":"FUBENCH","data":{"group":"mem","name":"working_set_256K","value":33,"unit":"ns/10 access","note":"dependent random loads (end 32867)"}}
+{"kind":"FUBENCH","data":{"group":"mem","name":"working_set_4096K","value":690,"unit":"ns/10 access","note":"dependent random loads (end 611571)"}}
+{"kind":"FUBENCH","data":{"group":"mem","name":"working_set_32768K","value":1463,"unit":"ns/10 access","note":"dependent random loads (end 7222772)"}}
+{"kind":"FUBENCH","data":{"group":"storage","name":"seq_write","value":2464,"unit":"MB/s x100","note":"32 MiB in 64 KiB writes + sync"}}
+{"kind":"FUBENCH","data":{"group":"storage","name":"seq_read","value":37034,"unit":"MB/s x100","note":"cold cache, 64 KiB reads"}}
+{"kind":"FUBENCH","data":{"group":"storage","name":"rand_read","value":5739,"unit":"ops/s","note":"cold cache, 4 KiB"}}
+{"kind":"FUBENCH","data":{"group":"storage","name":"rand_write","value":4485,"unit":"ops/s","note":"4 KiB + final sync"}}
+{"kind":"FUBENCH","data":{"group":"storage","name":"small_file_create","value":1402,"unit":"files/s","note":"500 x 4 KiB create+write+close, then sync"}}
+{"kind":"FUBENCH","data":{"group":"storage","name":"small_file_delete","value":12835,"unit":"files/s","note":"500 unlinks, then sync"}}
+{"kind":"FUBENCH","data":{"group":"net","name":"tcp_throughput","value":14517,"unit":"MB/s x100","note":"32 MiB to the guest's own IP (loopback path of the own stack)"}}
+{"kind":"FUBENCH","data":{"group":"net","name":"tcp_rtt_p50","value":2,"unit":"us","note":"1-byte ping-pong x 2000, p99 4 us"}}
+{"kind":"FUBENCH","data":{"group":"net","name":"udp_delivered_rate","value":93695,"unit":"packets/s","note":"64 B datagrams, <=16 in flight: 20000 sent, 20000 delivered"}}
+{"kind":"FUBENCH","data":{"group":"cpu","name":"prime","value":61,"unit":"ms","note":"25997 primes below 300000 (trial division)"}}
+{"kind":"FUBENCH","data":{"group":"cpu","name":"matrix","value":10,"unit":"ms","note":"4 x 160x160 int32 multiply, checksum 4988"}}
+{"kind":"FUBENCH","data":{"group":"cpu","name":"compilation","value":-1,"unit":"","status":"NOT RUN","note":"no compiler has been ported to FuhrerOS"}}
+{"kind":"FUBENCH","data":{"group":"mem","name":"alloc_free","value":25,"unit":"ns/pair","note":"malloc 16..4111 B + free, 64 live objects"}}
+{"kind":"FUBENCH","data":{"group":"mem","name":"copy","value":4579,"unit":"MB/s","note":"memcpy 4 MiB x 32 (libfu memcpy, no SSE)"}}
+{"kind":"FUBENCH","data":{"group":"mem","name":"working_set_16K","value":13,"unit":"ns/10 access","note":"dependent random loads (end 1990)"}}
+{"kind":"FUBENCH","data":{"group":"mem","name":"working_set_256K","value":33,"unit":"ns/10 access","note":"dependent random loads (end 32867)"}}
+{"kind":"FUBENCH","data":{"group":"mem","name":"working_set_4096K","value":592,"unit":"ns/10 access","note":"dependent random loads (end 611571)"}}
+{"kind":"FUBENCH","data":{"group":"mem","name":"working_set_32768K","value":1540,"unit":"ns/10 access","note":"dependent random loads (end 7222772)"}}
+{"kind":"FUBENCH","data":{"group":"storage","name":"seq_write","value":2521,"unit":"MB/s x100","note":"32 MiB in 64 KiB writes + sync"}}
+{"kind":"FUBENCH","data":{"group":"storage","name":"seq_read","value":41433,"unit":"MB/s x100","note":"cold cache, 64 KiB reads"}}
+{"kind":"FUBENCH","data":{"group":"storage","name":"rand_read","value":6743,"unit":"ops/s","note":"cold cache, 4 KiB"}}
+{"kind":"FUBENCH","data":{"group":"storage","name":"rand_write","value":4807,"unit":"ops/s","note":"4 KiB + final sync"}}
+{"kind":"FUBENCH","data":{"group":"storage","name":"small_file_create","value":1306,"unit":"files/s","note":"500 x 4 KiB create+write+close, then sync"}}
+{"kind":"FUBENCH","data":{"group":"storage","name":"small_file_delete","value":12643,"unit":"files/s","note":"500 unlinks, then sync"}}
+{"kind":"FUBENCH","data":{"group":"net","name":"tcp_throughput","value":15353,"unit":"MB/s x100","note":"32 MiB to the guest's own IP (loopback path of the own stack)"}}
+{"kind":"FUBENCH","data":{"group":"net","name":"tcp_rtt_p50","value":2,"unit":"us","note":"1-byte ping-pong x 2000, p99 3 us"}}
+{"kind":"FUBENCH","data":{"group":"net","name":"udp_delivered_rate","value":72550,"unit":"packets/s","note":"64 B datagrams, <=16 in flight: 20000 sent, 20000 delivered"}}
+{"kind":"FUBENCH","data":{"group":"desktop","name":"window_create","value":1666,"unit":"us","note":"open 400x300 + fill + present, avg of 20"}}
+{"kind":"FUBENCH","data":{"group":"desktop","name":"launch_terminal","value":4,"unit":"ms","note":"spawn -> window exists; mean of 3, best 1 ms"}}
+{"kind":"FUBENCH","data":{"group":"desktop","name":"launch_files","value":3,"unit":"ms","note":"spawn -> window exists; mean of 3, best 3 ms"}}
+{"kind":"FUBENCH","data":{"group":"desktop","name":"launch_editor","value":3,"unit":"ms","note":"spawn -> window exists; mean of 3, best 2 ms"}}
+{"kind":"FUBENCH","data":{"group":"desktop","name":"launch_browser","value":3,"unit":"ms","note":"spawn -> window exists; mean of 3, best 2 ms"}}
+{"kind":"FUBENCH","data":{"group":"desktop","name":"launch_settings","value":3,"unit":"ms","note":"spawn -> window exists; mean of 3, best 2 ms"}}
+{"kind":"FUBENCH","data":{"group":"desktop","name":"launch_control_center","value":3,"unit":"ms","note":"spawn -> window exists; mean of 3, best 3 ms"}}
+{"kind":"FUBENCH","data":{"group":"desktop","name":"workspace_switch","value":1314,"unit":"us","note":"switch request -> composed frame, avg of 10"}}
+{"kind":"FUBENCH","data":{"group":"desktop","name":"compose_avg","value":1716,"unit":"us","note":"average full composition, whole run"}}
+{"kind":"FUBENCH","data":{"group":"desktop","name":"compose_max","value":7894,"unit":"us","note":"worst composition, whole run"}}
+{"kind":"FUBENCH","data":{"group":"desktop","name":"terminal_keystroke_latency","value":-1,"unit":"","status":"NOT RUN","note":"needs injected keyboard input; not measurable from inside the guest yet"}}

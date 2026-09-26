@@ -1,4 +1,4 @@
-# Experiments (M16)
+# Experiments (M16, M17, §35)
 
 The question behind these experiments: **does a small kernel that classifies
 what is running, and adapts its scheduler and buffer cache to that class, do
@@ -6,11 +6,22 @@ better than fixed policies?** Every number below is copied from a run's
 `summary.md` in `experiments/`, and every run can be reproduced with one
 command. Values that were not measured are written as NOT RUN.
 
-Final runs: **E-117 (sched), E-118 (cache), E-119 (transition), E-120
-(ablation)**, all on one binary built from commit `e942a12` (now `96b4fa6`; hashes changed when commit messages were rewritten, see [research-log/commit-map.md](../research-log/commit-map.md)). Their configs
-say `e942a12-dirty` only because research-log/ and tools/ documentation files
-were edited while the campaign ran. No kernel, user-space or rootfs file
-differed from the commit.
+**Final runs:**
+
+| run | suite | commit |
+|---|---|---|
+| E-129 | sched | `4768a1f` |
+| E-130 | cache | `4768a1f` |
+| E-131 | transition | `4768a1f` |
+| E-132 | ablation | `4768a1f` |
+| E-133 | micro (§35) | `4768a1f` |
+| E-135 | desktop stress (M17) | `389c7f5`, which only changes the benchmark's HTTP port |
+
+All earlier runs are superseded, and each of them exposed a bug; see the
+history below and
+[research-log/experiments](../research-log/experiments/README.md). Hashes
+quoted by records written before 2026-09-26 18:00 are mapped in
+[commit-map.md](../research-log/commit-map.md).
 
 ## Setup
 
@@ -19,211 +30,209 @@ differed from the commit.
 | host | AMD Ryzen 5 7520U, Windows 11 → WSL 2 (Linux 6.6.87.2) → QEMU 10.2.1 |
 | acceleration | **KVM** (nested inside WSL 2), printed as `Acceleration: KVM` by every script |
 | guest | FuhrerOS 0.1.0; 4 vCPUs offered, **1 used** (uniprocessor kernel), 4096 MB |
-| devices | virtio-blk (FFS0 raw image, host cache=writeback), virtio-net (slirp) |
-| clock | TSC, calibrated at boot; scheduler tick 1000 Hz |
+| devices | virtio-blk (FFS0 raw image, host cache=writeback, device write cache + FLUSH), virtio-net (slirp) |
+| clock | TSC, calibrated at boot (PIT channel 2); scheduler tick 1000 Hz |
 
-`./scripts/experiment.sh SUITE` builds an ISO with `bench=SUITE` on the
-kernel command line, boots it headless, and waits for the guest to power
-itself off. Init runs `rootfs/etc/bench/SUITE.sh`. The script then turns the
-serial log into `results.jsonl`, `summary.md` and SVG graphs
-(`scripts/analyze.py`). The config, the suite script and the raw log are
-kept with every run.
+`./scripts/experiment.sh SUITE` builds an ISO with `bench=SUITE`, boots it
+headless, and waits for the guest to power itself off. Init runs
+`rootfs/etc/bench/SUITE.sh`. The script then turns the serial log into
+`results.jsonl`, `summary.md` and SVG graphs (`scripts/analyze.py`). The
+configuration, the suite script and the raw log are kept with every run.
 
-## Workloads and metrics
+## Metrics
 
-- **schedbench** runs three worker types:
-  - an interactive *probe* that sleeps 10 ms and then does about 0.2 ms of work;
-  - *CPU workers* that compute prime sieves;
-  - *I/O workers* that make random 4 KiB reads through the buffer cache.
+- **Dispatch latency:** the kernel-measured time from the interactive probe
+  becoming runnable to it running. This is the part a scheduling policy
+  controls (D-119).
+- **Wake latency:** additionally contains the 1 ms timer granularity. Its
+  phase depends on the per-boot calibration (F-117), so compare it only
+  within one run.
+- **Policy decision time:** requeue + select in the scheduler, excluding
+  the context switch and the profiler.
 
-  Scenario `mixed` is 3 CPU workers + 1 I/O worker + the probe; `batch` is
-  4 CPU workers + the probe. Each run lasts 10 s, and the policy order is
-  rotated every repetition.
-  - **Dispatch latency** is the kernel-measured time from the probe becoming
-    runnable to it running. It is the part a scheduling policy controls.
-  - **Wake latency** is requested wake-up to actual run. It also contains
-    the 1 ms timer granularity, whose phase depends on the per-boot timer
-    calibration (F-117), so it is only comparable within one run
-    directory.
-- **iobench** reads a 64 MiB file through a 1024-block (4 MiB) cache, 6 s per
-  run, 2 repetitions. The access patterns are:
-  - `seq`;
-  - `random`;
-  - `hotset` (80 % of reads in 2 MiB);
-  - `scan` (hot set interleaved with a sequential scan).
-
-  The hit rate includes filesystem metadata blocks.
-- **transition** runs five 8 s phases: CPU → random I/O → sequential I/O →
-  loopback TCP → interactive. It samples the kernel's system-level class
-  every 250 ms.
-- **Policy decision time** ("sched overhead") is TSC time spent in the
-  scheduler's requeue + select. It excludes the context switch itself and
-  the profiler, which is measured separately.
-
-Baselines (NEW_EXPLANATION §37):
+Baselines (§37):
 - B0 round-robin;
 - B1 priority;
-- B2 low-latency, the "manually selected" policy for interactive work;
+- B2 low-latency (the manually selected policy);
 - B3 adaptive.
 
 ## Results
 
-### Scheduler, E-117 (median of 5 runs, CV in parentheses)
+### Scheduler, E-129 (median of 5; CV in parentheses)
 
-Mixed scenario:
+Mixed scenario: 3 CPU workers + 1 random-read I/O worker + a probe.
 
 | metric | B0 round-robin | B1 priority | B2 low-latency | B3 adaptive |
 |---|---|---|---|---|
-| dispatch p50 (µs) | 29,062 (0%) | 29,062 (0%) | 7 (21%) | 6 (0%) |
-| dispatch p99 (µs) | 29,820 (1%) | 29,621 (5%) | 104 (11%) | 84 (60%) |
-| response p99 (µs) | 41,002 (1%) | 40,665 (5%) | 11,157 (1%) | 11,339 (3%) |
-| batch jobs/s (x100) | 960,004 (1%) | 964,124 (11%) | 958,827 (4%) | 948,594 (1%) |
-| I/O ops/s | 21 (2%) | 22 (3%) | 509 (0%) | 501 (0%) |
-| context switches/s | 188 | 188 | 1,958 | 1,753 |
-| policy decision time (ns/s) | 27,646 | 25,849 | 132,013 | 124,805 |
-| kernel's system class | CPU_BOUND | CPU_BOUND | IO_BOUND | IO_BOUND |
+| dispatch p50 (µs) | 29,063 | 29,063 | 8 | 7 |
+| dispatch p99 (µs) | 29,281 | 29,213 | 107 | **70** |
+| batch jobs/s (x100) | 984,733 | 978,096 | 956,852 | 968,289 |
+| I/O ops/s | 22 | 21 | 511 | 501 |
+| context switches/s | 188 | 188 | 1,956 | 1,755 |
+| policy decision time (ns/s) | 27,981 | 27,894 | 97,693 | 119,186 |
 
-Batch scenario: dispatch p99 B0 39,219, B1 39,360, B2 52, B3 142 µs. Batch
-jobs/s ranged from 970,108 to 979,645 (x100) across all four policies.
+Batch scenario: 4 CPU workers + the probe.
+- Dispatch p99: B2 38 µs, B3 116 µs (CV 87 %).
+- Batch jobs/s ranged from 971,569 to 992,008 (x100) across all four
+  policies.
 
-![wake p99](../experiments/E-117-sched-20260926-1619/sched-wake_p99_us.svg)
-
-### Buffer cache, E-118 (median of 2 runs; MB/s)
+### Buffer cache, E-130 (median of 2; MB/s; 64 MiB file, 4 MiB cache)
 
 | workload | LRU | FIFO | CLOCK | read-ahead | adaptive |
 |---|---|---|---|---|---|
-| seq | 19.67 | 20.28 | 20.25 | 321.13 | **311.58** |
-| random | 20.28 | 19.92 | 20.80 | 20.26 | **21.02** |
-| hotset | 75.32 | 56.62 | 78.96 | 65.12 | **61.55** |
-| scan | 27.22 | 25.90 | 28.02 | 29.18 | **26.87** |
+| seq | 21.18 | 22.42 | 21.53 | 342.97 | **301.04** |
+| random | 24.18 | 23.28 | 23.15 | 23.49 | **25.24** |
+| hotset | 100.91 | 64.10 | 95.20 | 101.23 | **93.47** |
+| scan | 35.14 | 31.84 | 33.88 | 27.56 | **26.37** |
 
-Sequential read p99: LRU 499 µs, adaptive 74 µs. Hit rate on seq: LRU 745‰,
-adaptive 999‰. Cache CPU per read was 338–938 ns, except sequential
-read-ahead and adaptive (7,814 / 8,060 ns); that figure includes issuing the
-prefetches. All policies use the same 1024 blocks.
-
-![cache throughput](../experiments/E-118-cache-20260926-1627/cache-mb_per_s_x100.svg)
-
-### Workload transition, E-119
+### Workload transition, E-131 (8 s phases)
 
 | run | cpu | random-io | sequential-io | network | interactive |
 |---|---|---|---|---|---|
-| adaptive (sched + cache) | 284 ms | 290 ms | 318 ms | 307 ms | 401 ms |
-| round_robin + LRU | 301 ms | 286 ms | 291 ms | 286 ms | 300 ms |
+| adaptive (sched + cache) | 284 ms | 286 ms | 1,516 ms | 289 ms | 407 ms |
+| round_robin + LRU | 303 ms | 289 ms | 287 ms | 304 ms | 299 ms |
 
-Each value is the delay from the phase start to the first 250 ms sample
-whose system class matches the phase.
+The 1,516 ms is a labelling delay, not slow I/O. With read-ahead, the reads
+hit the cache from the first sample (25,000–31,000 reads per 250 ms), so
+the readers hardly block and look INTERACTIVE for about 1.2 s before they
+are classed IO_BOUND.
 
-![timeline](../experiments/E-119-transition-20260926-1632/transition-timeline.svg)
+### Ablations, E-132 (mixed scenario; median of 3; cache LRU except A5)
 
-### Ablations, E-120 (mixed scenario, median of 3; cache LRU except A5)
+| variant | dispatch p50 (µs) | dispatch p99 (µs) | batch jobs/s (x100) |
+|---|---|---|---|
+| A1 controller off (priority) | 29,067 | 29,261 | 969,827 |
+| A2 profiling off (all UNKNOWN) | 11,095 | 18,019 | 975,074 |
+| A3 profiling on, no switching | 29,066 | 29,378 | 969,435 |
+| A4 adaptive scheduler | 7 | 92 | 959,788 |
+| A5 + adaptive cache | 7 | 272 | 914,110 |
+| A6 window 25 ms | 7 | 100 | 949,204 |
+| A6 window 500 ms | 7 | 13,091 | 969,621 |
+| A7 hysteresis 1 | 7 | 76 | 942,914 |
+| A7 hysteresis 5 | 7 | 10,966 | 956,978 |
 
-| variant | dispatch p50 (µs) | dispatch p99 (µs) | batch jobs/s (x100) | I/O ops/s |
+The profiler used 8.85 ms in total during that boot, which ran at least
+27 × 10 s of benchmarks.
+
+### Micro-benchmarks (§35), E-133 (median of 3)
+
+| group | results |
+|---|---|
+| CPU | primes < 300,000: 62 ms · 4 × 160² int matrix: 10 ms · **compilation: NOT RUN** (no compiler) |
+| memory | malloc+free 19 ns · memcpy 4,579 MB/s · dependent loads 1.2 / 3.3 / 69.0 / 154.0 ns (16 KiB / 256 KiB / 4 MiB / 32 MiB) |
+| storage | seq write 25.21 MB/s · seq read 370.34 MB/s (cold, read-ahead) · random read 5,739 ops/s · random write 4,487 ops/s · small files 1,402 created/s, 12,835 deleted/s |
+| network (own stack, loopback path) | TCP 153.53 MB/s · 1-byte RTT 2 µs (p99 3 µs) · UDP 87,913 delivered packets/s |
+| desktop | window create 1,666 µs · app launch → window 3–4 ms (terminal, files, editor, browser, settings, Control Center) · workspace switch 1,314 µs · composition avg 1,716 µs, max 7,894 µs · **terminal keystroke latency: NOT RUN** (needs injected input) |
+
+### Desktop stress (M17), E-135 (median of 3)
+
+Everything below runs at the same time:
+- an HTTP client and server;
+- two CPU-bound "build" workers (a proxy: no compiler has been ported);
+- an 8 MiB file-copy loop;
+- a TCP stream;
+- an interactive probe.
+
+| metric | B0 round-robin | B1 priority | B2 low-latency | B3 adaptive |
 |---|---|---|---|---|
-| A1 controller off (priority) | 29,058 | 30,051 | 985,723 | 20 |
-| A2 profiling off (adaptive, all UNKNOWN) | 11,205 | 17,062 | 985,365 | 44 |
-| A3 profiling on, no switching (round-robin) | 29,057 | 29,341 | 974,720 | 21 |
-| A4 adaptive scheduler | 6 | 56 | 957,107 | 500 |
-| A5 adaptive scheduler + adaptive cache | 6 | 71 | 958,783 | 501 |
-| A6 window 25 ms | 6 | 60 | 958,045 | 503 |
-| A6 window 500 ms | 6 | 14,042 | 960,963 | 473 |
-| A7 hysteresis 1 | 7 | 77 | 954,234 | 508 |
-| A7 hysteresis 5 | 6 | 11,990 | 967,384 | 484 |
+| probe dispatch p50 (µs) | 19,528 | 19,447 | 9 | 14 |
+| probe dispatch p99 (µs) | 28,355 | 32,736 | **245** | 3,019 |
+| build-proxy jobs/s | 554 | 557 | 197 | 42 |
+| file copy MB/s | 0.20 | 0.19 | 6.44 | 5.51 |
+| HTTP requests/s | 0.09 | 0.09 | 2.09 | 0.19 |
+| TCP stream MB/s | 2.06 | 2.04 | 38.70 | **99.24** |
+| context switches/s | 332 | 324 | 5,095 | 8,340 |
 
-The profiler used 8.86 ms in total during the ablation boot, which ran at
-least 27 × 10 s of benchmarks.
+Media playback: NOT RUN (FuhrerOS has no audio or video path).
+
+Thread classes under B3 at mid-run:
+- copy, stream and web threads: IO_BOUND (priority 8);
+- probe: INTERACTIVE (priority 4);
+- build workers: MIXED (priority 12).
 
 ## Answers to the research questions
 
-- **RQ1: Can runtime workload characteristics select beneficial policies?**
-  Yes, within these workloads.
-  - In all five adaptive mixed runs of E-117, the profiler put the I/O
-    worker in IO_BOUND, the probe in INTERACTIVE and the CPU workers in
-    CPU_BOUND (per-task classes are in the run summaries). Under
-    round-robin the starved I/O worker looks INTERACTIVE, so the class
-    depends on the policy in force.
-  - The class-based parameters gave B2-level latency with no manual policy
-    choice.
-  - A2 and A3 show that both parts are needed.
-- **RQ2: Does adaptive beat fixed scheduling for heterogeneous workloads?**
-  It beats B0 and B1 clearly:
-  - dispatch p50 6 µs vs 29 ms;
-  - I/O throughput about 24× higher.
-
-  It does **not** clearly beat the manually selected B2. The p99 was
-  better in the mixed scenario (84 vs 104 µs) but worse in the batch
-  scenario (142 vs 52 µs), with high variance.
-- **RQ3: What does profiling cost?**
-  - The profiler itself cost below 0.004 % of CPU (8.86 ms over at least
+- **RQ1 — Can runtime characteristics select beneficial policies?** Yes, for
+  the workloads they were designed for.
+  - In the mixed scenario the classes are right: the I/O worker is IO_BOUND,
+    the probe INTERACTIVE, the CPU workers CPU_BOUND.
+  - Both profiling and class-based parameters are needed (E-132: A2, A3
+    vs A4).
+  - In the desktop-stress mix the classes are **wrong in a costly way**
+    (below).
+- **RQ2 — Does adaptive beat fixed scheduling on heterogeneous workloads?**
+  - It clearly beats B0/B1 on latency and I/O. In the mixed scenario:
+    dispatch p50 7 µs vs 29 ms; I/O throughput about 23× higher; batch
+    throughput 1.7 % lower.
+  - Against the hand-picked B2 it is mixed:
+    - better tail in the mixed scenario (70 vs 107 µs);
+    - worse in the pure-CPU scenario (116 vs 38 µs);
+    - clearly worse under the desktop stress mix (p99 3.0 ms vs 0.25 ms).
+- **RQ3 — Overhead.**
+  - The profiler used under 0.004 % of CPU time (8.85 ms over at least
     270 s).
   - Adaptive policy decisions cost about 0.12–0.14 ms per second.
-  - The larger cost is about 9× more context switches than round-robin.
-    Their CPU time is **UNKNOWN - REQUIRES VERIFICATION** (not measured).
-- **RQ4: How fast should FuhrerOS react?**
-  - The class follows a phase change within 284–401 ms.
-  - Reacting slower hurts. A 500 ms window or hysteresis 5 raised dispatch
-    p99 by about 210–250×, because new threads wait behind CPU workers
-    until they are classified.
-  - Faster than 100 ms (a 25 ms window) gave no measurable gain.
-- **RQ5: Can adaptive caching help without more memory?**
-  Partly.
-  - On sequential reads it matches the dedicated read-ahead policy (97 %;
-    15.8× LRU) with the same memory.
-  - On random reads it is the best policy, and on scan it is within 8 % of
-    the best.
-  - On hotset it is 18 % below LRU and 22 % below CLOCK.
-- **RQ6: Can it improve responsiveness without hurting batch throughput?**
-  Yes in this setup: B3 had 1.2 % fewer batch jobs than B0 in the mixed
-  scenario, within the run-to-run variation of B1 (CV 11 %).
-- **RQ7: Can this fit in a small from-scratch kernel?**
-  - The adaptive scheduler is 124 lines of C++ (`kernel/sched/adaptive.cpp`)
-    and the profiler is one C file, behind the same policy interface as the
-    fixed policies.
-  - The whole kernel plus user space is about 18,400 lines.
+  - The adaptive policy causes about 9× the context switches of
+    round-robin (E-129). Their CPU cost is **UNKNOWN - REQUIRES
+    VERIFICATION**.
+- **RQ4 — How fast should it react?**
+  - Phase changes are detected in 284–407 ms, except sequential reads
+    under read-ahead (1,516 ms, a labelling delay).
+  - Slow reaction hurts: a 500 ms window or hysteresis 5 raises dispatch
+    p99 about 120–140×.
+  - A 25 ms window gives no measurable gain over 100 ms.
+- **RQ5 — Adaptive caching without more memory?** Partly.
+  - Sequential: 88 % of the dedicated read-ahead policy and 14.2× LRU;
+    best on random reads.
+  - Below the best fixed policy on hotset (about 8 %) and scan (25 %).
+- **RQ6 — Responsiveness without hurting batch work?**
+  - In the mixed scenario: yes (−1.7 % batch).
+  - In the desktop-stress mix: **no**. The build proxy does 92 % fewer jobs
+    than under round-robin and 79 % fewer than under low-latency, because
+    busy streaming threads are classified IO_BOUND (many I/O calls, short
+    bursts) and outrank the MIXED build workers. The IO_BOUND rule ignores
+    CPU share. This is the next thing to fix.
+- **RQ7 — Small kernel?** The adaptive policy is 135 lines of C++, and the
+  profiler is one C file behind the same interface as the fixed policies.
+  The kernel plus user space is about 21,000 lines (without the generated logo data).
 
 ## How the results changed, and why that matters
 
-The final numbers exist only because the earlier runs were checked instead
-of reported. Each E-1xx run before E-117 exposed a bug, recorded under
-[research-log/failures](../research-log/failures/README.md):
+Every run before the final campaign exposed a bug. Each one has a record
+under [research-log/failures](../research-log/failures/README.md):
 
 | found in | failure | effect on earlier numbers |
 |---|---|---|
 | E-101 | F-109 system class IDLE for blocking workloads | class column wrong |
 | E-102 | F-114 metadata hid sequential streams | read-ahead never ran |
 | E-103, E-107 | F-115 aging did not lift IDLE-class tasks | "4.4–5.7 s detection" was a starved sampler |
-| E-105, E-108 | F-117 wake latency follows the per-boot tick phase | 44 µs vs 975 µs for the same configuration |
+| E-105, E-108 | F-117 wake latency follows the per-boot tick phase | 44 µs vs 975 µs for one configuration |
 | E-106 | F-116 read-ahead evicted its own prefetches | 110k prefetches, 6k used |
-| E-110 | F-118 a wake-up on an idle CPU waited for the next tick | every disk read about 1 ms; I/O about 5× too slow |
+| E-110 | F-118 a wake-up on an idle CPU waited for the tick | every disk read about 1 ms |
 | E-114 | F-119 evict-behind evicted metadata | adaptive cache no better than LRU |
+| E-121 | F-123 virtio-blk ran write-through | writes 1.82 MB/s (now 25.21) |
+| E-122 | F-122 the aging boost never expired | adaptive dispatch p50 49 ms under stress |
 
-The records for all runs are in
-[research-log/experiments](../research-log/experiments/README.md).
+The F-122 bug was only visible under the heavier M17 mix. The F-115 fix had
+turned a latent defect harmful, and the E-117 scenario had too few threads
+to show it.
 
 ## Threats to validity
 
 - **Virtualisation.** The stack is nested (Windows → WSL 2 → KVM). Absolute
-  times are not bare-metal times. The comparisons are between policies
-  within one boot.
-- **One CPU.** FuhrerOS uses one CPU, so multi-core scheduling effects are
-  not studied.
-- **Synthetic workloads.** Whether the results transfer to real desktop use
-  is UNKNOWN - REQUIRES VERIFICATION.
-- **Few repetitions** (5 sched, 2 cache, 3 ablation, 1 transition). Several
-  tail-latency cells have a CV of 40–60 %, so B2 vs B3 differences in p99
-  are not significant.
-- **Shorter phases.** Transition phases are 8 s, not the 60 s of
-  NEW_EXPLANATION §36.
-- **Hit rates include metadata.** A read that misses its data block still
-  hits its inode and indirect blocks, so LRU's sequential hit rate is about
-  75 %, not 0 %.
-- **No comparison with Linux.** NEW_EXPLANATION §37 asks for comparisons
-  inside FuhrerOS. The Linux-based prototype's numbers
-  (linux-prototype/) come from a different system and are not comparable.
+  times are not bare-metal times, and comparisons are within one boot.
+- **One CPU**, and synthetic workloads. Whether the results transfer to real
+  desktop use is UNKNOWN - REQUIRES VERIFICATION.
+- **Few repetitions** (5 sched, 2 cache, 3 ablation/micro/stress, 1
+  transition). Several tail cells have a CV of 40–120 %.
+- **Shorter phases.** Transition phases are 8 s, not the 60 s of §36.
+- **Hit rates include metadata.**
+- **Network benchmarks** use the stack's loopback path, not a NIC.
+- **Proxies.** The "build" workload is a CPU proxy, and media is not run.
 
 ## Reproduce
 
 ```bash
 ./scripts/build.sh
-./scripts/experiment.sh sched       # also: cache | transition | ablation
+./scripts/experiment.sh sched    # also: cache | transition | ablation | micro | stress
 ```
