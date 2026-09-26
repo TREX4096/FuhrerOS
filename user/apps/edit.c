@@ -1,4 +1,4 @@
-/* edit [FILE] — text editor: arrows/Home/End/PgUp/PgDn move, Enter/Backspace/
+/* edit [FILE] - text editor: arrows/Home/End/PgUp/PgDn move, Enter/Backspace/
  * Delete edit, Ctrl+S saves, Esc or the close button quits. */
 #include "gui.h"
 

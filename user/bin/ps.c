@@ -1,4 +1,4 @@
-/* ps — tasks with their scheduling class (from /proc/tasks) */
+/* ps - tasks with their scheduling class (from /proc/tasks) */
 #include "fu.h"
 int main(void)
 {

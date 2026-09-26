@@ -75,6 +75,7 @@ static bool btn_down;
 static int drag = -1, resize = -1, drag_ox, drag_oy;
 static int cur_ws;
 static bool menu_open, overview, locked, tiling, show_desktop;
+static bool super_down, super_used;	/* Super alone (press+release) = launcher */
 static struct waitqueue comp_wq;
 static struct mutex comp_lock;	/* window list/surfaces vs. composition */
 static u64 frames_drawn, last_clock_s;
@@ -677,11 +678,6 @@ static bool handle_shortcut(const struct input_event *ev)
 		damage_all();
 		return true;
 	}
-	if (ev->code == KEY_SUPER && !(m & ~MOD_SUPER)) {
-		menu_open = !menu_open;
-		damage_all();
-		return true;
-	}
 	bool super = m & MOD_SUPER;
 	if ((super && ev->code == KEY_TAB) || ((m & MOD_ALT) && ev->code == KEY_TAB)) {
 		cycle_focus((m & MOD_SHIFT) ? -1 : 1);
@@ -825,6 +821,21 @@ static void compositor_input(const struct input_event *ev)
 	u64 f = irq_save();
 	switch (ev->type) {
 	case EV_KEY:
+		if (ev->code == KEY_SUPER) {
+			if (ev->value) {
+				super_down = true;
+				super_used = false;
+			} else {
+				if (super_down && !super_used && !locked) {
+					menu_open = !menu_open;
+					damage_all();
+				}
+				super_down = false;
+			}
+			break;
+		}
+		if (super_down && ev->value)
+			super_used = true;
 		if (handle_shortcut(ev))
 			break;
 		if (focus >= 0 && wins[focus].used)

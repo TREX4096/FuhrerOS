@@ -1,4 +1,4 @@
-/* libfu — the FuhrerOS user-space runtime (NEW_EXPLANATION §19 "libfuhrer").
+/* libfu - the FuhrerOS user-space runtime (NEW_EXPLANATION §19 "libfuhrer").
  * A small, freestanding C library over the native syscall ABI. It is not
  * POSIX, but names follow familiar conventions where the meaning matches. */
 #ifndef FU_H

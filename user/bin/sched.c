@@ -1,4 +1,4 @@
-/* sched — inspect and control the FuhrerOS scheduler.
+/* sched - inspect and control the FuhrerOS scheduler.
  *   sched                     show policy, stats and recent adaptations
  *   sched policy NAME         round_robin | priority | low_latency | adaptive
  *   sched prio PID N          set a process's base priority (0 high .. 31 low)

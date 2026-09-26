@@ -159,7 +159,7 @@ $(B)/iso-%/stamp: $(ISO_DEPS)
 	@rm -rf $(dir $@) && mkdir -p $(dir $@)boot/limine $(dir $@)EFI/BOOT
 	@cp $(KERNEL) $(dir $@)boot/fuhreros.elf
 	@cp $(B)/initrd.tar $(dir $@)boot/initrd.tar
-	@sed -e 's/@CMDLINE@/$(if $(filter test,$*),test usertest,)/' \
+	@sed -e 's/@CMDLINE@/$(if $(filter test,$*),test usertest,desktop)/' \
 	     -e 's/@TIMEOUT@/$(if $(filter test,$*),0,3)/' boot/limine.conf > $(dir $@)boot/limine/limine.conf
 	@cp $(LIMINE_DIR)/limine-bios.sys $(LIMINE_DIR)/limine-bios-cd.bin \
 	    $(LIMINE_DIR)/limine-uefi-cd.bin $(dir $@)boot/limine/

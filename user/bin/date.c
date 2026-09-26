@@ -1,4 +1,4 @@
-/* date — UTC wall clock (civil-from-days, no floating point) */
+/* date - UTC wall clock (civil-from-days, no floating point) */
 #include "fu.h"
 int main(void)
 {

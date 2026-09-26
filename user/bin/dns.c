@@ -1,4 +1,4 @@
-/* dns NAME — resolve a host name through the DNS server from DHCP */
+/* dns NAME - resolve a host name through the DNS server from DHCP */
 #include "fu.h"
 
 int main(int argc, char **argv)

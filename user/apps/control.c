@@ -1,4 +1,4 @@
-/* control — Fuhrer Control Center (NEW_EXPLANATION §33).
+/* control - Fuhrer Control Center (NEW_EXPLANATION §33).
  * Shows the adaptive kernel live: resource bars, CPU history, the detected
  * system workload with confidence and reason, per-task classes, the
  * scheduling and cache policies (switchable), and recent adaptations. */

@@ -1,5 +1,5 @@
-/* nc HOST PORT   — connect, send stdin, print replies
- * nc -l PORT     — TCP echo server (one connection at a time) */
+/* nc HOST PORT   - connect, send stdin, print replies
+ * nc -l PORT     - TCP echo server (one connection at a time) */
 #include "fu.h"
 
 int main(int argc, char **argv)

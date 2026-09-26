@@ -155,7 +155,7 @@ static void gen_interrupts(struct pbuf *p)
 
 static void gen_version(struct pbuf *p)
 {
-	pb_printf(p, "FuhrerOS %s (%s) x86_64 — own kernel, booted by %s\n", FUHREROS_VERSION,
+	pb_printf(p, "FuhrerOS %s (%s) x86_64 - own kernel, booted by %s\n", FUHREROS_VERSION,
 		  FUHREROS_CODENAME, boot.bootloader);
 }
 

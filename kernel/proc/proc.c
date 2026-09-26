@@ -452,10 +452,22 @@ int proc_kill(pid_t pid)
 NORETURN void proc_exit(int code)
 {
 	struct process *p = proc_current();
-	/* Other threads: mark killed so they exit when they next run. */
-	if (p)
-		p->killed = true;
+	/* Other threads are killed too: blocked ones are woken so their
+	 * syscalls return, running ones stop at their next kernel entry
+	 * (syscall return or interrupt, see proc_check_killed). */
+	if (p && !p->killed)
+		proc_kill(p->pid);
 	task_exit(code);
+}
+
+/* Called on every return to ring 3 from an interrupt. */
+void proc_check_killed(struct trap_frame *tf)
+{
+	struct process *p = proc_current();
+	if (p && p->killed && (tf->cs & 3)) {
+		sti();
+		proc_exit(130);
+	}
 }
 
 /* Exceptions in ring 3 kill the process instead of the kernel. */
@@ -466,7 +478,7 @@ bool proc_handle_user_fault(struct trap_frame *tf)
 		return false;
 	extern u64 read_cr2_export(void);
 	printk("\033[1;31m[fault]\033[0m %s (pid %d): exception %lu at rip %p, addr %p, err 0x%lx"
-	       " — process terminated\n",
+	       " - process terminated\n",
 	       p->name, p->pid, tf->vector, (void *)tf->rip,
 	       tf->vector == 14 ? (void *)read_cr2_export() : NULL, tf->error);
 	sti();

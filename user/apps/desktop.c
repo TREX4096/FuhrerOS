@@ -1,4 +1,4 @@
-/* desktop — starts the Fuhrer compositor and the default session apps. */
+/* desktop - starts the Fuhrer compositor and the default session apps. */
 #include "fu.h"
 
 static void launch(const char *path)

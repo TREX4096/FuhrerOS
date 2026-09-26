@@ -154,6 +154,9 @@ void profiler_tick(void)
  * with "interactive" winning ties when interactive tasks are active. */
 enum task_class profiler_system_class(u8 *confidence, const char **reason)
 {
+	/* Weight = activity in the last window: CPU milliseconds + wake-ups +
+	 * I/O operations. CPU time alone would make tasks that mostly block
+	 * (interactive, network, disk) invisible next to any computation. */
 	u64 by_class[CLASS_COUNT] = { 0 };
 	u32 interactive = 0;
 	u64 total = 0;
@@ -162,18 +165,23 @@ enum task_class profiler_system_class(u8 *confidence, const char **reason)
 		struct task *t = container_of(it, struct task, all_node);
 		if (sched_is_idle_task(t) || t->state == TASK_ZOMBIE)
 			continue;
-		u64 w = t->prof.last.run_ns + 1;
-		by_class[t->prof.cls] += w;
-		total += w;
+		const struct task_window *w = &t->prof.last;
+		u64 score = w->run_ns / 1000000 + w->wakeups + w->io_ops;
+		by_class[t->prof.cls] += score;
+		total += score;
 		if (t->prof.cls == CLASS_INTERACTIVE)
 			interactive++;
 	}
 	irq_restore(f);
+	by_class[CLASS_UNKNOWN] = 0;
 	enum task_class best = CLASS_IDLE;
-	for (int c = CLASS_IDLE; c < CLASS_COUNT; c++)
+	for (int c = CLASS_INTERACTIVE; c < CLASS_COUNT; c++)
 		if (by_class[c] > by_class[best])
 			best = (enum task_class)c;
-	if (total < 1000000 * 5) /* < 5 ms of CPU in the window */
+	/* Housekeeping threads (network daemon, flusher, compositor) wake a few
+	 * times per window; below this much activity the system is idle. */
+	u64 floor = profiler_window_ms() / 10 + 2;
+	if (by_class[best] < floor)
 		best = CLASS_IDLE;
 	if (confidence)
 		*confidence = total ? (u8)(by_class[best] * 100 / total) : 100;

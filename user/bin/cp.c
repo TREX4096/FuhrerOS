@@ -1,4 +1,4 @@
-/* cp SRC DST — copy a file (DST may be a directory) */
+/* cp SRC DST - copy a file (DST may be a directory) */
 #include "fu.h"
 int main(int argc, char **argv)
 {

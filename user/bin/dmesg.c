@@ -1,4 +1,4 @@
-/* dmesg — kernel log */
+/* dmesg - kernel log */
 #include "fu.h"
 int main(void)
 {

@@ -1,4 +1,4 @@
-/* fetch URL [-o FILE] [-q] [-i] — HTTP/1.0 client (http:// only; TLS is not
+/* fetch URL [-o FILE] [-q] [-i] - HTTP/1.0 client (http:// only; TLS is not
  * implemented). Prints the body, or saves it with -o; -i shows headers. */
 #include "fu.h"
 

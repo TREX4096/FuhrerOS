@@ -1,4 +1,4 @@
-/* fsh — the FuhrerOS shell.
+/* fsh - the FuhrerOS shell.
  *
  * Features: line editing with history (raw tty mode, arrow keys), pipelines
  * (a | b | c), redirection (< > >>), background jobs (&), `;` sequencing,
@@ -358,7 +358,7 @@ int main(int argc, char **argv)
 	if (argc > 1 && !strcmp(argv[1], "-i")) {
 		/* driven by the desktop terminal through pipes: it edits lines
 		 * itself, so we print prompts and read whole lines */
-		printf("\033[1;36mFuhrerOS shell\033[0m — type 'help' for commands\n");
+		printf("\033[1;36mFuhrerOS shell\033[0m - type 'help' for commands\n");
 		chdir("/home");
 		for (;;) {
 			prompt();
@@ -389,7 +389,7 @@ int main(int argc, char **argv)
 	struct stat st;
 	interactive = fstat(0, &st) == 0 && st.type == VT_CHAR;
 	if (interactive) {
-		printf("\n\033[1;36mFuhrerOS shell\033[0m — type 'help' for commands\n");
+		printf("\n\033[1;36mFuhrerOS shell\033[0m - type 'help' for commands\n");
 		chdir("/home");
 	}
 	for (;;) {

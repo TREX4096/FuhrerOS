@@ -1,4 +1,4 @@
-/* schedbench — scheduler evaluation workload (NEW_EXPLANATION §17, §35, M16).
+/* schedbench - scheduler evaluation workload (NEW_EXPLANATION §17, §35, M16).
  *
  *   schedbench [-p POLICY] [-t SECONDS] [-c CPU_WORKERS] [-i IO_WORKERS] [-n NAME]
  *
@@ -140,12 +140,32 @@ int main(int argc, char **argv)
 	sysinfo(&s0);
 	uint64_t t0 = uptime_ns();
 	stop = false;
-	for (int i = 0; i < ncpu; i++)
-		thread_create(cpu_worker, (void *)(uintptr_t)i, 0);
-	for (int i = 0; i < nio; i++)
-		thread_create(io_worker, (void *)(uintptr_t)i, 0);
-	thread_create(probe, NULL, 0);
-	sleep_ms((uint64_t)secs * 1000);
+	int tids[MAXW * 2 + 1], kinds[MAXW * 2 + 1], nt = 0; /* kind 0 cpu, 1 io, 2 probe */
+	for (int i = 0; i < ncpu; i++) {
+		kinds[nt] = 0;
+		tids[nt++] = thread_create(cpu_worker, (void *)(uintptr_t)i, 0);
+	}
+	for (int i = 0; i < nio; i++) {
+		kinds[nt] = 1;
+		tids[nt++] = thread_create(io_worker, (void *)(uintptr_t)i, 0);
+	}
+	kinds[nt] = 2;
+	tids[nt++] = thread_create(probe, NULL, 0);
+	/* mid-run: which class did the kernel assign to each worker, and what
+	 * does it think the whole system is doing? (evidence for RQ1) */
+	sleep_ms((uint64_t)secs * 500);
+	static const char *cn[] = { "UNKNOWN", "IDLE", "INTERACTIVE", "IO_BOUND", "CPU_BOUND", "MIXED" };
+	char classes[256] = "";
+	for (int i = 0; i < nt; i++) {
+		int c = sched_ctl(SCHED_TASK_CLASS, tids[i], NULL);
+		char one[40];
+		snprintf(one, sizeof(one), "%s%s:%s", i ? "," : "", kinds[i] == 0 ? "cpu" : kinds[i] == 1 ? "io" : "probe",
+			 c >= 0 && c < 6 ? cn[c] : "?");
+		strlcat(classes, one, sizeof(classes));
+	}
+	struct fu_sysinfo mid;
+	sysinfo(&mid);
+	sleep_ms((uint64_t)secs * 500);
 	stop = true;
 	while (done_threads < ncpu + nio + 1)
 		sleep_ms(5);
@@ -171,11 +191,11 @@ int main(int argc, char **argv)
 	       "\"samples\":%d,\"wake_p50_us\":%lu,\"wake_p95_us\":%lu,\"wake_p99_us\":%lu,\"wake_max_us\":%lu,"
 	       "\"resp_p50_us\":%lu,\"resp_p95_us\":%lu,\"resp_p99_us\":%lu,"
 	       "\"cpu_jobs_per_s_x100\":%lu,\"io_ops_per_s\":%lu,\"jain_x1000\":%lu,\"ctx_switches_per_s\":%lu,"
-	       "\"cpu_util_pct\":%lu,\"sched_overhead_ns_per_s\":%ld,\"system_class\":\"%s\"}\n",
+	       "\"cpu_util_pct\":%lu,\"sched_overhead_ns_per_s\":%ld,\"system_class\":\"%s\",\"task_classes\":\"%s\"}\n",
 	       name, pol, secs, ncpu, nio, n, pct(wake_lat, n, 50) / 1000, pct(wake_lat, n, 95) / 1000,
 	       pct(wake_lat, n, 99) / 1000, n ? wake_lat[n - 1] / 1000 : 0, pct(resp, n, 50) / 1000,
 	       pct(resp, n, 95) / 1000, pct(resp, n, 99) / 1000, jobs * 100000000000UL / el,
 	       iops * 1000000000UL / el, jain, cs, (busy + idle) ? busy * 100 / (busy + idle) : 0,
-	       (long)((ov1 - ov0) * 1000000000LL / (long)el), s1.system_class);
+	       (long)((ov1 - ov0) * 1000000000LL / (long)el), mid.system_class, classes);
 	return 0;
 }

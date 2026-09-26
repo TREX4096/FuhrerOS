@@ -245,10 +245,20 @@ int toupper(int c) { return (c >= 'a' && c <= 'z') ? c - 32 : c; }
 int tolower(int c) { return (c >= 'A' && c <= 'Z') ? c + 32 : c; }
 
 /* ---- stdout buffering ---- */
+/* stdout buffer, shared by all threads of a process: guarded by a spinlock
+ * (yielding while contended) so concurrent flushes cannot duplicate data. */
 static char obuf[1024];
 static size_t olen;
+static volatile char olock;
 
-void flush(void)
+static void olock_take(void)
+{
+	while (__atomic_test_and_set(&olock, __ATOMIC_ACQUIRE))
+		sys0(SYS_YIELD);
+}
+static void olock_drop(void) { __atomic_clear(&olock, __ATOMIC_RELEASE); }
+
+static void flush_locked(void)
 {
 	if (olen) {
 		sys3(SYS_WRITE, 1, obuf, olen);
@@ -256,11 +266,20 @@ void flush(void)
 	}
 }
 
+void flush(void)
+{
+	olock_take();
+	flush_locked();
+	olock_drop();
+}
+
 int putchar(int c)
 {
+	olock_take();
 	obuf[olen++] = (char)c;
 	if (c == '\n' || olen == sizeof(obuf))
-		flush();
+		flush_locked();
+	olock_drop();
 	return c;
 }
 

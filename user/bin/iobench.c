@@ -1,4 +1,4 @@
-/* iobench — buffer-cache policy evaluation (NEW_EXPLANATION §31, M14/M16).
+/* iobench - buffer-cache policy evaluation (NEW_EXPLANATION §31, M14/M16).
  *
  *   iobench [-p POLICY] [-w WORKLOAD] [-m FILE_MB] [-c CACHE_BLOCKS] [-t SECONDS]
  * workloads:

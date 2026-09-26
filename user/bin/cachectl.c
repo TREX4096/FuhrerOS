@@ -1,4 +1,4 @@
-/* cachectl — buffer cache control.
+/* cachectl - buffer cache control.
  *   cachectl                     statistics
  *   cachectl policy NAME         lru | fifo | clock | readahead | adaptive
  *   cachectl capacity BLOCKS     resize (4 KiB blocks)

@@ -1,4 +1,4 @@
-/* poweroff — sync filesystems and power off the machine */
+/* poweroff - sync filesystems and power off the machine */
 #include "fu.h"
 int main(void)
 {

@@ -1,4 +1,4 @@
-/* wc [FILE] — lines, words, bytes */
+/* wc [FILE] - lines, words, bytes */
 #include "fu.h"
 int main(int argc, char **argv)
 {

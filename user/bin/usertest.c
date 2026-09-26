@@ -1,4 +1,4 @@
-/* usertest — user-space acceptance tests (M5, M6, M8 and later milestones).
+/* usertest - user-space acceptance tests (M5, M6, M8 and later milestones).
  * Prints "UTEST <name> PASS|FAIL <detail>" lines; exit status = #failures. */
 #include "fu.h"
 

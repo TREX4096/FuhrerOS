@@ -1,4 +1,4 @@
-/* nettest — network acceptance tests (run by usertest): interface up via
+/* nettest - network acceptance tests (run by usertest): interface up via
  * DHCP, TCP through FuhrerOS's own stack, DNS, and HTTP to the internet. */
 #include "fu.h"
 

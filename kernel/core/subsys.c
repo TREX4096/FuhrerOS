@@ -62,7 +62,7 @@ void start_userspace(void)
 		printk("\033[1;31mkinit: cannot start /bin/init (%d)\033[0m\n", pid);
 		return;
 	}
-	KLOG("init", "started /bin/init as pid %d — kernel handing over to user space", pid);
+	KLOG("init", "started /bin/init as pid %d - kernel handing over to user space", pid);
 	/* kinit becomes the reaper of orphaned processes. */
 	for (;;) {
 		sleep_ms(250);

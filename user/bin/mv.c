@@ -1,4 +1,4 @@
-/* mv SRC DST — rename (falls back to copy + delete across filesystems) */
+/* mv SRC DST - rename (falls back to copy + delete across filesystems) */
 #include "fu.h"
 int main(int argc, char **argv)
 {

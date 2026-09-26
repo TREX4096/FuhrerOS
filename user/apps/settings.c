@@ -1,4 +1,4 @@
-/* settings — appearance, scheduler/profiler parameters, cache policy, and
+/* settings - appearance, scheduler/profiler parameters, cache policy, and
  * a keyboard-shortcut reference. Changes apply immediately. */
 #include "gui.h"
 

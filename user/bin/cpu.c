@@ -1,4 +1,4 @@
-/* cpu — processor and scheduler summary */
+/* cpu - processor and scheduler summary */
 #include "fu.h"
 int main(void)
 {

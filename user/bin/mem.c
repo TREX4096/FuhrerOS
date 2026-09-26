@@ -1,4 +1,4 @@
-/* mem — memory usage */
+/* mem - memory usage */
 #include "fu.h"
 int main(void)
 {

@@ -163,15 +163,15 @@ static ssize_t stream_recv(struct socket *s, u8 *buf, u64 len, bool nonblock)
 		}
 	}
 	u64 n = 0;
-	bool was_full = SOCK_RXBUF - (s->rx_head - s->rx_tail) < TCP_MSS;
+	u32 free_before = SOCK_RXBUF - (s->rx_head - s->rx_tail);
 	while (n < len && s->rx_tail != s->rx_head)
 		buf[n++] = s->rx[s->rx_tail++ % SOCK_RXBUF];
-	if (was_full && s->state != TCP_CLOSED) {
-		/* window update so a stalled sender resumes */
-		extern void tcp_output(struct socket *);
-		tcp_output(s);
-		u8 dummy = 0;
-		(void)dummy;
+	u32 free_after = SOCK_RXBUF - (s->rx_head - s->rx_tail);
+	/* advertise a reopened window (receiver-side silly-window avoidance:
+	 * only once at least a quarter of the buffer is free again) */
+	if (free_before < 2 * TCP_MSS && free_after >= SOCK_RXBUF / 4) {
+		extern void tcp_window_update(struct socket *);
+		tcp_window_update(s);
 	}
 	irq_restore(f);
 	return (ssize_t)n;

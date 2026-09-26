@@ -1,4 +1,4 @@
-/* touch FILE... — create empty files */
+/* touch FILE... - create empty files */
 #include "fu.h"
 int main(int argc, char **argv)
 {

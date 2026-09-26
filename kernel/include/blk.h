@@ -58,7 +58,8 @@ enum cache_policy { CACHE_LRU, CACHE_FIFO, CACHE_CLOCK, CACHE_READAHEAD, CACHE_A
 		    CACHE_POLICY_COUNT };
 
 void bcache_init(u32 capacity_blocks);
-struct buf *bread(struct blkdev *d, u64 blockno);	/* referenced + valid */
+struct buf *bread(struct blkdev *d, u64 blockno);	/* file data: referenced + valid */
+struct buf *bread_meta(struct blkdev *d, u64 blockno);	/* metadata: not a data stream */
 struct buf *bget_nofill(struct blkdev *d, u64 blockno);	/* caller overwrites whole block */
 void bdirty(struct buf *b);
 void brelse(struct buf *b);

@@ -1,4 +1,4 @@
-/* init — first user process (pid 1). Brings up the session:
+/* init - first user process (pid 1). Brings up the session:
  *   kernel cmdline "desktop"  -> the graphical desktop (/bin/desktop)
  *   kernel cmdline "usertest" -> the user-space test suite, then power off
  *   otherwise                 -> the shell on the console, respawned on exit */

@@ -1,4 +1,4 @@
-/* top — live view of tasks, classes and the adaptive policy (q to quit) */
+/* top - live view of tasks, classes and the adaptive policy (q to quit) */
 #include "fu.h"
 int main(int argc, char **argv)
 {

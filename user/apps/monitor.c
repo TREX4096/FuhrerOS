@@ -1,4 +1,4 @@
-/* monitor — System Monitor: CPU/memory history, task list with scheduling
+/* monitor - System Monitor: CPU/memory history, task list with scheduling
  * class and priority; select a task and press Kill (or the Delete key). */
 #include "gui.h"
 

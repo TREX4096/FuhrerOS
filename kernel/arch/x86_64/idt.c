@@ -78,6 +78,7 @@ u64 irq_count(u8 vector) { return counts[vector]; }
 __attribute__((weak)) bool proc_handle_user_fault(struct trap_frame *tf) { return false; }
 __attribute__((weak)) bool vmm_handle_page_fault(struct trap_frame *tf) { return false; }
 __attribute__((weak)) void sched_irq_exit(struct trap_frame *tf) {}
+__attribute__((weak)) void proc_check_killed(struct trap_frame *tf) {}
 
 void isr_dispatch(struct trap_frame *tf)
 {
@@ -101,4 +102,6 @@ void isr_dispatch(struct trap_frame *tf)
 	if (v != VEC_SPURIOUS)
 		lapic_eoi();
 	sched_irq_exit(tf);
+	if (tf->cs & 3)
+		proc_check_killed(tf);
 }

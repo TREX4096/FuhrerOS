@@ -1,4 +1,4 @@
-/* cat [FILE...] — concatenate files (stdin when none) */
+/* cat [FILE...] - concatenate files (stdin when none) */
 #include "fu.h"
 static int dump(int fd)
 {

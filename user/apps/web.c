@@ -1,4 +1,4 @@
-/* web — FuhrerWeb: an HTTP page viewer, the first step of the browser
+/* web - FuhrerWeb: an HTTP page viewer, the first step of the browser
  * foundation (NEW_EXPLANATION §28). It is deliberately NOT a browser engine:
  * it fetches over FuhrerOS's own TCP/IP stack, strips markup, and renders
  * headings, paragraphs, list items and links (clickable) as wrapped text.

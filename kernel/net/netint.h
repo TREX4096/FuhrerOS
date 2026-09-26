@@ -45,6 +45,7 @@ struct socket {
 	bool fin_pending, fin_sent, fin_received;
 	u64 rto_ns, rto_deadline, timewait_until;
 	u32 retries;
+	u32 dupacks;
 	int error;
 	struct socket *parent;		/* listening socket of an embryonic conn. */
 	struct list_node accept_q;	/* completed connections (listener) */

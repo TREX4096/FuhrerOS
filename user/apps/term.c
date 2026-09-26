@@ -1,4 +1,4 @@
-/* term — FuhrerOS terminal emulator. Runs `sh -i` connected through pipes,
+/* term - FuhrerOS terminal emulator. Runs `sh -i` connected through pipes,
  * does line editing locally, renders a character grid with scrollback and a
  * subset of ANSI (SGR colours, clear, cursor home, erase line). */
 #include "gui.h"
@@ -108,7 +108,7 @@ static void reader(void *arg)
 	for (;;) {
 		ssize_t n = read(from_shell, buf, sizeof(buf));
 		if (n <= 0) {
-			const char *m = "\n[shell exited — close this window]\n";
+			const char *m = "\n[shell exited - close this window]\n";
 			for (const char *p = m; *p; p++)
 				put(*p);
 			dirty = true;

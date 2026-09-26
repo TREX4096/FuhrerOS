@@ -1,4 +1,4 @@
-/* transition — the workload-transition experiment (NEW_EXPLANATION §36).
+/* transition - the workload-transition experiment (NEW_EXPLANATION §36).
  *
  *   transition [-s SECONDS_PER_PHASE] [-p SCHED_POLICY]
  * Phases: cpu -> random-io -> sequential-io -> network -> interactive.
@@ -12,6 +12,7 @@
 static volatile int phase = -1;
 static volatile bool quit;
 static volatile uint64_t ops;
+static bool debug;
 static const char *phases[] = { "cpu", "random-io", "sequential-io", "network", "interactive" };
 static const char *expect[] = { "CPU_BOUND", "IO_BOUND", "IO_BOUND", "IO_BOUND", "INTERACTIVE" };
 
@@ -85,23 +86,40 @@ static void worker(void *arg)
 	}
 }
 
+static void drain(void *arg)
+{
+	int c = (int)(uintptr_t)arg;
+	static char buf[2][65536];
+	static volatile int slot;
+	char *b = buf[__atomic_fetch_add(&slot, 1, __ATOMIC_RELAXED) & 1];
+	ssize_t r;
+	uint64_t total = 0;
+	while ((r = recv(c, b, 65536)) > 0)
+		total += (uint64_t)r;
+	if (debug)
+		printf("DEBUG drain fd %d exits: recv=%ld after %lu bytes\n", c, (long)r, total);
+	close(c);
+}
+
+/* One draining thread per connection (both workers connect). */
 static void sink_server(void *arg)
 {
 	int s = socket(AF_INET, SOCK_STREAM);
 	bind(s, 7070);
 	listen(s, 4);
-	static char buf[65536];
 	for (;;) {
 		int c = accept(s, NULL);
-		while (recv(c, buf, sizeof(buf)) > 0)
-			;
-		close(c);
+		if (c >= 0)
+			thread_create(drain, (void *)(uintptr_t)c, 0);
 	}
 }
 
 int main(int argc, char **argv)
 {
 	int secs = 10;
+	for (int i = 1; i < argc; i++)
+		if (!strcmp(argv[i], "-d"))
+			debug = true;
 	for (int i = 1; i + 1 < argc; i += 2) {
 		if (!strcmp(argv[i], "-s")) secs = atoi(argv[i + 1]);
 		else if (!strcmp(argv[i], "-p")) sched_ctl(SCHED_SET_POLICY, 0, argv[i + 1]);
@@ -143,6 +161,13 @@ int main(int argc, char **argv)
 			last_ops = o;
 			if (detect_ms[p] < 0 && !strcmp(cls, expect[p]))
 				detect_ms[p] = (int64_t)((uptime_ns() - pstart) / 1000000);
+		}
+		if (debug) {
+			static char dbg[16384];
+			read_file("/proc/net", dbg, sizeof(dbg));
+			printf("DEBUG phase %s /proc/net:\n%s", phases[p], dbg);
+			read_file("/proc/tasks", dbg, sizeof(dbg));
+			printf("DEBUG /proc/tasks:\n%s", dbg);
 		}
 	}
 	quit = true;

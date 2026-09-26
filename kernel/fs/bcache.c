@@ -40,6 +40,7 @@ static u64 last_block = ~0ULL;
 static u32 ra_window = 2;
 static u64 adapt_changes;
 static u64 cache_cycles;
+static u64 cache_io_cycles;	/* time inside get() spent waiting for the disk */
 
 static u32 hidx(struct blkdev *d, u64 b) { return (u32)((b * 2654435761u) ^ d->id) % NHASH; }
 
@@ -83,7 +84,9 @@ static void writeback(struct buf *b)
 		return;
 	b->dirty = false;
 	st.writebacks++;
+	u64 t0 = rdtsc();
 	blk_rw(b->dev, b->blockno * SECTORS_PER_BLOCK, SECTORS_PER_BLOCK, b->phys, true);
+	cache_io_cycles += rdtsc() - t0;
 }
 
 /* Find a reusable buffer (called with interrupts disabled; may sleep for
@@ -221,7 +224,10 @@ static void account_access(struct blkdev *d, u64 blockno, bool hit)
 		readahead(d, blockno + 1, ra);
 }
 
-static struct buf *get(struct blkdev *d, u64 blockno, bool fill)
+/* meta: filesystem metadata (inodes, bitmaps, indirect blocks, directories).
+ * Only file-data accesses feed stream detection and read-ahead; otherwise
+ * metadata interleaved between data blocks hides sequential patterns. */
+static struct buf *get(struct blkdev *d, u64 blockno, bool fill, bool meta)
 {
 	u64 c0 = rdtsc();
 	u64 f = irq_save();
@@ -229,7 +235,9 @@ static struct buf *get(struct blkdev *d, u64 blockno, bool fill)
 		struct buf *b = lookup(d, blockno);
 		if (b) {
 			if (b->io_pending) {
+				u64 w0 = rdtsc();
 				wq_wait(&bufio_wait, 0);
+				cache_io_cycles += rdtsc() - w0;
 				continue; /* re-check after the read completed */
 			}
 			if (!b->valid) { /* failed read-ahead: reload below */
@@ -241,7 +249,8 @@ static struct buf *get(struct blkdev *d, u64 blockno, bool fill)
 					st.readahead_used++;
 				}
 				touch(b);
-				account_access(d, blockno, true);
+				if (!meta)
+					account_access(d, blockno, true);
 				b->readahead = policy == CACHE_ADAPTIVE && io_cls == IO_SEQUENTIAL ? true : false;
 				cache_cycles += rdtsc() - c0;
 				irq_restore(f);
@@ -264,7 +273,9 @@ static struct buf *get(struct blkdev *d, u64 blockno, bool fill)
 		if (fill) {
 			b->io_pending = true;
 			irq_restore(f);
+			u64 w0 = rdtsc();
 			int r = blk_rw(d, blockno * SECTORS_PER_BLOCK, SECTORS_PER_BLOCK, b->phys, false);
+			cache_io_cycles += rdtsc() - w0;
 			f = irq_save();
 			b->io_pending = false;
 			b->valid = r == 0;
@@ -273,15 +284,17 @@ static struct buf *get(struct blkdev *d, u64 blockno, bool fill)
 			memset(b->data, 0, BLOCK_SIZE);
 			b->valid = true;
 		}
-		account_access(d, blockno, false);
+		if (!meta)
+			account_access(d, blockno, false);
 		cache_cycles += rdtsc() - c0;
 		irq_restore(f);
 		return b;
 	}
 }
 
-struct buf *bread(struct blkdev *d, u64 blockno) { return get(d, blockno, true); }
-struct buf *bget_nofill(struct blkdev *d, u64 blockno) { return get(d, blockno, false); }
+struct buf *bread(struct blkdev *d, u64 blockno) { return get(d, blockno, true, false); }
+struct buf *bread_meta(struct blkdev *d, u64 blockno) { return get(d, blockno, true, true); }
+struct buf *bget_nofill(struct blkdev *d, u64 blockno) { return get(d, blockno, false, false); }
 
 void bdirty(struct buf *b) { b->dirty = true; }
 
@@ -375,7 +388,7 @@ void bcache_reset_stats(void)
 {
 	u64 f = irq_save();
 	memset(&st, 0, sizeof(st));
-	cache_cycles = 0;
+	cache_cycles = cache_io_cycles = 0;
 	irq_restore(f);
 }
 
@@ -409,7 +422,9 @@ static void gen_bcache(void *pb)
 	pb_printf(pb, "readahead_issued: %lu\nreadahead_used: %lu\nevictions: %lu\nwritebacks: %lu\n",
 		  st.readahead_issued, st.readahead_used, st.evictions, st.writebacks);
 	pb_printf(pb, "memory_kb: %u\nadapt_changes: %lu\ncpu_ns: %lu\n", nbufs * 4, adapt_changes,
-		  tsc_frequency() ? cache_cycles * 1000000000ULL / tsc_frequency() : 0);
+		  tsc_frequency() && cache_cycles > cache_io_cycles
+			  ? (cache_cycles - cache_io_cycles) * 1000000000ULL / tsc_frequency()
+			  : 0);
 }
 
 void bcache_init(u32 cap)

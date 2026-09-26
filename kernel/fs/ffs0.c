@@ -26,7 +26,8 @@ struct fnode {
 static const struct vnode_ops ffs0_ops;
 
 /* ---- block helpers ---- */
-static struct buf *blk(struct ffs0 *fs, u64 b) { return bread(fs->dev, b); }
+/* Metadata goes through bread_meta; file data through bread (see bcache.c). */
+static struct buf *blk(struct ffs0 *fs, u64 b) { return bread_meta(fs->dev, b); }
 
 static void write_super(struct ffs0 *fs)
 {
@@ -280,14 +281,16 @@ static ssize_t rw_locked(struct fnode *f, void *buf, u64 len, u64 off, bool writ
 		if (write) {
 			if (!bno)
 				break; /* disk full */
-			struct buf *b = (bo == 0 && n == FFS0_BLOCK) ? bget_nofill(fs->dev, bno) : blk(fs, bno);
+			struct buf *b = (bo == 0 && n == FFS0_BLOCK) ? bget_nofill(fs->dev, bno)
+								      : (f->vn.type == VT_FILE ? bread(fs->dev, bno) : blk(fs, bno));
 			memcpy(b->data + bo, (u8 *)buf + done, n);
 			bdirty(b);
 			brelse(b);
 		} else if (!bno) {
 			memset((u8 *)buf + done, 0, n); /* sparse hole */
 		} else {
-			struct buf *b = blk(fs, bno);
+			/* regular-file data feeds the cache's stream detection */
+			struct buf *b = f->vn.type == VT_FILE ? bread(fs->dev, bno) : blk(fs, bno);
 			memcpy((u8 *)buf + done, b->data + bo, n);
 			brelse(b);
 		}

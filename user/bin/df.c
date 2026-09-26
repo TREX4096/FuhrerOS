@@ -1,4 +1,4 @@
-/* df — mounted filesystems */
+/* df - mounted filesystems */
 #include "fu.h"
 int main(void)
 {

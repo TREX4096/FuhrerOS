@@ -132,6 +132,19 @@ void test_memory(void)
 			"slab utilisation %lu%% (%lu KiB live in %lu KiB of slabs), large pages %lu",
 			slab_bytes ? small_live * 100 / slab_bytes : 0, small_live / 1024,
 			slab_bytes / 1024, hs.large_pages);
+	/* Small objects only: the common case for kernel data structures. */
+	static void *small[4096];
+	u64 s0 = rdtsc();
+	for (int i = 0; i < 4096; i++)
+		small[i] = kmalloc(64);
+	u64 s1 = rdtsc();
+	for (int i = 0; i < 4096; i++)
+		kfree(small[i]);
+	u64 s2 = rdtsc();
+	selftest_report("heap.small_latency", small[0] && small[4095],
+			"kmalloc(64) avg %lu ns, kfree avg %lu ns (4096 objects)",
+			hz ? (s1 - s0) * 1000000000ULL / hz / 4096 : 0,
+			hz ? (s2 - s1) * 1000000000ULL / hz / 4096 : 0);
 	void *z = kzalloc(3000);
 	bool zok = z && ((u8 *)z)[0] == 0 && ((u8 *)z)[2999] == 0;
 	void *z2 = krealloc(z, 9000);

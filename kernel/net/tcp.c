@@ -52,6 +52,14 @@ static void send_segment(struct socket *s, u32 seq, u8 flags, const u8 *data, u3
 
 static void send_ack(struct socket *s) { send_segment(s, s->snd_nxt, F_ACK, NULL, 0); }
 
+/* The application drained a (nearly) full receive buffer: advertise the
+ * reopened window, otherwise a sender that saw a zero window waits forever. */
+void tcp_window_update(struct socket *s)
+{
+	if (s->state == TCP_ESTABLISHED || s->state == TCP_FIN_WAIT1 || s->state == TCP_FIN_WAIT2)
+		send_ack(s);
+}
+
 static void send_rst_reply(u32 src, u32 dst, const u8 *seg, u32 len)
 {
 	/* RST for a segment that matches no socket */
@@ -88,7 +96,7 @@ void tcp_output(struct socket *s)
 	if (s->state != TCP_ESTABLISHED && s->state != TCP_CLOSE_WAIT &&
 	    s->state != TCP_FIN_WAIT1 && s->state != TCP_LAST_ACK && s->state != TCP_CLOSING)
 		return;
-	u32 wnd = s->snd_wnd ? s->snd_wnd : TCP_MSS;
+	u32 wnd = s->snd_wnd; /* zero window: send nothing; the persist timer probes */
 	for (;;) {
 		u32 sent_unacked = s->snd_nxt - s->snd_una;
 		u32 queued = s->tx_head - s->tx_tail; /* bytes not yet acked */
@@ -272,6 +280,25 @@ void tcp_input(u32 src, u32 dst, const u8 *seg, u32 len)
 		break;
 	}
 
+	/* duplicate ACKs: three in a row mean a segment was lost -> fast
+	 * retransmit instead of waiting for the timeout */
+	if ((flags & F_ACK) && ack == s->snd_una && s->snd_nxt != s->snd_una && !dlen &&
+	    win == s->snd_wnd && !(flags & (F_SYN | F_FIN))) {
+		if (++s->dupacks == 3) {
+			s->retransmits++;
+			s->snd_nxt = s->snd_una;
+			if (s->fin_sent) {
+				s->fin_sent = false;
+				if (s->state == TCP_FIN_WAIT1)
+					s->state = TCP_ESTABLISHED;
+				else if (s->state == TCP_LAST_ACK)
+					s->state = TCP_CLOSE_WAIT;
+			}
+		}
+	} else if (flags & F_ACK) {
+		s->dupacks = 0;
+	}
+
 	/* ACK processing */
 	if ((flags & F_ACK) && SEQ_LT(s->snd_una, ack) && SEQ_LEQ(ack, s->snd_nxt)) {
 		u32 acked = ack - s->snd_una;
@@ -282,6 +309,9 @@ void tcp_input(u32 src, u32 dst, const u8 *seg, u32 len)
 		s->retries = 0;
 		s->rto_ns = 0;
 		s->rto_deadline = s->snd_una == s->snd_nxt ? 0 : time_ns() + 300000000ULL;
+		/* persist timer: data waiting behind a zero window gets probed */
+		if (!s->rto_deadline && win == 0 && s->tx_head != s->tx_tail)
+			s->rto_deadline = time_ns() + 200000000ULL;
 		wq_wake_all(&s->wwait);
 		if (s->fin_sent && ack == s->snd_nxt) {
 			if (s->state == TCP_FIN_WAIT1)
@@ -347,7 +377,15 @@ void tcp_timer(void)
 		}
 		s->rto_ns = s->rto_ns ? MIN(s->rto_ns * 2, 8000000000ULL) : 300000000ULL;
 		s->retransmits++;
-		if (s->state == TCP_SYN_SENT) {
+		if ((s->state == TCP_ESTABLISHED || s->state == TCP_CLOSE_WAIT) && s->snd_wnd == 0 &&
+		    s->snd_nxt == s->snd_una && s->tx_head != s->tx_tail) {
+			/* zero-window probe: one byte of new data forces an ACK
+			 * that carries the receiver's current window */
+			u8 b = s->tx[s->tx_tail % SOCK_TXBUF];
+			send_segment(s, s->snd_nxt, F_ACK | F_PSH, &b, 1);
+			s->snd_nxt++;
+			s->retries = 0; /* probing is not a failure */
+		} else if (s->state == TCP_SYN_SENT) {
 			send_segment(s, s->iss, F_SYN, NULL, 0);
 		} else if (s->state == TCP_SYN_RCVD) {
 			send_segment(s, s->iss, F_SYN | F_ACK, NULL, 0);

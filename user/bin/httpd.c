@@ -1,4 +1,4 @@
-/* httpd [PORT] [ROOT] — tiny static HTTP/1.0 server (default port 80,
+/* httpd [PORT] [ROOT] - tiny static HTTP/1.0 server (default port 80,
  * root /www). QEMU forwards host 127.0.0.1:8080 to guest port 80. */
 #include "fu.h"
 

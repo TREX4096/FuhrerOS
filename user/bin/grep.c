@@ -1,4 +1,4 @@
-/* grep PATTERN [FILE] — fixed-string search */
+/* grep PATTERN [FILE] - fixed-string search */
 #include "fu.h"
 int main(int argc, char **argv)
 {

@@ -1,4 +1,4 @@
-/* ifconfig — network interface status */
+/* ifconfig - network interface status */
 #include "fu.h"
 
 int main(void)

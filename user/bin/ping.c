@@ -1,4 +1,4 @@
-/* ping HOST [COUNT] — ICMP echo */
+/* ping HOST [COUNT] - ICMP echo */
 #include "fu.h"
 
 static uint16_t csum(const uint8_t *p, int n)

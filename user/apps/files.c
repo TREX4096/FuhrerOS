@@ -1,4 +1,4 @@
-/* files — file manager: browse directories, open files in the editor, create
+/* files - file manager: browse directories, open files in the editor, create
  * folders, delete entries, jump Home/Up. Double-click (or Enter) opens. */
 #include "gui.h"
 
