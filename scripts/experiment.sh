@@ -32,7 +32,7 @@ cp --sparse=always "$B/disk.img" "$B/disk-exp.img"
 
 detect_accel 2>"$EXP/accel.txt"
 REV=$(git -C "$REPO" rev-parse --short HEAD 2>/dev/null || echo unknown)
-[ -n "$(git -C "$REPO" status --porcelain 2>/dev/null)" ] && REV="$REV-dirty"
+[ -n "$(git -C "$REPO" status --porcelain -- . ':!experiments' 2>/dev/null)" ] && REV="$REV-dirty"
 cat >"$EXP/config.json" <<EOF
 {
   "experiment": "E-$N",
