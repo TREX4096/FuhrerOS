@@ -194,7 +194,7 @@ def main():
         wls = [w for w in ["seq", "random", "hotset", "scan"] if any(k[0] == w for k in g)]
         pols = [p for p in ["lru", "fifo", "clock", "readahead", "adaptive"] if any(k[1] == p for k in g)]
         for key, label in [("mb_per_s_x100", "throughput MB/s x100"), ("hit_rate_pm", "hit rate (per mille)"),
-                           ("lat_p99_us", "read latency p99 (us)"), ("cache_cpu_us", "cache CPU (us)")]:
+                           ("lat_p99_us", "read latency p99 (us)"), ("cache_cpu_ns_per_read", "cache CPU per read (ns)")]:
             md += [f"## Buffer cache — {label} (median)", "", "| workload | " + " | ".join(pols) + " |",
                    "|---" * (len(pols) + 1) + "|"]
             vals = {}

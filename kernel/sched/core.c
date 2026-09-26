@@ -320,6 +320,11 @@ void task_wake(struct task *t)
 		t->enqueue_ns = t->woken_ns;
 		t->prof.cur.wakeups++;
 		policy->task_wake(t);
+		/* A wake-up from a device IRQ while idle must switch at this
+		 * interrupt's exit, not at the next tick (F-118: every blocking
+		 * disk read cost ~1 ms). */
+		if (current_task() == idle_task)
+			need_resched = true;
 	}
 	irq_restore(f);
 }

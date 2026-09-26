@@ -1,0 +1,170 @@
+
+FuhrerOS: kernel entry reached (serial up)
+
+================================
+        FUHREROS KERNEL
+================================
+
+Architecture : x86_64
+Bootloader   : Limine 11.4.1
+Kernel       : FuhrerOS 0.1.0 (from-scratch)
+Status       : BOOTED
+
+[boot  ] bootloader: Limine 11.4.1 (BIOS firmware)
+[boot  ] cmdline: 'bench=sched'
+[boot  ] kernel: phys 0x000000007fd73000 virt 0xffffffff80000000 size 872 KiB
+[boot  ] hhdm offset: 0xffff800000000000, rsdp: 0x00000000000f5260
+[boot  ] memory map (25 entries):
+[boot  ]   0000000000001000-0000000000061000 bootloader     384 KiB
+[boot  ]   0000000000061000-000000000009f000 usable         248 KiB
+[boot  ]   000000000009fc00-00000000000a0000 reserved       1 KiB
+[boot  ]   00000000000f0000-00000000000f5000 reserved       20 KiB
+[boot  ]   00000000000f5000-00000000000f6000 reserved       4 KiB
+[boot  ]   00000000000f6000-0000000000100000 reserved       40 KiB
+[boot  ]   0000000000100000-000000007f8ce000 usable         2088760 KiB
+[boot  ]   000000007f8ce000-000000007fd65000 kernel+modules 4700 KiB
+[boot  ]   000000007fd65000-000000007fd66000 bootloader     4 KiB
+[boot  ]   000000007fd66000-000000007fd69000 usable         12 KiB
+[boot  ]   000000007fd69000-000000007fd73000 bootloader     40 KiB
+[boot  ]   000000007fd73000-000000007fe4d000 kernel+modules 872 KiB
+[boot  ]   000000007fe4d000-000000007ff38000 bootloader     940 KiB
+[boot  ]   000000007ff38000-000000007ff55000 usable         116 KiB
+[boot  ]   000000007ff55000-000000007ffdc000 bootloader     540 KiB
+[boot  ]   000000007ffdc000-000000007ffe0000 reserved       16 KiB
+[boot  ]   000000007ffe0000-000000007ffe3000 reserved       12 KiB
+[boot  ]   000000007ffe3000-0000000080000000 reserved       116 KiB
+[boot  ]   00000000b0000000-00000000c0000000 reserved       262144 KiB
+[boot  ]   00000000fd000000-00000000fd3e8000 framebuffer    4000 KiB
+[boot  ]   00000000fed1c000-00000000fed20000 reserved       16 KiB
+[boot  ]   00000000feffc000-00000000ff000000 reserved       16 KiB
+[boot  ]   00000000fffc0000-0000000100000000 reserved       256 KiB
+[boot  ]   0000000100000000-0000000180000000 usable         2097152 KiB
+[boot  ]   000000fd00000000-0000010000000000 reserved       12582912 KiB
+[boot  ] usable memory: 4088 MiB
+[boot  ] framebuffer: 1280x800 32bpp pitch 5120 at phys 0x00000000fd000000
+[boot  ] module: /boot/initrd.tar (4812800 bytes) 'initrd'
+[boot  ] cpu: AuthenticAMD / AMD Ryzen 5 7520U with Radeon Graphics         
+[pmm   ] 1572864 frames tracked, 1046462 free (4087 MiB), bitmap 192 KiB at 0x0000000000100000
+[vmm   ] kernel page tables active (pml4 0x0000000000130000, NX on)
+[heap  ] slab classes 16..2048 B, large allocations from vmalloc
+[pmm   ] reclaimed 1908 KiB of bootloader memory
+[acpi  ] OEM 'BOCHS ', 4 CPU(s), LAPIC 0x00000000fee00000, 1 IOAPIC(s) (first 0x00000000fec00000 gsi 0), ECAM 0x00000000b0000000
+[apic  ] local APIC id 0 enabled
+[apic  ] I/O APIC with 24 inputs
+[time  ] TSC 2792.767 MHz, LAPIC timer 62589 kHz (div 16)
+[time  ] LAPIC periodic timer at 1000 Hz (vector 0x20)
+[sched ] policy -> adaptive
+[sched ] scheduler ready, policy adaptive, 4 policies available
+[init  ] kinit running as task 2 under policy 'adaptive'
+[ps2   ] keyboard ready, mouse ready (4-byte packets, wheel)
+[proc  ] process subsystem ready (ELF64 loader, spawn/wait)
+[syscall] syscall/sysret MSRs programmed, 64 syscall numbers
+[pci   ] 00:00.0 8086:29c0 host bridge
+[pci   ] 00:01.0 1234:1111 display
+[pci   ] 00:02.0 1af4:1041 network
+[vnet  ] eth0 MAC 52:54:00:12:34:56
+[pci   ] 00:03.0 1af4:1042 storage
+[blk   ] vda: 20480 MiB (41943040 sectors of 512 B)
+[pci   ] 00:1f.0 8086:2918 ISA bridge
+[pci   ] 00:1f.2 8086:2922 SATA controller
+[pci   ] 00:1f.3 8086:2930 SMBus
+[bcache] 2048 x 4 KiB buffers, policy adaptive
+[net   ] sockets: TCP, UDP, ICMP echo
+[tty   ] console tty on framebuffer + COM1 (serial input enabled)
+[net   ] DHCP: 10.0.2.15/255.255.255.0 gw 10.0.2.2 dns 10.0.2.3
+[ffs0  ] 'fuhreros' on vda: 5242880 blocks (5241345 free), 4096 inodes (4034 free), mount #1
+[vfs   ] mounted vda (ffs0) on /
+[tarfs ] initrd: 54 files, 4700 KiB
+[vfs   ] mounted initrd (tarfs) on /initrd
+[vfs   ] mounted - (devfs) on /dev
+[vfs   ] mounted - (procfs) on /proc
+[vfs   ] mounted - (ramfs) on /tmp
+[vfs   ] root filesystem: FFS0 (virtio-blk vda)
+[init  ] started /bin/init as pid 1 - kernel handing over to user space
+[1;36mFuhrerOS init[0m (pid 1): user space is running outside kernel privilege
+init: running benchmark suite /etc/bench/sched.sh
+BENCH-BEGIN sched
+[sched ] policy -> round_robin
+SCHEDBENCH {"name":"mixed-r1","policy":"round_robin","seconds":10,"cpu_workers":3,"io_workers":1,"samples":254,"wake_p50_us":30035,"wake_p95_us":30073,"wake_p99_us":30435,"wake_max_us":40130,"dispatch_p50_us":29062,"dispatch_p99_us":29368,"resp_p50_us":40074,"resp_p95_us":40112,"resp_p99_us":40482,"cpu_jobs_per_s_x100":977195,"io_ops_per_s":22,"jain_x1000":999,"ctx_switches_per_s":188,"cpu_util_pct":99,"sched_overhead_ns_per_s":22234,"system_class":"CPU_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:INTERACTIVE,probe:INTERACTIVE"}
+[sched ] policy -> priority
+SCHEDBENCH {"name":"mixed-r1","policy":"priority","seconds":10,"cpu_workers":3,"io_workers":1,"samples":254,"wake_p50_us":30032,"wake_p95_us":30446,"wake_p99_us":33948,"wake_max_us":38442,"dispatch_p50_us":29065,"dispatch_p99_us":31234,"resp_p50_us":40073,"resp_p95_us":40485,"resp_p99_us":43999,"cpu_jobs_per_s_x100":895580,"io_ops_per_s":22,"jain_x1000":999,"ctx_switches_per_s":187,"cpu_util_pct":99,"sched_overhead_ns_per_s":31536,"system_class":"CPU_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:INTERACTIVE,probe:INTERACTIVE"}
+[sched ] policy -> low_latency
+SCHEDBENCH {"name":"mixed-r1","policy":"low_latency","seconds":10,"cpu_workers":3,"io_workers":1,"samples":902,"wake_p50_us":978,"wake_p95_us":1084,"wake_p99_us":5921,"wake_max_us":7970,"dispatch_p50_us":7,"dispatch_p99_us":125,"resp_p50_us":11017,"resp_p95_us":11130,"resp_p99_us":16006,"cpu_jobs_per_s_x100":916757,"io_ops_per_s":498,"jain_x1000":999,"ctx_switches_per_s":1912,"cpu_util_pct":99,"sched_overhead_ns_per_s":160431,"system_class":"IO_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:IO_BOUND,probe:INTERACTIVE"}
+[sched ] policy -> adaptive
+SCHEDBENCH {"name":"mixed-r1","policy":"adaptive","seconds":10,"cpu_workers":3,"io_workers":1,"samples":902,"wake_p50_us":977,"wake_p95_us":1050,"wake_p99_us":1442,"wake_max_us":17052,"dispatch_p50_us":7,"dispatch_p99_us":313,"resp_p50_us":11018,"resp_p95_us":11125,"resp_p99_us":11689,"cpu_jobs_per_s_x100":886616,"io_ops_per_s":495,"jain_x1000":999,"ctx_switches_per_s":1744,"cpu_util_pct":99,"sched_overhead_ns_per_s":627589,"system_class":"IO_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:IO_BOUND,probe:INTERACTIVE"}
+[sched ] policy -> round_robin
+SCHEDBENCH {"name":"batch-r1","policy":"round_robin","seconds":10,"cpu_workers":4,"io_workers":0,"samples":202,"wake_p50_us":40054,"wake_p95_us":40095,"wake_p99_us":40351,"wake_max_us":41257,"dispatch_p50_us":39079,"dispatch_p99_us":39375,"resp_p50_us":50093,"resp_p95_us":50134,"resp_p99_us":50390,"cpu_jobs_per_s_x100":988925,"io_ops_per_s":0,"jain_x1000":999,"ctx_switches_per_s":144,"cpu_util_pct":99,"sched_overhead_ns_per_s":29587,"system_class":"CPU_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,probe:INTERACTIVE"}
+[sched ] policy -> priority
+SCHEDBENCH {"name":"batch-r1","policy":"priority","seconds":10,"cpu_workers":4,"io_workers":0,"samples":204,"wake_p50_us":40053,"wake_p95_us":40141,"wake_p99_us":41137,"wake_max_us":43008,"dispatch_p50_us":39080,"dispatch_p99_us":40127,"resp_p50_us":50092,"resp_p95_us":50189,"resp_p99_us":51189,"cpu_jobs_per_s_x100":931094,"io_ops_per_s":0,"jain_x1000":999,"ctx_switches_per_s":145,"cpu_util_pct":99,"sched_overhead_ns_per_s":28830,"system_class":"CPU_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,probe:INTERACTIVE"}
+[sched ] policy -> low_latency
+SCHEDBENCH {"name":"batch-r1","policy":"low_latency","seconds":10,"cpu_workers":4,"io_workers":0,"samples":901,"wake_p50_us":968,"wake_p95_us":1648,"wake_p99_us":6252,"wake_max_us":9434,"dispatch_p50_us":15,"dispatch_p99_us":75,"resp_p50_us":11013,"resp_p95_us":11702,"resp_p99_us":16306,"cpu_jobs_per_s_x100":759070,"io_ops_per_s":0,"jain_x1000":999,"ctx_switches_per_s":749,"cpu_util_pct":99,"sched_overhead_ns_per_s":180108,"system_class":"CPU_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,probe:INTERACTIVE"}
+[sched ] policy -> adaptive
+SCHEDBENCH {"name":"batch-r1","policy":"adaptive","seconds":10,"cpu_workers":4,"io_workers":0,"samples":862,"wake_p50_us":971,"wake_p95_us":5775,"wake_p99_us":9364,"wake_max_us":23026,"dispatch_p50_us":15,"dispatch_p99_us":677,"resp_p50_us":11016,"resp_p95_us":15867,"resp_p99_us":19657,"cpu_jobs_per_s_x100":662887,"io_ops_per_s":0,"jain_x1000":999,"ctx_switches_per_s":299,"cpu_util_pct":99,"sched_overhead_ns_per_s":54696,"system_class":"CPU_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,probe:INTERACTIVE"}
+[sched ] policy -> priority
+SCHEDBENCH {"name":"mixed-r2","policy":"priority","seconds":10,"cpu_workers":3,"io_workers":1,"samples":253,"wake_p50_us":30034,"wake_p95_us":30070,"wake_p99_us":30288,"wake_max_us":31128,"dispatch_p50_us":29060,"dispatch_p99_us":29295,"resp_p50_us":40074,"resp_p95_us":40115,"resp_p99_us":40327,"cpu_jobs_per_s_x100":964505,"io_ops_per_s":22,"jain_x1000":999,"ctx_switches_per_s":188,"cpu_util_pct":99,"sched_overhead_ns_per_s":21464,"system_class":"CPU_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:INTERACTIVE,probe:INTERACTIVE"}
+[sched ] policy -> low_latency
+SCHEDBENCH {"name":"mixed-r2","policy":"low_latency","seconds":10,"cpu_workers":3,"io_workers":1,"samples":910,"wake_p50_us":975,"wake_p95_us":1068,"wake_p99_us":1652,"wake_max_us":6811,"dispatch_p50_us":10,"dispatch_p99_us":170,"resp_p50_us":11015,"resp_p95_us":11116,"resp_p99_us":11848,"cpu_jobs_per_s_x100":868408,"io_ops_per_s":501,"jain_x1000":999,"ctx_switches_per_s":1945,"cpu_util_pct":99,"sched_overhead_ns_per_s":138717,"system_class":"IO_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:IO_BOUND,probe:INTERACTIVE"}
+[sched ] policy -> adaptive
+SCHEDBENCH {"name":"mixed-r2","policy":"adaptive","seconds":10,"cpu_workers":3,"io_workers":1,"samples":901,"wake_p50_us":977,"wake_p95_us":1038,"wake_p99_us":2373,"wake_max_us":17047,"dispatch_p50_us":7,"dispatch_p99_us":282,"resp_p50_us":11017,"resp_p95_us":11106,"resp_p99_us":12592,"cpu_jobs_per_s_x100":888371,"io_ops_per_s":498,"jain_x1000":999,"ctx_switches_per_s":1758,"cpu_util_pct":99,"sched_overhead_ns_per_s":435606,"system_class":"IO_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:IO_BOUND,probe:INTERACTIVE"}
+[sched ] policy -> round_robin
+SCHEDBENCH {"name":"mixed-r2","policy":"round_robin","seconds":10,"cpu_workers":3,"io_workers":1,"samples":253,"wake_p50_us":30034,"wake_p95_us":30089,"wake_p99_us":30360,"wake_max_us":31380,"dispatch_p50_us":29062,"dispatch_p99_us":29263,"resp_p50_us":40074,"resp_p95_us":40130,"resp_p99_us":40493,"cpu_jobs_per_s_x100":968787,"io_ops_per_s":21,"jain_x1000":999,"ctx_switches_per_s":188,"cpu_util_pct":99,"sched_overhead_ns_per_s":41450,"system_class":"CPU_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:INTERACTIVE,probe:INTERACTIVE"}
+[sched ] policy -> priority
+SCHEDBENCH {"name":"batch-r2","policy":"priority","seconds":10,"cpu_workers":4,"io_workers":0,"samples":202,"wake_p50_us":40053,"wake_p95_us":40861,"wake_p99_us":42428,"wake_max_us":54108,"dispatch_p50_us":39083,"dispatch_p99_us":42139,"resp_p50_us":50094,"resp_p95_us":50909,"resp_p99_us":52478,"cpu_jobs_per_s_x100":894799,"io_ops_per_s":0,"jain_x1000":999,"ctx_switches_per_s":144,"cpu_util_pct":99,"sched_overhead_ns_per_s":49947,"system_class":"CPU_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,probe:INTERACTIVE"}
+[sched ] policy -> low_latency
+SCHEDBENCH {"name":"batch-r2","policy":"low_latency","seconds":10,"cpu_workers":4,"io_workers":0,"samples":898,"wake_p50_us":978,"wake_p95_us":1110,"wake_p99_us":6051,"wake_max_us":11982,"dispatch_p50_us":7,"dispatch_p99_us":137,"resp_p50_us":11018,"resp_p95_us":11170,"resp_p99_us":16122,"cpu_jobs_per_s_x100":877676,"io_ops_per_s":0,"jain_x1000":999,"ctx_switches_per_s":765,"cpu_util_pct":99,"sched_overhead_ns_per_s":118986,"system_class":"CPU_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,probe:INTERACTIVE"}
+[sched ] policy -> adaptive
+SCHEDBENCH {"name":"batch-r2","policy":"adaptive","seconds":10,"cpu_workers":4,"io_workers":0,"samples":901,"wake_p50_us":976,"wake_p95_us":1034,"wake_p99_us":2626,"wake_max_us":21047,"dispatch_p50_us":8,"dispatch_p99_us":189,"resp_p50_us":11016,"resp_p95_us":11090,"resp_p99_us":12924,"cpu_jobs_per_s_x100":899339,"io_ops_per_s":0,"jain_x1000":999,"ctx_switches_per_s":320,"cpu_util_pct":99,"sched_overhead_ns_per_s":225070,"system_class":"CPU_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,probe:INTERACTIVE"}
+[sched ] policy -> round_robin
+SCHEDBENCH {"name":"batch-r2","policy":"round_robin","seconds":10,"cpu_workers":4,"io_workers":0,"samples":205,"wake_p50_us":40050,"wake_p95_us":40236,"wake_p99_us":41069,"wake_max_us":43107,"dispatch_p50_us":39080,"dispatch_p99_us":40147,"resp_p50_us":50091,"resp_p95_us":50284,"resp_p99_us":51148,"cpu_jobs_per_s_x100":863052,"io_ops_per_s":0,"jain_x1000":999,"ctx_switches_per_s":145,"cpu_util_pct":99,"sched_overhead_ns_per_s":70042,"system_class":"CPU_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,probe:INTERACTIVE"}
+[sched ] policy -> low_latency
+SCHEDBENCH {"name":"mixed-r3","policy":"low_latency","seconds":10,"cpu_workers":3,"io_workers":1,"samples":909,"wake_p50_us":977,"wake_p95_us":1078,"wake_p99_us":1254,"wake_max_us":2144,"dispatch_p50_us":9,"dispatch_p99_us":136,"resp_p50_us":11016,"resp_p95_us":11129,"resp_p99_us":11323,"cpu_jobs_per_s_x100":901370,"io_ops_per_s":506,"jain_x1000":999,"ctx_switches_per_s":1952,"cpu_util_pct":99,"sched_overhead_ns_per_s":287901,"system_class":"IO_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:IO_BOUND,probe:INTERACTIVE"}
+[sched ] policy -> adaptive
+SCHEDBENCH {"name":"mixed-r3","policy":"adaptive","seconds":10,"cpu_workers":3,"io_workers":1,"samples":902,"wake_p50_us":979,"wake_p95_us":1021,"wake_p99_us":1259,"wake_max_us":18026,"dispatch_p50_us":6,"dispatch_p99_us":77,"resp_p50_us":11018,"resp_p95_us":11072,"resp_p99_us":11516,"cpu_jobs_per_s_x100":942326,"io_ops_per_s":501,"jain_x1000":999,"ctx_switches_per_s":1768,"cpu_util_pct":99,"sched_overhead_ns_per_s":131734,"system_class":"IO_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:IO_BOUND,probe:INTERACTIVE"}
+[sched ] policy -> round_robin
+SCHEDBENCH {"name":"mixed-r3","policy":"round_robin","seconds":10,"cpu_workers":3,"io_workers":1,"samples":252,"wake_p50_us":30036,"wake_p95_us":30101,"wake_p99_us":31048,"wake_max_us":33073,"dispatch_p50_us":29062,"dispatch_p99_us":30080,"resp_p50_us":40075,"resp_p95_us":40141,"resp_p99_us":41087,"cpu_jobs_per_s_x100":975026,"io_ops_per_s":21,"jain_x1000":999,"ctx_switches_per_s":188,"cpu_util_pct":99,"sched_overhead_ns_per_s":24199,"system_class":"CPU_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:INTERACTIVE,probe:INTERACTIVE"}
+[sched ] policy -> priority
+SCHEDBENCH {"name":"mixed-r3","policy":"priority","seconds":10,"cpu_workers":3,"io_workers":1,"samples":253,"wake_p50_us":30035,"wake_p95_us":30082,"wake_p99_us":30306,"wake_max_us":34644,"dispatch_p50_us":29061,"dispatch_p99_us":29321,"resp_p50_us":40074,"resp_p95_us":40138,"resp_p99_us":40346,"cpu_jobs_per_s_x100":976908,"io_ops_per_s":21,"jain_x1000":999,"ctx_switches_per_s":188,"cpu_util_pct":99,"sched_overhead_ns_per_s":37675,"system_class":"CPU_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:INTERACTIVE,probe:INTERACTIVE"}
+[sched ] policy -> low_latency
+SCHEDBENCH {"name":"batch-r3","policy":"low_latency","seconds":10,"cpu_workers":4,"io_workers":0,"samples":911,"wake_p50_us":978,"wake_p95_us":1022,"wake_p99_us":1071,"wake_max_us":1544,"dispatch_p50_us":7,"dispatch_p99_us":46,"resp_p50_us":11018,"resp_p95_us":11065,"resp_p99_us":11148,"cpu_jobs_per_s_x100":960390,"io_ops_per_s":0,"jain_x1000":999,"ctx_switches_per_s":786,"cpu_util_pct":99,"sched_overhead_ns_per_s":77794,"system_class":"CPU_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,probe:INTERACTIVE"}
+[sched ] policy -> adaptive
+SCHEDBENCH {"name":"batch-r3","policy":"adaptive","seconds":10,"cpu_workers":4,"io_workers":0,"samples":897,"wake_p50_us":980,"wake_p95_us":1025,"wake_p99_us":5744,"wake_max_us":30030,"dispatch_p50_us":7,"dispatch_p99_us":130,"resp_p50_us":11020,"resp_p95_us":11080,"resp_p99_us":15794,"cpu_jobs_per_s_x100":959917,"io_ops_per_s":0,"jain_x1000":999,"ctx_switches_per_s":315,"cpu_util_pct":99,"sched_overhead_ns_per_s":32262,"system_class":"CPU_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,probe:INTERACTIVE"}
+[sched ] policy -> round_robin
+SCHEDBENCH {"name":"batch-r3","policy":"round_robin","seconds":10,"cpu_workers":4,"io_workers":0,"samples":202,"wake_p50_us":40054,"wake_p95_us":40112,"wake_p99_us":41028,"wake_max_us":68089,"dispatch_p50_us":39080,"dispatch_p99_us":39901,"resp_p50_us":50093,"resp_p95_us":50172,"resp_p99_us":51067,"cpu_jobs_per_s_x100":977680,"io_ops_per_s":0,"jain_x1000":999,"ctx_switches_per_s":144,"cpu_util_pct":99,"sched_overhead_ns_per_s":22982,"system_class":"CPU_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,probe:INTERACTIVE"}
+[sched ] policy -> priority
+SCHEDBENCH {"name":"batch-r3","policy":"priority","seconds":10,"cpu_workers":4,"io_workers":0,"samples":203,"wake_p50_us":40054,"wake_p95_us":40095,"wake_p99_us":40237,"wake_max_us":41066,"dispatch_p50_us":39080,"dispatch_p99_us":39263,"resp_p50_us":50093,"resp_p95_us":50143,"resp_p99_us":50277,"cpu_jobs_per_s_x100":992297,"io_ops_per_s":0,"jain_x1000":999,"ctx_switches_per_s":145,"cpu_util_pct":99,"sched_overhead_ns_per_s":18306,"system_class":"CPU_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,probe:INTERACTIVE"}
+[sched ] policy -> adaptive
+SCHEDBENCH {"name":"mixed-r4","policy":"adaptive","seconds":10,"cpu_workers":3,"io_workers":1,"samples":901,"wake_p50_us":980,"wake_p95_us":1025,"wake_p99_us":3810,"wake_max_us":16009,"dispatch_p50_us":6,"dispatch_p99_us":82,"resp_p50_us":11019,"resp_p95_us":11065,"resp_p99_us":13852,"cpu_jobs_per_s_x100":964540,"io_ops_per_s":496,"jain_x1000":999,"ctx_switches_per_s":1740,"cpu_util_pct":99,"sched_overhead_ns_per_s":121772,"system_class":"IO_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:IO_BOUND,probe:INTERACTIVE"}
+[sched ] policy -> round_robin
+SCHEDBENCH {"name":"mixed-r4","policy":"round_robin","seconds":10,"cpu_workers":3,"io_workers":1,"samples":254,"wake_p50_us":30035,"wake_p95_us":30106,"wake_p99_us":30268,"wake_max_us":33035,"dispatch_p50_us":29062,"dispatch_p99_us":29370,"resp_p50_us":40074,"resp_p95_us":40151,"resp_p99_us":40306,"cpu_jobs_per_s_x100":986802,"io_ops_per_s":22,"jain_x1000":999,"ctx_switches_per_s":188,"cpu_util_pct":99,"sched_overhead_ns_per_s":24928,"system_class":"CPU_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:INTERACTIVE,probe:INTERACTIVE"}
+[sched ] policy -> priority
+SCHEDBENCH {"name":"mixed-r4","policy":"priority","seconds":10,"cpu_workers":3,"io_workers":1,"samples":255,"wake_p50_us":30033,"wake_p95_us":30105,"wake_p99_us":31030,"wake_max_us":34142,"dispatch_p50_us":29062,"dispatch_p99_us":30062,"resp_p50_us":40073,"resp_p95_us":40180,"resp_p99_us":41069,"cpu_jobs_per_s_x100":966004,"io_ops_per_s":21,"jain_x1000":999,"ctx_switches_per_s":189,"cpu_util_pct":99,"sched_overhead_ns_per_s":55858,"system_class":"CPU_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:INTERACTIVE,probe:INTERACTIVE"}
+[sched ] policy -> low_latency
+SCHEDBENCH {"name":"mixed-r4","policy":"low_latency","seconds":10,"cpu_workers":3,"io_workers":1,"samples":910,"wake_p50_us":981,"wake_p95_us":1037,"wake_p99_us":1110,"wake_max_us":1715,"dispatch_p50_us":6,"dispatch_p99_us":88,"resp_p50_us":11019,"resp_p95_us":11077,"resp_p99_us":11152,"cpu_jobs_per_s_x100":969827,"io_ops_per_s":511,"jain_x1000":999,"ctx_switches_per_s":1946,"cpu_util_pct":99,"sched_overhead_ns_per_s":104544,"system_class":"IO_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:IO_BOUND,probe:INTERACTIVE"}
+[sched ] policy -> adaptive
+SCHEDBENCH {"name":"batch-r4","policy":"adaptive","seconds":10,"cpu_workers":4,"io_workers":0,"samples":900,"wake_p50_us":979,"wake_p95_us":1015,"wake_p99_us":1223,"wake_max_us":20047,"dispatch_p50_us":7,"dispatch_p99_us":41,"resp_p50_us":11018,"resp_p95_us":11062,"resp_p99_us":11289,"cpu_jobs_per_s_x100":991637,"io_ops_per_s":0,"jain_x1000":999,"ctx_switches_per_s":315,"cpu_util_pct":99,"sched_overhead_ns_per_s":29879,"system_class":"CPU_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,probe:INTERACTIVE"}
+[sched ] policy -> round_robin
+SCHEDBENCH {"name":"batch-r4","policy":"round_robin","seconds":10,"cpu_workers":4,"io_workers":0,"samples":202,"wake_p50_us":40054,"wake_p95_us":40102,"wake_p99_us":40260,"wake_max_us":41209,"dispatch_p50_us":39080,"dispatch_p99_us":39277,"resp_p50_us":50093,"resp_p95_us":50141,"resp_p99_us":50299,"cpu_jobs_per_s_x100":986547,"io_ops_per_s":0,"jain_x1000":999,"ctx_switches_per_s":144,"cpu_util_pct":99,"sched_overhead_ns_per_s":24170,"system_class":"CPU_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,probe:INTERACTIVE"}
+[sched ] policy -> priority
+SCHEDBENCH {"name":"batch-r4","policy":"priority","seconds":10,"cpu_workers":4,"io_workers":0,"samples":203,"wake_p50_us":40054,"wake_p95_us":40089,"wake_p99_us":40123,"wake_max_us":41012,"dispatch_p50_us":39080,"dispatch_p99_us":39145,"resp_p50_us":50093,"resp_p95_us":50131,"resp_p99_us":50166,"cpu_jobs_per_s_x100":994194,"io_ops_per_s":0,"jain_x1000":999,"ctx_switches_per_s":144,"cpu_util_pct":99,"sched_overhead_ns_per_s":16648,"system_class":"CPU_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,probe:INTERACTIVE"}
+[sched ] policy -> low_latency
+SCHEDBENCH {"name":"batch-r4","policy":"low_latency","seconds":10,"cpu_workers":4,"io_workers":0,"samples":910,"wake_p50_us":980,"wake_p95_us":1010,"wake_p99_us":1075,"wake_max_us":1443,"dispatch_p50_us":6,"dispatch_p99_us":31,"resp_p50_us":11019,"resp_p95_us":11053,"resp_p99_us":11148,"cpu_jobs_per_s_x100":996199,"io_ops_per_s":0,"jain_x1000":999,"ctx_switches_per_s":784,"cpu_util_pct":99,"sched_overhead_ns_per_s":117638,"system_class":"CPU_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,probe:INTERACTIVE"}
+[sched ] policy -> round_robin
+SCHEDBENCH {"name":"mixed-r5","policy":"round_robin","seconds":10,"cpu_workers":3,"io_workers":1,"samples":253,"wake_p50_us":30036,"wake_p95_us":30121,"wake_p99_us":31860,"wake_max_us":36016,"dispatch_p50_us":29062,"dispatch_p99_us":31054,"resp_p50_us":40075,"resp_p95_us":40160,"resp_p99_us":41899,"cpu_jobs_per_s_x100":967157,"io_ops_per_s":21,"jain_x1000":999,"ctx_switches_per_s":188,"cpu_util_pct":99,"sched_overhead_ns_per_s":40033,"system_class":"CPU_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:INTERACTIVE,probe:INTERACTIVE"}
+[sched ] policy -> priority
+SCHEDBENCH {"name":"mixed-r5","policy":"priority","seconds":10,"cpu_workers":3,"io_workers":1,"samples":254,"wake_p50_us":30035,"wake_p95_us":30105,"wake_p99_us":31358,"wake_max_us":35118,"dispatch_p50_us":29062,"dispatch_p99_us":30149,"resp_p50_us":40075,"resp_p95_us":40149,"resp_p99_us":41398,"cpu_jobs_per_s_x100":974690,"io_ops_per_s":22,"jain_x1000":999,"ctx_switches_per_s":188,"cpu_util_pct":99,"sched_overhead_ns_per_s":36054,"system_class":"CPU_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:INTERACTIVE,probe:INTERACTIVE"}
+[sched ] policy -> low_latency
+SCHEDBENCH {"name":"mixed-r5","policy":"low_latency","seconds":10,"cpu_workers":3,"io_workers":1,"samples":911,"wake_p50_us":980,"wake_p95_us":1030,"wake_p99_us":1111,"wake_max_us":1785,"dispatch_p50_us":7,"dispatch_p99_us":87,"resp_p50_us":11018,"resp_p95_us":11071,"resp_p99_us":11152,"cpu_jobs_per_s_x100":963923,"io_ops_per_s":510,"jain_x1000":999,"ctx_switches_per_s":1968,"cpu_util_pct":99,"sched_overhead_ns_per_s":183428,"system_class":"IO_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:IO_BOUND,probe:INTERACTIVE"}
+[sched ] policy -> adaptive
+SCHEDBENCH {"name":"mixed-r5","policy":"adaptive","seconds":10,"cpu_workers":3,"io_workers":1,"samples":903,"wake_p50_us":981,"wake_p95_us":1013,"wake_p99_us":1293,"wake_max_us":18014,"dispatch_p50_us":6,"dispatch_p99_us":154,"resp_p50_us":11020,"resp_p95_us":11058,"resp_p99_us":11404,"cpu_jobs_per_s_x100":970549,"io_ops_per_s":501,"jain_x1000":999,"ctx_switches_per_s":1760,"cpu_util_pct":99,"sched_overhead_ns_per_s":113093,"system_class":"IO_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:IO_BOUND,probe:INTERACTIVE"}
+[sched ] policy -> round_robin
+SCHEDBENCH {"name":"batch-r5","policy":"round_robin","seconds":10,"cpu_workers":4,"io_workers":0,"samples":202,"wake_p50_us":40055,"wake_p95_us":40089,"wake_p99_us":40151,"wake_max_us":46221,"dispatch_p50_us":39080,"dispatch_p99_us":39180,"resp_p50_us":50095,"resp_p95_us":50134,"resp_p99_us":50198,"cpu_jobs_per_s_x100":980673,"io_ops_per_s":0,"jain_x1000":999,"ctx_switches_per_s":144,"cpu_util_pct":99,"sched_overhead_ns_per_s":24783,"system_class":"CPU_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,probe:INTERACTIVE"}
+[sched ] policy -> priority
+SCHEDBENCH {"name":"batch-r5","policy":"priority","seconds":10,"cpu_workers":4,"io_workers":0,"samples":202,"wake_p50_us":40055,"wake_p95_us":40091,"wake_p99_us":40118,"wake_max_us":46992,"dispatch_p50_us":39079,"dispatch_p99_us":39149,"resp_p50_us":50094,"resp_p95_us":50130,"resp_p99_us":50157,"cpu_jobs_per_s_x100":991926,"io_ops_per_s":0,"jain_x1000":999,"ctx_switches_per_s":144,"cpu_util_pct":99,"sched_overhead_ns_per_s":18942,"system_class":"CPU_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,probe:INTERACTIVE"}
+[sched ] policy -> low_latency
+SCHEDBENCH {"name":"batch-r5","policy":"low_latency","seconds":10,"cpu_workers":4,"io_workers":0,"samples":911,"wake_p50_us":978,"wake_p95_us":1016,"wake_p99_us":1115,"wake_max_us":2147,"dispatch_p50_us":7,"dispatch_p99_us":85,"resp_p50_us":11018,"resp_p95_us":11059,"resp_p99_us":11184,"cpu_jobs_per_s_x100":954722,"io_ops_per_s":0,"jain_x1000":999,"ctx_switches_per_s":786,"cpu_util_pct":99,"sched_overhead_ns_per_s":162898,"system_class":"CPU_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,probe:INTERACTIVE"}
+[sched ] policy -> adaptive
+SCHEDBENCH {"name":"batch-r5","policy":"adaptive","seconds":10,"cpu_workers":4,"io_workers":0,"samples":900,"wake_p50_us":981,"wake_p95_us":1017,"wake_p99_us":1284,"wake_max_us":22024,"dispatch_p50_us":7,"dispatch_p99_us":134,"resp_p50_us":11020,"resp_p95_us":11061,"resp_p99_us":11324,"cpu_jobs_per_s_x100":985430,"io_ops_per_s":0,"jain_x1000":999,"ctx_switches_per_s":314,"cpu_util_pct":99,"sched_overhead_ns_per_s":86765,"system_class":"CPU_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,probe:INTERACTIVE"}
+BENCH-END sched
+init: benchmark suite finished (0)
+FuhrerOS: syncing filesystems and powering off
+POWEROFF

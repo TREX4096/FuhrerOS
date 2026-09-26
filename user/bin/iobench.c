@@ -94,10 +94,11 @@ int main(int argc, char **argv)
 	printf("IOBENCH {\"policy\":\"%s\",\"workload\":\"%s\",\"file_mb\":%d,\"cache_blocks\":%d,\"seconds\":%d,"
 	       "\"reads\":%ld,\"mb_per_s_x100\":%lu,\"lat_mean_us\":%lu,\"lat_p50_us\":%lu,\"lat_p99_us\":%lu,"
 	       "\"hit_rate_pm\":%lu,\"readahead_issued\":%lu,\"readahead_used\":%lu,\"evictions\":%lu,"
-	       "\"disk_reads\":%lu,\"cache_cpu_us\":%ld,\"io_class\":\"%s\"}\n",
-	       bs.cache_policy, wl, mb, cap, secs, n, bytes * 100000000000UL / el / 1048576,
+	       "\"disk_reads\":%lu,\"cache_cpu_us\":%ld,\"cache_cpu_ns_per_read\":%ld,\"io_class\":\"%s\"}\n",
+	       /* KiB first: bytes * 1e11 overflowed above ~180 MB (F-118) */
+	       bs.cache_policy, wl, mb, cap, secs, n, (bytes / 1024) * 100000000000UL / el / 1024,
 	       m ? sum / (uint64_t)m / 1000 : 0, m ? lat[m / 2] / 1000 : 0, m ? lat[(m - 1) * 99 / 100] / 1000 : 0,
 	       acc ? bs.cache_hits * 1000 / acc : 0, bs.readahead_blocks, bs.readahead_hits, bs.evictions,
-	       bs.reads, (cpu1 - cpu0) / 1000, bs.io_class);
+	       bs.reads, (cpu1 - cpu0) / 1000, n ? (cpu1 - cpu0) / n : 0, bs.io_class);
 	return 0;
 }
