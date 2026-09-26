@@ -37,5 +37,12 @@ unlink (deferred free while open), rename, truncate, read, write (sparse
 holes read as zeros). `tools/mkffs0` builds the 20 GiB sparse root image
 from the staged root filesystem at build time. No journal (D-111).
 
+**Durability.** The virtio-blk device runs with a write cache (the driver
+negotiates `VIRTIO_BLK_F_FLUSH`, F-123). Data is durable after `sync()` or
+poweroff, which write back dirty buffers and issue a device FLUSH, or after
+the `bflush` thread's next pass (every 2 s). A crash can therefore lose up
+to about 2 s of writes, and without a journal it can leave metadata
+inconsistent. `/proc/blk` reports `write_cache` and the number of flushes.
+
 Tested by `usertest`: create/write/stat, cp, mv, rm, 1 MiB checksummed file
 (indirect blocks), rmdir.

@@ -1,0 +1,6 @@
+{"kind":"FUBENCH","data":{"group":"storage","name":"seq_write","value":188,"unit":"MB/s x100","note":"32 MiB in 64 KiB writes + sync"}}
+{"kind":"FUBENCH","data":{"group":"storage","name":"seq_read","value":31666,"unit":"MB/s x100","note":"cold cache, 64 KiB reads"}}
+{"kind":"FUBENCH","data":{"group":"storage","name":"rand_read","value":6720,"unit":"ops/s","note":"cold cache, 4 KiB"}}
+{"kind":"FUBENCH","data":{"group":"storage","name":"rand_write","value":853,"unit":"ops/s","note":"4 KiB + final sync"}}
+{"kind":"FUBENCH","data":{"group":"storage","name":"small_file_create","value":256,"unit":"files/s","note":"500 x 4 KiB create+write+close, then sync"}}
+{"kind":"FUBENCH","data":{"group":"storage","name":"small_file_delete","value":11472,"unit":"files/s","note":"500 unlinks, then sync"}}

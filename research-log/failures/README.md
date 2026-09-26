@@ -23,5 +23,7 @@
 | [F-119](F-119-evict-behind-metadata.md) | Adaptive cache evict-behind evicted the file's own metadata |
 | [F-120](F-120-system-class-flicker.md) | The system-level class flickered on every profiler window |
 | [F-121](F-121-launcher-blocks-in-irq.md) | Launching an app from the launcher froze the desktop |
+| [F-122](F-122-aging-boost-never-expires.md) | The adaptive scheduler's aging boost never expired |
+| [F-123](F-123-virtio-blk-write-through.md) | Every disk write waited for a host flush (virtio-blk write-through) |
 
 Failures F-001..F-006 of the Linux-based prototype are in linux-prototype/research-log/failures/.

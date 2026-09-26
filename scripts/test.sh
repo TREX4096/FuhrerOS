@@ -4,6 +4,18 @@
 . "$(dirname "$0")/common.sh"
 ISO=$B/fuhreros-test.iso
 [ -f "$ISO" ] || die "missing $ISO — run ./scripts/build.sh"
+# FUHRER_CMDLINE_EXTRA="time=pmtimer": same self-tests with extra kernel options
+if [ -n "${FUHRER_CMDLINE_EXTRA:-}" ]; then
+	D=$B/iso-test-extra
+	rm -rf "$D" && cp -r "$B/iso-test" "$D"
+	sed -i -E "s/^( *cmdline:.*test usertest)$/\1 $FUHRER_CMDLINE_EXTRA/" "$D/boot/limine/limine.conf"
+	xorriso -as mkisofs -R -r -J -b boot/limine/limine-bios-cd.bin -no-emul-boot -boot-load-size 4 \
+		-boot-info-table -hfsplus -apm-block-size 2048 --efi-boot boot/limine/limine-uefi-cd.bin \
+		-efi-boot-part --efi-boot-image --protective-msdos-label "$D" -o "$B/test-extra.iso" 2>/dev/null
+	"$HOME/src/limine/limine" bios-install "$B/test-extra.iso" >/dev/null 2>&1
+	ISO=$B/test-extra.iso
+	log "self-test with extra kernel options: $FUHRER_CMDLINE_EXTRA"
+fi
 LOG=$B/test-serial.log
 detect_accel
 rm -f "$B/disk-test.img"

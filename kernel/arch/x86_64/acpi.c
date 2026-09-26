@@ -7,7 +7,8 @@
 #include "mm.h"
 
 static struct {
-	u32 smi_cmd, pm1a_cnt, pm1b_cnt;
+	u32 smi_cmd, pm1a_cnt, pm1b_cnt, pm_tmr;
+	bool pm_tmr_32;
 	u8 acpi_enable;
 	u16 slp_typa, slp_typb;
 	bool s5_ok;
@@ -127,6 +128,8 @@ static void parse_fadt(struct sdt *t)
 	pm.acpi_enable = f[52];
 	pm.pm1a_cnt = *(u32 *)(f + 64);
 	pm.pm1b_cnt = *(u32 *)(f + 68);
+	pm.pm_tmr = *(u32 *)(f + 76);
+	pm.pm_tmr_32 = t->length >= 116 && (*(u32 *)(f + 112) & (1u << 8)); /* TMR_VAL_EXT */
 	if (t->length >= 129 && (*(u32 *)(f + 112) & (1u << 10))) { /* RESET_REG_SUP */
 		pm.reset_space = f[116];
 		pm.reset_addr = *(u64 *)(f + 120);
@@ -184,6 +187,14 @@ NORETURN void machine_reboot(void)
 
 bool acpi_can_poweroff(void) { return pm.s5_ok; }
 
+/* ACPI power-management timer (3.579545 MHz), 0 if absent. */
+u16 acpi_pm_timer_port(bool *is32)
+{
+	if (is32)
+		*is32 = pm.pm_tmr_32;
+	return (u16)pm.pm_tmr;
+}
+
 void acpi_init(void)
 {
 	for (int i = 0; i < 16; i++)
@@ -213,6 +224,7 @@ void acpi_init(void)
 	KLOG("acpi", "OEM '%s', %u CPU(s), LAPIC %p, %u IOAPIC(s) (first %p gsi %u), ECAM %p",
 	     acpi.oem, acpi.cpu_count, (void *)acpi.lapic_phys, acpi.ioapic_count,
 	     (void *)acpi.ioapics[0].phys, acpi.ioapics[0].gsi_base, (void *)acpi.mcfg_base);
-	KLOG("acpi", "PM1a_CNT 0x%x, S5 %s (SLP_TYPa %u), reset register %s", pm.pm1a_cnt,
-	     pm.s5_ok ? "found" : "NOT found", pm.slp_typa >> 10, pm.reset_ok ? "yes" : "no");
+	KLOG("acpi", "PM1a_CNT 0x%x, S5 %s (SLP_TYPa %u), reset register %s, PM timer 0x%x (%s-bit)",
+	     pm.pm1a_cnt, pm.s5_ok ? "found" : "NOT found", pm.slp_typa >> 10, pm.reset_ok ? "yes" : "no",
+	     pm.pm_tmr, pm.pm_tmr_32 ? "32" : "24");
 }

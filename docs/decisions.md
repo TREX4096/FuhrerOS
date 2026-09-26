@@ -105,3 +105,49 @@ Tasks waiting > 100 ms in the run queue are lifted to priority 4 for one quantum
 ## D-118 — Desktop is the default boot entry
 **Decision:** The first Limine entry boots the desktop; a text-console entry and the self-test entry remain in the menu.
 **Status:** Adopted.
+
+## D-119 — Measure dispatch latency, not only wake-up latency
+**Problem:** Wake-up latency (requested wake → running) differed between boots for the same configuration (44 µs vs 975 µs, F-117).
+**Context:** Sleepers are woken by the 1000 Hz tick. The tick's phase relative to the probe's deadline depends on the per-boot LAPIC calibration.
+**Options:** (A) a one-shot/TSC-deadline timer for precise sleeps; (B) keep the tick and also measure what a policy controls.
+**Evidence:** E-105 vs E-108 (same binary, same configuration, two levels).
+**Decision:** B. The kernel records each task's runnable→running latency (`SCHED_LAST_DISPATCH`). `schedbench` and `deskstress` report it next to wake latency.
+**Reason:** The research question is about scheduling policies, and timer granularity is policy-independent. A is a larger change to the timer subsystem.
+**Tradeoffs:** Sleep precision stays at 1 ms.
+**Expected impact:** Comparable latency numbers across boots.
+**Validation:** E-109..E-120 dispatch columns are consistent across suites (A4 6 µs, sched B3 6–7 µs).
+**Status:** Adopted. (A) remains future work.
+
+## D-120 — ACPI power-off without an AML interpreter
+**Problem:** Power-off worked only through QEMU's isa-debug-exit port; M18 needs a real power-off and reset.
+**Options:** (A) port ACPICA; (B) write an AML interpreter; (C) read `\_S5_` from the DSDT bytes and use the FADT registers.
+**Decision:** C: FADT (PM1a/PM1b control, SMI command, reset register, PM timer) plus a byte scan for the `\_S5_` package. Reset tries the FADT reset register, then 0xCF9, then the 8042, then a triple fault.
+**Tradeoffs:** Firmware whose `\_S5_` is computed by AML methods will not power off. The fallback is the debug-exit port, then halt.
+**Validation:** `scripts/test-power.sh poweroff|reboot` passes without the debug-exit device (QEMU exit code 0). Real hardware: NOT RUN.
+**Status:** Adopted.
+
+## D-121 — Input handlers never block; blocking desktop work is deferred
+**Problem:** Keyboard/mouse events are processed in interrupt context, but the launcher needs to spawn processes, read directories and switch policies (F-121).
+**Options:** (A) a user-space shell process that owns the launcher; (B) a work queue run by the compositor thread.
+**Decision:** B (`defer()` in the compositor). Interrupt-side code only updates state and queues work.
+**Tradeoffs:** Actions run up to one compositor wake-up later (under a frame).
+**Validation:** F-121 regression session (launcher → Settings, Ctrl+Alt+T, `notify`, Super+F).
+**Status:** Adopted.
+
+## D-122 — Desktop configuration and theme live in the kernel, apps pull them
+**Problem:** Dark/light themes, accents and touchpad options must reach the compositor, the input layer and every app.
+**Decision:** One `struct fu_desk_cfg` in the compositor (`DESK_GET_CFG` / `DESK_SET_CFG`). Apps get colours with `DESK_THEME` and are told to redraw with a `WEV_THEME` event. Touchpad options go to the recognizer through `input_set_options`.
+**Tradeoffs:** Settings are not saved across reboots yet (no config file). **UNKNOWN - REQUIRES VERIFICATION** whether users expect persistence first.
+**Status:** Adopted.
+
+## D-123 — The desktop shows a smoothed system class
+**Problem:** The system-level class flickered between IDLE and INTERACTIVE on every 100 ms window (F-120).
+**Decision:** Apply the task-level hysteresis to the system class (`profiler_stable_class`). The desktop, notifications and Control Center show it. `/proc/adapt` keeps the instantaneous `system_class`, which the transition experiments measured, and adds `stable_class`.
+**Validation:** 3 transitions in 39 s of light use (was 173 in 84 s).
+**Status:** Adopted.
+
+## D-124 — Calibration fallback: ACPI PM timer
+**Problem:** TSC/LAPIC calibration used only PIT channel 2. Some recent machines lack a working 8254 (docs/real-hardware.md).
+**Decision:** Bound the PIT wait. If it does not complete, or if `time=pmtimer` is on the command line, calibrate against the ACPI PM timer (3.579545 MHz, port from the FADT). The source is logged.
+**Validation:** `FUHRER_CMDLINE_EXTRA=time=pmtimer ./scripts/test.sh` passes every self-test in QEMU. The PM timer gave TSC 2798.4 MHz, the PIT 2792.2 MHz (single boots, 0.22 % apart). Real hardware: NOT RUN.
+**Status:** Adopted.

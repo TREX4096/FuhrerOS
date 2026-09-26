@@ -1,0 +1,481 @@
+{
+ "config": {
+  "experiment": "E-121",
+  "suite": "micro",
+  "date": "2026-09-26T18:04:15Z",
+  "commit": "fceac52-dirty",
+  "kernel": "FuhrerOS 0.1.0 (own kernel)",
+  "host": "Linux 6.6.87.2-microsoft-standard-WSL2 x86_64",
+  "host_cpu": "AMD Ryzen 5 7520U with Radeon Graphics",
+  "host_note": "Windows 11 -> WSL2 -> QEMU; KVM nested inside WSL2 when accel=kvm",
+  "qemu": "QEMU emulator version 10.2.1 (Debian 1:10.2.1+ds-1ubuntu3.1)",
+  "accel": "kvm",
+  "vcpus": 4,
+  "vcpus_used_by_kernel": 1,
+  "memory_mb": 4096,
+  "disk": "virtio-blk, FFS0 raw image, host cache=writeback",
+  "network": "virtio-net, QEMU user-mode (slirp)",
+  "suite_script": "rootfs/etc/bench/micro.sh"
+ },
+ "fubench": [
+  {
+   "group": "cpu",
+   "name": "prime",
+   "value": 61,
+   "unit": "ms",
+   "note": "25997 primes below 300000 (trial division)"
+  },
+  {
+   "group": "cpu",
+   "name": "matrix",
+   "value": 7,
+   "unit": "ms",
+   "note": "4 x 160x160 int32 multiply, checksum 4988"
+  },
+  {
+   "group": "cpu",
+   "name": "compilation",
+   "value": -1,
+   "unit": "",
+   "status": "NOT RUN",
+   "note": "no compiler has been ported to FuhrerOS"
+  },
+  {
+   "group": "mem",
+   "name": "alloc_free",
+   "value": 17,
+   "unit": "ns/pair",
+   "note": "malloc 16..4111 B + free, 64 live objects"
+  },
+  {
+   "group": "mem",
+   "name": "copy",
+   "value": 6373,
+   "unit": "MB/s",
+   "note": "memcpy 4 MiB x 32 (libfu memcpy, no SSE)"
+  },
+  {
+   "group": "mem",
+   "name": "working_set_16K",
+   "value": 12,
+   "unit": "ns/10 access",
+   "note": "dependent random loads (end 1990)"
+  },
+  {
+   "group": "mem",
+   "name": "working_set_256K",
+   "value": 35,
+   "unit": "ns/10 access",
+   "note": "dependent random loads (end 32867)"
+  },
+  {
+   "group": "mem",
+   "name": "working_set_4096K",
+   "value": 715,
+   "unit": "ns/10 access",
+   "note": "dependent random loads (end 611571)"
+  },
+  {
+   "group": "mem",
+   "name": "working_set_32768K",
+   "value": 1652,
+   "unit": "ns/10 access",
+   "note": "dependent random loads (end 7222772)"
+  },
+  {
+   "group": "storage",
+   "name": "seq_write",
+   "value": 181,
+   "unit": "MB/s x100",
+   "note": "32 MiB in 64 KiB writes + sync"
+  },
+  {
+   "group": "storage",
+   "name": "seq_read",
+   "value": 36609,
+   "unit": "MB/s x100",
+   "note": "cold cache, 64 KiB reads"
+  },
+  {
+   "group": "storage",
+   "name": "rand_read",
+   "value": 6156,
+   "unit": "ops/s",
+   "note": "cold cache, 4 KiB"
+  },
+  {
+   "group": "storage",
+   "name": "rand_write",
+   "value": 842,
+   "unit": "ops/s",
+   "note": "4 KiB + final sync"
+  },
+  {
+   "group": "storage",
+   "name": "small_file_create",
+   "value": 253,
+   "unit": "files/s",
+   "note": "500 x 4 KiB create+write+close, then sync"
+  },
+  {
+   "group": "storage",
+   "name": "small_file_delete",
+   "value": 7086,
+   "unit": "files/s",
+   "note": "500 unlinks, then sync"
+  },
+  {
+   "group": "net",
+   "name": "tcp_throughput",
+   "value": 16811,
+   "unit": "MB/s x100",
+   "note": "32 MiB to the guest's own IP (loopback path of the own stack)"
+  },
+  {
+   "group": "net",
+   "name": "tcp_rtt_p50",
+   "value": 1,
+   "unit": "us",
+   "note": "1-byte ping-pong x 2000, p99 4 us"
+  },
+  {
+   "group": "net",
+   "name": "udp_packet_rate",
+   "value": 3676465,
+   "unit": "packets/s",
+   "note": "64 B datagrams: 20000 sent, 32 received"
+  },
+  {
+   "group": "cpu",
+   "name": "prime",
+   "value": 70,
+   "unit": "ms",
+   "note": "25997 primes below 300000 (trial division)"
+  },
+  {
+   "group": "cpu",
+   "name": "matrix",
+   "value": 9,
+   "unit": "ms",
+   "note": "4 x 160x160 int32 multiply, checksum 4988"
+  },
+  {
+   "group": "cpu",
+   "name": "compilation",
+   "value": -1,
+   "unit": "",
+   "status": "NOT RUN",
+   "note": "no compiler has been ported to FuhrerOS"
+  },
+  {
+   "group": "mem",
+   "name": "alloc_free",
+   "value": 21,
+   "unit": "ns/pair",
+   "note": "malloc 16..4111 B + free, 64 live objects"
+  },
+  {
+   "group": "mem",
+   "name": "copy",
+   "value": 5980,
+   "unit": "MB/s",
+   "note": "memcpy 4 MiB x 32 (libfu memcpy, no SSE)"
+  },
+  {
+   "group": "mem",
+   "name": "working_set_16K",
+   "value": 13,
+   "unit": "ns/10 access",
+   "note": "dependent random loads (end 1990)"
+  },
+  {
+   "group": "mem",
+   "name": "working_set_256K",
+   "value": 34,
+   "unit": "ns/10 access",
+   "note": "dependent random loads (end 32867)"
+  },
+  {
+   "group": "mem",
+   "name": "working_set_4096K",
+   "value": 573,
+   "unit": "ns/10 access",
+   "note": "dependent random loads (end 611571)"
+  },
+  {
+   "group": "mem",
+   "name": "working_set_32768K",
+   "value": 1503,
+   "unit": "ns/10 access",
+   "note": "dependent random loads (end 7222772)"
+  },
+  {
+   "group": "storage",
+   "name": "seq_write",
+   "value": 190,
+   "unit": "MB/s x100",
+   "note": "32 MiB in 64 KiB writes + sync"
+  },
+  {
+   "group": "storage",
+   "name": "seq_read",
+   "value": 34311,
+   "unit": "MB/s x100",
+   "note": "cold cache, 64 KiB reads"
+  },
+  {
+   "group": "storage",
+   "name": "rand_read",
+   "value": 5210,
+   "unit": "ops/s",
+   "note": "cold cache, 4 KiB"
+  },
+  {
+   "group": "storage",
+   "name": "rand_write",
+   "value": 803,
+   "unit": "ops/s",
+   "note": "4 KiB + final sync"
+  },
+  {
+   "group": "storage",
+   "name": "small_file_create",
+   "value": 227,
+   "unit": "files/s",
+   "note": "500 x 4 KiB create+write+close, then sync"
+  },
+  {
+   "group": "storage",
+   "name": "small_file_delete",
+   "value": 10666,
+   "unit": "files/s",
+   "note": "500 unlinks, then sync"
+  },
+  {
+   "group": "net",
+   "name": "tcp_throughput",
+   "value": 14991,
+   "unit": "MB/s x100",
+   "note": "32 MiB to the guest's own IP (loopback path of the own stack)"
+  },
+  {
+   "group": "net",
+   "name": "tcp_rtt_p50",
+   "value": 2,
+   "unit": "us",
+   "note": "1-byte ping-pong x 2000, p99 7 us"
+  },
+  {
+   "group": "net",
+   "name": "udp_packet_rate",
+   "value": 2978681,
+   "unit": "packets/s",
+   "note": "64 B datagrams: 20000 sent, 32 received"
+  },
+  {
+   "group": "cpu",
+   "name": "prime",
+   "value": 70,
+   "unit": "ms",
+   "note": "25997 primes below 300000 (trial division)"
+  },
+  {
+   "group": "cpu",
+   "name": "matrix",
+   "value": 9,
+   "unit": "ms",
+   "note": "4 x 160x160 int32 multiply, checksum 4988"
+  },
+  {
+   "group": "cpu",
+   "name": "compilation",
+   "value": -1,
+   "unit": "",
+   "status": "NOT RUN",
+   "note": "no compiler has been ported to FuhrerOS"
+  },
+  {
+   "group": "mem",
+   "name": "alloc_free",
+   "value": 17,
+   "unit": "ns/pair",
+   "note": "malloc 16..4111 B + free, 64 live objects"
+  },
+  {
+   "group": "mem",
+   "name": "copy",
+   "value": 5101,
+   "unit": "MB/s",
+   "note": "memcpy 4 MiB x 32 (libfu memcpy, no SSE)"
+  },
+  {
+   "group": "mem",
+   "name": "working_set_16K",
+   "value": 12,
+   "unit": "ns/10 access",
+   "note": "dependent random loads (end 1990)"
+  },
+  {
+   "group": "mem",
+   "name": "working_set_256K",
+   "value": 34,
+   "unit": "ns/10 access",
+   "note": "dependent random loads (end 32867)"
+  },
+  {
+   "group": "mem",
+   "name": "working_set_4096K",
+   "value": 1098,
+   "unit": "ns/10 access",
+   "note": "dependent random loads (end 611571)"
+  },
+  {
+   "group": "mem",
+   "name": "working_set_32768K",
+   "value": 1570,
+   "unit": "ns/10 access",
+   "note": "dependent random loads (end 7222772)"
+  },
+  {
+   "group": "storage",
+   "name": "seq_write",
+   "value": 182,
+   "unit": "MB/s x100",
+   "note": "32 MiB in 64 KiB writes + sync"
+  },
+  {
+   "group": "storage",
+   "name": "seq_read",
+   "value": 39755,
+   "unit": "MB/s x100",
+   "note": "cold cache, 64 KiB reads"
+  },
+  {
+   "group": "storage",
+   "name": "rand_read",
+   "value": 5196,
+   "unit": "ops/s",
+   "note": "cold cache, 4 KiB"
+  },
+  {
+   "group": "storage",
+   "name": "rand_write",
+   "value": 855,
+   "unit": "ops/s",
+   "note": "4 KiB + final sync"
+  },
+  {
+   "group": "storage",
+   "name": "small_file_create",
+   "value": 230,
+   "unit": "files/s",
+   "note": "500 x 4 KiB create+write+close, then sync"
+  },
+  {
+   "group": "storage",
+   "name": "small_file_delete",
+   "value": 5562,
+   "unit": "files/s",
+   "note": "500 unlinks, then sync"
+  },
+  {
+   "group": "net",
+   "name": "tcp_throughput",
+   "value": 10640,
+   "unit": "MB/s x100",
+   "note": "32 MiB to the guest's own IP (loopback path of the own stack)"
+  },
+  {
+   "group": "net",
+   "name": "tcp_rtt_p50",
+   "value": 2,
+   "unit": "us",
+   "note": "1-byte ping-pong x 2000, p99 4 us"
+  },
+  {
+   "group": "net",
+   "name": "udp_packet_rate",
+   "value": 2441774,
+   "unit": "packets/s",
+   "note": "64 B datagrams: 20000 sent, 32 received"
+  },
+  {
+   "group": "desktop",
+   "name": "window_create",
+   "value": 1423,
+   "unit": "us",
+   "note": "open 400x300 + fill + present, avg of 20"
+  },
+  {
+   "group": "desktop",
+   "name": "launch_terminal",
+   "value": 6,
+   "unit": "ms",
+   "note": "spawn -> window exists; mean of 3, best 1 ms"
+  },
+  {
+   "group": "desktop",
+   "name": "launch_files",
+   "value": 5,
+   "unit": "ms",
+   "note": "spawn -> window exists; mean of 3, best 1 ms"
+  },
+  {
+   "group": "desktop",
+   "name": "launch_editor",
+   "value": 10,
+   "unit": "ms",
+   "note": "spawn -> window exists; mean of 3, best 2 ms"
+  },
+  {
+   "group": "desktop",
+   "name": "launch_browser",
+   "value": 6,
+   "unit": "ms",
+   "note": "spawn -> window exists; mean of 3, best 2 ms"
+  },
+  {
+   "group": "desktop",
+   "name": "launch_settings",
+   "value": 4,
+   "unit": "ms",
+   "note": "spawn -> window exists; mean of 3, best 3 ms"
+  },
+  {
+   "group": "desktop",
+   "name": "launch_control_center",
+   "value": 4,
+   "unit": "ms",
+   "note": "spawn -> window exists; mean of 3, best 2 ms"
+  },
+  {
+   "group": "desktop",
+   "name": "workspace_switch",
+   "value": 1349,
+   "unit": "us",
+   "note": "switch request -> composed frame, avg of 10"
+  },
+  {
+   "group": "desktop",
+   "name": "compose_avg",
+   "value": 1763,
+   "unit": "us",
+   "note": "average full composition, whole run"
+  },
+  {
+   "group": "desktop",
+   "name": "compose_max",
+   "value": 9492,
+   "unit": "us",
+   "note": "worst composition, whole run"
+  },
+  {
+   "group": "desktop",
+   "name": "terminal_keystroke_latency",
+   "value": -1,
+   "unit": "",
+   "status": "NOT RUN",
+   "note": "needs injected keyboard input; not measurable from inside the guest yet"
+  }
+ ]
+}

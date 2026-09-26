@@ -1,0 +1,64 @@
+{
+ "config": {
+  "experiment": "E-125",
+  "suite": "wdebug",
+  "date": "2026-09-26T18:11:53Z",
+  "commit": "fceac52-dirty",
+  "kernel": "FuhrerOS 0.1.0 (own kernel)",
+  "host": "Linux 6.6.87.2-microsoft-standard-WSL2 x86_64",
+  "host_cpu": "AMD Ryzen 5 7520U with Radeon Graphics",
+  "host_note": "Windows 11 -> WSL2 -> QEMU; KVM nested inside WSL2 when accel=kvm",
+  "qemu": "QEMU emulator version 10.2.1 (Debian 1:10.2.1+ds-1ubuntu3.1)",
+  "accel": "kvm",
+  "vcpus": 4,
+  "vcpus_used_by_kernel": 1,
+  "memory_mb": 4096,
+  "disk": "virtio-blk, FFS0 raw image, host cache=writeback",
+  "network": "virtio-net, QEMU user-mode (slirp)",
+  "suite_script": "rootfs/etc/bench/wdebug.sh"
+ },
+ "fubench": [
+  {
+   "group": "storage",
+   "name": "seq_write",
+   "value": 205,
+   "unit": "MB/s x100",
+   "note": "32 MiB in 64 KiB writes + sync"
+  },
+  {
+   "group": "storage",
+   "name": "seq_read",
+   "value": 42086,
+   "unit": "MB/s x100",
+   "note": "cold cache, 64 KiB reads"
+  },
+  {
+   "group": "storage",
+   "name": "rand_read",
+   "value": 6034,
+   "unit": "ops/s",
+   "note": "cold cache, 4 KiB"
+  },
+  {
+   "group": "storage",
+   "name": "rand_write",
+   "value": 866,
+   "unit": "ops/s",
+   "note": "4 KiB + final sync"
+  },
+  {
+   "group": "storage",
+   "name": "small_file_create",
+   "value": 259,
+   "unit": "files/s",
+   "note": "500 x 4 KiB create+write+close, then sync"
+  },
+  {
+   "group": "storage",
+   "name": "small_file_delete",
+   "value": 10062,
+   "unit": "files/s",
+   "note": "500 unlinks, then sync"
+  }
+ ]
+}

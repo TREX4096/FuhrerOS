@@ -312,9 +312,12 @@ void brelse(struct buf *b)
 	irq_restore(f);
 }
 
-void bsync(struct blkdev *d)
+/* Write back dirty buffers, then make them durable with a device flush.
+ * flush_if_idle: flush even when nothing was written (explicit sync()). */
+static void bsync_flush(struct blkdev *d, bool flush_if_idle)
 {
 	u64 f = irq_save();
+	u64 wrote = 0;
 	for (;;) {
 		struct buf *dirty = NULL;
 		list_for_each(it, &lru) {
@@ -329,9 +332,18 @@ void bsync(struct blkdev *d)
 		dirty->refcnt++; /* the list may change while we sleep in I/O */
 		writeback(dirty);
 		dirty->refcnt--;
+		wrote++;
 	}
 	irq_restore(f);
+	if (wrote || flush_if_idle) {
+		if (d)
+			blk_flush(d);
+		else
+			blk_flush_all();
+	}
 }
+
+void bsync(struct blkdev *d) { bsync_flush(d, true); }
 
 void bcache_drop(void)
 {
@@ -410,7 +422,7 @@ static void flusher(void *arg)
 {
 	for (;;) {
 		sleep_ms(2000);
-		bsync(NULL);
+		bsync_flush(NULL, false);
 	}
 }
 

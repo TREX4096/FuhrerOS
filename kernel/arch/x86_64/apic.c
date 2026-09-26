@@ -134,19 +134,58 @@ static void pit_wait_start(u16 count)
 
 static bool pit_done(void) { return inb(0x61) & 0x20; }
 
+/* Fallback reference: the ACPI PM timer (3.579545 MHz; 35795 ticks = 10 ms).
+ * Some recent machines no longer provide a working 8254 PIT. */
+static bool pm_wait_10ms(u16 port, bool is32)
+{
+	u32 mask = is32 ? 0xFFFFFFFFu : 0xFFFFFFu;
+	u32 start = inl(port) & mask;
+	for (u64 spins = 0; spins < 100000000ULL; spins++) {
+		u32 now = inl(port) & mask;
+		if (((now - start) & mask) >= 35795)
+			return true;
+	}
+	return false;
+}
+
+static const char *calib_source = "PIT channel 2";
+
 void time_init(void)
 {
-	/* 10 ms at 1.193182 MHz = 11932 ticks. Take the median of 3 runs. */
+	/* 10 ms reference interval, median of 3 runs. Reference: PIT channel 2
+	 * (1.193182 MHz, 11932 ticks); if it never completes, or with the
+	 * command line option time=pmtimer, the ACPI PM timer. */
 	u64 tsc_s[3], lapic_s[3];
+	bool is32;
+	u16 pmt = acpi_pm_timer_port(&is32);
+	bool use_pm = pmt && boot_cmdline_has("time=pmtimer");
 	lw(LAPIC_TIMER_DIV, 0x3); /* divide by 16 */
 	for (int k = 0; k < 3; k++) {
 		lw(LAPIC_LVT_TIMER, 1u << 16); /* masked, one-shot */
-		pit_wait_start(11932);
-		lw(LAPIC_TIMER_INIT, 0xFFFFFFFF);
-		u64 t0 = rdtsc();
-		while (!pit_done())
-			cpu_pause();
-		u64 t1 = rdtsc();
+		bool ok = false;
+		u64 t0 = 0, t1 = 0;
+		if (!use_pm) {
+			pit_wait_start(11932);
+			lw(LAPIC_TIMER_INIT, 0xFFFFFFFF);
+			t0 = rdtsc();
+			/* ~10 ms expected; give up after ~2^34 TSC cycles (seconds) */
+			while (!(ok = pit_done()) && rdtsc() - t0 < (1ULL << 34))
+				cpu_pause();
+			t1 = rdtsc();
+			if (!ok && pmt) {
+				KLOG("time", "PIT channel 2 did not count; using the ACPI PM timer");
+				use_pm = true;
+			}
+		}
+		if (use_pm) {
+			lw(LAPIC_TIMER_INIT, 0xFFFFFFFF);
+			t0 = rdtsc();
+			ok = pm_wait_10ms(pmt, is32);
+			t1 = rdtsc();
+			calib_source = "ACPI PM timer";
+		}
+		if (!ok)
+			panic("time: no working calibration reference (PIT or ACPI PM timer)");
 		u32 cur = lr(LAPIC_TIMER_CUR);
 		tsc_s[k] = (t1 - t0) * 100;
 		lapic_s[k] = (u64)(0xFFFFFFFF - cur) * 100;
@@ -160,8 +199,8 @@ void time_init(void)
 	lapic_ticks_per_sec = lapic_s[1];
 	tsc_boot = rdtsc();
 	ns_mult = div128_64(1000000000ULL >> 32, 1000000000ULL << 32, tsc_hz);
-	KLOG("time", "TSC %lu.%03lu MHz, LAPIC timer %lu kHz (div 16)", tsc_hz / 1000000,
-	     (tsc_hz / 1000) % 1000, lapic_ticks_per_sec / 1000);
+	KLOG("time", "TSC %lu.%03lu MHz, LAPIC timer %lu kHz (div 16), calibrated with the %s",
+	     tsc_hz / 1000000, (tsc_hz / 1000) % 1000, lapic_ticks_per_sec / 1000, calib_source);
 }
 
 u64 time_ns(void)

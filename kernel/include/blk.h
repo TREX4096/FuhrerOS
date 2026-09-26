@@ -13,6 +13,7 @@ struct blk_req {
 	u32 count;		/* sectors */
 	paddr_t buf;		/* physically contiguous DMA buffer */
 	bool write;
+	bool flush;		/* cache flush (no data): durability barrier */
 	volatile bool done;
 	int status;
 	void (*complete)(struct blk_req *r);	/* called from IRQ context */
@@ -31,7 +32,10 @@ struct blkdev {
 	/* stats */
 	u64 reads, writes, read_bytes, write_bytes;
 	u64 busy_ns;
+	u64 read_ns, write_ns;	/* submit -> completion, summed per direction */
 	u32 inflight, max_inflight;
+	bool write_cache;	/* device has a volatile write cache (needs flushes) */
+	u64 flushes;
 };
 
 int blk_register(struct blkdev *d);
@@ -39,6 +43,9 @@ struct blkdev *blk_get(const char *name);
 /* Synchronous helper: submit and sleep until done. */
 int blk_rw(struct blkdev *d, u64 sector, u32 count, paddr_t buf, bool write);
 int blk_submit(struct blkdev *d, struct blk_req *r);
+/* Make completed writes durable (no-op for write-through devices). */
+int blk_flush(struct blkdev *d);
+void blk_flush_all(void);
 
 /* ---- buffer cache ---- */
 struct buf {

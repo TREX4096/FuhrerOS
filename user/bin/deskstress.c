@@ -181,9 +181,28 @@ int main(int argc, char **argv)
 	thread_create(net_src, NULL, 0);
 	sleep_ms((uint64_t)secs * 1000 / 2);
 	char cls[24] = "";
-	static char ad[8192];
+	static char ad[8192], tk[16384];
 	read_file("/proc/adapt", ad, sizeof(ad));
 	text_value(ad, "system_class", cls, sizeof(cls));
+	/* this process's threads at mid-run: tid:prio:class (/proc/tasks columns
+	 * TID PID NAME STATE PRIO QMS CLASS ...) */
+	static char tcls[512];
+	int tl = 0;
+	read_file("/proc/tasks", tk, sizeof(tk));
+	char *save, *l = strtok_r(tk, "\n", &save);
+	while (l) {
+		char f[8][24];
+		int nf = 0;
+		char *s2, *w = strtok_r(l, " ", &s2);
+		while (w && nf < 8) {
+			strlcpy(f[nf++], w, sizeof(f[0]));
+			w = strtok_r(NULL, " ", &s2);
+		}
+		if (nf >= 7 && atoi(f[1]) == getpid() && tl < (int)sizeof(tcls) - 40)
+			tl += snprintf(tcls + tl, sizeof(tcls) - (size_t)tl, "%s%s:%s:%s", tl ? "," : "", f[0], f[4],
+				       f[6]);
+		l = strtok_r(NULL, "\n", &save);
+	}
 	sleep_ms((uint64_t)secs * 1000 - (uint64_t)secs * 1000 / 2);
 	stop = true;
 	uint64_t el = uptime_ns() - t0;
@@ -203,11 +222,11 @@ int main(int argc, char **argv)
 	       "\"dispatch_p50_us\":%lu,\"dispatch_p99_us\":%lu,\"wake_p50_us\":%lu,\"wake_p99_us\":%lu,"
 	       "\"build_jobs_per_s_x100\":%lu,\"copy_mb_per_s_x100\":%lu,\"web_req_per_s_x100\":%lu,"
 	       "\"web_failures\":%lu,\"net_mb_per_s_x100\":%lu,\"ctx_switches_per_s\":%lu,\"system_class\":\"%s\","
-	       "\"media\":\"NOT RUN\"}\n",
+	       "\"threads\":\"%s\",\"media\":\"NOT RUN\"}\n",
 	       name, pol, secs, n, pct(disp, n, 50) / 1000, pct(disp, n, 99) / 1000, pct(wake, n, 50) / 1000,
 	       pct(wake, n, 99) / 1000, build_jobs * 100000000000UL / el,
 	       copy_bytes / 1024 * 100000000000UL / el / 1024, web_reqs * 100000000000UL / el, web_fail,
-	       net_bytes / 1024 * 100000000000UL / el / 1024, cs, cls);
+	       net_bytes / 1024 * 100000000000UL / el / 1024, cs, cls, tcls);
 	flush();
 	return 0;
 }

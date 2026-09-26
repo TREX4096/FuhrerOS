@@ -283,6 +283,10 @@ def main():
             md.append(f"| {label} | " + " | ".join(cells) + " |")
         md.append("| system class (mid-run) | " + " | ".join(
             "/".join(sorted({d.get("system_class", "?") for d in g[p]})) for p in pols) + " |")
+        if any(d.get("threads") for d in ds):
+            md += ["", "Threads of the benchmark at mid-run (`tid:priority:class`, first run of each policy):", ""]
+            for p in pols:
+                md.append(f"- {LABEL.get(p, p)}: `{g[p][0].get('threads', '')}`")
         md += ["", "Media playback: NOT RUN (no audio/video path). The build workload is a CPU-bound proxy: "
                "no compiler has been ported.", ""]
         result["deskstress"] = ds

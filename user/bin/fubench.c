@@ -329,17 +329,24 @@ static void bench_net(void)
 		sleep_ms(1);
 	int u = socket(AF_INET, SOCK_DGRAM);
 	char pkt[64] = "fubench";
+	/* UDP has no flow control: an unpaced sender only measures how fast
+	 * datagrams can be dropped (a first version reported 20000 sent, 32
+	 * received). Keep at most 16 in flight and report the delivered rate. */
 	enum { NP = 20000 };
 	uint64_t t0 = uptime_ns();
 	int sent = 0;
-	for (int i = 0; i < NP; i++)
+	for (int i = 0; i < NP; i++) {
+		for (int spin = 0; (uint64_t)sent - udp_got >= 16 && spin < 100000; spin++)
+			yield();
 		sent += sendto(u, pkt, sizeof(pkt), ni.ip, 7103) > 0;
-	uint64_t dt = uptime_ns() - t0;
-	sleep_ms(600); /* let the receiver drain and time out */
+	}
+	for (int i = 0; i < 100 && udp_got < (uint64_t)sent; i++)
+		sleep_ms(1);
+	uint64_t dt = uptime_ns() - t0, got = udp_got;
 	close(u);
-	char note[80];
-	snprintf(note, sizeof(note), "64 B datagrams: %d sent, %lu received", sent, udp_got);
-	out("net", "udp_packet_rate", (long)((uint64_t)sent * 1000000000ULL / (dt ? dt : 1)), "packets/s", note);
+	char note[96];
+	snprintf(note, sizeof(note), "64 B datagrams, <=16 in flight: %d sent, %lu delivered", sent, got);
+	out("net", "udp_delivered_rate", (long)(got * 1000000000ULL / (dt ? dt : 1)), "packets/s", note);
 }
 
 /* ---- desktop ---- */

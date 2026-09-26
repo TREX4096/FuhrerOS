@@ -11,7 +11,7 @@
 //   CPU_BOUND      20    30 ms  no             fewer context switches
 //
 // Anti-starvation: a task waiting more than 100 ms in the run queue is
-// temporarily lifted to the INTERACTIVE level (4) for one quantum, so no
+// temporarily lifted to the INTERACTIVE level (4) for one 3 ms quantum, so no
 // task can be starved by a higher class that never blocks. (Lifting only
 // to 12 left IDLE/MIXED tasks starving behind non-blocking IO_BOUND tasks
 // for seconds: F-115.)
@@ -75,6 +75,11 @@ class Adaptive final : public Policy {
 		if (cur->ticks_left)
 			cur->ticks_left--;
 		if (cur->ticks_left == 0) {
+			/* Quantum over: back to the class parameters. This also ends an
+			 * aging boost - before F-122 the refill here meant requeue()
+			 * never re-ran setup(), so a boosted task that never blocks
+			 * kept the boost forever. */
+			setup(cur);
 			cur->ticks_left = cur->quantum_ticks;
 			return q_.best_prio() <= cur->prio;
 		}
@@ -104,6 +109,8 @@ class Adaptive final : public Policy {
 		for (int i = 0; i < n; i++) {
 			q_.remove(boost[i]);
 			boost[i]->prio = kBoostPrio;
+			/* one short (interactive-sized) quantum at the boosted level */
+			boost[i]->ticks_left = scaled(params[CLASS_INTERACTIVE].quantum);
 			q_.push_back(boost[i]);
 		}
 	}

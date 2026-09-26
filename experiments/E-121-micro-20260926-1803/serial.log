@@ -1,0 +1,157 @@
+
+FuhrerOS: kernel entry reached (serial up)
+
+================================
+        FUHREROS KERNEL
+================================
+
+Architecture : x86_64
+Bootloader   : Limine 11.4.1
+Kernel       : FuhrerOS 0.1.0 (from-scratch)
+Status       : BOOTED
+
+[boot  ] bootloader: Limine 11.4.1 (BIOS firmware)
+[boot  ] cmdline: 'bench=micro'
+[boot  ] kernel: phys 0x000000007fd0d000 virt 0xffffffff80000000 size 1056 KiB
+[boot  ] hhdm offset: 0xffff800000000000, rsdp: 0x00000000000f5260
+[boot  ] memory map (25 entries):
+[boot  ]   0000000000001000-0000000000061000 bootloader     384 KiB
+[boot  ]   0000000000061000-000000000009f000 usable         248 KiB
+[boot  ]   000000000009fc00-00000000000a0000 reserved       1 KiB
+[boot  ]   00000000000f0000-00000000000f5000 reserved       20 KiB
+[boot  ]   00000000000f5000-00000000000f6000 reserved       4 KiB
+[boot  ]   00000000000f6000-0000000000100000 reserved       40 KiB
+[boot  ]   0000000000100000-000000007f7d2000 usable         2087752 KiB
+[boot  ]   000000007f7d2000-000000007fcff000 kernel+modules 5300 KiB
+[boot  ]   000000007fcff000-000000007fd00000 bootloader     4 KiB
+[boot  ]   000000007fd00000-000000007fd03000 usable         12 KiB
+[boot  ]   000000007fd03000-000000007fd0d000 bootloader     40 KiB
+[boot  ]   000000007fd0d000-000000007fe15000 kernel+modules 1056 KiB
+[boot  ]   000000007fe15000-000000007ff38000 bootloader     1164 KiB
+[boot  ]   000000007ff38000-000000007ff55000 usable         116 KiB
+[boot  ]   000000007ff55000-000000007ffdc000 bootloader     540 KiB
+[boot  ]   000000007ffdc000-000000007ffe0000 reserved       16 KiB
+[boot  ]   000000007ffe0000-000000007ffe3000 reserved       12 KiB
+[boot  ]   000000007ffe3000-0000000080000000 reserved       116 KiB
+[boot  ]   00000000b0000000-00000000c0000000 reserved       262144 KiB
+[boot  ]   00000000fd000000-00000000fd3e8000 framebuffer    4000 KiB
+[boot  ]   00000000fed1c000-00000000fed20000 reserved       16 KiB
+[boot  ]   00000000feffc000-00000000ff000000 reserved       16 KiB
+[boot  ]   00000000fffc0000-0000000100000000 reserved       256 KiB
+[boot  ]   0000000100000000-0000000180000000 usable         2097152 KiB
+[boot  ]   000000fd00000000-0000010000000000 reserved       12582912 KiB
+[boot  ] usable memory: 4087 MiB
+[boot  ] framebuffer: 1280x800 32bpp pitch 5120 at phys 0x00000000fd000000
+[boot  ] module: /boot/initrd.tar (5427200 bytes) 'initrd'
+[boot  ] cpu: AuthenticAMD / AMD Ryzen 5 7520U with Radeon Graphics         
+[pmm   ] 1572864 frames tracked, 1046210 free (4086 MiB), bitmap 192 KiB at 0x0000000000100000
+[vmm   ] kernel page tables active (pml4 0x0000000000130000, NX on)
+[heap  ] slab classes 16..2048 B, large allocations from vmalloc
+[pmm   ] reclaimed 2132 KiB of bootloader memory
+[acpi  ] OEM 'BOCHS ', 4 CPU(s), LAPIC 0x00000000fee00000, 1 IOAPIC(s) (first 0x00000000fec00000 gsi 0), ECAM 0x00000000b0000000
+[acpi  ] PM1a_CNT 0x604, S5 found (SLP_TYPa 0), reset register yes
+[apic  ] local APIC id 0 enabled
+[apic  ] I/O APIC with 24 inputs
+[time  ] TSC 2792.255 MHz, LAPIC timer 62611 kHz (div 16)
+[time  ] LAPIC periodic timer at 1000 Hz (vector 0x20)
+[sched ] policy -> adaptive
+[sched ] scheduler ready, policy adaptive, 4 policies available
+[init  ] kinit running as task 2 under policy 'adaptive'
+[ps2   ] keyboard ready, mouse ready (4-byte packets, wheel)
+[proc  ] process subsystem ready (ELF64 loader, spawn/wait)
+[syscall] syscall/sysret MSRs programmed, 64 syscall numbers
+[pci   ] 00:00.0 8086:29c0 host bridge
+[pci   ] 00:01.0 1234:1111 display
+[pci   ] 00:02.0 1af4:1041 network
+[vnet  ] eth0 MAC 52:54:00:12:34:56
+[pci   ] 00:03.0 1af4:1042 storage
+[blk   ] vda: 20480 MiB (41943040 sectors of 512 B)
+[pci   ] 00:1f.0 8086:2918 ISA bridge
+[pci   ] 00:1f.2 8086:2922 SATA controller
+[pci   ] 00:1f.3 8086:2930 SMBus
+[bcache] 2048 x 4 KiB buffers, policy adaptive
+[net   ] sockets: TCP, UDP, ICMP echo
+[tty   ] console tty on framebuffer + COM1 (serial input enabled)
+[net   ] DHCP: 10.0.2.15/255.255.255.0 gw 10.0.2.2 dns 10.0.2.3
+[ffs0  ] 'fuhreros' on vda: 5242880 blocks (5241187 free), 4096 inodes (4028 free), mount #1
+[vfs   ] mounted vda (ffs0) on /
+[tarfs ] initrd: 60 files, 5300 KiB
+[vfs   ] mounted initrd (tarfs) on /initrd
+[vfs   ] mounted - (devfs) on /dev
+[vfs   ] mounted - (procfs) on /proc
+[vfs   ] mounted - (ramfs) on /tmp
+[vfs   ] root filesystem: FFS0 (virtio-blk vda)
+[init  ] started /bin/init as pid 1 - kernel handing over to user space
+[1;36mFuhrerOS init[0m (pid 1): user space is running outside kernel privilege
+init: running benchmark suite /etc/bench/micro.sh
+BENCH-BEGIN micro
+FUBENCH {"group":"cpu","name":"prime","value":61,"unit":"ms","note":"25997 primes below 300000 (trial division)"}
+FUBENCH {"group":"cpu","name":"matrix","value":7,"unit":"ms","note":"4 x 160x160 int32 multiply, checksum 4988"}
+FUBENCH {"group":"cpu","name":"compilation","value":-1,"unit":"","status":"NOT RUN","note":"no compiler has been ported to FuhrerOS"}
+FUBENCH {"group":"mem","name":"alloc_free","value":17,"unit":"ns/pair","note":"malloc 16..4111 B + free, 64 live objects"}
+FUBENCH {"group":"mem","name":"copy","value":6373,"unit":"MB/s","note":"memcpy 4 MiB x 32 (libfu memcpy, no SSE)"}
+FUBENCH {"group":"mem","name":"working_set_16K","value":12,"unit":"ns/10 access","note":"dependent random loads (end 1990)"}
+FUBENCH {"group":"mem","name":"working_set_256K","value":35,"unit":"ns/10 access","note":"dependent random loads (end 32867)"}
+FUBENCH {"group":"mem","name":"working_set_4096K","value":715,"unit":"ns/10 access","note":"dependent random loads (end 611571)"}
+FUBENCH {"group":"mem","name":"working_set_32768K","value":1652,"unit":"ns/10 access","note":"dependent random loads (end 7222772)"}
+FUBENCH {"group":"storage","name":"seq_write","value":181,"unit":"MB/s x100","note":"32 MiB in 64 KiB writes + sync"}
+FUBENCH {"group":"storage","name":"seq_read","value":36609,"unit":"MB/s x100","note":"cold cache, 64 KiB reads"}
+FUBENCH {"group":"storage","name":"rand_read","value":6156,"unit":"ops/s","note":"cold cache, 4 KiB"}
+FUBENCH {"group":"storage","name":"rand_write","value":842,"unit":"ops/s","note":"4 KiB + final sync"}
+FUBENCH {"group":"storage","name":"small_file_create","value":253,"unit":"files/s","note":"500 x 4 KiB create+write+close, then sync"}
+FUBENCH {"group":"storage","name":"small_file_delete","value":7086,"unit":"files/s","note":"500 unlinks, then sync"}
+FUBENCH {"group":"net","name":"tcp_throughput","value":16811,"unit":"MB/s x100","note":"32 MiB to the guest's own IP (loopback path of the own stack)"}
+FUBENCH {"group":"net","name":"tcp_rtt_p50","value":1,"unit":"us","note":"1-byte ping-pong x 2000, p99 4 us"}
+FUBENCH {"group":"net","name":"udp_packet_rate","value":3676465,"unit":"packets/s","note":"64 B datagrams: 20000 sent, 32 received"}
+FUBENCH {"group":"cpu","name":"prime","value":70,"unit":"ms","note":"25997 primes below 300000 (trial division)"}
+FUBENCH {"group":"cpu","name":"matrix","value":9,"unit":"ms","note":"4 x 160x160 int32 multiply, checksum 4988"}
+FUBENCH {"group":"cpu","name":"compilation","value":-1,"unit":"","status":"NOT RUN","note":"no compiler has been ported to FuhrerOS"}
+FUBENCH {"group":"mem","name":"alloc_free","value":21,"unit":"ns/pair","note":"malloc 16..4111 B + free, 64 live objects"}
+FUBENCH {"group":"mem","name":"copy","value":5980,"unit":"MB/s","note":"memcpy 4 MiB x 32 (libfu memcpy, no SSE)"}
+FUBENCH {"group":"mem","name":"working_set_16K","value":13,"unit":"ns/10 access","note":"dependent random loads (end 1990)"}
+FUBENCH {"group":"mem","name":"working_set_256K","value":34,"unit":"ns/10 access","note":"dependent random loads (end 32867)"}
+FUBENCH {"group":"mem","name":"working_set_4096K","value":573,"unit":"ns/10 access","note":"dependent random loads (end 611571)"}
+FUBENCH {"group":"mem","name":"working_set_32768K","value":1503,"unit":"ns/10 access","note":"dependent random loads (end 7222772)"}
+FUBENCH {"group":"storage","name":"seq_write","value":190,"unit":"MB/s x100","note":"32 MiB in 64 KiB writes + sync"}
+FUBENCH {"group":"storage","name":"seq_read","value":34311,"unit":"MB/s x100","note":"cold cache, 64 KiB reads"}
+FUBENCH {"group":"storage","name":"rand_read","value":5210,"unit":"ops/s","note":"cold cache, 4 KiB"}
+FUBENCH {"group":"storage","name":"rand_write","value":803,"unit":"ops/s","note":"4 KiB + final sync"}
+FUBENCH {"group":"storage","name":"small_file_create","value":227,"unit":"files/s","note":"500 x 4 KiB create+write+close, then sync"}
+FUBENCH {"group":"storage","name":"small_file_delete","value":10666,"unit":"files/s","note":"500 unlinks, then sync"}
+FUBENCH {"group":"net","name":"tcp_throughput","value":14991,"unit":"MB/s x100","note":"32 MiB to the guest's own IP (loopback path of the own stack)"}
+FUBENCH {"group":"net","name":"tcp_rtt_p50","value":2,"unit":"us","note":"1-byte ping-pong x 2000, p99 7 us"}
+FUBENCH {"group":"net","name":"udp_packet_rate","value":2978681,"unit":"packets/s","note":"64 B datagrams: 20000 sent, 32 received"}
+FUBENCH {"group":"cpu","name":"prime","value":70,"unit":"ms","note":"25997 primes below 300000 (trial division)"}
+FUBENCH {"group":"cpu","name":"matrix","value":9,"unit":"ms","note":"4 x 160x160 int32 multiply, checksum 4988"}
+FUBENCH {"group":"cpu","name":"compilation","value":-1,"unit":"","status":"NOT RUN","note":"no compiler has been ported to FuhrerOS"}
+FUBENCH {"group":"mem","name":"alloc_free","value":17,"unit":"ns/pair","note":"malloc 16..4111 B + free, 64 live objects"}
+FUBENCH {"group":"mem","name":"copy","value":5101,"unit":"MB/s","note":"memcpy 4 MiB x 32 (libfu memcpy, no SSE)"}
+FUBENCH {"group":"mem","name":"working_set_16K","value":12,"unit":"ns/10 access","note":"dependent random loads (end 1990)"}
+FUBENCH {"group":"mem","name":"working_set_256K","value":34,"unit":"ns/10 access","note":"dependent random loads (end 32867)"}
+FUBENCH {"group":"mem","name":"working_set_4096K","value":1098,"unit":"ns/10 access","note":"dependent random loads (end 611571)"}
+FUBENCH {"group":"mem","name":"working_set_32768K","value":1570,"unit":"ns/10 access","note":"dependent random loads (end 7222772)"}
+FUBENCH {"group":"storage","name":"seq_write","value":182,"unit":"MB/s x100","note":"32 MiB in 64 KiB writes + sync"}
+FUBENCH {"group":"storage","name":"seq_read","value":39755,"unit":"MB/s x100","note":"cold cache, 64 KiB reads"}
+FUBENCH {"group":"storage","name":"rand_read","value":5196,"unit":"ops/s","note":"cold cache, 4 KiB"}
+FUBENCH {"group":"storage","name":"rand_write","value":855,"unit":"ops/s","note":"4 KiB + final sync"}
+FUBENCH {"group":"storage","name":"small_file_create","value":230,"unit":"files/s","note":"500 x 4 KiB create+write+close, then sync"}
+FUBENCH {"group":"storage","name":"small_file_delete","value":5562,"unit":"files/s","note":"500 unlinks, then sync"}
+FUBENCH {"group":"net","name":"tcp_throughput","value":10640,"unit":"MB/s x100","note":"32 MiB to the guest's own IP (loopback path of the own stack)"}
+FUBENCH {"group":"net","name":"tcp_rtt_p50","value":2,"unit":"us","note":"1-byte ping-pong x 2000, p99 4 us"}
+FUBENCH {"group":"net","name":"udp_packet_rate","value":2441774,"unit":"packets/s","note":"64 B datagrams: 20000 sent, 32 received"}
+[desktop] compositor running at 1280x800
+FUBENCH {"group":"desktop","name":"window_create","value":1423,"unit":"us","note":"open 400x300 + fill + present, avg of 20"}
+FUBENCH {"group":"desktop","name":"launch_terminal","value":6,"unit":"ms","note":"spawn -> window exists; mean of 3, best 1 ms"}
+FUBENCH {"group":"desktop","name":"launch_files","value":5,"unit":"ms","note":"spawn -> window exists; mean of 3, best 1 ms"}
+FUBENCH {"group":"desktop","name":"launch_editor","value":10,"unit":"ms","note":"spawn -> window exists; mean of 3, best 2 ms"}
+FUBENCH {"group":"desktop","name":"launch_browser","value":6,"unit":"ms","note":"spawn -> window exists; mean of 3, best 2 ms"}
+FUBENCH {"group":"desktop","name":"launch_settings","value":4,"unit":"ms","note":"spawn -> window exists; mean of 3, best 3 ms"}
+FUBENCH {"group":"desktop","name":"launch_control_center","value":4,"unit":"ms","note":"spawn -> window exists; mean of 3, best 2 ms"}
+FUBENCH {"group":"desktop","name":"workspace_switch","value":1349,"unit":"us","note":"switch request -> composed frame, avg of 10"}
+FUBENCH {"group":"desktop","name":"compose_avg","value":1763,"unit":"us","note":"average full composition, whole run"}
+FUBENCH {"group":"desktop","name":"compose_max","value":9492,"unit":"us","note":"worst composition, whole run"}
+FUBENCH {"group":"desktop","name":"terminal_keystroke_latency","value":-1,"unit":"","status":"NOT RUN","note":"needs injected keyboard input; not measurable from inside the guest yet"}
+BENCH-END micro
+init: benchmark suite finished (0)
+FuhrerOS: syncing filesystems and powering off
+POWEROFF

@@ -23,6 +23,7 @@ extern struct acpi_info acpi;
 void acpi_init(void);
 void acpi_poweroff(void);		/* returns only on failure */
 bool acpi_can_poweroff(void);
+u16 acpi_pm_timer_port(bool *is32);
 NORETURN void machine_reboot(void);
 
 void lapic_init(void);
