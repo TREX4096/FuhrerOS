@@ -1,0 +1,308 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="370" font-family="sans-serif" font-size="12">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="500.0" y="22" text-anchor="middle" font-size="15" font-weight="bold">Workload transitions: phase, detected class, throughput</text>
+<text x="10" y="62" font-weight="bold">adaptive scheduler / adaptive cache</text>
+<text x="10" y="98" fill="#555">workload</text>
+<text x="10" y="128" fill="#555">detected</text>
+<text x="10" y="168" fill="#555">throughput</text>
+<rect x="90.0" y="112" width="5.5" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<line x1="90.0" x2="90.0" y1="80" y2="185" stroke="#999" stroke-dasharray="3 3"/>
+<text x="94.0" y="98">cpu</text>
+<rect x="95.5" y="112" width="6.2" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="101.7" y="112" width="6.4" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="108.1" y="112" width="6.9" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="115.0" y="112" width="6.3" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="121.3" y="112" width="6.7" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="128.0" y="112" width="6.2" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="134.3" y="112" width="6.2" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="140.5" y="112" width="6.4" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="146.9" y="112" width="6.2" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="153.1" y="112" width="6.5" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="159.6" y="112" width="6.4" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="166.0" y="112" width="6.3" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="172.3" y="112" width="6.3" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="178.6" y="112" width="6.3" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="184.9" y="112" width="6.4" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="191.2" y="112" width="6.4" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="197.6" y="112" width="6.3" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="203.9" y="112" width="6.3" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="210.2" y="112" width="6.2" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="216.5" y="112" width="6.2" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="222.7" y="112" width="6.2" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="228.9" y="112" width="6.4" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="235.3" y="112" width="7.0" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="242.3" y="112" width="6.2" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="248.6" y="112" width="6.5" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="255.1" y="112" width="6.3" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="261.4" y="112" width="6.5" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="267.9" y="112" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<line x1="267.9" x2="267.9" y1="80" y2="185" stroke="#999" stroke-dasharray="3 3"/>
+<text x="271.9" y="98">random-io</text>
+<rect x="274.2" y="112" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="280.6" y="112" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="286.9" y="112" width="6.5" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="293.5" y="112" width="6.8" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="300.2" y="112" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="306.6" y="112" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="313.0" y="112" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="319.5" y="112" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="325.8" y="112" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="332.2" y="112" width="6.5" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="338.7" y="112" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="345.1" y="112" width="6.5" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="351.5" y="112" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="357.9" y="112" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="364.3" y="112" width="6.3" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="370.5" y="112" width="6.5" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="377.0" y="112" width="6.8" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="383.8" y="112" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="390.1" y="112" width="6.5" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="396.6" y="112" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="402.9" y="112" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="409.3" y="112" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="415.7" y="112" width="6.6" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="422.3" y="112" width="6.5" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="428.7" y="112" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="435.1" y="112" width="8.5" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="443.6" y="112" width="6.9" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<line x1="443.6" x2="443.6" y1="80" y2="185" stroke="#999" stroke-dasharray="3 3"/>
+<text x="447.6" y="98">sequential-io</text>
+<rect x="450.5" y="112" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="456.9" y="112" width="7.8" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="464.7" y="112" width="6.9" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="471.6" y="112" width="6.9" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="478.6" y="112" width="7.2" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="485.8" y="112" width="6.7" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="492.5" y="112" width="6.5" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="499.0" y="112" width="6.5" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="505.5" y="112" width="7.2" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="512.7" y="112" width="6.5" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="519.2" y="112" width="6.8" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="526.1" y="112" width="6.7" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="532.8" y="112" width="6.6" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="539.4" y="112" width="6.6" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="546.1" y="112" width="6.6" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="552.6" y="112" width="6.5" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="559.1" y="112" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="565.5" y="112" width="7.1" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="572.6" y="112" width="6.5" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="579.2" y="112" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="585.5" y="112" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="591.9" y="112" width="6.5" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="598.4" y="112" width="6.5" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="604.9" y="112" width="6.4" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="611.3" y="112" width="6.9" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="618.2" y="112" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="624.6" y="112" width="6.5" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<line x1="624.6" x2="624.6" y1="80" y2="185" stroke="#999" stroke-dasharray="3 3"/>
+<text x="628.6" y="98">network</text>
+<rect x="631.1" y="112" width="6.5" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="637.5" y="112" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="643.9" y="112" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="650.2" y="112" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="656.6" y="112" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="663.0" y="112" width="6.5" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="669.5" y="112" width="6.5" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="676.0" y="112" width="7.0" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="683.0" y="112" width="6.5" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="689.5" y="112" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="695.8" y="112" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="702.2" y="112" width="6.8" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="709.0" y="112" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="715.4" y="112" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="721.8" y="112" width="6.5" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="728.3" y="112" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="734.6" y="112" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="741.1" y="112" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="747.4" y="112" width="6.5" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="753.9" y="112" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="760.3" y="112" width="6.6" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="766.9" y="112" width="6.5" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="773.4" y="112" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="779.7" y="112" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="786.0" y="112" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="792.4" y="112" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="798.8" y="112" width="6.5" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="805.3" y="112" width="6.5" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<line x1="805.3" x2="805.3" y1="80" y2="185" stroke="#999" stroke-dasharray="3 3"/>
+<text x="809.3" y="98">interactive</text>
+<rect x="811.8" y="112" width="8.7" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="820.6" y="112" width="8.8" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="829.4" y="112" width="8.7" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="838.1" y="112" width="8.9" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="847.0" y="112" width="8.9" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="855.9" y="112" width="8.8" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="864.8" y="112" width="8.8" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="873.5" y="112" width="8.8" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="882.4" y="112" width="8.8" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="891.2" y="112" width="9.2" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="900.4" y="112" width="8.9" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="909.3" y="112" width="8.7" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="918.0" y="112" width="8.8" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="926.8" y="112" width="8.8" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="935.6" y="112" width="8.9" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="944.5" y="112" width="8.9" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="953.4" y="112" width="8.9" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="962.3" y="112" width="8.9" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="971.2" y="112" width="8.8" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<polyline points="95.5,151.5 101.7,153.0 108.1,157.7 115.0,152.2 121.3,156.0 128.0,151.2 134.3,150.3 140.5,151.1 146.9,151.9 153.1,150.0 159.6,155.3 166.0,158.1 172.3,150.7 178.6,150.8 184.9,162.0 191.2,151.3 197.6,150.5 203.9,157.2 210.2,150.5 216.5,150.1 222.7,151.6 228.9,151.3 235.3,150.1 242.3,164.1 248.6,161.6 255.1,150.9 261.4,151.0 267.9,150.6 274.2,155.1 280.6,153.5 286.9,162.2 293.5,154.9 300.2,154.6 306.6,153.1 313.0,151.4 319.5,152.0 325.8,151.9 332.2,157.2 338.7,153.9 345.1,156.2 351.5,151.4 357.9,150.1 364.3,150.3 370.5,152.8 377.0,153.8 383.8,154.7 390.1,156.5 396.6,154.3 402.9,151.2 409.3,153.1 415.7,153.6 422.3,150.0 428.7,155.9 435.1,157.9 443.6,162.9 450.5,158.6 456.9,168.5 464.7,167.5 471.6,170.3 478.6,164.1 485.8,167.5 492.5,164.0 499.0,162.6 505.5,165.2 512.7,165.5 519.2,166.4 526.1,163.0 532.8,166.2 539.4,164.7 546.1,162.6 552.6,162.7 559.1,160.5 565.5,166.0 572.6,159.7 579.2,163.5 585.5,159.6 591.9,159.3 598.4,160.1 604.9,159.7 611.3,150.0 618.2,157.8 624.6,164.3 631.1,150.3 637.5,151.5 643.9,150.0 650.2,150.4 656.6,152.7 663.0,154.5 669.5,154.6 676.0,154.4 683.0,155.3 689.5,156.4 695.8,150.6 702.2,157.0 709.0,154.4 715.4,152.9 721.8,150.2 728.3,152.3 734.6,150.3 741.1,151.7 747.4,150.3 753.9,152.2 760.3,151.6 766.9,151.3 773.4,151.5 779.7,151.2 786.0,151.2 792.4,150.5 798.8,151.6 805.3,151.1 811.8,150.0 820.6,150.0 829.4,150.0 838.1,150.0 847.0,150.0 855.9,150.0 864.8,150.0 873.5,150.0 882.4,150.0 891.2,150.0 900.4,150.0 909.3,150.0 918.0,150.0 926.8,150.0 935.6,150.0 944.5,150.0 953.4,150.0 962.3,150.0 971.2,150.0 980.0,150.0" fill="none" stroke="#B5646B" stroke-width="1.5"/>
+<text x="10" y="212" font-weight="bold">round_robin scheduler / lru cache</text>
+<text x="10" y="248" fill="#555">workload</text>
+<text x="10" y="278" fill="#555">detected</text>
+<text x="10" y="318" fill="#555">throughput</text>
+<rect x="90.0" y="262" width="5.7" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<line x1="90.0" x2="90.0" y1="230" y2="335" stroke="#999" stroke-dasharray="3 3"/>
+<text x="94.0" y="248">cpu</text>
+<rect x="95.7" y="262" width="6.2" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="101.8" y="262" width="6.7" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="108.5" y="262" width="6.7" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="115.3" y="262" width="6.4" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="121.7" y="262" width="6.5" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="128.2" y="262" width="6.7" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="134.8" y="262" width="6.4" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="141.3" y="262" width="7.2" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="148.5" y="262" width="6.8" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="155.3" y="262" width="7.2" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="162.5" y="262" width="6.9" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="169.4" y="262" width="6.9" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="176.3" y="262" width="7.2" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="183.4" y="262" width="6.7" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="190.2" y="262" width="6.7" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="196.9" y="262" width="6.4" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="203.3" y="262" width="6.6" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="209.9" y="262" width="6.6" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="216.5" y="262" width="7.0" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="223.5" y="262" width="6.8" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="230.4" y="262" width="6.4" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="236.8" y="262" width="6.6" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="243.5" y="262" width="6.8" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="250.2" y="262" width="6.4" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="256.7" y="262" width="6.6" height="22" fill="#C9A66B"><title>CPU_BOUND</title></rect>
+<rect x="263.3" y="262" width="6.6" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<line x1="263.3" x2="263.3" y1="230" y2="335" stroke="#999" stroke-dasharray="3 3"/>
+<text x="267.3" y="248">random-io</text>
+<rect x="269.9" y="262" width="6.6" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="276.5" y="262" width="6.2" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="282.7" y="262" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="289.1" y="262" width="6.2" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="295.3" y="262" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="301.6" y="262" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="307.9" y="262" width="6.5" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="314.4" y="262" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="320.7" y="262" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="327.1" y="262" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="333.4" y="262" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="339.7" y="262" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="346.0" y="262" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="352.3" y="262" width="6.2" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="358.5" y="262" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="364.9" y="262" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="371.3" y="262" width="6.5" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="377.8" y="262" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="384.1" y="262" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="390.5" y="262" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="396.8" y="262" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="403.0" y="262" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="409.4" y="262" width="6.5" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="415.8" y="262" width="6.5" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="422.3" y="262" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="428.8" y="262" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="435.1" y="262" width="7.1" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="442.1" y="262" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<line x1="442.1" x2="442.1" y1="230" y2="335" stroke="#999" stroke-dasharray="3 3"/>
+<text x="446.1" y="248">sequential-io</text>
+<rect x="448.5" y="262" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="454.9" y="262" width="6.7" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="461.5" y="262" width="6.7" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="468.2" y="262" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="474.5" y="262" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="480.8" y="262" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="487.2" y="262" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="493.5" y="262" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="499.9" y="262" width="6.8" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="506.6" y="262" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="512.9" y="262" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="519.2" y="262" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="525.6" y="262" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="532.1" y="262" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="538.5" y="262" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="544.8" y="262" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="551.1" y="262" width="6.9" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="558.0" y="262" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="564.3" y="262" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="570.6" y="262" width="6.5" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="577.1" y="262" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="583.5" y="262" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="589.8" y="262" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="596.2" y="262" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="602.6" y="262" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="609.0" y="262" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="615.3" y="262" width="6.5" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="621.8" y="262" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<line x1="621.8" x2="621.8" y1="230" y2="335" stroke="#999" stroke-dasharray="3 3"/>
+<text x="625.8" y="248">network</text>
+<rect x="628.1" y="262" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="634.4" y="262" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="640.7" y="262" width="6.2" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="646.9" y="262" width="6.6" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="653.5" y="262" width="7.0" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="660.5" y="262" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="666.8" y="262" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="673.1" y="262" width="6.2" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="679.3" y="262" width="6.5" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="685.8" y="262" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="692.1" y="262" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="698.4" y="262" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="704.8" y="262" width="6.5" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="711.2" y="262" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="717.5" y="262" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="723.8" y="262" width="6.2" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="730.0" y="262" width="6.6" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="736.6" y="262" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="742.9" y="262" width="6.2" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="749.1" y="262" width="6.6" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="755.7" y="262" width="6.2" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="761.9" y="262" width="6.2" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="768.2" y="262" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="774.4" y="262" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="780.7" y="262" width="6.2" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="786.8" y="262" width="6.4" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="793.3" y="262" width="6.3" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<rect x="799.6" y="262" width="6.2" height="22" fill="#5B6C8F"><title>IO_BOUND</title></rect>
+<line x1="799.6" x2="799.6" y1="230" y2="335" stroke="#999" stroke-dasharray="3 3"/>
+<text x="803.6" y="248">interactive</text>
+<rect x="805.8" y="262" width="6.3" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="812.1" y="262" width="6.4" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="818.5" y="262" width="6.3" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="824.8" y="262" width="6.4" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="831.3" y="262" width="7.2" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="838.4" y="262" width="6.4" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="844.8" y="262" width="6.4" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="851.2" y="262" width="6.3" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="857.6" y="262" width="6.4" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="863.9" y="262" width="6.4" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="870.3" y="262" width="6.5" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="876.8" y="262" width="6.4" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="883.1" y="262" width="6.4" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="889.5" y="262" width="6.4" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="895.9" y="262" width="6.6" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="902.5" y="262" width="6.4" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="908.9" y="262" width="6.4" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="915.3" y="262" width="6.6" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="921.9" y="262" width="6.5" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="928.4" y="262" width="6.4" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="934.8" y="262" width="6.3" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="941.2" y="262" width="6.3" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="947.5" y="262" width="6.5" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="954.0" y="262" width="6.4" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="960.4" y="262" width="6.7" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="967.1" y="262" width="6.6" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<rect x="973.7" y="262" width="6.3" height="22" fill="#7FA37A"><title>INTERACTIVE</title></rect>
+<polyline points="95.7,302.9 101.8,303.7 108.5,301.9 115.3,305.1 121.7,301.4 128.2,301.2 134.8,301.2 141.3,307.0 148.5,305.5 155.3,310.5 162.5,301.5 169.4,302.5 176.3,313.9 183.4,308.8 190.2,303.3 196.9,300.0 203.3,302.6 209.9,306.8 216.5,307.6 223.5,308.1 230.4,309.2 236.8,304.9 243.5,303.2 250.2,301.8 256.7,301.5 263.3,300.2 269.9,304.7 276.5,303.9 282.7,307.3 289.1,304.0 295.3,304.5 301.6,304.2 307.9,313.0 314.4,307.3 320.7,308.9 327.1,309.0 333.4,306.4 339.7,304.8 346.0,305.2 352.3,305.5 358.5,302.9 364.9,307.8 371.3,311.2 377.8,306.0 384.1,308.1 390.5,304.5 396.8,306.5 403.0,300.0 409.4,305.9 415.8,304.8 422.3,309.0 428.8,306.3 435.1,306.1 442.1,312.8 448.5,314.0 454.9,306.8 461.5,307.2 468.2,312.2 474.5,305.9 480.8,305.2 487.2,304.4 493.5,303.4 499.9,303.8 506.6,304.1 512.9,306.9 519.2,303.0 525.6,300.0 532.1,305.8 538.5,301.7 544.8,302.4 551.1,314.6 558.0,309.4 564.3,304.8 570.6,303.6 577.1,304.2 583.5,305.2 589.8,304.6 596.2,308.3 602.6,308.3 609.0,306.3 615.3,304.7 621.8,302.9 628.1,300.7 634.4,301.1 640.7,303.0 646.9,301.1 653.5,302.1 660.5,307.4 666.8,305.6 673.1,300.1 679.3,303.6 685.8,302.5 692.1,300.8 698.4,302.9 704.8,304.0 711.2,300.4 717.5,300.0 723.8,300.8 730.0,300.1 736.6,301.7 742.9,302.2 749.1,304.1 755.7,301.0 761.9,300.8 768.2,300.8 774.4,301.0 780.7,302.8 786.8,302.1 793.3,300.5 799.6,300.6 805.8,300.6 812.1,300.6 818.5,300.6 824.8,300.6 831.3,300.6 838.4,300.6 844.8,300.6 851.2,300.6 857.6,300.6 863.9,300.6 870.3,300.6 876.8,300.6 883.1,300.6 889.5,300.6 895.9,300.6 902.5,300.6 908.9,300.6 915.3,300.6 921.9,300.6 928.4,300.0 934.8,300.6 941.2,300.6 947.5,300.6 954.0,300.6 960.4,300.6 967.1,300.6 973.7,300.6 980.0,300.6" fill="none" stroke="#B5646B" stroke-width="1.5"/>
+<rect x="90" y="346" width="12" height="12" fill="#C9A66B"/><text x="106" y="356">CPU_BOUND</text>
+<rect x="192" y="346" width="12" height="12" fill="#5B6C8F"/><text x="208" y="356">IO_BOUND</text>
+<rect x="286" y="346" width="12" height="12" fill="#7FA37A"/><text x="302" y="356">INTERACTIVE</text>
+<rect x="404" y="346" width="12" height="12" fill="#9C7FB5"/><text x="420" y="356">MIXED</text>
+<rect x="474" y="346" width="12" height="12" fill="#d9d9d9"/><text x="490" y="356">IDLE</text>
+<rect x="536" y="346" width="12" height="12" fill="#eeeeee"/><text x="552" y="356">UNKNOWN</text>
+</svg>

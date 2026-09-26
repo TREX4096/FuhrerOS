@@ -54,14 +54,17 @@ static struct buf *lookup(struct blkdev *d, u64 b)
 	return NULL;
 }
 
-static void touch(struct buf *b)
+/* data: a file-data block (not metadata), see get(). */
+static void touch(struct buf *b, bool data)
 {
 	b->referenced = true;
 	b->last_use = ++clock_tick;
 	bool move_on_use = policy == CACHE_LRU || policy == CACHE_READAHEAD ||
 			   (policy == CACHE_ADAPTIVE && io_cls != IO_RANDOM);
-	if (policy == CACHE_ADAPTIVE && io_cls == IO_SEQUENTIAL && b->readahead) {
-		/* evict-behind: a consumed stream block is unlikely to be re-read */
+	if (policy == CACHE_ADAPTIVE && io_cls == IO_SEQUENTIAL && data) {
+		/* evict-behind: a consumed stream block is unlikely to be re-read.
+		 * Never metadata: the file's inode/indirect blocks are re-used by
+		 * every read of the stream (F-119). */
 		list_remove(&b->lru_node);
 		list_push_front(&lru, &b->lru_node);
 		return;
@@ -249,12 +252,12 @@ static struct buf *get(struct blkdev *d, u64 blockno, bool fill, bool meta)
 				b->refcnt++;
 				st.hits++;
 				if (b->readahead) {
-					st.readahead_used++;
+					st.readahead_used++;	/* counted once per prefetch */
+					b->readahead = false;
 				}
-				touch(b);
+				touch(b, !meta);
 				if (!meta)
 					account_access(d, blockno, true);
-				b->readahead = policy == CACHE_ADAPTIVE && io_cls == IO_SEQUENTIAL ? true : false;
 				cache_cycles += rdtsc() - c0;
 				irq_restore(f);
 				return b;
@@ -272,7 +275,7 @@ static struct buf *get(struct blkdev *d, u64 blockno, bool fill, bool meta)
 		b->dirty = false;
 		list_push_back(&hash[hidx(d, blockno)], &b->hash_node);
 		st.misses++;
-		touch(b);
+		touch(b, !meta);
 		if (fill) {
 			b->io_pending = true;
 			irq_restore(f);

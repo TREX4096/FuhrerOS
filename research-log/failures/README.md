@@ -20,5 +20,6 @@
 | [F-116](F-116-readahead-self-eviction.md) | Read-ahead evicted its own prefetched blocks |
 | [F-117](F-117-wake-latency-tick-phase.md) | Wake-up latency depended on the boot, not the policy |
 | [F-118](F-118-idle-wake-waits-for-tick.md) | A task woken on an idle CPU waited for the next timer tick |
+| [F-119](F-119-evict-behind-metadata.md) | Adaptive cache evict-behind evicted the file's own metadata |
 
 Failures F-001..F-006 of the Linux-based prototype are in linux-prototype/research-log/failures/.

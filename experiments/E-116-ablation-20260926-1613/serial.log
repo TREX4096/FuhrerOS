@@ -1,0 +1,1355 @@
+
+FuhrerOS: kernel entry reached (serial up)
+
+================================
+        FUHREROS KERNEL
+================================
+
+Architecture : x86_64
+Bootloader   : Limine 11.4.1
+Kernel       : FuhrerOS 0.1.0 (from-scratch)
+Status       : BOOTED
+
+[boot  ] bootloader: Limine 11.4.1 (BIOS firmware)
+[boot  ] cmdline: 'bench=ablation'
+[boot  ] kernel: phys 0x000000007fd73000 virt 0xffffffff80000000 size 872 KiB
+[boot  ] hhdm offset: 0xffff800000000000, rsdp: 0x00000000000f5260
+[boot  ] memory map (25 entries):
+[boot  ]   0000000000001000-0000000000061000 bootloader     384 KiB
+[boot  ]   0000000000061000-000000000009f000 usable         248 KiB
+[boot  ]   000000000009fc00-00000000000a0000 reserved       1 KiB
+[boot  ]   00000000000f0000-00000000000f5000 reserved       20 KiB
+[boot  ]   00000000000f5000-00000000000f6000 reserved       4 KiB
+[boot  ]   00000000000f6000-0000000000100000 reserved       40 KiB
+[boot  ]   0000000000100000-000000007f8ce000 usable         2088760 KiB
+[boot  ]   000000007f8ce000-000000007fd65000 kernel+modules 4700 KiB
+[boot  ]   000000007fd65000-000000007fd66000 bootloader     4 KiB
+[boot  ]   000000007fd66000-000000007fd69000 usable         12 KiB
+[boot  ]   000000007fd69000-000000007fd73000 bootloader     40 KiB
+[boot  ]   000000007fd73000-000000007fe4d000 kernel+modules 872 KiB
+[boot  ]   000000007fe4d000-000000007ff38000 bootloader     940 KiB
+[boot  ]   000000007ff38000-000000007ff55000 usable         116 KiB
+[boot  ]   000000007ff55000-000000007ffdc000 bootloader     540 KiB
+[boot  ]   000000007ffdc000-000000007ffe0000 reserved       16 KiB
+[boot  ]   000000007ffe0000-000000007ffe3000 reserved       12 KiB
+[boot  ]   000000007ffe3000-0000000080000000 reserved       116 KiB
+[boot  ]   00000000b0000000-00000000c0000000 reserved       262144 KiB
+[boot  ]   00000000fd000000-00000000fd3e8000 framebuffer    4000 KiB
+[boot  ]   00000000fed1c000-00000000fed20000 reserved       16 KiB
+[boot  ]   00000000feffc000-00000000ff000000 reserved       16 KiB
+[boot  ]   00000000fffc0000-0000000100000000 reserved       256 KiB
+[boot  ]   0000000100000000-0000000180000000 usable         2097152 KiB
+[boot  ]   000000fd00000000-0000010000000000 reserved       12582912 KiB
+[boot  ] usable memory: 4088 MiB
+[boot  ] framebuffer: 1280x800 32bpp pitch 5120 at phys 0x00000000fd000000
+[boot  ] module: /boot/initrd.tar (4812800 bytes) 'initrd'
+[boot  ] cpu: AuthenticAMD / AMD Ryzen 5 7520U with Radeon Graphics         
+[pmm   ] 1572864 frames tracked, 1046462 free (4087 MiB), bitmap 192 KiB at 0x0000000000100000
+[vmm   ] kernel page tables active (pml4 0x0000000000130000, NX on)
+[heap  ] slab classes 16..2048 B, large allocations from vmalloc
+[pmm   ] reclaimed 1908 KiB of bootloader memory
+[acpi  ] OEM 'BOCHS ', 4 CPU(s), LAPIC 0x00000000fee00000, 1 IOAPIC(s) (first 0x00000000fec00000 gsi 0), ECAM 0x00000000b0000000
+[apic  ] local APIC id 0 enabled
+[apic  ] I/O APIC with 24 inputs
+[time  ] TSC 2793.056 MHz, LAPIC timer 62559 kHz (div 16)
+[time  ] LAPIC periodic timer at 1000 Hz (vector 0x20)
+[sched ] policy -> adaptive
+[sched ] scheduler ready, policy adaptive, 4 policies available
+[init  ] kinit running as task 2 under policy 'adaptive'
+[ps2   ] keyboard ready, mouse ready (4-byte packets, wheel)
+[proc  ] process subsystem ready (ELF64 loader, spawn/wait)
+[syscall] syscall/sysret MSRs programmed, 64 syscall numbers
+[pci   ] 00:00.0 8086:29c0 host bridge
+[pci   ] 00:01.0 1234:1111 display
+[pci   ] 00:02.0 1af4:1041 network
+[vnet  ] eth0 MAC 52:54:00:12:34:56
+[pci   ] 00:03.0 1af4:1042 storage
+[blk   ] vda: 20480 MiB (41943040 sectors of 512 B)
+[pci   ] 00:1f.0 8086:2918 ISA bridge
+[pci   ] 00:1f.2 8086:2922 SATA controller
+[pci   ] 00:1f.3 8086:2930 SMBus
+[bcache] 2048 x 4 KiB buffers, policy adaptive
+[net   ] sockets: TCP, UDP, ICMP echo
+[tty   ] console tty on framebuffer + COM1 (serial input enabled)
+[net   ] DHCP: 10.0.2.15/255.255.255.0 gw 10.0.2.2 dns 10.0.2.3
+[ffs0  ] 'fuhreros' on vda: 5242880 blocks (5241345 free), 4096 inodes (4034 free), mount #1
+[vfs   ] mounted vda (ffs0) on /
+[tarfs ] initrd: 54 files, 4700 KiB
+[vfs   ] mounted initrd (tarfs) on /initrd
+[vfs   ] mounted - (devfs) on /dev
+[vfs   ] mounted - (procfs) on /proc
+[vfs   ] mounted - (ramfs) on /tmp
+[vfs   ] root filesystem: FFS0 (virtio-blk vda)
+[init  ] started /bin/init as pid 1 - kernel handing over to user space
+[1;36mFuhrerOS init[0m (pid 1): user space is running outside kernel privilege
+init: running benchmark suite /etc/bench/ablation.sh
+BENCH-BEGIN ablation
+policy: adaptive
+policies: round_robin priority low_latency adaptive
+context_switches: 81
+preemptions: 13
+sched_calls: 82
+sched_overhead_ns: 129280
+busy_ns: 704161845
+idle_ns: 7475957
+tasks: 7
+runnable: 0
+policy_switches: 1
+profiler: on
+window_ms: 100
+hysteresis: 2
+profiler_windows: 6
+profiler_overhead_ns: 19187
+---
+system_class: IDLE
+confidence: 0
+reason: little CPU activity
+policy: adaptive
+transitions: 3
+0.240 tid=2 kinit UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+0.774 tid=3 bflush UNKNOWN->IDLE conf=37% not running
+0.774 tid=4 netd UNKNOWN->INTERACTIVE conf=25% high wake-up frequency, low CPU
+policy: adaptive
+policies: round_robin priority low_latency adaptive
+context_switches: 110
+preemptions: 26
+sched_calls: 111
+sched_overhead_ns: 132298
+busy_ns: 918387614
+idle_ns: 7475957
+tasks: 7
+runnable: 0
+policy_switches: 1
+profiler: on
+window_ms: 100
+hysteresis: 2
+profiler_windows: 9
+profiler_overhead_ns: 23247
+---
+system_class: IDLE
+confidence: 13
+reason: little CPU activity
+policy: adaptive
+transitions: 7
+0.240 tid=2 kinit UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+0.774 tid=3 bflush UNKNOWN->IDLE conf=37% not running
+0.774 tid=4 netd UNKNOWN->INTERACTIVE conf=25% high wake-up frequency, low CPU
+0.981 tid=5 init UNKNOWN->IDLE conf=25% not running
+0.981 tid=6 sh UNKNOWN->IDLE conf=25% not running
+0.981 tid=8 sched UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+1.086 tid=2 kinit CPU_BOUND->MIXED conf=37% mixed behaviour
+policy: adaptive
+policies: round_robin priority low_latency adaptive
+context_switches: 149
+preemptions: 44
+sched_calls: 150
+sched_overhead_ns: 136207
+busy_ns: 1216706184
+idle_ns: 7475957
+tasks: 7
+runnable: 0
+policy_switches: 1
+profiler: on
+window_ms: 100
+hysteresis: 2
+profiler_windows: 11
+profiler_overhead_ns: 26335
+---
+system_class: IDLE
+confidence: 0
+reason: little CPU activity
+policy: adaptive
+transitions: 8
+0.240 tid=2 kinit UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+0.774 tid=3 bflush UNKNOWN->IDLE conf=37% not running
+0.774 tid=4 netd UNKNOWN->INTERACTIVE conf=25% high wake-up frequency, low CPU
+0.981 tid=5 init UNKNOWN->IDLE conf=25% not running
+0.981 tid=6 sh UNKNOWN->IDLE conf=25% not running
+0.981 tid=8 sched UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+1.086 tid=2 kinit CPU_BOUND->MIXED conf=37% mixed behaviour
+1.198 tid=9 sched UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+[sched ] policy -> priority
+SCHEDBENCH {"name":"A1-controller-off-r1","policy":"priority","seconds":10,"cpu_workers":3,"io_workers":1,"samples":253,"wake_p50_us":30015,"wake_p95_us":30072,"wake_p99_us":30353,"wake_max_us":35984,"dispatch_p50_us":29047,"dispatch_p99_us":29389,"resp_p50_us":40054,"resp_p95_us":40112,"resp_p99_us":40391,"cpu_jobs_per_s_x100":987527,"io_ops_per_s":22,"jain_x1000":999,"ctx_switches_per_s":188,"cpu_util_pct":99,"sched_overhead_ns_per_s":35034,"system_class":"CPU_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:INTERACTIVE,probe:INTERACTIVE"}
+policy: priority
+policies: round_robin priority low_latency adaptive
+context_switches: 11391
+preemptions: 1067
+sched_calls: 11392
+sched_overhead_ns: 1581897
+busy_ns: 12052373778
+idle_ns: 8473105047
+tasks: 7
+runnable: 0
+policy_switches: 2
+profiler: off
+window_ms: 100
+hysteresis: 2
+profiler_windows: 203
+profiler_overhead_ns: 587527
+---
+system_class: IDLE
+confidence: 23
+reason: little CPU activity
+policy: priority
+transitions: 35
+0.240 tid=2 kinit UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+0.774 tid=3 bflush UNKNOWN->IDLE conf=37% not running
+0.774 tid=4 netd UNKNOWN->INTERACTIVE conf=25% high wake-up frequency, low CPU
+0.981 tid=5 init UNKNOWN->IDLE conf=25% not running
+0.981 tid=6 sh UNKNOWN->IDLE conf=25% not running
+0.981 tid=8 sched UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+1.086 tid=2 kinit CPU_BOUND->MIXED conf=37% mixed behaviour
+1.198 tid=9 sched UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+1.540 tid=10 sched UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+1.741 tid=2 kinit MIXED->IDLE conf=50% not running
+1.841 tid=11 schedbench UNKNOWN->IO_BOUND conf=25% frequent I/O, short bursts
+2.042 tid=11 schedbench IO_BOUND->INTERACTIVE conf=25% high wake-up frequency, low CPU
+2.643 tid=3 bflush IDLE->INTERACTIVE conf=25% high wake-up frequency, low CPU
+10.554 tid=12 schedben[sched ] policy -> adaptive
+SCHEDBENCH {"name":"A2-profiling-off-r1","policy":"adaptive","seconds":10,"cpu_workers":3,"io_workers":1,"samples":436,"wake_p50_us":12917,"wake_p95_us":17049,"wake_p99_us":18007,"wake_max_us":19583,"dispatch_p50_us":12005,"dispatch_p99_us":17065,"resp_p50_us":22955,"resp_p95_us":27105,"resp_p99_us":28045,"cpu_jobs_per_s_x100":987963,"io_ops_per_s":44,"jain_x1000":999,"ctx_switches_per_s":423,"cpu_util_pct":99,"sched_overhead_ns_per_s":41986,"system_class":"IDLE","task_classes":"cpu:UNKNOWN,cpu:UNKNOWN,cpu:UNKNOWN,io:UNKNOWN,probe:UNKNOWN"}
+policy: adaptive
+policies: round_robin priority low_latency adaptive
+context_switches: 15671
+preemptions: 3166
+sched_calls: 15672
+sched_overhead_ns: 2006109
+busy_ns: 22664511324
+idle_ns: 8479794555
+tasks: 7
+runnable: 0
+policy_switches: 3
+profiler: on
+window_ms: 100
+hysteresis: 2
+profiler_windows: 308
+profiler_overhead_ns: 715273
+---
+system_class: IDLE
+confidence: 14
+reason: little CPU activity
+policy: adaptive
+transitions: 35
+0.240 tid=2 kinit UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+0.774 tid=3 bflush UNKNOWN->IDLE conf=37% not running
+0.774 tid=4 netd UNKNOWN->INTERACTIVE conf=25% high wake-up frequency, low CPU
+0.981 tid=5 init UNKNOWN->IDLE conf=25% not running
+0.981 tid=6 sh UNKNOWN->IDLE conf=25% not running
+0.981 tid=8 sched UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+1.086 tid=2 kinit CPU_BOUND->MIXED conf=37% mixed behaviour
+1.198 tid=9 sched UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+1.540 tid=10 sched UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+1.741 tid=2 kinit MIXED->IDLE conf=50% not running
+1.841 tid=11 schedbench UNKNOWN->IO_BOUND conf=25% frequent I/O, short bursts
+2.042 tid=11 schedbench IO_BOUND->INTERACTIVE conf=25% high wake-up frequency, low CPU
+2.643 tid=3 bflush IDLE->INTERACTIVE conf=25% high wake-up frequency, low CPU
+10.554 tid=12 schedben[sched ] policy -> round_robin
+SCHEDBENCH {"name":"A3-profile-no-switch-r1","policy":"round_robin","seconds":10,"cpu_workers":3,"io_workers":1,"samples":252,"wake_p50_us":30015,"wake_p95_us":30057,"wake_p99_us":30176,"wake_max_us":31813,"dispatch_p50_us":29046,"dispatch_p99_us":29204,"resp_p50_us":40053,"resp_p95_us":40096,"resp_p99_us":40216,"cpu_jobs_per_s_x100":997592,"io_ops_per_s":22,"jain_x1000":999,"ctx_switches_per_s":188,"cpu_util_pct":99,"sched_overhead_ns_per_s":32015,"system_class":"CPU_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:INTERACTIVE,probe:INTERACTIVE"}
+[sched ] policy -> adaptive
+SCHEDBENCH {"name":"A4-adaptive-r1","policy":"adaptive","seconds":10,"cpu_workers":3,"io_workers":1,"samples":902,"wake_p50_us":975,"wake_p95_us":1009,"wake_p99_us":1234,"wake_max_us":17057,"dispatch_p50_us":6,"dispatch_p99_us":89,"resp_p50_us":11013,"resp_p95_us":11058,"resp_p99_us":11383,"cpu_jobs_per_s_x100":973205,"io_ops_per_s":499,"jain_x1000":999,"ctx_switches_per_s":1763,"cpu_util_pct":99,"sched_overhead_ns_per_s":122950,"system_class":"IO_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:IO_BOUND,probe:INTERACTIVE"}
+policy: adaptive
+policies: round_robin priority low_latency adaptive
+context_switches: 35347
+preemptions: 12407
+sched_calls: 35349
+sched_overhead_ns: 3567555
+busy_ns: 43468367143
+idle_ns: 8499569286
+tasks: 7
+runnable: 0
+policy_switches: 5
+profiler: on
+window_ms: 25
+hysteresis: 2
+profiler_windows: 514
+profiler_overhead_ns: 1002786
+---
+system_class: CPU_BOUND
+confidence: 91
+reason: dominant class (interactive tasks present)
+policy: adaptive
+transitions: 68
+0.981 tid=6 sh UNKNOWN->IDLE conf=25% not running
+0.981 tid=8 sched UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+1.086 tid=2 kinit CPU_BOUND->MIXED conf=37% mixed behaviour
+1.198 tid=9 sched UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+1.540 tid=10 sched UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+1.741 tid=2 kinit MIXED->IDLE conf=50% not running
+1.841 tid=11 schedbench UNKNOWN->IO_BOUND conf=25% frequent I/O, short bursts
+2.042 tid=11 schedbench IO_BOUND->INTERACTIVE conf=25% high wake-up frequency, low CPU
+2.643 tid=3 bflush IDLE->INTERACTIVE conf=25% high wake-up frequency, low CPU
+10.554 tid=12 schedbench UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+10.554 tid=13 schedbench UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+10.554 tid=14 schedbench UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+10SCHEDBENCH {"name":"A6-window25-r1","policy":"adaptive","seconds":10,"cpu_workers":3,"io_workers":1,"samples":908,"wake_p50_us":973,"wake_p95_us":1013,"wake_p99_us":1096,"wake_max_us":13962,"dispatch_p50_us":7,"dispatch_p99_us":38,"resp_p50_us":11012,"resp_p95_us":11054,"resp_p99_us":11152,"cpu_jobs_per_s_x100":961831,"io_ops_per_s":505,"jain_x1000":999,"ctx_switches_per_s":1776,"cpu_util_pct":99,"sched_overhead_ns_per_s":133976,"system_class":"IO_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:IO_BOUND,probe:INTERACTIVE"}
+policy: adaptive
+policies: round_robin priority low_latency adaptive
+context_switches: 53295
+preemptions: 20684
+sched_calls: 53297
+sched_overhead_ns: 4919394
+busy_ns: 54015751464
+idle_ns: 8515931391
+tasks: 7
+runnable: 0
+policy_switches: 5
+profiler: on
+window_ms: 500
+hysteresis: 2
+profiler_windows: 926
+profiler_overhead_ns: 1530553
+---
+system_class: IDLE
+confidence: 50
+reason: little CPU activity
+policy: adaptive
+transitions: 78
+10.554 tid=13 schedbench UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+10.554 tid=14 schedbench UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+10.554 tid=15 schedbench UNKNOWN->INTERACTIVE conf=25% high wake-up frequency, low CPU
+10.554 tid=16 schedbench UNKNOWN->INTERACTIVE conf=25% high wake-up frequency, low CPU
+10.654 tid=3 bflush INTERACTIVE->IDLE conf=25% not running
+10.654 tid=11 schedbench INTERACTIVE->IDLE conf=25% not running
+12.256 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+12.657 tid=2 kinit MIXED->IDLE conf=50% not running
+13.058 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+13.458 tid=2 kinit MIXED->IDLE conf=50% not running
+14.960 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+15.361 tid=2 kinit MIXED->IDLE conf=50% not running
+15.761 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+16.162 tid=2 kinit MIXED->IDLE conf=50% not running
+17.664 tid=2 kinit IDLE->SCHEDBENCH {"name":"A6-window500-r1","policy":"adaptive","seconds":10,"cpu_workers":3,"io_workers":1,"samples":883,"wake_p50_us":975,"wake_p95_us":1031,"wake_p99_us":13016,"wake_max_us":18990,"dispatch_p50_us":6,"dispatch_p99_us":12028,"resp_p50_us":11013,"resp_p95_us":11078,"resp_p99_us":23055,"cpu_jobs_per_s_x100":968956,"io_ops_per_s":480,"jain_x1000":999,"ctx_switches_per_s":1697,"cpu_util_pct":99,"sched_overhead_ns_per_s":119947,"system_class":"IO_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:IO_BOUND,probe:INTERACTIVE"}
+policy: adaptive
+policies: round_robin priority low_latency adaptive
+context_switches: 70472
+preemptions: 28596
+sched_calls: 70474
+sched_overhead_ns: 6132237
+busy_ns: 64574819708
+idle_ns: 8536217629
+tasks: 7
+runnable: 0
+policy_switches: 5
+profiler: on
+window_ms: 100
+hysteresis: 2
+profiler_windows: 947
+profiler_overhead_ns: 1564237
+---
+system_class: IDLE
+confidence: 31
+reason: little CPU activity
+policy: adaptive
+transitions: 85
+12.657 tid=2 kinit MIXED->IDLE conf=50% not running
+13.058 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+13.458 tid=2 kinit MIXED->IDLE conf=50% not running
+14.960 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+15.361 tid=2 kinit MIXED->IDLE conf=50% not running
+15.761 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+16.162 tid=2 kinit MIXED->IDLE conf=50% not running
+17.664 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+18.064 tid=2 kinit MIXED->IDLE conf=50% not running
+18.565 tid=3 bflush IDLE->MIXED conf=25% mixed behaviour
+18.765 tid=3 bflush MIXED->IDLE conf=75% not running
+19.568 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+19.968 tid=2 kinit MIXED->IDLE conf=50% not running
+20.369 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+31.419 tid=24 sched UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+31.839 tid=26 schedbench UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+3policy: adaptive
+policies: round_robin priority low_latency adaptive
+context_switches: 70530
+preemptions: 28623
+sched_calls: 70532
+sched_overhead_ns: 6137360
+busy_ns: 65109986722
+idle_ns: 8536217629
+tasks: 7
+runnable: 0
+policy_switches: 5
+profiler: on
+window_ms: 100
+hysteresis: 1
+profiler_windows: 951
+profiler_overhead_ns: 1569801
+---
+system_class: CPU_BOUND
+confidence: 92
+reason: dominant class (interactive tasks present)
+policy: adaptive
+transitions: 92
+17.664 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+18.064 tid=2 kinit MIXED->IDLE conf=50% not running
+18.565 tid=3 bflush IDLE->MIXED conf=25% mixed behaviour
+18.765 tid=3 bflush MIXED->IDLE conf=75% not running
+19.568 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+19.968 tid=2 kinit MIXED->IDLE conf=50% not running
+20.369 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+31.419 tid=24 sched UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+31.839 tid=26 schedbench UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+31.839 tid=27 schedbench UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+31.839 tid=28 schedbench UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+31.839 tid=29 schedbench UNKNOWN->INTERACTIVE conf=25% high wake-up frequency, low CPU
+31.839 tid=30 schedbench UNKNOWN->INTERACTIVE conf=25% high wake-up frequency, low CPU
+31.94SCHEDBENCH {"name":"A7-hyst1-r1","policy":"adaptive","seconds":10,"cpu_workers":3,"io_workers":1,"samples":905,"wake_p50_us":975,"wake_p95_us":1017,"wake_p99_us":1481,"wake_max_us":13928,"dispatch_p50_us":6,"dispatch_p99_us":44,"resp_p50_us":11014,"resp_p95_us":11063,"resp_p99_us":11519,"cpu_jobs_per_s_x100":956928,"io_ops_per_s":503,"jain_x1000":999,"ctx_switches_per_s":1768,"cpu_util_pct":99,"sched_overhead_ns_per_s":123755,"system_class":"IO_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:IO_BOUND,probe:INTERACTIVE"}
+policy: adaptive
+policies: round_robin priority low_latency adaptive
+context_switches: 88413
+preemptions: 36867
+sched_calls: 88415
+sched_overhead_ns: 8041277
+busy_ns: 75861229635
+idle_ns: 8555379071
+tasks: 7
+runnable: 0
+policy_switches: 5
+profiler: on
+window_ms: 100
+hysteresis: 5
+profiler_windows: 1058
+profiler_overhead_ns: 1758278
+---
+system_class: IDLE
+confidence: 32
+reason: little CPU activity
+policy: adaptive
+transitions: 199
+77.602 tid=2 kinit MIXED->IDLE conf=62% not running
+77.802 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+77.902 tid=2 kinit MIXED->IDLE conf=62% not running
+78.002 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+78.102 tid=2 kinit MIXED->IDLE conf=62% not running
+78.303 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+78.403 tid=2 kinit MIXED->IDLE conf=62% not running
+78.503 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+78.603 tid=2 kinit MIXED->IDLE conf=62% not running
+78.803 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+78.803 tid=3 bflush IDLE->MIXED conf=12% mixed behaviour
+78.904 tid=2 kinit MIXED->IDLE conf=62% not running
+78.904 tid=3 bflush MIXED->IDLE conf=87% not running
+79.004 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+79.104 tid=2 kinit MIXED->IDLE conf=62% not running
+79.304 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+79.404 tid=2 kinit MIXED->IDLE conf=62% not running
+79.40SCHEDBENCH {"name":"A7-hyst5-r1","policy":"adaptive","seconds":10,"cpu_workers":3,"io_workers":1,"samples":885,"wake_p50_us":975,"wake_p95_us":1027,"wake_p99_us":21950,"wake_max_us":22059,"dispatch_p50_us":6,"dispatch_p99_us":21027,"resp_p50_us":11013,"resp_p95_us":11075,"resp_p99_us":31989,"cpu_jobs_per_s_x100":975432,"io_ops_per_s":483,"jain_x1000":999,"ctx_switches_per_s":1698,"cpu_util_pct":99,"sched_overhead_ns_per_s":119552,"system_class":"IO_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:IO_BOUND,probe:INTERACTIVE"}
+policy: adaptive
+policies: round_robin priority low_latency adaptive
+context_switches: 105557
+preemptions: 44766
+sched_calls: 105559
+sched_overhead_ns: 9245508
+busy_ns: 86464203014
+idle_ns: 8574730271
+tasks: 7
+runnable: 0
+policy_switches: 5
+profiler: on
+window_ms: 100
+hysteresis: 2
+profiler_windows: 1163
+profiler_overhead_ns: 1970695
+---
+system_class: IDLE
+confidence: 32
+reason: little CPU activity
+policy: adaptive
+transitions: 206
+78.503 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+78.603 tid=2 kinit MIXED->IDLE conf=62% not running
+78.803 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+78.803 tid=3 bflush IDLE->MIXED conf=12% mixed behaviour
+78.904 tid=2 kinit MIXED->IDLE conf=62% not running
+78.904 tid=3 bflush MIXED->IDLE conf=87% not running
+79.004 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+79.104 tid=2 kinit MIXED->IDLE conf=62% not running
+79.304 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+79.404 tid=2 kinit MIXED->IDLE conf=62% not running
+79.404 tid=53 schedbench IDLE->MIXED conf=12% mixed behaviour
+79.504 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+79.504 tid=53 schedbench MIXED->IDLE conf=87% not running
+79.605 tid=2 kinit MIXED->IDLE conf=62% not running
+79.805 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+79.905 tid=2 kinit MIXED->IDLE conf=62% not running
+80.005 tid=2 kinit IDLE->MIXED conf=50% mixedpolicy: adaptive
+policies: round_robin priority low_latency adaptive
+context_switches: 105618
+preemptions: 44795
+sched_calls: 105620
+sched_overhead_ns: 9252114
+busy_ns: 86909945996
+idle_ns: 8574730271
+tasks: 7
+runnable: 0
+policy_switches: 5
+profiler: on
+window_ms: 100
+hysteresis: 2
+profiler_windows: 1167
+profiler_overhead_ns: 1974053
+---
+system_class: IDLE
+confidence: 15
+reason: little CPU activity
+policy: adaptive
+transitions: 207
+78.603 tid=2 kinit MIXED->IDLE conf=62% not running
+78.803 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+78.803 tid=3 bflush IDLE->MIXED conf=12% mixed behaviour
+78.904 tid=2 kinit MIXED->IDLE conf=62% not running
+78.904 tid=3 bflush MIXED->IDLE conf=87% not running
+79.004 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+79.104 tid=2 kinit MIXED->IDLE conf=62% not running
+79.304 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+79.404 tid=2 kinit MIXED->IDLE conf=62% not running
+79.404 tid=53 schedbench IDLE->MIXED conf=12% mixed behaviour
+79.504 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+79.504 tid=53 schedbench MIXED->IDLE conf=87% not running
+79.605 tid=2 kinit MIXED->IDLE conf=62% not running
+79.805 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+79.905 tid=2 kinit MIXED->IDLE conf=62% not running
+80.005 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+80.105 tid=2 kinit MIXED->IDLE conf=62% not rpolicy: adaptive
+policies: round_robin priority low_latency adaptive
+context_switches: 105678
+preemptions: 44823
+sched_calls: 105680
+sched_overhead_ns: 9258250
+busy_ns: 87317316073
+idle_ns: 8574730271
+tasks: 7
+runnable: 0
+policy_switches: 5
+profiler: on
+window_ms: 100
+hysteresis: 2
+profiler_windows: 1171
+profiler_overhead_ns: 1978294
+---
+system_class: IDLE
+confidence: 14
+reason: little CPU activity
+policy: adaptive
+transitions: 209
+78.803 tid=3 bflush IDLE->MIXED conf=12% mixed behaviour
+78.904 tid=2 kinit MIXED->IDLE conf=62% not running
+78.904 tid=3 bflush MIXED->IDLE conf=87% not running
+79.004 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+79.104 tid=2 kinit MIXED->IDLE conf=62% not running
+79.304 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+79.404 tid=2 kinit MIXED->IDLE conf=62% not running
+79.404 tid=53 schedbench IDLE->MIXED conf=12% mixed behaviour
+79.504 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+79.504 tid=53 schedbench MIXED->IDLE conf=87% not running
+79.605 tid=2 kinit MIXED->IDLE conf=62% not running
+79.805 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+79.905 tid=2 kinit MIXED->IDLE conf=62% not running
+80.005 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+80.105 tid=2 kinit MIXED->IDLE conf=62% not running
+80.305 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+80.406 tid=2 kinit MIXED->IDLE conf=62% not rpolicy: adaptive
+policies: round_robin priority low_latency adaptive
+context_switches: 105737
+preemptions: 44851
+sched_calls: 105739
+sched_overhead_ns: 9264505
+busy_ns: 87727354218
+idle_ns: 8574730271
+tasks: 7
+runnable: 0
+policy_switches: 5
+profiler: on
+window_ms: 100
+hysteresis: 2
+profiler_windows: 1174
+profiler_overhead_ns: 1981151
+---
+system_class: IDLE
+confidence: 0
+reason: little CPU activity
+policy: adaptive
+transitions: 211
+78.904 tid=3 bflush MIXED->IDLE conf=87% not running
+79.004 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+79.104 tid=2 kinit MIXED->IDLE conf=62% not running
+79.304 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+79.404 tid=2 kinit MIXED->IDLE conf=62% not running
+79.404 tid=53 schedbench IDLE->MIXED conf=12% mixed behaviour
+79.504 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+79.504 tid=53 schedbench MIXED->IDLE conf=87% not running
+79.605 tid=2 kinit MIXED->IDLE conf=62% not running
+79.805 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+79.905 tid=2 kinit MIXED->IDLE conf=62% not running
+80.005 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+80.105 tid=2 kinit MIXED->IDLE conf=62% not running
+80.305 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+80.406 tid=2 kinit MIXED->IDLE conf=62% not running
+80.506 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+80.606 tid=2 kinit MIXED->IDLE conf=62% not run[sched ] policy -> priority
+SCHEDBENCH {"name":"A1-controller-off-r2","policy":"priority","seconds":10,"cpu_workers":3,"io_workers":1,"samples":253,"wake_p50_us":30014,"wake_p95_us":30066,"wake_p99_us":30146,"wake_max_us":42978,"dispatch_p50_us":29047,"dispatch_p99_us":29155,"resp_p50_us":40054,"resp_p95_us":40109,"resp_p99_us":40306,"cpu_jobs_per_s_x100":982633,"io_ops_per_s":22,"jain_x1000":999,"ctx_switches_per_s":188,"cpu_util_pct":99,"sched_overhead_ns_per_s":33651,"system_class":"CPU_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:INTERACTIVE,probe:INTERACTIVE"}
+policy: priority
+policies: round_robin priority low_latency adaptive
+context_switches: 107724
+preemptions: 45883
+sched_calls: 107726
+sched_overhead_ns: 9611475
+busy_ns: 98364197442
+idle_ns: 8588047008
+tasks: 7
+runnable: 0
+policy_switches: 6
+profiler: off
+window_ms: 100
+hysteresis: 2
+profiler_windows: 1280
+profiler_overhead_ns: 2146852
+---
+system_class: IDLE
+confidence: 15
+reason: little CPU activity
+policy: priority
+transitions: 240
+82.009 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+82.109 tid=2 kinit MIXED->IDLE conf=62% not running
+82.309 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+82.409 tid=2 kinit MIXED->IDLE conf=62% not running
+82.510 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+82.610 tid=2 kinit MIXED->IDLE conf=62% not running
+82.810 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+82.810 tid=3 bflush IDLE->MIXED conf=12% mixed behaviour
+82.910 tid=2 kinit MIXED->IDLE conf=62% not running
+82.910 tid=3 bflush MIXED->IDLE conf=87% not running
+83.010 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+83.110 tid=2 kinit MIXED->IDLE conf=62% not running
+83.311 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+83.411 tid=2 kinit MIXED->IDLE conf=62% not running
+83.511 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+83.611 tid=2 kinit MIXED->IDLE conf=62% not running
+83.811 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+8[sched ] policy -> adaptive
+SCHEDBENCH {"name":"A2-profiling-off-r2","policy":"adaptive","seconds":10,"cpu_workers":3,"io_workers":1,"samples":437,"wake_p50_us":12048,"wake_p95_us":17037,"wake_p99_us":18060,"wake_max_us":19010,"dispatch_p50_us":11085,"dispatch_p99_us":17099,"resp_p50_us":22088,"resp_p95_us":27076,"resp_p99_us":28101,"cpu_jobs_per_s_x100":992707,"io_ops_per_s":44,"jain_x1000":999,"ctx_switches_per_s":425,"cpu_util_pct":99,"sched_overhead_ns_per_s":62561,"system_class":"IDLE","task_classes":"cpu:UNKNOWN,cpu:UNKNOWN,cpu:UNKNOWN,io:UNKNOWN,probe:UNKNOWN"}
+policy: adaptive
+policies: round_robin priority low_latency adaptive
+context_switches: 112012
+preemptions: 48002
+sched_calls: 112014
+sched_overhead_ns: 10240896
+busy_ns: 109054026351
+idle_ns: 8592915722
+tasks: 7
+runnable: 0
+policy_switches: 7
+profiler: on
+window_ms: 100
+hysteresis: 2
+profiler_windows: 1386
+profiler_overhead_ns: 2245787
+---
+system_class: IDLE
+confidence: 14
+reason: little CPU activity
+policy: adaptive
+transitions: 240
+82.009 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+82.109 tid=2 kinit MIXED->IDLE conf=62% not running
+82.309 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+82.409 tid=2 kinit MIXED->IDLE conf=62% not running
+82.510 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+82.610 tid=2 kinit MIXED->IDLE conf=62% not running
+82.810 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+82.810 tid=3 bflush IDLE->MIXED conf=12% mixed behaviour
+82.910 tid=2 kinit MIXED->IDLE conf=62% not running
+82.910 tid=3 bflush MIXED->IDLE conf=87% not running
+83.010 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+83.110 tid=2 kinit MIXED->IDLE conf=62% not running
+83.311 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+83.411 tid=2 kinit MIXED->IDLE conf=62% not running
+83.511 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+83.611 tid=2 kinit MIXED->IDLE conf=62% not running
+83.811 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+8[sched ] policy -> round_robin
+SCHEDBENCH {"name":"A3-profile-no-switch-r2","policy":"round_robin","seconds":10,"cpu_workers":3,"io_workers":1,"samples":253,"wake_p50_us":30015,"wake_p95_us":30050,"wake_p99_us":30086,"wake_max_us":31154,"dispatch_p50_us":29047,"dispatch_p99_us":29107,"resp_p50_us":40054,"resp_p95_us":40092,"resp_p99_us":40126,"cpu_jobs_per_s_x100":988688,"io_ops_per_s":22,"jain_x1000":999,"ctx_switches_per_s":188,"cpu_util_pct":99,"sched_overhead_ns_per_s":39418,"system_class":"CPU_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:INTERACTIVE,probe:INTERACTIVE"}
+[sched ] policy -> adaptive
+SCHEDBENCH {"name":"A4-adaptive-r2","policy":"adaptive","seconds":10,"cpu_workers":3,"io_workers":1,"samples":902,"wake_p50_us":975,"wake_p95_us":1012,"wake_p99_us":1208,"wake_max_us":18000,"dispatch_p50_us":6,"dispatch_p99_us":98,"resp_p50_us":11013,"resp_p95_us":11057,"resp_p99_us":11256,"cpu_jobs_per_s_x100":958363,"io_ops_per_s":499,"jain_x1000":999,"ctx_switches_per_s":1749,"cpu_util_pct":99,"sched_overhead_ns_per_s":154182,"system_class":"IO_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:IO_BOUND,probe:INTERACTIVE"}
+policy: adaptive
+policies: round_robin priority low_latency adaptive
+context_switches: 131551
+preemptions: 57181
+sched_calls: 131553
+sched_overhead_ns: 12191407
+busy_ns: 129980151035
+idle_ns: 8607154966
+tasks: 7
+runnable: 0
+policy_switches: 9
+profiler: on
+window_ms: 25
+hysteresis: 2
+profiler_windows: 1592
+profiler_overhead_ns: 2623184
+---
+system_class: CPU_BOUND
+confidence: 92
+reason: dominant class (interactive tasks present)
+policy: adaptive
+transitions: 275
+96.582 tid=69 sched UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+96.902 tid=3 bflush IDLE->MIXED conf=25% mixed behaviour
+97.003 tid=71 schedbench UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+97.003 tid=72 schedbench UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+97.003 tid=73 schedbench UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+97.003 tid=74 schedbench UNKNOWN->INTERACTIVE conf=25% high wake-up frequency, low CPU
+97.003 tid=75 schedbench UNKNOWN->INTERACTIVE conf=25% high wake-up frequency, low CPU
+97.103 tid=3 bflush MIXED->IDLE conf=75% not running
+97.103 tid=70 schedbench UNKNOWN->IDLE conf=25% not running
+97.403 tid=2 kinit MIXED->IDLE conf=50% not running
+97.804 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+98.204 tid=2 kinit MIXED->IDLE conf=50% not running
+98.605 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+SCHEDBENCH {"name":"A6-window25-r2","policy":"adaptive","seconds":10,"cpu_workers":3,"io_workers":1,"samples":905,"wake_p50_us":971,"wake_p95_us":1044,"wake_p99_us":3666,"wake_max_us":12009,"dispatch_p50_us":9,"dispatch_p99_us":170,"resp_p50_us":11011,"resp_p95_us":11110,"resp_p99_us":13980,"cpu_jobs_per_s_x100":849852,"io_ops_per_s":493,"jain_x1000":999,"ctx_switches_per_s":1745,"cpu_util_pct":99,"sched_overhead_ns_per_s":695739,"system_class":"IO_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:IO_BOUND,probe:INTERACTIVE"}
+policy: adaptive
+policies: round_robin priority low_latency adaptive
+context_switches: 149207
+preemptions: 65318
+sched_calls: 149209
+sched_overhead_ns: 19196909
+busy_ns: 140552145314
+idle_ns: 8628734244
+tasks: 7
+runnable: 0
+policy_switches: 9
+profiler: on
+window_ms: 500
+hysteresis: 2
+profiler_windows: 2002
+profiler_overhead_ns: 3935879
+---
+system_class: IDLE
+confidence: 40
+reason: little CPU activity
+policy: adaptive
+transitions: 289
+99.006 tid=2 kinit MIXED->IDLE conf=50% not running
+99.106 tid=3 bflush MIXED->IDLE conf=75% not running
+100.508 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+100.909 tid=2 kinit MIXED->IDLE conf=50% not running
+101.309 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+101.710 tid=2 kinit MIXED->IDLE conf=50% not running
+101.910 tid=70 schedbench IDLE->MIXED conf=25% mixed behaviour
+102.111 tid=70 schedbench MIXED->IDLE conf=75% not running
+103.212 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+103.613 tid=2 kinit MIXED->IDLE conf=50% not running
+104.013 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+104.414 tid=2 kinit MIXED->IDLE conf=50% not running
+105.916 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+106.316 tid=2 kinit MIXED->IDLE conf=50% not running
+106.717 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+117.935 tid=83 sched UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+118.357 SCHEDBENCH {"name":"A6-window500-r2","policy":"adaptive","seconds":10,"cpu_workers":3,"io_workers":1,"samples":885,"wake_p50_us":974,"wake_p95_us":1036,"wake_p99_us":13935,"wake_max_us":16038,"dispatch_p50_us":7,"dispatch_p99_us":13018,"resp_p50_us":11013,"resp_p95_us":11106,"resp_p99_us":23973,"cpu_jobs_per_s_x100":950532,"io_ops_per_s":479,"jain_x1000":999,"ctx_switches_per_s":1700,"cpu_util_pct":99,"sched_overhead_ns_per_s":286307,"system_class":"IO_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:IO_BOUND,probe:INTERACTIVE"}
+policy: adaptive
+policies: round_robin priority low_latency adaptive
+context_switches: 166411
+preemptions: 73240
+sched_calls: 166413
+sched_overhead_ns: 22074862
+busy_ns: 151152352482
+idle_ns: 8649257189
+tasks: 7
+runnable: 0
+policy_switches: 9
+profiler: on
+window_ms: 100
+hysteresis: 2
+profiler_windows: 2023
+profiler_overhead_ns: 3968790
+---
+system_class: IDLE
+confidence: 31
+reason: little CPU activity
+policy: adaptive
+transitions: 298
+103.613 tid=2 kinit MIXED->IDLE conf=50% not running
+104.013 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+104.414 tid=2 kinit MIXED->IDLE conf=50% not running
+105.916 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+106.316 tid=2 kinit MIXED->IDLE conf=50% not running
+106.717 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+117.935 tid=83 sched UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+118.357 tid=85 schedbench UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+118.357 tid=86 schedbench UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+118.457 tid=2 kinit MIXED->IDLE conf=50% not running
+118.457 tid=84 schedbench UNKNOWN->IDLE conf=25% not running
+118.457 tid=87 schedbench UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+118.457 tid=88 schedbench UNKNOWN->INTERACTIVE conf=25% high wake-up frequency, low CPU
+118.457 tid=89 schedbench UNKNOWN->INTERACTIVE conf=policy: adaptive
+policies: round_robin priority low_latency adaptive
+context_switches: 166464
+preemptions: 73265
+sched_calls: 166466
+sched_overhead_ns: 22079624
+busy_ns: 151602668946
+idle_ns: 8649257189
+tasks: 7
+runnable: 0
+policy_switches: 9
+profiler: on
+window_ms: 100
+hysteresis: 1
+profiler_windows: 2027
+profiler_overhead_ns: 3973091
+---
+system_class: CPU_BOUND
+confidence: 76
+reason: dominant class (interactive tasks present)
+policy: adaptive
+transitions: 302
+106.316 tid=2 kinit MIXED->IDLE conf=50% not running
+106.717 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+117.935 tid=83 sched UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+118.357 tid=85 schedbench UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+118.357 tid=86 schedbench UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+118.457 tid=2 kinit MIXED->IDLE conf=50% not running
+118.457 tid=84 schedbench UNKNOWN->IDLE conf=25% not running
+118.457 tid=87 schedbench UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+118.457 tid=88 schedbench UNKNOWN->INTERACTIVE conf=25% high wake-up frequency, low CPU
+118.457 tid=89 schedbench UNKNOWN->INTERACTIVE conf=25% high wake-up frequency, low CPU
+118.858 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+119.258 tid=2 kinit MIXED->IDLE conf=50% not running
+120.760 tid=2 kinit IDLE->MIXED conf=50% mixedSCHEDBENCH {"name":"A7-hyst1-r2","policy":"adaptive","seconds":10,"cpu_workers":3,"io_workers":1,"samples":907,"wake_p50_us":975,"wake_p95_us":1010,"wake_p99_us":1091,"wake_max_us":11987,"dispatch_p50_us":6,"dispatch_p99_us":38,"resp_p50_us":11013,"resp_p95_us":11052,"resp_p99_us":11146,"cpu_jobs_per_s_x100":972112,"io_ops_per_s":505,"jain_x1000":999,"ctx_switches_per_s":1765,"cpu_util_pct":99,"sched_overhead_ns_per_s":148755,"system_class":"IO_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:IO_BOUND,probe:INTERACTIVE"}
+policy: adaptive
+policies: round_robin priority low_latency adaptive
+context_switches: 184322
+preemptions: 81492
+sched_calls: 184324
+sched_overhead_ns: 23579510
+busy_ns: 162160929624
+idle_ns: 8669733723
+tasks: 7
+runnable: 0
+policy_switches: 9
+profiler: on
+window_ms: 100
+hysteresis: 5
+profiler_windows: 2132
+profiler_overhead_ns: 4143925
+---
+system_class: IDLE
+confidence: 33
+reason: little CPU activity
+policy: adaptive
+transitions: 408
+164.015 tid=2 kinit MIXED->IDLE conf=62% not running
+164.215 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+164.315 tid=2 kinit MIXED->IDLE conf=62% not running
+164.415 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+164.516 tid=2 kinit MIXED->IDLE conf=62% not running
+164.716 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+164.816 tid=2 kinit MIXED->IDLE conf=62% not running
+164.916 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+165.016 tid=2 kinit MIXED->IDLE conf=62% not running
+165.217 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+165.317 tid=2 kinit MIXED->IDLE conf=62% not running
+165.317 tid=3 bflush IDLE->MIXED conf=12% mixed behaviour
+165.417 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+165.417 tid=3 bflush MIXED->IDLE conf=87% not running
+165.517 tid=2 kinit MIXED->IDLE conf=62% not running
+165.717 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+165.817 tid=2 kinit MIXED->IDLE conf=62% SCHEDBENCH {"name":"A7-hyst5-r2","policy":"adaptive","seconds":10,"cpu_workers":3,"io_workers":1,"samples":888,"wake_p50_us":975,"wake_p95_us":1017,"wake_p99_us":13990,"wake_max_us":18003,"dispatch_p50_us":6,"dispatch_p99_us":13034,"resp_p50_us":11013,"resp_p95_us":11066,"resp_p99_us":24028,"cpu_jobs_per_s_x100":971066,"io_ops_per_s":487,"jain_x1000":999,"ctx_switches_per_s":1722,"cpu_util_pct":99,"sched_overhead_ns_per_s":137018,"system_class":"IO_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:IO_BOUND,probe:INTERACTIVE"}
+policy: adaptive
+policies: round_robin priority low_latency adaptive
+context_switches: 201756
+preemptions: 89554
+sched_calls: 201758
+sched_overhead_ns: 24964230
+busy_ns: 172727771672
+idle_ns: 8693164184
+tasks: 7
+runnable: 0
+policy_switches: 9
+profiler: on
+window_ms: 100
+hysteresis: 2
+profiler_windows: 2237
+profiler_overhead_ns: 4302828
+---
+system_class: IDLE
+confidence: 32
+reason: little CPU activity
+policy: adaptive
+transitions: 415
+164.916 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+165.016 tid=2 kinit MIXED->IDLE conf=62% not running
+165.217 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+165.317 tid=2 kinit MIXED->IDLE conf=62% not running
+165.317 tid=3 bflush IDLE->MIXED conf=12% mixed behaviour
+165.417 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+165.417 tid=3 bflush MIXED->IDLE conf=87% not running
+165.517 tid=2 kinit MIXED->IDLE conf=62% not running
+165.717 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+165.817 tid=2 kinit MIXED->IDLE conf=62% not running
+165.817 tid=112 schedbench IDLE->MIXED conf=12% mixed behaviour
+165.917 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+165.917 tid=112 schedbench MIXED->IDLE conf=87% not running
+166.018 tid=2 kinit MIXED->IDLE conf=62% not running
+166.218 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+166.318 tid=2 kinit MIXED->IDLE conf=62% not running
+166.418 tid=2 kinit IDLE->Mpolicy: adaptive
+policies: round_robin priority low_latency adaptive
+context_switches: 201815
+preemptions: 89582
+sched_calls: 201817
+sched_overhead_ns: 24969483
+busy_ns: 173168274950
+idle_ns: 8693164184
+tasks: 7
+runnable: 0
+policy_switches: 9
+profiler: on
+window_ms: 100
+hysteresis: 2
+profiler_windows: 2241
+profiler_overhead_ns: 4307098
+---
+system_class: IDLE
+confidence: 17
+reason: little CPU activity
+policy: adaptive
+transitions: 416
+165.016 tid=2 kinit MIXED->IDLE conf=62% not running
+165.217 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+165.317 tid=2 kinit MIXED->IDLE conf=62% not running
+165.317 tid=3 bflush IDLE->MIXED conf=12% mixed behaviour
+165.417 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+165.417 tid=3 bflush MIXED->IDLE conf=87% not running
+165.517 tid=2 kinit MIXED->IDLE conf=62% not running
+165.717 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+165.817 tid=2 kinit MIXED->IDLE conf=62% not running
+165.817 tid=112 schedbench IDLE->MIXED conf=12% mixed behaviour
+165.917 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+165.917 tid=112 schedbench MIXED->IDLE conf=87% not running
+166.018 tid=2 kinit MIXED->IDLE conf=62% not running
+166.218 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+166.318 tid=2 kinit MIXED->IDLE conf=62% not running
+166.418 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+166.518 tid=2 kinit MIXED->policy: adaptive
+policies: round_robin priority low_latency adaptive
+context_switches: 201873
+preemptions: 89609
+sched_calls: 201875
+sched_overhead_ns: 24975638
+busy_ns: 173624828763
+idle_ns: 8693164184
+tasks: 7
+runnable: 0
+policy_switches: 9
+profiler: on
+window_ms: 100
+hysteresis: 2
+profiler_windows: 2245
+profiler_overhead_ns: 4313003
+---
+system_class: IDLE
+confidence: 21
+reason: little CPU activity
+policy: adaptive
+transitions: 418
+165.317 tid=2 kinit MIXED->IDLE conf=62% not running
+165.317 tid=3 bflush IDLE->MIXED conf=12% mixed behaviour
+165.417 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+165.417 tid=3 bflush MIXED->IDLE conf=87% not running
+165.517 tid=2 kinit MIXED->IDLE conf=62% not running
+165.717 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+165.817 tid=2 kinit MIXED->IDLE conf=62% not running
+165.817 tid=112 schedbench IDLE->MIXED conf=12% mixed behaviour
+165.917 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+165.917 tid=112 schedbench MIXED->IDLE conf=87% not running
+166.018 tid=2 kinit MIXED->IDLE conf=62% not running
+166.218 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+166.318 tid=2 kinit MIXED->IDLE conf=62% not running
+166.418 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+166.518 tid=2 kinit MIXED->IDLE conf=62% not running
+166.719 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+166.819 tid=2 kinit MIXED->policy: adaptive
+policies: round_robin priority low_latency adaptive
+context_switches: 201937
+preemptions: 89639
+sched_calls: 201939
+sched_overhead_ns: 24980851
+busy_ns: 174125365023
+idle_ns: 8693164184
+tasks: 7
+runnable: 0
+policy_switches: 9
+profiler: on
+window_ms: 100
+hysteresis: 2
+profiler_windows: 2250
+profiler_overhead_ns: 4319890
+---
+system_class: IDLE
+confidence: 16
+reason: little CPU activity
+policy: adaptive
+transitions: 420
+165.417 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+165.417 tid=3 bflush MIXED->IDLE conf=87% not running
+165.517 tid=2 kinit MIXED->IDLE conf=62% not running
+165.717 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+165.817 tid=2 kinit MIXED->IDLE conf=62% not running
+165.817 tid=112 schedbench IDLE->MIXED conf=12% mixed behaviour
+165.917 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+165.917 tid=112 schedbench MIXED->IDLE conf=87% not running
+166.018 tid=2 kinit MIXED->IDLE conf=62% not running
+166.218 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+166.318 tid=2 kinit MIXED->IDLE conf=62% not running
+166.418 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+166.518 tid=2 kinit MIXED->IDLE conf=62% not running
+166.719 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+166.819 tid=2 kinit MIXED->IDLE conf=62% not running
+166.919 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+167.019 tid=2 kinit MIXED->I[sched ] policy -> priority
+SCHEDBENCH {"name":"A1-controller-off-r3","policy":"priority","seconds":10,"cpu_workers":3,"io_workers":1,"samples":253,"wake_p50_us":30014,"wake_p95_us":30059,"wake_p99_us":30230,"wake_max_us":35034,"dispatch_p50_us":29048,"dispatch_p99_us":29263,"resp_p50_us":40053,"resp_p95_us":40117,"resp_p99_us":40294,"cpu_jobs_per_s_x100":978395,"io_ops_per_s":21,"jain_x1000":999,"ctx_switches_per_s":188,"cpu_util_pct":99,"sched_overhead_ns_per_s":37602,"system_class":"CPU_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:INTERACTIVE,probe:INTERACTIVE"}
+policy: priority
+policies: round_robin priority low_latency adaptive
+context_switches: 203963
+preemptions: 90670
+sched_calls: 203965
+sched_overhead_ns: 25368131
+busy_ns: 184849343690
+idle_ns: 8707466156
+tasks: 7
+runnable: 0
+policy_switches: 10
+profiler: off
+window_ms: 100
+hysteresis: 2
+profiler_windows: 2356
+profiler_overhead_ns: 4490312
+---
+system_class: IDLE
+confidence: 16
+reason: little CPU activity
+policy: priority
+transitions: 445
+167.921 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+168.021 tid=2 kinit MIXED->IDLE conf=62% not running
+168.222 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+168.322 tid=2 kinit MIXED->IDLE conf=62% not running
+168.422 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+168.522 tid=2 kinit MIXED->IDLE conf=62% not running
+168.722 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+168.823 tid=2 kinit MIXED->IDLE conf=62% not running
+168.923 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+169.023 tid=2 kinit MIXED->IDLE conf=62% not running
+169.223 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+169.323 tid=2 kinit MIXED->IDLE conf=62% not running
+169.323 tid=3 bflush IDLE->MIXED conf=12% mixed behaviour
+169.423 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+169.423 tid=3 bflush MIXED->IDLE conf=87% not running
+169.523 tid=2 kinit MIXED->IDLE conf=62% not running
+169.724 tid=2 kinit IDLE->MIXED conf=37% [sched ] policy -> adaptive
+SCHEDBENCH {"name":"A2-profiling-off-r3","policy":"adaptive","seconds":10,"cpu_workers":3,"io_workers":1,"samples":431,"wake_p50_us":12985,"wake_p95_us":17987,"wake_p99_us":18010,"wake_max_us":19042,"dispatch_p50_us":12022,"dispatch_p99_us":17039,"resp_p50_us":23023,"resp_p95_us":28026,"resp_p99_us":28049,"cpu_jobs_per_s_x100":984774,"io_ops_per_s":43,"jain_x1000":999,"ctx_switches_per_s":421,"cpu_util_pct":99,"sched_overhead_ns_per_s":52755,"system_class":"IDLE","task_classes":"cpu:UNKNOWN,cpu:UNKNOWN,cpu:UNKNOWN,io:UNKNOWN,probe:UNKNOWN"}
+policy: adaptive
+policies: round_robin priority low_latency adaptive
+context_switches: 208207
+preemptions: 92757
+sched_calls: 208210
+sched_overhead_ns: 25899048
+busy_ns: 195649317670
+idle_ns: 8712281348
+tasks: 7
+runnable: 0
+policy_switches: 11
+profiler: on
+window_ms: 100
+hysteresis: 2
+profiler_windows: 2462
+profiler_overhead_ns: 4609829
+---
+system_class: IDLE
+confidence: 13
+reason: little CPU activity
+policy: adaptive
+transitions: 445
+167.921 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+168.021 tid=2 kinit MIXED->IDLE conf=62% not running
+168.222 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+168.322 tid=2 kinit MIXED->IDLE conf=62% not running
+168.422 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+168.522 tid=2 kinit MIXED->IDLE conf=62% not running
+168.722 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+168.823 tid=2 kinit MIXED->IDLE conf=62% not running
+168.923 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+169.023 tid=2 kinit MIXED->IDLE conf=62% not running
+169.223 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+169.323 tid=2 kinit MIXED->IDLE conf=62% not running
+169.323 tid=3 bflush IDLE->MIXED conf=12% mixed behaviour
+169.423 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+169.423 tid=3 bflush MIXED->IDLE conf=87% not running
+169.523 tid=2 kinit MIXED->IDLE conf=62% not running
+169.724 tid=2 kinit IDLE->MIXED conf=37% [sched ] policy -> round_robin
+SCHEDBENCH {"name":"A3-profile-no-switch-r3","policy":"round_robin","seconds":10,"cpu_workers":3,"io_workers":1,"samples":254,"wake_p50_us":30014,"wake_p95_us":30061,"wake_p99_us":30214,"wake_max_us":30410,"dispatch_p50_us":29046,"dispatch_p99_us":29184,"resp_p50_us":40053,"resp_p95_us":40115,"resp_p99_us":40294,"cpu_jobs_per_s_x100":987462,"io_ops_per_s":21,"jain_x1000":999,"ctx_switches_per_s":188,"cpu_util_pct":99,"sched_overhead_ns_per_s":44548,"system_class":"CPU_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:INTERACTIVE,probe:INTERACTIVE"}
+[sched ] policy -> adaptive
+SCHEDBENCH {"name":"A4-adaptive-r3","policy":"adaptive","seconds":10,"cpu_workers":3,"io_workers":1,"samples":901,"wake_p50_us":975,"wake_p95_us":1011,"wake_p99_us":1569,"wake_max_us":18000,"dispatch_p50_us":6,"dispatch_p99_us":38,"resp_p50_us":11014,"resp_p95_us":11050,"resp_p99_us":11607,"cpu_jobs_per_s_x100":975113,"io_ops_per_s":500,"jain_x1000":999,"ctx_switches_per_s":1763,"cpu_util_pct":99,"sched_overhead_ns_per_s":120087,"system_class":"IO_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:IO_BOUND,probe:INTERACTIVE"}
+policy: adaptive
+policies: round_robin priority low_latency adaptive
+context_switches: 227882
+preemptions: 102001
+sched_calls: 227886
+sched_overhead_ns: 27557840
+busy_ns: 216426226808
+idle_ns: 8726486579
+tasks: 7
+runnable: 0
+policy_switches: 13
+profiler: on
+window_ms: 25
+hysteresis: 2
+profiler_windows: 2668
+profiler_overhead_ns: 4921191
+---
+system_class: CPU_BOUND
+confidence: 91
+reason: dominant class (interactive tasks present)
+policy: adaptive
+transitions: 481
+182.212 tid=2 kinit MIXED->IDLE conf=50% not running
+182.536 tid=127 sched UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+182.863 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+183.072 tid=128 sched UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+183.494 tid=2 kinit MIXED->IDLE conf=50% not running
+183.594 tid=130 schedbench UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+183.594 tid=131 schedbench UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+183.594 tid=132 schedbench UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+183.594 tid=133 schedbench UNKNOWN->INTERACTIVE conf=25% high wake-up frequency, low CPU
+183.594 tid=134 schedbench UNKNOWN->INTERACTIVE conf=25% high wake-up frequency, low CPU
+183.694 tid=129 schedbench UNKNOWN->IDLE conf=25% not running
+184.996 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+185.396 tiSCHEDBENCH {"name":"A6-window25-r3","policy":"adaptive","seconds":10,"cpu_workers":3,"io_workers":1,"samples":908,"wake_p50_us":975,"wake_p95_us":1002,"wake_p99_us":1113,"wake_max_us":15994,"dispatch_p50_us":6,"dispatch_p99_us":43,"resp_p50_us":11013,"resp_p95_us":11043,"resp_p99_us":11152,"cpu_jobs_per_s_x100":969578,"io_ops_per_s":505,"jain_x1000":999,"ctx_switches_per_s":1778,"cpu_util_pct":99,"sched_overhead_ns_per_s":141342,"system_class":"IO_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:IO_BOUND,probe:INTERACTIVE"}
+policy: adaptive
+policies: round_robin priority low_latency adaptive
+context_switches: 245858
+preemptions: 110304
+sched_calls: 245862
+sched_overhead_ns: 28982026
+busy_ns: 227034975200
+idle_ns: 8741092600
+tasks: 7
+runnable: 0
+policy_switches: 13
+profiler: on
+window_ms: 500
+hysteresis: 2
+profiler_windows: 3081
+profiler_overhead_ns: 5428359
+---
+system_class: IDLE
+confidence: 0
+reason: little CPU activity
+policy: adaptive
+transitions: 498
+188.501 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+188.901 tid=2 kinit MIXED->IDLE conf=50% not running
+189.403 tid=3 bflush IDLE->MIXED conf=25% mixed behaviour
+189.603 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+189.603 tid=3 bflush MIXED->IDLE conf=75% not running
+190.004 tid=2 kinit MIXED->IDLE conf=50% not running
+190.404 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+190.805 tid=2 kinit MIXED->IDLE conf=50% not running
+192.307 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+192.707 tid=2 kinit MIXED->IDLE conf=50% not running
+193.108 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+204.633 tid=142 sched UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+204.943 tid=2 kinit MIXED->IDLE conf=50% not running
+205.043 tid=144 schedbench UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+205.043 tid=145 schedbench UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+205.04SCHEDBENCH {"name":"A6-window500-r3","policy":"adaptive","seconds":10,"cpu_workers":3,"io_workers":1,"samples":884,"wake_p50_us":974,"wake_p95_us":1029,"wake_p99_us":12982,"wake_max_us":18005,"dispatch_p50_us":6,"dispatch_p99_us":12022,"resp_p50_us":11013,"resp_p95_us":11076,"resp_p99_us":23021,"cpu_jobs_per_s_x100":971678,"io_ops_per_s":479,"jain_x1000":999,"ctx_switches_per_s":1698,"cpu_util_pct":99,"sched_overhead_ns_per_s":118046,"system_class":"IO_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:IO_BOUND,probe:INTERACTIVE"}
+policy: adaptive
+policies: round_robin priority low_latency adaptive
+context_switches: 263044
+preemptions: 118233
+sched_calls: 263048
+sched_overhead_ns: 30175171
+busy_ns: 237630251165
+idle_ns: 8762279687
+tasks: 7
+runnable: 0
+policy_switches: 13
+profiler: on
+window_ms: 100
+hysteresis: 2
+profiler_windows: 3102
+profiler_overhead_ns: 5476709
+---
+system_class: IDLE
+confidence: 32
+reason: little CPU activity
+policy: adaptive
+transitions: 505
+190.805 tid=2 kinit MIXED->IDLE conf=50% not running
+192.307 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+192.707 tid=2 kinit MIXED->IDLE conf=50% not running
+193.108 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+204.633 tid=142 sched UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+204.943 tid=2 kinit MIXED->IDLE conf=50% not running
+205.043 tid=144 schedbench UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+205.043 tid=145 schedbench UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+205.043 tid=146 schedbench UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+205.043 tid=147 schedbench UNKNOWN->INTERACTIVE conf=25% high wake-up frequency, low CPU
+205.043 tid=148 schedbench UNKNOWN->INTERACTIVE conf=25% high wake-up frequency, low CPU
+205.144 tid=143 schedbench UNKNOWN->IDLE conf=25% not running
+205.544 tid=3 bflush IDLE->MIXED conf=25% mixed behaviour
+205.744 tpolicy: adaptive
+policies: round_robin priority low_latency adaptive
+context_switches: 263100
+preemptions: 118259
+sched_calls: 263104
+sched_overhead_ns: 30180765
+busy_ns: 238228434668
+idle_ns: 8762279687
+tasks: 7
+runnable: 0
+policy_switches: 13
+profiler: on
+window_ms: 100
+hysteresis: 1
+profiler_windows: 3107
+profiler_overhead_ns: 5482633
+---
+system_class: CPU_BOUND
+confidence: 92
+reason: dominant class (interactive tasks present)
+policy: adaptive
+transitions: 512
+205.043 tid=145 schedbench UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+205.043 tid=146 schedbench UNKNOWN->CPU_BOUND conf=25% uses full quanta, rarely blocks
+205.043 tid=147 schedbench UNKNOWN->INTERACTIVE conf=25% high wake-up frequency, low CPU
+205.043 tid=148 schedbench UNKNOWN->INTERACTIVE conf=25% high wake-up frequency, low CPU
+205.144 tid=143 schedbench UNKNOWN->IDLE conf=25% not running
+205.544 tid=3 bflush IDLE->MIXED conf=25% mixed behaviour
+205.744 tid=3 bflush MIXED->IDLE conf=75% not running
+206.445 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+206.846 tid=2 kinit MIXED->IDLE conf=50% not running
+207.247 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+207.647 tid=2 kinit MIXED->IDLE conf=50% not running
+208.348 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+208.749 tid=2 kinit MIXED->IDLE conf=50% not running
+209.149 tid=2 kinit IDLE->MIXED conf=50SCHEDBENCH {"name":"A7-hyst1-r3","policy":"adaptive","seconds":10,"cpu_workers":3,"io_workers":1,"samples":907,"wake_p50_us":974,"wake_p95_us":1024,"wake_p99_us":1436,"wake_max_us":12032,"dispatch_p50_us":6,"dispatch_p99_us":63,"resp_p50_us":11013,"resp_p95_us":11076,"resp_p99_us":11514,"cpu_jobs_per_s_x100":954323,"io_ops_per_s":505,"jain_x1000":999,"ctx_switches_per_s":1769,"cpu_util_pct":99,"sched_overhead_ns_per_s":148094,"system_class":"IO_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:IO_BOUND,probe:INTERACTIVE"}
+policy: adaptive
+policies: round_robin priority low_latency adaptive
+context_switches: 281005
+preemptions: 126510
+sched_calls: 281009
+sched_overhead_ns: 31674483
+busy_ns: 248930446591
+idle_ns: 8784222485
+tasks: 7
+runnable: 0
+policy_switches: 13
+profiler: on
+window_ms: 100
+hysteresis: 5
+profiler_windows: 3213
+profiler_overhead_ns: 5677606
+---
+system_class: IDLE
+confidence: 34
+reason: little CPU activity
+policy: adaptive
+transitions: 620
+251.122 tid=2 kinit MIXED->IDLE conf=62% not running
+251.322 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+251.423 tid=2 kinit MIXED->IDLE conf=62% not running
+251.523 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+251.623 tid=2 kinit MIXED->IDLE conf=62% not running
+251.623 tid=3 bflush IDLE->MIXED conf=12% mixed behaviour
+251.723 tid=3 bflush MIXED->IDLE conf=87% not running
+251.823 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+251.923 tid=2 kinit MIXED->IDLE conf=62% not running
+252.023 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+252.124 tid=2 kinit MIXED->IDLE conf=62% not running
+252.324 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+252.424 tid=2 kinit MIXED->IDLE conf=62% not running
+252.524 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+252.524 tid=171 schedbench IDLE->MIXED conf=12% mixed behaviour
+252.624 tid=2 kinit MIXED->IDLE conf=62% not running
+252.724 tid=171 schedbench MIXED->SCHEDBENCH {"name":"A7-hyst5-r3","policy":"adaptive","seconds":10,"cpu_workers":3,"io_workers":1,"samples":886,"wake_p50_us":974,"wake_p95_us":1034,"wake_p99_us":21972,"wake_max_us":22118,"dispatch_p50_us":6,"dispatch_p99_us":21035,"resp_p50_us":11013,"resp_p95_us":11073,"resp_p99_us":32011,"cpu_jobs_per_s_x100":958732,"io_ops_per_s":489,"jain_x1000":999,"ctx_switches_per_s":1735,"cpu_util_pct":99,"sched_overhead_ns_per_s":150249,"system_class":"IO_BOUND","task_classes":"cpu:CPU_BOUND,cpu:CPU_BOUND,cpu:CPU_BOUND,io:IO_BOUND,probe:INTERACTIVE"}
+policy: adaptive
+policies: round_robin priority low_latency adaptive
+context_switches: 298525
+preemptions: 134606
+sched_calls: 298529
+sched_overhead_ns: 33185458
+busy_ns: 259559280103
+idle_ns: 8804993667
+tasks: 7
+runnable: 0
+policy_switches: 13
+profiler: on
+window_ms: 100
+hysteresis: 2
+profiler_windows: 3318
+profiler_overhead_ns: 5841693
+---
+system_class: IDLE
+confidence: 31
+reason: little CPU activity
+policy: adaptive
+transitions: 629
+252.023 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+252.124 tid=2 kinit MIXED->IDLE conf=62% not running
+252.324 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+252.424 tid=2 kinit MIXED->IDLE conf=62% not running
+252.524 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+252.524 tid=171 schedbench IDLE->MIXED conf=12% mixed behaviour
+252.624 tid=2 kinit MIXED->IDLE conf=62% not running
+252.724 tid=171 schedbench MIXED->IDLE conf=75% not running
+252.824 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+252.925 tid=2 kinit MIXED->IDLE conf=62% not running
+253.025 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+253.125 tid=2 kinit MIXED->IDLE conf=62% not running
+253.325 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+253.425 tid=2 kinit MIXED->IDLE conf=62% not running
+253.526 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+253.626 tid=2 kinit MIXED->IDLE conf=62% not running
+253.626 tid=3 bflush IDLE->MIpolicy: adaptive
+policies: round_robin priority low_latency adaptive
+context_switches: 298583
+preemptions: 134633
+sched_calls: 298587
+sched_overhead_ns: 33190982
+busy_ns: 259988702449
+idle_ns: 8804993667
+tasks: 7
+runnable: 0
+policy_switches: 13
+profiler: on
+window_ms: 100
+hysteresis: 2
+profiler_windows: 3322
+profiler_overhead_ns: 5846315
+---
+system_class: IDLE
+confidence: 5
+reason: little CPU activity
+policy: adaptive
+transitions: 630
+252.124 tid=2 kinit MIXED->IDLE conf=62% not running
+252.324 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+252.424 tid=2 kinit MIXED->IDLE conf=62% not running
+252.524 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+252.524 tid=171 schedbench IDLE->MIXED conf=12% mixed behaviour
+252.624 tid=2 kinit MIXED->IDLE conf=62% not running
+252.724 tid=171 schedbench MIXED->IDLE conf=75% not running
+252.824 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+252.925 tid=2 kinit MIXED->IDLE conf=62% not running
+253.025 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+253.125 tid=2 kinit MIXED->IDLE conf=62% not running
+253.325 tid=2 kinit IDLE->MIXED conf=37% mixed behaviour
+253.425 tid=2 kinit MIXED->IDLE conf=62% not running
+253.526 tid=2 kinit IDLE->MIXED conf=50% mixed behaviour
+253.626 tid=2 kinit MIXED->IDLE conf=62% not running
+253.626 tid=3 bflush IDLE->MIXED conf=12% mixed behaviour
+253.726 tid=3 bflush MIXED->IBENCH-END ablation
+init: benchmark suite finished (0)
+FuhrerOS: syncing filesystems and powering off
+POWEROFF
