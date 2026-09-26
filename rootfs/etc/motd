@@ -1,0 +1,6 @@
+Welcome to FuhrerOS — a from-scratch x86-64 operating system.
+
+  help        shell builtins and commands
+  ps / top    tasks and their adaptive scheduling class
+  sched       scheduler policy and adaptation log
+  desktop     start the graphical desktop
