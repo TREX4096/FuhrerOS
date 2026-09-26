@@ -439,6 +439,18 @@ static void bench_desktop(void)
 		    "switch request -> composed frame, avg of 10");
 	else
 		not_run("desktop", "workspace_switch", "no measurement from the compositor");
+	/* motion: frames drawn during one workspace slide (220 ms at 60 fps ~ 13) */
+	sleep_ms(400);
+	read_file("/proc/desktop", dbuf, sizeof(dbuf));
+	long f0 = text_num(dbuf, "animation_frames");
+	sys2(SYS_DESKTOP_CTL, DESK_WORKSPACE, 1);
+	sleep_ms(400);
+	read_file("/proc/desktop", dbuf, sizeof(dbuf));
+	long f1 = text_num(dbuf, "animation_frames");
+	sys2(SYS_DESKTOP_CTL, DESK_WORKSPACE, 0);
+	out("desktop", "workspace_slide_frames", f1 - f0, "frames", "frames composed during one 220 ms slide");
+	out("desktop", "animation_compose_max", text_num(dbuf, "animation_compose_max_us"), "us",
+	    "worst frame while animating (budget 16,667 us at 60 fps)");
 	read_file("/proc/desktop", dbuf, sizeof(dbuf));
 	out("desktop", "compose_avg", text_num(dbuf, "avg_compose_us"), "us", "average full composition, whole run");
 	out("desktop", "compose_max", text_num(dbuf, "max_compose_us"), "us", "worst composition, whole run");

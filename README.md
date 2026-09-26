@@ -71,7 +71,7 @@ Super+F the Control Center. Other checks: `./scripts/test-power.sh poweroff`,
 | M9 networking | ✅ | DHCP, own-stack TCP echo (20 000 B), DNS + HTTP to example.com |
 | M10 graphics | ✅ | compositor with damage tracking |
 | M11 desktop | ✅ | redesigned per UI_SUGGESTION.md (UI-D-001..006), 8 themed apps; app launch 3–4 ms (E-133) |
-| M12 input | ✅ / ⚠️ | keyboard, mouse, gestures + touchpad options (16 `gesture.*` self-tests with synthetic frames; no real touchpad driver) |
+| M12 input | ✅ / ⚠️ | keyboard, mouse, gestures + touchpad options (10 `gesture.*` self-tests with synthetic frames; no real touchpad driver) |
 | M13 adaptive scheduler | ✅ | profiler + adaptive policy; see results |
 | M14 adaptive storage | ✅ | adaptive buffer cache; see results |
 | M15 network + browser foundation | ✅ / ⚠️ | HTTP client/server, FuhrerWeb viewer; no TLS, not a browser engine |

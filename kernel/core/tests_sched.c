@@ -27,7 +27,9 @@ static bool run_concurrency(const char *policy, u64 *switches_out, u64 *min_shar
 		spin_count[i] = 0;
 		task_create_kernel("spin", spinner, (void *)(u64)i);
 	}
-	sleep_ms(300);
+	/* 900 ms: CPU_BOUND tasks get 30 ms quanta under the adaptive policy, and
+	 * 300 ms (10 quanta) made the fairness check depend on one quantum (F-124) */
+	sleep_ms(900);
 	stop_spin = true;
 	while (done_count < 3)
 		sleep_ms(1);
@@ -94,7 +96,7 @@ void test_scheduler(void)
 		char name[48];
 		snprintf(name, sizeof(name), "sched.concurrent.%s", pols[i]);
 		/* fair share of 3 equal spinners is 333 per mille */
-		selftest_report(name, ok && share > 200, "%lu switches in 300 ms, min share %lu/1000",
+		selftest_report(name, ok && share > 200, "%lu switches in 900 ms, min share %lu/1000",
 				sw, share);
 	}
 

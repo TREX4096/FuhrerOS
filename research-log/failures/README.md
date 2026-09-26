@@ -25,5 +25,7 @@
 | [F-121](F-121-launcher-blocks-in-irq.md) | Launching an app from the launcher froze the desktop |
 | [F-122](F-122-aging-boost-never-expires.md) | The adaptive scheduler's aging boost never expired |
 | [F-123](F-123-virtio-blk-write-through.md) | Every disk write waited for a host flush (virtio-blk write-through) |
+| [F-124](F-124-fairness-test-window.md) | Scheduler fairness self-test too short for 30 ms quanta |
+| [F-125](F-125-delay-test-host-preemption.md) | Timer self-test failed when the host descheduled the vCPU |
 
 Failures F-001..F-006 of the Linux-based prototype are in linux-prototype/research-log/failures/.

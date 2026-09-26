@@ -6,14 +6,15 @@ The design and its decision records are in [ui-design.md](ui-design.md).
 
 ## Shell
 
-- **Top bar:**
+- **Top bar** (Fedora/GNOME layout, dark in both themes):
   - logo (opens the launcher);
-  - workspaces with names, plus a dot where windows are;
+  - workspace dots, with the active workspace as a named pill;
   - layout mode (click to cycle);
   - the focused window's title;
-  - a status group: adaptive policy and workload class, CPU, RAM and
-    network rates (click for the Control Center);
-  - the clock.
+  - a centred date and clock;
+  - a status cluster (workload class, CPU, RAM, network) with a power icon.
+    Click it or press Super+S for **Quick Settings**: toggle tiles, a
+    scheduler switch, and Settings, Control Center, Lock, Restart and Off.
 - **Launcher / command palette** (Super):
   - searches apps, commands and files in `/home`;
   - `>` restricts the search to commands;
@@ -27,8 +28,11 @@ The design and its decision records are in [ui-design.md](ui-design.md).
     - add/remove workspace;
     - adaptive notifications.
 - **Alt+Tab:** a switcher with live thumbnails while Alt is held.
-- **Overview** (Super+Tab, 3-finger up): workspace strip + window
-  thumbnails.
+- **Overview** (Super+Tab, 3-finger up): workspace strip, window
+  thumbnails and a **dash** of apps. Typing starts a search.
+- **Motion:** windows zoom in when they open, workspaces slide, and
+  overlays and notifications slide in, on a 60 fps frame clock.
+  Reduce Motion turns it off (UI-D-007).
 - **Notifications:** top right, auto-dismiss after 6 s, click to dismiss.
   Send one with `notify TITLE [TEXT]`.
 - **Lock screen** (Super+L): logo and clock; any key unlocks (there are no
@@ -59,6 +63,7 @@ Each workspace is in one of three modes:
 | Super+D | show desktop |
 | Super+L | lock screen |
 | Super+F | Fuhrer Control Center |
+| Super+S | Quick Settings |
 | Super+E | files |
 | Super+1…9 / Super+Shift+1…9 | workspace / move window there and follow |
 | Super+Ctrl+←/→ | previous / next workspace |

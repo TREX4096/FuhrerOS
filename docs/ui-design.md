@@ -44,7 +44,7 @@ or artwork from them is used. Everything is drawn by the FuhrerOS compositor
 | §12, §32 notifications | compact, stacked, auto-dismiss after 6 s, click to dismiss; adaptive-class toasts are **off by default** | `notify TITLE TEXT`; Settings → Desktop |
 | §13 shortcuts | all listed ones (Settings → Shortcuts) | |
 | §14–§23 touchpad | tap-to-click, natural scrolling, pointer/scroll speed, disable-while-typing, 3/4-finger swipes and taps with configurable actions, pinch → zoom event | Settings → Touchpad |
-| §27–28 reduced motion | setting stored; no animations exist yet | Settings → Appearance |
+| §27–28 animation, reduced motion | eased 60 fps effects (UI-D-007); Reduce Motion disables them | Settings → Appearance, Quick Settings |
 | §33 files, §34 terminal, §35 monitor | existing apps, now themed; Files and Editor accept a path argument | |
 | §40 measure | `/proc/desktop`: average/max composition time, input→frame latency, last workspace-switch latency | `cat /proc/desktop` |
 
@@ -111,14 +111,55 @@ or artwork from them is used. Everything is drawn by the FuhrerOS compositor
 - **Reason:** horizontal workspaces match horizontal swipes (the brief's own UI-D example). The settings example in §20 uses these defaults.
 - **Validation:** recognizer self-tests (`gesture.*`). The desktop actions are not validated on a real touchpad (see Limits).
 
+### UI-D-007 — Motion: eased animations on a frame clock
+- **Problem:** The desktop jumped between states. The user asked for a smoother UI.
+- **References:** GNOME Shell (workspace slides, overview zoom), Windows 11 and macOS (window open zoom).
+- **Options:** (A) no animation; (B) timers per effect; (C) one frame clock, with every effect computed from its start time and an ease-out curve.
+- **Chosen:** C.
+  - While anything moves, the compositor composes every 16 ms.
+  - The effects are:
+    - a window opens with a 92 %→100 % zoom and fade (180 ms);
+    - workspaces slide in the direction of travel (220 ms);
+    - the launcher and Quick Settings slide down while the backdrop darkens (160 ms);
+    - the overview fades in and its thumbnails and dash settle (200 ms);
+    - notifications slide in from the right (220 ms).
+  - Reduce Motion turns every effect off.
+- **Reason:** A late frame shows a later state instead of queueing work, and input is never blocked.
+- **Performance impact** (`fubench desktop`, E-136 vs E-137):
+  - One slide draws 14 frames in 220 ms.
+  - The worst animation frame was 15.4 ms, near the 16.7 ms budget. Two changes brought it to 3.96 ms:
+    - shadows now blend only their visible rim instead of the whole rectangle 3–5 times per window;
+    - transformed windows use two-channel integer blending.
+  - Average composition went from 2.25 to 1.53 ms, and the worst frame of the run from 89 to 9.4 ms.
+  - Cost: during an animation, the first frame after a request can wait up to one frame (the workspace switch "request → frame" is 12.0 ms in E-137 vs 1.3 ms without motion).
+- **Accessibility impact:** Reduce Motion (Settings → Appearance, Quick Settings) disables all of it.
+- **Validation:** E-136, E-137. The effects themselves are too fast for the QEMU monitor's screendump to capture mid-flight.
+
+### UI-D-008 — Fedora / GNOME-inspired shell chrome
+- **Problem:** The user asked for inspiration from Fedora's GUI.
+- **References:** Fedora Workstation (GNOME 4x, libadwaita).
+- **Chosen**, keeping FuhrerOS's logo, red accent and adaptive-kernel status:
+  - a dark top bar in both themes;
+  - workspace dots with the active workspace as a named pill;
+  - a centred date and clock;
+  - a status cluster with a power icon that opens **Quick Settings** (Super+S). Its toggle tiles are Dark Style, Tiling, Adaptive Alerts, Natural Scroll, Tap to Click and Reduce Motion. It also has a scheduler segmented control and Settings, Control Center, Lock, Restart and Off buttons;
+  - Adwaita-style windows: #242424 / #fafafa backgrounds, #303030 / #ebebeb header bars, centred titles, round title-bar buttons;
+  - an overview **dash** of apps at the bottom;
+  - type-to-search in the overview;
+  - "Blue" is GNOME's #3584e4.
+- **Performance impact:** none beyond UI-D-007.
+- **Accessibility impact:** Quick Settings puts the accessibility and touchpad toggles one click away.
+- **Validation:** `docs/images/quick-settings.png`, `overview.png`, `desktop-tiling.png`, `desktop-light.png`.
+
 ## Limits (honest)
 
 - **HiDPI (§38):** NOT implemented. The UI works in physical pixels with an
   8×16 font. The QEMU screen is 1280×800.
 - **Scalable fonts, icons (§30–31):** none. Launcher "icons" are initials
   in rounded squares.
-- **Animations (§27):** none. The reduced-motion setting is stored but
-  changes nothing yet.
+- **Animations (§27):** window open, workspace slide, launcher, Quick
+  Settings, overview and notifications (UI-D-007). There is no window close
+  or minimise animation yet.
 - **Touchpad (§14–26):** there is no real multi-touch driver (QEMU has no
   such device). The recognizer and the options are verified with synthetic
   touch frames. Palm rejection needs contact size, which the touch-frame

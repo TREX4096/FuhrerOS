@@ -1,0 +1,13 @@
+{"kind":"FUBENCH","data":{"group":"desktop","name":"window_create","value":1924,"unit":"us","note":"open 400x300 + fill + present, avg of 20"}}
+{"kind":"FUBENCH","data":{"group":"desktop","name":"launch_terminal","value":5,"unit":"ms","note":"spawn -> window exists; mean of 3, best 3 ms"}}
+{"kind":"FUBENCH","data":{"group":"desktop","name":"launch_files","value":3,"unit":"ms","note":"spawn -> window exists; mean of 3, best 1 ms"}}
+{"kind":"FUBENCH","data":{"group":"desktop","name":"launch_editor","value":2,"unit":"ms","note":"spawn -> window exists; mean of 3, best 1 ms"}}
+{"kind":"FUBENCH","data":{"group":"desktop","name":"launch_browser","value":2,"unit":"ms","note":"spawn -> window exists; mean of 3, best 1 ms"}}
+{"kind":"FUBENCH","data":{"group":"desktop","name":"launch_settings","value":2,"unit":"ms","note":"spawn -> window exists; mean of 3, best 1 ms"}}
+{"kind":"FUBENCH","data":{"group":"desktop","name":"launch_control_center","value":2,"unit":"ms","note":"spawn -> window exists; mean of 3, best 1 ms"}}
+{"kind":"FUBENCH","data":{"group":"desktop","name":"workspace_switch","value":11994,"unit":"us","note":"switch request -> composed frame, avg of 10"}}
+{"kind":"FUBENCH","data":{"group":"desktop","name":"workspace_slide_frames","value":14,"unit":"frames","note":"frames composed during one 220 ms slide"}}
+{"kind":"FUBENCH","data":{"group":"desktop","name":"animation_compose_max","value":3958,"unit":"us","note":"worst frame while animating (budget 16,667 us at 60 fps)"}}
+{"kind":"FUBENCH","data":{"group":"desktop","name":"compose_avg","value":1526,"unit":"us","note":"average full composition, whole run"}}
+{"kind":"FUBENCH","data":{"group":"desktop","name":"compose_max","value":9405,"unit":"us","note":"worst composition, whole run"}}
+{"kind":"FUBENCH","data":{"group":"desktop","name":"terminal_keystroke_latency","value":-1,"unit":"","status":"NOT RUN","note":"needs injected keyboard input; not measurable from inside the guest yet"}}

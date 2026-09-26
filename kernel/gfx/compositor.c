@@ -42,9 +42,10 @@
 struct theme {
 	u32 wall0, wall1, bar, chip, chip_hi, surface, surface_hi, title, title_focus, border, text,
 		text_dim, accent, close, good, warn, bad;
+	u32 bar_text, bar_dim; /* the top bar is dark in both themes (as on Fedora/GNOME) */
 };
 static struct theme T;
-static const u32 accents[] = { RGB(0xe8, 0x2a, 0x36), RGB(0x4f, 0x9d, 0xff), RGB(0x2e, 0xc4, 0xa8),
+static const u32 accents[] = { RGB(0xe8, 0x2a, 0x36), RGB(0x35, 0x84, 0xe4), RGB(0x2e, 0xc4, 0xa8),
 			       RGB(0xf2, 0xa9, 0x3b), RGB(0xa7, 0x7b, 0xf3) };
 static const char *const accent_names[] = { "Fuhrer red", "Blue", "Teal", "Amber", "Violet" };
 #define NACCENT ((int)ARRAY_LEN(accents))
@@ -71,20 +72,22 @@ static u32 mix(u32 a, u32 b, u32 t) /* t/255 of b over a */
 static void theme_build(void)
 {
 	u32 acc = accents[cfg.accent % NACCENT];
+	/* Adwaita-inspired neutrals (Fedora Workstation / GNOME): #242424 windows,
+	 * #303030 header bars in dark; #fafafa / #ebebeb in light. */
 	if (cfg.dark) {
-		T = (struct theme){ RGB(0x0d, 0x0f, 0x14), RGB(0x17, 0x1b, 0x24), RGB(0x0c, 0x0e, 0x13),
-				    RGB(0x1b, 0x1f, 0x28), RGB(0x27, 0x2d, 0x39), RGB(0x16, 0x19, 0x21),
-				    RGB(0x22, 0x27, 0x32), RGB(0x15, 0x18, 0x1f), RGB(0x1c, 0x20, 0x29),
-				    RGB(0x2b, 0x30, 0x3b), RGB(0xe7, 0xe9, 0xee), RGB(0x8b, 0x93, 0xa5), acc,
-				    RGB(0xe5, 0x48, 0x4d), RGB(0x6f, 0xcf, 0x8a), RGB(0xf2, 0xc1, 0x5b),
-				    RGB(0xe5, 0x48, 0x4d) };
+		T = (struct theme){ RGB(0x12, 0x13, 0x17), RGB(0x1c, 0x1e, 0x25), RGB(0x0b, 0x0b, 0x0c),
+				    RGB(0x3a, 0x3a, 0x3a), RGB(0x4a, 0x4a, 0x4a), RGB(0x2e, 0x2e, 0x32),
+				    RGB(0x3a, 0x3a, 0x3e), RGB(0x24, 0x24, 0x24), RGB(0x30, 0x30, 0x30),
+				    RGB(0x1b, 0x1b, 0x1b), RGB(0xff, 0xff, 0xff), RGB(0x9a, 0x9a, 0x9e), acc,
+				    RGB(0xe0, 0x1b, 0x24), RGB(0x57, 0xe3, 0x89), RGB(0xf6, 0xd3, 0x2d),
+				    RGB(0xed, 0x33, 0x3b), RGB(0xf2, 0xf2, 0xf2), RGB(0x9a, 0x9a, 0x9a) };
 	} else {
-		T = (struct theme){ RGB(0xe8, 0xea, 0xee), RGB(0xd6, 0xda, 0xe1), RGB(0xf7, 0xf8, 0xfa),
-				    RGB(0xe6, 0xe8, 0xec), RGB(0xd4, 0xd8, 0xe0), RGB(0xff, 0xff, 0xff),
-				    RGB(0xee, 0xf0, 0xf3), RGB(0xef, 0xf1, 0xf4), RGB(0xfc, 0xfc, 0xfd),
-				    RGB(0xc6, 0xcb, 0xd4), RGB(0x1a, 0x1e, 0x26), RGB(0x5b, 0x63, 0x72), acc,
-				    RGB(0xd9, 0x3b, 0x41), RGB(0x2f, 0x9e, 0x57), RGB(0xb7, 0x80, 0x12),
-				    RGB(0xd9, 0x3b, 0x41) };
+		T = (struct theme){ RGB(0xde, 0xe2, 0xea), RGB(0xc9, 0xcf, 0xda), RGB(0x0b, 0x0b, 0x0c),
+				    RGB(0xe1, 0xe1, 0xe3), RGB(0xd0, 0xd0, 0xd3), RGB(0xff, 0xff, 0xff),
+				    RGB(0xf0, 0xf0, 0xf2), RGB(0xfa, 0xfa, 0xfa), RGB(0xeb, 0xeb, 0xeb),
+				    RGB(0xc8, 0xc8, 0xcc), RGB(0x1f, 0x1f, 0x1f), RGB(0x6e, 0x6e, 0x73), acc,
+				    RGB(0xe0, 0x1b, 0x24), RGB(0x26, 0xa2, 0x69), RGB(0xc6, 0x46, 0x00),
+				    RGB(0xe0, 0x1b, 0x24), RGB(0xf2, 0xf2, 0xf2), RGB(0x9a, 0x9a, 0x9a) };
 	}
 	if (cfg.wallpaper % 3 == 1) { /* Midnight: blue-tinted */
 		T.wall0 = mix(T.wall0, RGB(0x10, 0x1c, 0x3a), cfg.dark ? 150 : 60);
@@ -147,6 +150,7 @@ static u64 frames_drawn, last_clock_s;
 static u64 compose_ns_total, compose_ns_max;
 static u64 input_pending_ns, input_lat_total, input_lat_max, input_lat_n;
 static u64 ws_switch_pending_ns, ws_switch_last_us;
+static u64 anim_frames, anim_compose_ns_max;	/* frames drawn while animating */
 
 static int work_y(void) { return BAR_H; }
 static int work_h(void) { return (int)screen->h - BAR_H; }
@@ -419,13 +423,64 @@ static int corner_inset(int r, int d) /* d: 1..r rows from the rounded edge */
 	return r - q;
 }
 
-/* soft shadow: a few translucent layers */
-static void shadow(int x, int y, int w, int h, int r)
+/* ---- motion (UI-D-007): eased animations on a 60 fps frame clock ----
+ * Everything that moves (window open, workspace slide, launcher, Quick
+ * Settings, overview, notifications) computes its state from a start time
+ * and an ease-out curve, so an animation never blocks input and a frame
+ * drawn late simply shows a later state. Reduce Motion turns it all off. */
+static u64 anim_until;		/* compose every frame until then */
+static u64 win_open_ns[MAX_WIN];
+static u64 menu_t, qs_t, ov_t;	/* when the overlay appeared */
+static int ws_from = -1, ws_dir;
+static u64 ws_t;
+static bool qs_open;		/* Quick Settings panel */
+static int odx;			/* horizontal offset applied while drawing (workspace slide) */
+static struct surface *tgt;	/* draw target: the back buffer, or scr for animated windows */
+static struct surface scr;	/* scratch surface for transformed windows */
+#define MS(x) ((u64)(x) * 1000000ULL)
+
+static bool motion(void) { return !cfg.reduce_motion; }
+static void animate(u64 dur)
 {
-	for (int i = 3; i >= 1; i--)
-		surf_blend_fill(&back, x - i * 2 + 2, y - i * 2 + 5, w + i * 4 - 4, h + i * 4 - 4, 0,
-				(u8)(cfg.dark ? 26 : 14));
-	(void)r;
+	if (!motion())
+		return;
+	u64 e = time_ns() + dur;
+	if (e > anim_until)
+		anim_until = e;
+}
+/* 0..256, ease-out cubic */
+static int ease(u64 t0, u64 dur)
+{
+	if (!motion() || !t0)
+		return 256;
+	u64 now = time_ns();
+	if (now >= t0 + dur)
+		return 256;
+	u64 x = (now - t0) * 256 / dur, inv = 256 - x;
+	return (int)(256 - inv * inv * inv / 65536);
+}
+
+/* soft shadow: several translucent layers, larger for the focused window.
+ * Only the rim outside (x,y,w,h) is blended - the window covers the rest,
+ * and blending whole rectangles cost most of an animation frame (UI-D-007). */
+static void rim_blend(int x, int y, int w, int h, int ix, int iy, int iw, int ih, u8 a)
+{
+	surf_blend_fill(tgt, x, y, w, iy - y, 0, a);				/* top */
+	surf_blend_fill(tgt, x, iy + ih, w, y + h - iy - ih, 0, a);		/* bottom */
+	surf_blend_fill(tgt, x, iy, ix - x, ih, 0, a);				/* left */
+	surf_blend_fill(tgt, ix + iw, iy, x + w - ix - iw, ih, 0, a);		/* right */
+}
+
+static void shadow(int x, int y, int w, int h, int layers)
+{
+	u8 a = (u8)(cfg.dark ? 22 : 12);
+	for (int i = layers; i >= 1; i--) {
+		int sx = x - i * 2 + 1, sy = y - i * 2 + 4, sw = w + i * 4 - 2, sh = h + i * 4 - 2;
+		/* each layer darkens only where it extends beyond the next inner one */
+		int ix = x - (i - 1) * 2 + 1, iy = y - (i - 1) * 2 + 4, iw = w + (i - 1) * 4 - 2, ih = h + (i - 1) * 4 - 2;
+		if (i == 1) { ix = x; iy = y; iw = w; ih = h; }
+		rim_blend(sx, sy, sw, sh, MAX(ix, sx), MAX(iy, sy), MIN(iw, sw), MIN(ih, sh), (u8)(a * (layers - i + 1)));
+	}
 }
 
 static void text_clip(int x, int y, const char *s, int maxw, u32 c)
@@ -442,10 +497,42 @@ static void text_clip(int x, int y, const char *s, int maxw, u32 c)
 		}
 		buf[n] = 0;
 	}
-	surf_text(&back, x, y, buf, c);
+	surf_text(tgt, x, y, buf, c);
 }
 
-static void pill(int x, int y, int w, int h, u32 c) { surf_round_rect(&back, x, y, w, h, h / 2, c); }
+static void pill(int x, int y, int w, int h, u32 c) { surf_round_rect(tgt, x, y, w, h, h / 2, c); }
+static void circle(int cx, int cy, int r, u32 c) { surf_round_rect(tgt, cx - r, cy - r, 2 * r, 2 * r, r, c); }
+
+/* copy a rectangle of `src` to back, scaled by s/256 around its centre and
+ * blended with alpha a/256 (nearest neighbour; used for window animations) */
+static void blit_transform(const struct surface *src, int x, int y, int w, int h, int s, int a)
+{
+	int nw = w * s / 256, nh = h * s / 256;
+	if (nw <= 0 || nh <= 0)
+		return;
+	int ox = x + (w - nw) / 2, oy = y + (h - nh) / 2;
+	for (int j = 0; j < nh; j++) {
+		int py = oy + j;
+		if (py < 0 || py >= (int)back.h)
+			continue;
+		const u32 *srow = src->px + (size_t)(y + j * h / nh) * src->stride;
+		u32 *drow = back.px + (size_t)py * back.stride;
+		for (int i = 0; i < nw; i++) {
+			int px = ox + i;
+			if (px < 0 || px >= (int)back.w)
+				continue;
+			u32 c = srow[x + i * w / nw];
+			if (a >= 256) {
+				drow[px] = c;
+			} else { /* two channels at a time, no divisions */
+				u32 d = drow[px];
+				u32 rb = ((c & 0xFF00FF) * (u32)a + (d & 0xFF00FF) * (u32)(256 - a)) >> 8;
+				u32 g = ((c & 0x00FF00) * (u32)a + (d & 0x00FF00) * (u32)(256 - a)) >> 8;
+				drow[px] = (rb & 0xFF00FF) | (g & 0x00FF00);
+			}
+		}
+	}
+}
 
 /* ---- wallpaper (rendered once per theme into wallc) ---- */
 static void render_wallpaper(void)
@@ -475,51 +562,48 @@ static void render_wallpaper(void)
 		  mix(T.wall1, T.accent, 200));
 	const char *sub = "own kernel  -  workload-aware adaptive scheduling";
 	surf_text(&wallc, w / 2 - (int)strlen(sub) * 4, h / 2 + 30, sub, mix(T.wall1, T.text_dim, 200));
-	const char *hint = "Super  launcher      Super+Tab  overview      Super+T  layout      Super+F  Control Center";
-	surf_text(&wallc, w / 2 - (int)strlen(hint) * 4, h - 40, hint, mix(T.wall1, T.text_dim, 150));
 	wall_valid = true;
 }
 
-/* ---- windows ---- */
-static int title_buttons_x(int fx, int fw) { return fx + fw - 3 * 26 - 8; }
+/* ---- windows: Adwaita-style header bar (centred title, round buttons) ---- */
+static int title_buttons_x(int fx, int fw) { return fx + fw - 3 * 28 - 6; }
 
 static void draw_window(struct window *w, bool focused)
 {
 	int x, y, fw, fh;
 	frame_rect(w, &x, &y, &fw, &fh);
+	x += odx;
+	int wx = w->x + odx;
 	bool tiled_full = w->state == W_TILED && ws_mode[cur_ws] == MODE_FOCUS;
 	int r = tiled_full || w->state == W_MAX ? 0 : RADIUS;
 	if (r)
-		shadow(x, y, fw, fh, r);
-	surf_round_rect(&back, x, y, fw, fh, r, focused ? T.accent : T.border);
-	surf_round_rect(&back, x + 1, y + 1, fw - 2, TITLE_H + r, r ? r - 1 : 0,
-			focused ? T.title_focus : T.title);
-	/* title: focus dot + text */
-	surf_round_rect(&back, x + 14, y + TITLE_H / 2 - 3, 8, 8, 4, focused ? T.accent : T.chip_hi);
+		shadow(x, y, fw, fh, focused ? 5 : 3);
+	surf_round_rect(tgt, x, y, fw, fh, r, focused ? mix(T.border, T.accent, 110) : T.border);
+	surf_round_rect(tgt, x + 1, y + 1, fw - 2, TITLE_H + r, r ? r - 1 : 0, focused ? T.title_focus : T.title);
+	/* centred title (drawn twice, 1 px apart, for a bold look when focused) */
 	int bx = title_buttons_x(x, fw);
-	text_clip(x + 30, y + (TITLE_H - FONT_H) / 2 + 1, w->title, bx - x - 40,
-		  focused ? T.text : T.text_dim);
-	/* buttons: minimise, maximise, close (hover highlighted) */
-	int by = y + (TITLE_H - 22) / 2 + 1;
+	int avail = MIN(bx - x - 16, fw - 2 * (x + fw - bx) - 8);
+	int tl = MIN((int)strlen(w->title) * FONT_W, avail);
+	int tx = x + fw / 2 - tl / 2, ty = y + (TITLE_H - FONT_H) / 2 + 1;
+	text_clip(tx, ty, w->title, avail, focused ? T.text : T.text_dim);
+	if (focused)
+		text_clip(tx + 1, ty, w->title, avail, T.text);
+	/* buttons: minimise, maximise, close - round, GNOME style */
+	int cyb = y + TITLE_H / 2 + 1;
 	for (int b = 0; b < 3; b++) {
-		int bxx = bx + b * 26;
-		bool hot = mx >= bxx && mx < bxx + 22 && my >= by && my < by + 22;
-		u32 fg = focused ? T.text : T.text_dim;
-		if (hot) {
-			surf_round_rect(&back, bxx, by, 22, 22, 6, b == 2 ? T.close : T.chip_hi);
-			if (b == 2)
-				fg = RGB(0xff, 0xff, 0xff);
-		}
-		int cx = bxx + 11, cy = by + 11;
+		int cxb = bx + b * 28 + 12;
+		bool hot = mx >= cxb - 12 && mx < cxb + 12 && my >= cyb - 12 && my < cyb + 12;
+		u32 bg = hot ? (b == 2 ? T.close : T.chip_hi) : T.chip;
+		u32 fg = hot && b == 2 ? RGB(0xff, 0xff, 0xff) : focused ? T.text : T.text_dim;
+		circle(cxb, cyb, 11, bg);
 		if (b == 0) {
-			surf_fill(&back, cx - 5, cy + 3, 10, 2, fg);
+			surf_fill(tgt, cxb - 4, cyb + 2, 9, 2, fg);
 		} else if (b == 1) {
-			surf_rect(&back, cx - 5, cy - 5, 10, 10, fg);
-			surf_fill(&back, cx - 5, cy - 5, 10, 2, fg);
+			surf_rect(tgt, cxb - 4, cyb - 4, 9, 9, fg);
 		} else {
-			for (int k = -4; k <= 4; k++) {
-				surf_fill(&back, cx + k, cy + k, 2, 1, fg);
-				surf_fill(&back, cx + k, cy - k, 2, 1, fg);
+			for (int k = -3; k <= 3; k++) {
+				surf_fill(tgt, cxb + k, cyb + k, 2, 1, fg);
+				surf_fill(tgt, cxb + k, cyb - k, 2, 1, fg);
 			}
 		}
 	}
@@ -527,24 +611,44 @@ static void draw_window(struct window *w, bool focused)
 	int rr = r ? r - 1 : 0;
 	for (int j = 0; j < w->h; j++) {
 		int py = w->y + j;
-		if (py < 0 || py >= (int)back.h)
+		if (py < 0 || py >= (int)tgt->h)
 			continue;
 		int in = 0;
 		if (rr && j >= w->h - rr)
 			in = corner_inset(rr, j - (w->h - rr - 1));
-		int x0 = MAX(w->x + in, 0), x1 = MIN(w->x + w->w - in, (int)back.w);
+		int x0 = MAX(wx + in, 0), x1 = MIN(wx + w->w - in, (int)tgt->w);
 		if (x1 <= x0)
 			continue;
-		memcpy(back.px + (size_t)py * back.stride + x0,
-		       w->surf.px + (size_t)j * w->surf.stride + (x0 - w->x), (size_t)(x1 - x0) * 4);
+		memcpy(tgt->px + (size_t)py * tgt->stride + x0, w->surf.px + (size_t)j * w->surf.stride + (x0 - wx),
+		       (size_t)(x1 - x0) * 4);
 	}
 }
 
-/* ---- top bar ---- */
+/* A window that just opened zooms in from 92 % and fades in (180 ms). */
+static void draw_window_animated(struct window *w, bool focused)
+{
+	int p = ease(win_open_ns[w->id], MS(180));
+	if (p >= 256 || odx) {
+		draw_window(w, focused);
+		return;
+	}
+	int x, y, fw, fh;
+	frame_rect(w, &x, &y, &fw, &fh);
+	tgt = &scr;
+	draw_window(w, focused);
+	tgt = &back;
+	int x0 = MAX(x, 0), y0 = MAX(y, 0);
+	int x1 = MIN(x + fw, (int)back.w), y1 = MIN(y + fh, (int)back.h);
+	if (x1 > x0 && y1 > y0)
+		blit_transform(&scr, x0, y0, x1 - x0, y1 - y0, 236 + 20 * p / 256, p);
+}
+
+/* ---- top bar (Fedora/GNOME layout: activities + workspaces | clock | status) ---- */
 static struct {
 	int logo_x1;
 	int ws_x0[DESK_MAX_WS], ws_x1[DESK_MAX_WS];
 	int mode_x0, mode_x1;
+	int clock_x0, clock_x1;
 	int status_x0, status_x1;
 } bar;
 
@@ -585,77 +689,94 @@ static void fmt_rate(char *b, int n, u64 v)
 		snprintf(b, (size_t)n, "%luK", v / 1024);
 }
 
+/* "Sun 27 Sep  18:45" from the Unix time (days-to-civil, UTC) */
+static void fmt_clock(char *b, int n)
+{
+	static const char *const wd[] = { "Thu", "Fri", "Sat", "Sun", "Mon", "Tue", "Wed" };
+	static const char *const mn[] = { "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+					  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+	i64 t = time_unix(), days = t / 86400, rem = t % 86400;
+	i64 z = days + 719468, era = z / 146097, doe = z - era * 146097;
+	i64 yoe = (doe - doe / 1460 + doe / 36524 - doe / 146096) / 365;
+	i64 doy = doe - (365 * yoe + yoe / 4 - yoe / 100), mp = (5 * doy + 2) / 153;
+	i64 d = doy - (153 * mp + 2) / 5 + 1, m = mp < 10 ? mp + 3 : mp - 9;
+	snprintf(b, (size_t)n, "%s %ld %s  %02ld:%02ld", wd[days % 7], d, mn[m - 1], rem / 3600, (rem / 60) % 60);
+}
+
 static const char *const mode_names[] = { "floating", "tiling", "focus" };
 
 static void draw_bar(void)
 {
 	int sw = (int)back.w, cy = (BAR_H - FONT_H) / 2;
+	u32 hover = mix(T.bar, T.bar_text, 40);
 	surf_fill(&back, 0, 0, sw, BAR_H, T.bar);
-	surf_fill(&back, 0, BAR_H - 1, sw, 1, mix(T.bar, T.border, 160));
-	/* logo = launcher button */
+	/* logo = launcher ("Activities") */
 	int lw = logo_width(12);
-	if (menu_open)
-		pill(6, 4, lw + 20, BAR_H - 8, T.chip_hi);
-	surf_logo(&back, 16, (BAR_H - 12) / 2, 12, T.text, T.accent);
+	if (menu_open || (my < BAR_H && mx < lw + 26))
+		pill(6, 4, lw + 20, BAR_H - 8, hover);
+	surf_logo(&back, 16, (BAR_H - 12) / 2, 12, T.bar_text, T.accent);
 	bar.logo_x1 = lw + 26;
-	/* workspaces */
-	int x = bar.logo_x1 + 10;
+	/* workspaces: GNOME-style dots, the active one a wide pill with its name */
+	int x = bar.logo_x1 + 12;
 	for (int i = 0; i < cfg.workspaces; i++) {
 		bool any = false;
 		for (int k = 0; k < MAX_WIN; k++)
 			any |= wins[k].used && wins[k].ws == i;
-		char lbl[24];
-		if (i == cur_ws)
-			snprintf(lbl, sizeof(lbl), "%d %s", i + 1, cfg.ws_name[i]);
-		else
-			snprintf(lbl, sizeof(lbl), "%d", i + 1);
-		int w = (int)strlen(lbl) * FONT_W + 16;
 		bar.ws_x0[i] = x;
-		bar.ws_x1[i] = x + w;
-		if (i == cur_ws)
-			pill(x, 5, w, BAR_H - 10, T.accent);
-		surf_text(&back, x + 8, cy, lbl, i == cur_ws ? RGB(0xff, 0xff, 0xff) : any ? T.text : T.text_dim);
-		if (any && i != cur_ws)
-			surf_fill(&back, x + w / 2 - 2, BAR_H - 6, 4, 2, T.accent);
-		x += w + 4;
+		if (i == cur_ws) {
+			char lbl[24];
+			snprintf(lbl, sizeof(lbl), "%d %s", i + 1, cfg.ws_name[i]);
+			int w = (int)strlen(lbl) * FONT_W + 20;
+			pill(x, 7, w, BAR_H - 14, T.bar_text);
+			surf_text(&back, x + 10, cy, lbl, T.bar);
+			x += w;
+		} else {
+			circle(x + 8, BAR_H / 2, 4, any ? T.bar_text : mix(T.bar, T.bar_dim, 150));
+			x += 16;
+		}
+		bar.ws_x1[i] = x;
+		x += 6;
 	}
-	/* layout mode */
-	x += 8;
-	char mb[16];
-	snprintf(mb, sizeof(mb), "%s", mode_names[ws_mode[cur_ws] % 3]);
+	/* layout mode, quiet text */
+	x += 6;
 	bar.mode_x0 = x;
-	bar.mode_x1 = x + (int)strlen(mb) * FONT_W + 16;
-	pill(x, 5, bar.mode_x1 - x, BAR_H - 10, T.chip);
-	surf_text(&back, x + 8, cy, mb, T.text_dim);
-	x = bar.mode_x1 + 12;
-	/* clock (far right) */
-	int xr = sw - 12;
-	char buf[64];
-	i64 rem = time_unix() % 86400;
-	snprintf(buf, sizeof(buf), "%02ld:%02ld", rem / 3600, (rem / 60) % 60);
-	xr -= (int)strlen(buf) * FONT_W;
-	surf_text(&back, xr, cy, buf, T.text);
-	xr -= 14;
-	/* status group -> Control Center */
+	surf_text(&back, x, cy, mode_names[ws_mode[cur_ws] % 3], T.bar_dim);
+	bar.mode_x1 = x + (int)strlen(mode_names[ws_mode[cur_ws] % 3]) * FONT_W;
+	/* centred clock */
+	char clk[40];
+	fmt_clock(clk, sizeof(clk));
+	int cw = (int)strlen(clk) * FONT_W;
+	bar.clock_x0 = sw / 2 - cw / 2 - 12;
+	bar.clock_x1 = sw / 2 + cw / 2 + 12;
+	if (my < BAR_H && mx >= bar.clock_x0 && mx < bar.clock_x1)
+		pill(bar.clock_x0, 4, bar.clock_x1 - bar.clock_x0, BAR_H - 8, hover);
+	surf_text(&back, sw / 2 - cw / 2, cy, clk, T.bar_text);
+	/* status cluster -> Quick Settings */
 	char rx[12], tx[12];
 	fmt_rate(rx, sizeof(rx), net_rx_rate);
 	fmt_rate(tx, sizeof(tx), net_tx_rate);
 	enum task_class c = profiler_stable_class();
 	char st[128];
-	snprintf(st, sizeof(st), "%s: %s   CPU %lu%%   RAM %lu%%   NET %s/%s", sched_policy_name(),
-		 task_class_name(c), cpu_pct, ram_pct, rx, tx);
-	int stw = (int)strlen(st) * FONT_W + 20;
-	bar.status_x1 = xr;
-	bar.status_x0 = xr - stw;
-	bool hot = my < BAR_H && mx >= bar.status_x0 && mx < bar.status_x1;
-	pill(bar.status_x0, 5, stw, BAR_H - 10, hot ? T.chip_hi : T.chip);
-	surf_text(&back, bar.status_x0 + 10, cy, st, T.text_dim);
-	char head[48];
-	snprintf(head, sizeof(head), "%s: %s", sched_policy_name(), task_class_name(c));
-	surf_text(&back, bar.status_x0 + 10, cy, head, T.accent);
-	/* focused window title in the middle space */
-	if (focus >= 0 && wins[focus].used && wins[focus].ws == cur_ws && x < bar.status_x0 - 40)
-		text_clip(x, cy, wins[focus].title, bar.status_x0 - 20 - x, T.text_dim);
+	snprintf(st, sizeof(st), "%s   CPU %lu%%  RAM %lu%%  NET %s/%s", task_class_name(c), cpu_pct, ram_pct, rx, tx);
+	int stw = (int)strlen(st) * FONT_W + 20 + 26;
+	bar.status_x1 = sw - 6;
+	bar.status_x0 = bar.status_x1 - stw;
+	bool hot = qs_open || (my < BAR_H && mx >= bar.status_x0 && mx < bar.status_x1);
+	u32 pbg = hot ? hover : T.bar;
+	if (hot)
+		pill(bar.status_x0, 4, stw, BAR_H - 8, hover);
+	surf_text(&back, bar.status_x0 + 10, cy, st, T.bar_dim);
+	surf_text(&back, bar.status_x0 + 10, cy, task_class_name(c), T.accent);
+	/* power glyph: a ring broken at the top, with a bar */
+	int pcx = bar.status_x1 - 18, pcy = BAR_H / 2 + 1;
+	circle(pcx, pcy, 6, T.bar_text);
+	circle(pcx, pcy, 4, pbg);
+	surf_fill(&back, pcx - 2, pcy - 7, 5, 6, pbg);
+	surf_fill(&back, pcx, pcy - 8, 1, 7, T.bar_text);
+	/* focused window title, between the workspaces and the clock */
+	int tx0 = bar.mode_x1 + 20;
+	if (focus >= 0 && wins[focus].used && wins[focus].ws == cur_ws && tx0 < bar.clock_x0 - 40)
+		text_clip(tx0, cy, wins[focus].title, bar.clock_x0 - 20 - tx0, T.bar_dim);
 }
 
 /* ---- launcher / command palette ---- */
@@ -1008,10 +1129,11 @@ static int launcher_y(void) { return BAR_H + (int)back.h / 8; }
 
 static void draw_launcher(void)
 {
-	surf_blend_fill(&back, 0, BAR_H, (int)back.w, (int)back.h - BAR_H, 0, cfg.dark ? 90 : 50);
-	int x = launcher_x(), y = launcher_y(), rows = MIN(nitems, L_ROWS);
+	int p = ease(menu_t, MS(160)); /* slides down and the backdrop darkens */
+	surf_blend_fill(&back, 0, BAR_H, (int)back.w, (int)back.h - BAR_H, 0, (u8)((cfg.dark ? 90 : 50) * p / 256));
+	int x = launcher_x(), y = launcher_y() - (256 - p) * 18 / 256, rows = MIN(nitems, L_ROWS);
 	int h = 64 + MAX(rows, 1) * L_ROW + 36;
-	shadow(x, y, L_W, h, 14);
+	shadow(x, y, L_W, h, 5);
 	surf_round_rect(&back, x, y, L_W, h, 14, T.border);
 	surf_round_rect(&back, x + 1, y + 1, L_W - 2, h - 2, 13, T.surface);
 	/* search field */
@@ -1102,7 +1224,7 @@ static void draw_switcher(void)
 		return;
 	int cw = 180, ch = 130, pad = 14, tw = n * (cw + pad) + pad;
 	int x = ((int)back.w - tw) / 2, y = (int)back.h / 2 - ch / 2 - 20;
-	shadow(x, y, tw, ch + 2 * pad, 14);
+	shadow(x, y, tw, ch + 2 * pad, 5);
 	surf_round_rect(&back, x, y, tw, ch + 2 * pad, 14, T.surface);
 	for (int k = 0; k < n; k++) {
 		struct window *w = &wins[idx[k]];
@@ -1130,13 +1252,49 @@ static void draw_switcher(void)
 }
 
 /* ---- overview: workspace strip + window thumbnails ---- */
+/* GNOME-style dash: the apps as large icons at the bottom of the overview */
+#define DASH_ICON 52
+#define DASH_GAP 14
+static const u32 dash_colors[] = { RGB(0x24, 0x1f, 0x31), RGB(0x98, 0x6a, 0x44), RGB(0xe8, 0x2a, 0x36),
+				   RGB(0x26, 0xa2, 0x69), RGB(0x35, 0x84, 0xe4), RGB(0xe6, 0x61, 0x00),
+				   RGB(0x61, 0x35, 0x83) };
+static int dash_n(void) { return (int)ARRAY_LEN(apps); }
+static int dash_w(void) { return dash_n() * (DASH_ICON + DASH_GAP) + DASH_GAP; }
+static int dash_x(void) { return ((int)back.w - dash_w()) / 2; }
+static int dash_y(void) { return (int)back.h - DASH_ICON - 34; }
+
+static void draw_dash(int p)
+{
+	int x = dash_x(), y = dash_y() + (256 - p) * 40 / 256, w = dash_w(), h = DASH_ICON + 20;
+	shadow(x, y - 10, w, h, 4);
+	surf_round_rect(&back, x, y - 10, w, h, 20, T.surface);
+	for (int i = 0; i < dash_n(); i++) {
+		int ix = x + DASH_GAP + i * (DASH_ICON + DASH_GAP);
+		bool hot = mx >= ix && mx < ix + DASH_ICON && my >= y && my < y + DASH_ICON;
+		if (hot)
+			surf_round_rect(&back, ix - 4, y - 4, DASH_ICON + 8, DASH_ICON + 8, 16, T.surface_hi);
+		surf_round_rect(&back, ix, y, DASH_ICON, DASH_ICON, 14, dash_colors[i % ARRAY_LEN(dash_colors)]);
+		char c[2] = { apps[i].label[0], 0 };
+		surf_text_scaled(&back, ix + DASH_ICON / 2 - 8, y + DASH_ICON / 2 - 16, c, RGB(0xff, 0xff, 0xff), 2);
+		if (hot) { /* name above the icon */
+			int lw = (int)strlen(apps[i].label) * FONT_W + 16;
+			int lx = ix + DASH_ICON / 2 - lw / 2;
+			surf_round_rect(&back, lx, y - 44, lw, 24, 12, T.surface);
+			surf_text(&back, lx + 8, y - 40, apps[i].label, T.text);
+		}
+	}
+}
+
 static void draw_overview(void)
 {
-	surf_blend_fill(&back, 0, BAR_H, (int)back.w, (int)back.h - BAR_H, 0, cfg.dark ? 150 : 90);
+	int p = ease(ov_t, MS(200));
+	surf_blend_fill(&back, 0, BAR_H, (int)back.w, (int)back.h - BAR_H, 0, (u8)((cfg.dark ? 150 : 90) * p / 256));
 	int sw = (int)back.w, stripw = 150, striph = 34;
 	int sx0 = sw / 2 - (cfg.workspaces * (stripw + 10)) / 2;
+	int slide = (256 - p) * 24 / 256;
+	draw_dash(p);
 	for (int i = 0; i < cfg.workspaces; i++) {
-		int x = sx0 + i * (stripw + 10), y = BAR_H + 16;
+		int x = sx0 + i * (stripw + 10), y = BAR_H + 16 - slide;
 		surf_round_rect(&back, x, y, stripw, striph, 8, i == cur_ws ? T.accent : T.surface_hi);
 		char l[24];
 		snprintf(l, sizeof(l), "%d %s", i + 1, cfg.ws_name[i]);
@@ -1148,14 +1306,15 @@ static void draw_overview(void)
 			idx[n++] = zorder[i];
 	int top = BAR_H + 70;
 	if (!n) {
-		surf_text(&back, sw / 2 - 64, (int)back.h / 2, "No windows here", T.text_dim);
+		surf_text(&back, sw / 2 - 64, (int)back.h / 2 - 40, "No windows here", T.text_dim);
+		surf_text(&back, sw / 2 - 124, (int)back.h / 2 - 16, "type to search, or pick an app below", T.text_dim);
 		return;
 	}
 	int cols = n <= 1 ? 1 : n <= 4 ? 2 : 3, rows = (n + cols - 1) / cols;
-	int cw = (sw - 80) / cols, ch = ((int)back.h - top - 40) / rows;
+	int cw = (sw - 80) / cols, ch = (dash_y() - 20 - top) / rows;
 	for (int k = 0; k < n; k++) {
 		struct window *w = &wins[idx[k]];
-		int cx = 40 + (k % cols) * cw, cy = top + (k / cols) * ch;
+		int cx = 40 + (k % cols) * cw, cy = top + (k / cols) * ch + slide;
 		int tw = cw - 30, th = ch - 40;
 		int sx = w->w, sy = w->h;
 		if (sx * th > sy * tw)
@@ -1177,14 +1336,18 @@ static void draw_overview(void)
 
 static void draw_toasts(void)
 {
-	int y = BAR_H + 10, w = 340, x = (int)back.w - w - 12;
+	int y = BAR_H + 10, w = 340;
 	u64 now = time_ns();
 	for (int i = 0; i < NTOAST; i++) {
 		struct toast *t = &toasts[i];
 		if (!t->used)
 			continue;
 		int h = t->body[1][0] ? 74 : 56;
-		shadow(x, y, w, h, 10);
+		int p = ease(t->t, MS(220));
+		if (p < 256)
+			animate(MS(220));
+		int x = (int)back.w - w - 12 + (256 - p) * (w + 24) / 256;
+		shadow(x, y, w, h, 4);
 		surf_round_rect(&back, x, y, w, h, 10, T.border);
 		surf_round_rect(&back, x + 1, y + 1, w - 2, h - 2, 9, T.surface);
 		surf_fill(&back, x + 1, y + 10, 3, h - 20, T.accent);
@@ -1198,6 +1361,116 @@ static void draw_toasts(void)
 			text_clip(x + 16, y + 48, t->body[1], w - 28, T.text_dim);
 		y += h + 8;
 	}
+}
+
+/* ---- Quick Settings (GNOME 43+ style): toggle tiles, scheduler, session ---- */
+#define QS_W 380
+enum { Q_DARK, Q_TILE, Q_ALERT, Q_NATURAL, Q_TAP, Q_MOTION, Q_SCHED, Q_SETTINGS, Q_CONTROL, Q_LOCK,
+       Q_REBOOT, Q_OFF };
+static struct qhit {
+	int x, y, w, h, kind, arg;
+} qhits[24];
+static int nqhits;
+static const char *const qs_sched[] = { "round_robin", "priority", "low_latency", "adaptive" };
+static const char *const qs_sched_lbl[] = { "RR", "Priority", "Low lat.", "Adaptive" };
+
+static void qs_hit(int x, int y, int w, int h, int kind, int arg)
+{
+	if (nqhits < (int)ARRAY_LEN(qhits))
+		qhits[nqhits++] = (struct qhit){ x, y, w, h, kind, arg };
+}
+
+static int qs_x(void) { return (int)back.w - QS_W - 8; }
+
+static void qs_tile(int x, int y, int w, const char *label, bool on, int kind)
+{
+	bool hot = mx >= x && mx < x + w && my >= y && my < y + 48;
+	u32 bg = on ? T.accent : hot ? T.chip_hi : T.chip;
+	pill(x, y, w, 48, bg);
+	u32 fg = on ? RGB(0xff, 0xff, 0xff) : T.text;
+	surf_text(&back, x + 20, y + 8, label, fg);
+	surf_text(&back, x + 21, y + 8, label, fg);
+	surf_text(&back, x + 20, y + 26, on ? "On" : "Off", on ? mix(T.accent, RGB(0xff, 0xff, 0xff), 190) : T.text_dim);
+	qs_hit(x, y, w, 48, kind, 0);
+}
+
+static void qs_button(int x, int y, int w, const char *label, int kind, u32 bg)
+{
+	bool hot = mx >= x && mx < x + w && my >= y && my < y + 34;
+	pill(x, y, w, 34, hot ? mix(bg, T.text, 30) : bg);
+	surf_text(&back, x + w / 2 - (int)strlen(label) * 4, y + 9, label,
+		  bg == T.close ? RGB(0xff, 0xff, 0xff) : T.text);
+	qs_hit(x, y, w, 34, kind, 0);
+}
+
+static void draw_qs(void)
+{
+	int p = ease(qs_t, MS(160));
+	int x = qs_x(), y = BAR_H + 6 - (256 - p) * 14 / 256, h = 352;
+	nqhits = 0;
+	shadow(x, y, QS_W, h, 5);
+	surf_round_rect(&back, x, y, QS_W, h, 18, T.border);
+	surf_round_rect(&back, x + 1, y + 1, QS_W - 2, h - 2, 17, T.surface);
+	/* header: what the adaptive kernel is doing */
+	char l[80];
+	snprintf(l, sizeof(l), "Workload %s  -  scheduler %s", task_class_name(profiler_stable_class()),
+		 sched_policy_name());
+	text_clip(x + 16, y + 16, l, QS_W - 32, T.text_dim);
+	/* tiles */
+	int tw = (QS_W - 3 * 12) / 2, ty = y + 44;
+	qs_tile(x + 12, ty, tw, "Dark Style", cfg.dark, Q_DARK);
+	qs_tile(x + 24 + tw, ty, tw, "Tiling", ws_mode[cur_ws] == MODE_TILING, Q_TILE);
+	qs_tile(x + 12, ty + 58, tw, "Adaptive Alerts", cfg.adapt_notify, Q_ALERT);
+	qs_tile(x + 24 + tw, ty + 58, tw, "Natural Scroll", cfg.natural_scroll, Q_NATURAL);
+	qs_tile(x + 12, ty + 116, tw, "Tap to Click", cfg.tap_to_click, Q_TAP);
+	qs_tile(x + 24 + tw, ty + 116, tw, "Reduce Motion", cfg.reduce_motion, Q_MOTION);
+	/* scheduler: a segmented control */
+	int sy = ty + 182;
+	surf_text(&back, x + 16, sy, "Scheduler", T.text_dim);
+	int segw = (QS_W - 24) / 4;
+	surf_round_rect(&back, x + 12, sy + 20, segw * 4, 32, 16, T.chip);
+	for (int i = 0; i < 4; i++) {
+		bool on = !strcmp(sched_policy_name(), qs_sched[i]);
+		int bx = x + 12 + i * segw;
+		if (on)
+			pill(bx + 2, sy + 22, segw - 4, 28, T.accent);
+		surf_text(&back, bx + segw / 2 - (int)strlen(qs_sched_lbl[i]) * 4, sy + 28, qs_sched_lbl[i],
+			  on ? RGB(0xff, 0xff, 0xff) : T.text);
+		qs_hit(bx, sy + 20, segw, 32, Q_SCHED, i);
+	}
+	/* session buttons */
+	int by = y + h - 50, bw = (QS_W - 24 - 4 * 6) / 5;
+	qs_button(x + 12, by, bw, "Settings", Q_SETTINGS, T.chip);
+	qs_button(x + 12 + (bw + 6), by, bw, "Control", Q_CONTROL, T.chip);
+	qs_button(x + 12 + 2 * (bw + 6), by, bw, "Lock", Q_LOCK, T.chip);
+	qs_button(x + 12 + 3 * (bw + 6), by, bw, "Restart", Q_REBOOT, T.chip);
+	qs_button(x + 12 + 4 * (bw + 6), by, bw, "Off", Q_OFF, T.close);
+}
+
+static bool qs_click(int x, int y)
+{
+	for (int i = 0; i < nqhits; i++) {
+		struct qhit *h = &qhits[i];
+		if (x < h->x || x >= h->x + h->w || y < h->y || y >= h->y + h->h)
+			continue;
+		switch (h->kind) {
+		case Q_DARK: cfg.dark ^= 1; apply_cfg(true); break;
+		case Q_TILE: set_mode(ws_mode[cur_ws] == MODE_TILING ? MODE_FLOATING : MODE_TILING); break;
+		case Q_ALERT: cfg.adapt_notify ^= 1; break;
+		case Q_NATURAL: cfg.natural_scroll ^= 1; apply_cfg(false); break;
+		case Q_TAP: cfg.tap_to_click ^= 1; apply_cfg(false); break;
+		case Q_MOTION: cfg.reduce_motion ^= 1; break;
+		case Q_SCHED: defer(D_SCHED, NULL, qs_sched[h->arg]); break;
+		case Q_SETTINGS: qs_open = false; launch("/bin/settings"); break;
+		case Q_CONTROL: qs_open = false; focus_or_launch("Fuhrer Control Center", "/bin/control"); break;
+		case Q_LOCK: qs_open = false; locked = true; break;
+		case Q_REBOOT: launch_argv("/bin/poweroff", "-r"); break;
+		case Q_OFF: launch("/bin/poweroff"); break;
+		}
+		damage_all();
+		return true;
+	}
+	return x >= qs_x() && x < qs_x() + QS_W && y >= BAR_H && y < BAR_H + 360; /* inside: swallow */
 }
 
 static void draw_lock(void)
@@ -1234,6 +1507,19 @@ static void draw_cursor(void)
 		}
 }
 
+/* the windows of one workspace, floating-over-tiles order */
+static void draw_workspace(int ws, bool current)
+{
+	for (int pass = 0; pass < 2; pass++)
+		for (int i = 0; i < nz; i++) {
+			struct window *w = &wins[zorder[i]];
+			bool vis = current ? visible(w) : (w->used && w->ws == ws && w->state != W_MIN);
+			bool on_top = w->floating && ws_mode[ws] == MODE_TILING;
+			if (vis && (pass == 1) == on_top)
+				draw_window_animated(w, zorder[i] == focus);
+		}
+}
+
 static void compose(void)
 {
 	u64 t0 = time_ns();
@@ -1251,23 +1537,41 @@ static void compose(void)
 	if (locked) {
 		draw_lock();
 	} else {
+		/* overlays that just appeared start their entry animation */
+		static bool was_menu, was_ov, was_qs;
+		if (menu_open && !was_menu)
+			menu_t = t0, animate(MS(160));
+		if (overview && !was_ov)
+			ov_t = t0, animate(MS(200));
+		if (qs_open && !was_qs)
+			qs_t = t0, animate(MS(160));
+		was_menu = menu_open;
+		was_ov = overview;
+		was_qs = qs_open;
 		memcpy(back.px, wallc.px, (size_t)back.stride * back.h * 4);
-		for (int i = 0; i < nz && !overview; i++) {
-			struct window *w = &wins[zorder[i]];
-			if (visible(w) && !(w->floating && ws_mode[cur_ws] == MODE_TILING))
-				draw_window(w, zorder[i] == focus);
-		}
-		for (int i = 0; i < nz && !overview; i++) { /* floating windows stay above the tiles */
-			struct window *w = &wins[zorder[i]];
-			if (visible(w) && w->floating && ws_mode[cur_ws] == MODE_TILING)
-				draw_window(w, zorder[i] == focus);
-		}
-		if (overview)
+		if (!overview) {
+			int sp = ws_from >= 0 ? ease(ws_t, MS(220)) : 256;
+			if (sp >= 256)
+				ws_from = -1;
+			if (ws_from >= 0) { /* workspace slide: old one leaves, new one enters */
+				int W = (int)back.w;
+				odx = -ws_dir * W * sp / 256;
+				draw_workspace(ws_from, false);
+				odx = ws_dir * W * (256 - sp) / 256;
+				draw_workspace(cur_ws, true);
+				odx = 0;
+			} else {
+				draw_workspace(cur_ws, true);
+			}
+		} else {
 			draw_overview();
+		}
 		draw_bar();
 		draw_toasts();
 		if (switcher)
 			draw_switcher();
+		if (qs_open)
+			draw_qs();
 		if (menu_open)
 			draw_launcher();
 	}
@@ -1285,6 +1589,10 @@ static void compose(void)
 	frames_drawn++;
 	compose_ns_total += t1 - t0;
 	compose_ns_max = MAX(compose_ns_max, t1 - t0);
+	if (t0 < anim_until) {
+		anim_frames++;
+		anim_compose_ns_max = MAX(anim_compose_ns_max, t1 - t0);
+	}
 	if (in_t) { /* input event -> frame on screen */
 		input_lat_total += t1 - in_t;
 		input_lat_max = MAX(input_lat_max, t1 - in_t);
@@ -1313,9 +1621,12 @@ static void compositor_thread(void *arg)
 	u64 last = 0;
 	for (;;) {
 		u64 f = irq_save();
-		if (!dirty_all && dx1 <= dx0 && dq_head == dq_tail)
+		bool anim = time_ns() < anim_until;
+		if (!dirty_all && dx1 <= dx0 && dq_head == dq_tail && !anim)
 			wq_wait(&comp_wq, 1000000000ULL); /* at least once a second: clock, status */
 		irq_restore(f);
+		if (anim)
+			damage_all(); /* 60 fps frame clock while something moves */
 		u64 now = time_ns();
 		if (now - last < 16000000ULL) /* cap at ~60 fps */
 			sleep_ns(16000000ULL - (now - last));
@@ -1396,6 +1707,8 @@ static int win_create(struct process *p, int w, int h, const char *title)
 		y = work_y() + TITLE_H + 10;
 	win->x = x; win->y = y; win->w = w; win->h = h;
 	win->ws = cur_ws;
+	win_open_ns[id] = time_ns();
+	animate(MS(180));
 	zorder[nz++] = id;
 	set_focus(id);
 	retile();
@@ -1459,7 +1772,7 @@ static int window_at(int x, int y, int *part)
 				continue;
 			if (y < w->y) {
 				int bx = title_buttons_x(fx, fw);
-				*part = x >= bx + 52 ? 3 : x >= bx + 26 ? 2 : x >= bx ? 1 : 0; /* 0 title */
+				*part = x >= bx + 56 ? 3 : x >= bx + 28 ? 2 : x >= bx ? 1 : 0; /* 0 title */
 			} else if (x >= fx + fw - 14 && y >= fy + fh - 14) {
 				*part = 4; /* resize corner */
 			} else {
@@ -1476,6 +1789,12 @@ static void switch_workspace(int ws)
 	ws = ((ws % n) + n) % n;
 	if (ws == cur_ws && !show_desktop && !overview)
 		return;
+	if (ws != cur_ws && motion()) { /* slide in the direction of travel */
+		ws_from = cur_ws;
+		ws_dir = ws > cur_ws ? 1 : -1;
+		ws_t = time_ns();
+		animate(MS(220));
+	}
 	cur_ws = ws;
 	show_desktop = false;
 	overview = false;
@@ -1606,6 +1925,7 @@ static bool handle_shortcut(const struct input_event *ev)
 	case 'o': case 'w': overview = !overview; damage_all(); return true;
 	case 't': set_mode((ws_mode[cur_ws] + 1) % 3); return true;
 	case 'f': do_action(GA_CONTROL); return true;
+	case 's': qs_open = !qs_open; menu_open = false; damage_all(); return true; /* GNOME: Super+S */
 	case 'e': launch("/bin/files"); return true;
 	case ' ':
 		if (fw) {
@@ -1686,6 +2006,14 @@ static void click(int x, int y)
 		}
 		ty += h + 8;
 	}
+	if (qs_open) {
+		if (qs_click(x, y))
+			return;
+		qs_open = false; /* click outside closes it */
+		damage_all();
+		if (y < BAR_H && x >= bar.status_x0 && x < bar.status_x1)
+			return;
+	}
 	if (menu_open) {
 		int lx = launcher_x(), ly = launcher_y(), rows = MIN(nitems, L_ROWS);
 		int first = lsel >= L_ROWS ? lsel - L_ROWS + 1 : 0;
@@ -1699,6 +2027,18 @@ static void click(int x, int y)
 			open_launcher(false);
 		if (y >= BAR_H)
 			return;
+	}
+	if (overview && y >= dash_y() && y < dash_y() + DASH_ICON && x >= dash_x() + DASH_GAP) {
+		int k = (x - dash_x() - DASH_GAP) / (DASH_ICON + DASH_GAP);
+		if (k < dash_n()) {
+			overview = false;
+			if (!strcmp(apps[k].path, "/bin/control"))
+				focus_or_launch("Fuhrer Control Center", "/bin/control");
+			else
+				launch(apps[k].path);
+			damage_all();
+			return;
+		}
 	}
 	if (overview) {
 		int stripw = 150, sx0 = sw / 2 - (cfg.workspaces * (stripw + 10)) / 2;
@@ -1717,7 +2057,7 @@ static void click(int x, int y)
 				idx[n++] = zorder[i];
 		int top = BAR_H + 70;
 		int cols = n <= 1 ? 1 : n <= 4 ? 2 : 3, rows = n ? (n + cols - 1) / cols : 1;
-		int cw = (sw - 80) / cols, ch = ((int)screen->h - top - 40) / rows;
+		int cw = (sw - 80) / cols, ch = (dash_y() - 20 - top) / rows;
 		int k = ((y - top) / ch) * cols + (x - 40) / cw;
 		overview = false;
 		if (x >= 40 && y >= top && k >= 0 && k < n) {
@@ -1735,7 +2075,8 @@ static void click(int x, int y)
 		} else if (x >= bar.mode_x0 && x < bar.mode_x1) {
 			set_mode((ws_mode[cur_ws] + 1) % 3);
 		} else if (x >= bar.status_x0 && x < bar.status_x1) {
-			do_action(GA_CONTROL);
+			qs_open = !qs_open;
+			menu_open = false;
 		} else {
 			for (int i = 0; i < cfg.workspaces; i++)
 				if (x >= bar.ws_x0[i] && x < bar.ws_x1[i])
@@ -1784,8 +2125,10 @@ static void compositor_input(const struct input_event *ev)
 				super_down = true;
 				super_used = false;
 			} else {
-				if (super_down && !super_used && !locked)
+				if (super_down && !super_used && !locked) {
+					qs_open = false;
 					open_launcher(!menu_open);
+				}
 				super_down = false;
 			}
 			break;
@@ -1805,6 +2148,18 @@ static void compositor_input(const struct input_event *ev)
 		}
 		if (super_down && ev->value)
 			super_used = true;
+		if (ev->value && ev->code == KEY_ESC && (qs_open || (overview && !menu_open))) {
+			qs_open = overview = false;
+			damage_all();
+			break;
+		}
+		if (overview && !menu_open && ev->value && !(ev->mods & (MOD_SUPER | MOD_CTRL | MOD_ALT)) &&
+		    ev->ch >= 32 && ev->ch < 127) { /* GNOME: typing in the overview searches */
+			overview = false;
+			open_launcher(true);
+			launcher_key(ev);
+			break;
+		}
 		if (menu_open && ev->value && !(ev->mods & MOD_SUPER) && !locked) {
 			launcher_key(ev);
 			break;
@@ -1839,7 +2194,7 @@ static void compositor_input(const struct input_event *ev)
 			push_event(w, (struct fu_wevent){ .type = WEV_MOUSE_MOVE, .x = mx - w->x, .y = my - w->y, .value = 1 });
 		}
 		/* hover feedback: launcher rows, title buttons, bar status */
-		if (menu_open || my < BAR_H + TITLE_H + 40 || oy < BAR_H + TITLE_H + 40)
+		if (menu_open || qs_open || overview || my < BAR_H + TITLE_H + 40 || oy < BAR_H + TITLE_H + 40)
 			damage_all();
 		else
 			for (int i = 0; i < nz; i++) {
@@ -2106,7 +2461,8 @@ static void gen_desktop(void *pb)
 		  frames_drawn ? compose_ns_total / frames_drawn / 1000 : 0, compose_ns_max / 1000);
 	pb_printf(pb, "input_to_frame_avg_us: %lu\ninput_to_frame_max_us: %lu\ninput_frames: %lu\n",
 		  input_lat_n ? input_lat_total / input_lat_n / 1000 : 0, input_lat_max / 1000, input_lat_n);
-	pb_printf(pb, "last_workspace_switch_us: %lu\n", ws_switch_last_us);
+	pb_printf(pb, "last_workspace_switch_us: %lu\nanimation_frames: %lu\nanimation_compose_max_us: %lu\nmotion: %s\n",
+		  ws_switch_last_us, anim_frames, anim_compose_ns_max / 1000, cfg.reduce_motion ? "reduced" : "on");
 	for (int i = 0; i < MAX_WIN; i++)
 		if (wins[i].used)
 			pb_printf(pb, "win %d pid %d ws %d %dx%d at %d,%d state %d%s presents %u '%s'\n", i,
@@ -2126,6 +2482,9 @@ void desktop_start(void)
 	back.stride = wallc.stride = screen->w;
 	back.px = vmalloc_pages(pages);
 	wallc.px = vmalloc_pages(pages);
+	scr = back;
+	scr.px = vmalloc_pages(pages);
+	tgt = &back;
 	wq_init(&comp_wq);
 	mutex_init(&comp_lock);
 	for (int i = 0; i < DESK_MAX_WS; i++)

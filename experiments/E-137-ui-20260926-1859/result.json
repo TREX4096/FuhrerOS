@@ -1,0 +1,114 @@
+{
+ "config": {
+  "experiment": "E-137",
+  "suite": "ui",
+  "date": "2026-09-26T18:59:08Z",
+  "commit": "a0ebe22-dirty",
+  "kernel": "FuhrerOS 0.1.0 (own kernel)",
+  "host": "Linux 6.6.87.2-microsoft-standard-WSL2 x86_64",
+  "host_cpu": "AMD Ryzen 5 7520U with Radeon Graphics",
+  "host_note": "Windows 11 -> WSL2 -> QEMU; KVM nested inside WSL2 when accel=kvm",
+  "qemu": "QEMU emulator version 10.2.1 (Debian 1:10.2.1+ds-1ubuntu3.1)",
+  "accel": "kvm",
+  "vcpus": 4,
+  "vcpus_used_by_kernel": 1,
+  "memory_mb": 4096,
+  "disk": "virtio-blk, FFS0 raw image, host cache=writeback",
+  "network": "virtio-net, QEMU user-mode (slirp)",
+  "suite_script": "rootfs/etc/bench/ui.sh"
+ },
+ "fubench": [
+  {
+   "group": "desktop",
+   "name": "window_create",
+   "value": 1924,
+   "unit": "us",
+   "note": "open 400x300 + fill + present, avg of 20"
+  },
+  {
+   "group": "desktop",
+   "name": "launch_terminal",
+   "value": 5,
+   "unit": "ms",
+   "note": "spawn -> window exists; mean of 3, best 3 ms"
+  },
+  {
+   "group": "desktop",
+   "name": "launch_files",
+   "value": 3,
+   "unit": "ms",
+   "note": "spawn -> window exists; mean of 3, best 1 ms"
+  },
+  {
+   "group": "desktop",
+   "name": "launch_editor",
+   "value": 2,
+   "unit": "ms",
+   "note": "spawn -> window exists; mean of 3, best 1 ms"
+  },
+  {
+   "group": "desktop",
+   "name": "launch_browser",
+   "value": 2,
+   "unit": "ms",
+   "note": "spawn -> window exists; mean of 3, best 1 ms"
+  },
+  {
+   "group": "desktop",
+   "name": "launch_settings",
+   "value": 2,
+   "unit": "ms",
+   "note": "spawn -> window exists; mean of 3, best 1 ms"
+  },
+  {
+   "group": "desktop",
+   "name": "launch_control_center",
+   "value": 2,
+   "unit": "ms",
+   "note": "spawn -> window exists; mean of 3, best 1 ms"
+  },
+  {
+   "group": "desktop",
+   "name": "workspace_switch",
+   "value": 11994,
+   "unit": "us",
+   "note": "switch request -> composed frame, avg of 10"
+  },
+  {
+   "group": "desktop",
+   "name": "workspace_slide_frames",
+   "value": 14,
+   "unit": "frames",
+   "note": "frames composed during one 220 ms slide"
+  },
+  {
+   "group": "desktop",
+   "name": "animation_compose_max",
+   "value": 3958,
+   "unit": "us",
+   "note": "worst frame while animating (budget 16,667 us at 60 fps)"
+  },
+  {
+   "group": "desktop",
+   "name": "compose_avg",
+   "value": 1526,
+   "unit": "us",
+   "note": "average full composition, whole run"
+  },
+  {
+   "group": "desktop",
+   "name": "compose_max",
+   "value": 9405,
+   "unit": "us",
+   "note": "worst composition, whole run"
+  },
+  {
+   "group": "desktop",
+   "name": "terminal_keystroke_latency",
+   "value": -1,
+   "unit": "",
+   "status": "NOT RUN",
+   "note": "needs injected keyboard input; not measurable from inside the guest yet"
+  }
+ ]
+}

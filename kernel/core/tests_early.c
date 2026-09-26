@@ -32,11 +32,19 @@ void test_interrupts(void)
 	u64 got = ticks() - t0;
 	selftest_report("apic.timer.ticks", got >= 40 && got <= 60,
 			"%lu ticks in 50 ms at 1000 Hz", got);
-	u64 a = time_ns();
-	delay_us(1000);
-	u64 b = time_ns();
-	selftest_report("time.tsc.monotonic", b > a && b - a >= 1000000 && b - a < 1500000,
-			"delay_us(1000) measured %lu ns", b - a);
+	/* Minimum of 5: under nested virtualisation the host can deschedule the
+	 * vCPU mid-wait, which only ever adds time (F-125: one run measured 2.6 ms). */
+	u64 best = ~0ULL;
+	bool mono = true;
+	for (int i = 0; i < 5; i++) {
+		u64 a = time_ns();
+		delay_us(1000);
+		u64 b = time_ns();
+		mono &= b > a;
+		best = MIN(best, b - a);
+	}
+	selftest_report("time.tsc.monotonic", mono && best >= 1000000 && best < 1500000,
+			"delay_us(1000) measured %lu ns (min of 5)", best);
 }
 
 void test_memory(void)

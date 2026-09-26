@@ -46,6 +46,8 @@ n=1
 for k in "$@"; do
 	if [[ $k == sleep:* ]]; then sleep "${k#sleep:}"; continue; fi
 	if [[ $k == shot ]]; then shot "$OUT-$n.png"; n=$((n + 1)); continue; fi
+	wait_after=0.4
+	if [[ $k == fast:* ]]; then k=${k#fast:}; wait_after=0; fi # no pause, e.g. to catch an animation
 	printf 'sendkey %s\n' "$k" | nc -q1 -U "$MON" >/dev/null 2>&1 || printf 'sendkey %s\n' "$k" | nc -N -U "$MON" >/dev/null 2>&1
-	sleep 0.4
+	sleep "$wait_after"
 done
