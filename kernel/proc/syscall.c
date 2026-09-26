@@ -238,6 +238,7 @@ static i64 sys_sched_ctl(u64 op, u64 arg, char *ubuf)
 	case SCHED_SET_HYSTERESIS: profiler_set_hysteresis((u32)arg); return 0;
 	case SCHED_PROFILER: profiler_enable(arg != 0); return 0;
 	case SCHED_QUANTUM_SCALE: sched_set_quantum_scale((int)arg); return 0;
+	case SCHED_LAST_DISPATCH: return (i64)sched_current()->last_dispatch_ns;
 	case SCHED_TASK_CLASS: {
 		struct task *t = task_by_tid((int)arg);
 		return t ? (i64)t->prof.cls : -E_SRCH;

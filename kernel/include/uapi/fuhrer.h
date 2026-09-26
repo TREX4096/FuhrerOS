@@ -141,6 +141,7 @@ enum {
 	SCHED_QUANTUM_SCALE = 7,/* arg = percent */
 	SCHED_TASK_CLASS = 8,	/* arg = tid; returns class */
 	SCHED_RESET_STATS = 9,
+	SCHED_LAST_DISPATCH = 10,/* returns calling thread's last wake->run latency, ns */
 };
 
 /* tty ioctls */

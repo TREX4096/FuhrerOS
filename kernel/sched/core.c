@@ -196,6 +196,7 @@ static void switch_to(struct task *prev, struct task *next)
 	next->prof.cur.runs++;
 	if (next->woken_ns) {
 		next->prof.cur.wake_lat_ns += now - next->woken_ns;
+		next->last_dispatch_ns = now - next->woken_ns;
 		next->woken_ns = 0;
 	}
 	bsp_percpu.current = next;

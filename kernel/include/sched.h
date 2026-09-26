@@ -83,6 +83,7 @@ struct task {
 	u64 cpu_ns;
 	u64 run_start_ns;
 	u64 woken_ns;			/* last wake-up, for wake latency */
+	u64 last_dispatch_ns;		/* latest wake -> running latency */
 	u64 switches;
 	u64 created_ns;
 	struct task_profile prof;

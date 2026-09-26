@@ -4,8 +4,11 @@
  *
  * Runs, concurrently:
  *   - an interactive probe: sleeps 10 ms, then does ~0.2 ms of work, and
- *     measures wake-up latency (actual wake - requested wake) and response
- *     time (wake request -> work finished);
+ *     measures wake-up latency (actual wake - requested wake), dispatch
+ *     latency (kernel: runnable -> running, the part the scheduler controls;
+ *     wake-up latency also contains the 1 ms timer granularity, whose phase
+ *     depends on the per-boot timer calibration) and response time (wake
+ *     request -> work finished);
  *   - CPU-bound workers: fixed-size compute jobs (prime sieve), counted;
  *   - I/O-bound workers: random 4 KiB reads of a file through the buffer
  *     cache (small reads, frequent blocking).
@@ -21,7 +24,7 @@
 static volatile bool stop;
 static volatile uint64_t cpu_jobs[MAXW];
 static volatile uint64_t io_ops[MAXW];
-static uint64_t wake_lat[MAX_SAMPLES], resp[MAX_SAMPLES];
+static uint64_t wake_lat[MAX_SAMPLES], resp[MAX_SAMPLES], disp[MAX_SAMPLES];
 static volatile int nsamples;
 static volatile int done_threads;
 
@@ -79,6 +82,7 @@ static void probe(void *arg)
 		uint64_t want = uptime_ns() + 10000000UL;
 		sleep_ms(10);
 		uint64_t woke = uptime_ns();
+		long d = sys3(SYS_SCHED_CTL, SCHED_LAST_DISPATCH, 0, 0);
 		volatile uint32_t x = 0;
 		for (int i = 0; i < 20000; i++) /* ~0.1-0.3 ms of work */
 			x += (uint32_t)i * 2654435761u;
@@ -87,6 +91,7 @@ static void probe(void *arg)
 		if (k < MAX_SAMPLES) {
 			wake_lat[k] = woke > want ? woke - want : 0;
 			resp[k] = fin - (want - 10000000UL);
+			disp[k] = d > 0 ? (uint64_t)d : 0;
 			nsamples = k + 1;
 		}
 	}
@@ -176,6 +181,7 @@ int main(int argc, char **argv)
 	int n = nsamples;
 	qsort_u64(wake_lat, n);
 	qsort_u64(resp, n);
+	qsort_u64(disp, n);
 	uint64_t jobs = 0, sq = 0, iops = 0;
 	for (int i = 0; i < ncpu; i++) {
 		jobs += cpu_jobs[i];
@@ -189,11 +195,12 @@ int main(int argc, char **argv)
 	uint64_t busy = s1.busy_ns - s0.busy_ns, idle = s1.idle_ns - s0.idle_ns;
 	printf("SCHEDBENCH {\"name\":\"%s\",\"policy\":\"%s\",\"seconds\":%d,\"cpu_workers\":%d,\"io_workers\":%d,"
 	       "\"samples\":%d,\"wake_p50_us\":%lu,\"wake_p95_us\":%lu,\"wake_p99_us\":%lu,\"wake_max_us\":%lu,"
-	       "\"resp_p50_us\":%lu,\"resp_p95_us\":%lu,\"resp_p99_us\":%lu,"
+	       "\"dispatch_p50_us\":%lu,\"dispatch_p99_us\":%lu,\"resp_p50_us\":%lu,\"resp_p95_us\":%lu,\"resp_p99_us\":%lu,"
 	       "\"cpu_jobs_per_s_x100\":%lu,\"io_ops_per_s\":%lu,\"jain_x1000\":%lu,\"ctx_switches_per_s\":%lu,"
 	       "\"cpu_util_pct\":%lu,\"sched_overhead_ns_per_s\":%ld,\"system_class\":\"%s\",\"task_classes\":\"%s\"}\n",
 	       name, pol, secs, ncpu, nio, n, pct(wake_lat, n, 50) / 1000, pct(wake_lat, n, 95) / 1000,
-	       pct(wake_lat, n, 99) / 1000, n ? wake_lat[n - 1] / 1000 : 0, pct(resp, n, 50) / 1000,
+	       pct(wake_lat, n, 99) / 1000, n ? wake_lat[n - 1] / 1000 : 0, pct(disp, n, 50) / 1000, pct(disp, n, 99) / 1000,
+	       pct(resp, n, 50) / 1000,
 	       pct(resp, n, 95) / 1000, pct(resp, n, 99) / 1000, jobs * 100000000000UL / el,
 	       iops * 1000000000UL / el, jain, cs, (busy + idle) ? busy * 100 / (busy + idle) : 0,
 	       (long)((ov1 - ov0) * 1000000000LL / (long)el), mid.system_class, classes);

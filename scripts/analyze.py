@@ -136,7 +136,8 @@ def main():
             groups.setdefault((scen, d["policy"]), []).append(d)
         result["schedbench"] = {f"{k[0]}|{k[1]}": v for k, v in groups.items()}
         scenarios = sorted({k[0] for k in groups})
-        metrics = [("wake_p50_us", "wake p50 (us)"), ("wake_p99_us", "wake p99 (us)"),
+        metrics = [("dispatch_p50_us", "dispatch p50 (us)"), ("dispatch_p99_us", "dispatch p99 (us)"),
+                   ("wake_p50_us", "wake p50 (us)"), ("wake_p99_us", "wake p99 (us)"),
                    ("resp_p99_us", "response p99 (us)"), ("cpu_jobs_per_s_x100", "batch jobs/s (x100)"),
                    ("io_ops_per_s", "I/O ops/s"), ("jain_x1000", "fairness (Jain x1000)"),
                    ("ctx_switches_per_s", "ctx switches/s"), ("sched_overhead_ns_per_s", "sched overhead ns/s")]
@@ -245,6 +246,9 @@ def main():
            "- Nested virtualisation (Windows → WSL2 → KVM): absolute times are not bare-metal times; "
            "comparisons are between policies within one boot.",
            "- FuhrerOS schedules on one CPU (the BSP); extra vCPUs offered by QEMU are idle.",
+           "- Sleepers are woken by the 1000 Hz tick, so *wake* latency includes up to 1 ms of timer "
+           "granularity whose phase depends on the per-boot LAPIC calibration (F-117): compare wake latency "
+           "only within one experiment. *Dispatch* latency (runnable → running) does not have this problem.",
            "- Small repetition counts; see CV%.", ""]
     open(os.path.join(exp, "summary.md"), "w", encoding="utf-8").write("\n".join(md))
     json.dump(result, open(os.path.join(exp, "result.json"), "w", encoding="utf-8"), indent=1)
