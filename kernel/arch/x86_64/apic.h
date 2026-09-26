@@ -21,6 +21,9 @@ struct acpi_info {
 };
 extern struct acpi_info acpi;
 void acpi_init(void);
+void acpi_poweroff(void);		/* returns only on failure */
+bool acpi_can_poweroff(void);
+NORETURN void machine_reboot(void);
 
 void lapic_init(void);
 void lapic_eoi(void);

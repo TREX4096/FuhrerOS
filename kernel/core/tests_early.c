@@ -143,8 +143,8 @@ void test_memory(void)
 	u64 h2 = rdtsc();
 	selftest_report("heap.small_latency", small[0] && small[4095],
 			"kmalloc(64) avg %lu ns, kfree avg %lu ns (4096 objects)",
-			hz ? (h1 - h0) * 1000000000ULL / hz / 4096 : 0,
-			hz ? (h2 - h1) * 1000000000ULL / hz / 4096 : 0);
+			hz ? (u64)((h1 - h0) * 1000000000ULL / hz / 4096) : 0,
+			hz ? (u64)((h2 - h1) * 1000000000ULL / hz / 4096) : 0);
 	void *z = kzalloc(3000);
 	bool zok = z && ((u8 *)z)[0] == 0 && ((u8 *)z)[2999] == 0;
 	void *z2 = krealloc(z, 9000);

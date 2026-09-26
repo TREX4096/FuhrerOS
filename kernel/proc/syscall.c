@@ -1,4 +1,5 @@
 /* System call dispatch (FuhrerOS native ABI, include/uapi/fuhrer.h). */
+#include "arch/x86_64/apic.h"
 #include "arch/x86_64/cpu.h"
 #include "arch/x86_64/idt.h"
 #include "arch/x86_64/percpu.h"
@@ -448,11 +449,17 @@ i64 syscall_dispatch_nr(u64 nr, u64 a, u64 b, u64 c, u64 d, u64 e)
 		selftest_summary();
 		qemu_exit(selftest_failures() ? 2 : 1);
 	}
-	if (nr == SYS_DESKTOP_CTL && a == 99) { /* poweroff */
-		printk("FuhrerOS: syncing filesystems and powering off\n");
+	if (nr == SYS_DESKTOP_CTL && (a == DESK_POWEROFF || a == DESK_REBOOT)) {
+		printk("FuhrerOS: syncing filesystems and %s\n",
+		       a == DESK_REBOOT ? "rebooting" : "powering off");
 		vfs_sync_all();
+		if (a == DESK_REBOOT) {
+			printk("REBOOT\n");
+			machine_reboot();
+		}
 		printk("POWEROFF\n");
-		qemu_exit(1); /* QEMU isa-debug-exit; on real hardware this port is ignored */
+		acpi_poweroff(); /* ACPI S5; returns only if that failed */
+		qemu_exit(1);	 /* QEMU isa-debug-exit; on real hardware this port is ignored */
 	}
 	if (nr >= SYS_WIN_CREATE && nr <= SYS_DESKTOP_CTL)
 		return sys_win(nr, a, b, c, d, e);

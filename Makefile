@@ -28,9 +28,8 @@ K := kernel
 KCOMMON := -ffreestanding -fno-stack-protector -fno-stack-check -fno-pic -fno-pie \
 	-mcmodel=kernel -mno-red-zone -mgeneral-regs-only -mno-mmx -mno-sse -mno-sse2 \
 	-fno-omit-frame-pointer -fno-strict-aliasing -O2 -g -Wall -Wextra \
-	-Wno-unused-parameter -Werror=implicit-function-declaration \
-	-I$(K)/include -I$(K) -MMD -MP
-KCFLAGS   := $(KCOMMON) -std=gnu11
+	-Wno-unused-parameter -I$(K)/include -I$(K) -MMD -MP
+KCFLAGS   := $(KCOMMON) -std=gnu11 -Werror=implicit-function-declaration
 KCXXFLAGS := $(KCOMMON) -std=gnu++20 -fno-exceptions -fno-rtti -fno-threadsafe-statics \
 	-fno-use-cxa-atexit -nostdinc++
 KASFLAGS  := -g -I$(K)/include -I$(K)
