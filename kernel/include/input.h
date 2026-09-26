@@ -41,7 +41,21 @@ enum gesture {
 	GESTURE_THREE_SWIPE_RIGHT,
 	GESTURE_FOUR_SWIPE_LEFT,	/* workspace switch */
 	GESTURE_FOUR_SWIPE_RIGHT,
+	GESTURE_FOUR_SWIPE_UP,
+	GESTURE_FOUR_SWIPE_DOWN,
+	GESTURE_THREE_TAP,
+	GESTURE_FOUR_TAP,
 };
+
+/* Touchpad behaviour (Settings -> Touchpad). */
+struct input_options {
+	bool tap_to_click;
+	bool natural_scroll;
+	u32 typing_block_ms;	/* ignore touch this long after a key press */
+	int pointer_speed;	/* 1..8, 4 = default */
+	int scroll_speed;	/* 1..8, 4 = default */
+};
+void input_set_options(const struct input_options *o);
 
 struct input_event {
 	u16 type;

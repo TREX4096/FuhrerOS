@@ -68,6 +68,55 @@ static void test_gestures(void)
 	ngot = 0;
 	swipe(1, 200, 120, 6, 0);
 	selftest_report("gesture.one_finger_pointer", saw(EV_POINTER, 0), "%d events", ngot);
+	ngot = 0;
+	swipe(4, 0, -900, 8, 0);
+	selftest_report("gesture.four_swipe_up", saw(EV_GESTURE, GESTURE_FOUR_SWIPE_UP), "%d events", ngot);
+	ngot = 0;
+	swipe(3, 0, 0, 1, 0);
+	bool t3 = saw(EV_GESTURE, GESTURE_THREE_TAP);
+	ngot = 0;
+	swipe(4, 0, 0, 1, 0);
+	selftest_report("gesture.three_and_four_finger_tap", t3 && saw(EV_GESTURE, GESTURE_FOUR_TAP),
+			"%d events", ngot);
+
+	/* options: natural scrolling inverts, tap-to-click off suppresses clicks,
+	 * a key press blocks the touchpad for typing_block_ms */
+	struct input_options o = { .tap_to_click = true, .natural_scroll = false, .typing_block_ms = 0,
+				   .pointer_speed = 4, .scroll_speed = 4 };
+	input_set_options(&o);
+	ngot = 0;
+	swipe(2, 0, 600, 8, 0);
+	i32 plain = 0;
+	for (int i = 0; i < ngot; i++)
+		if (got[i].type == EV_GESTURE && got[i].code == GESTURE_SCROLL)
+			plain += got[i].dy;
+	o.natural_scroll = true;
+	input_set_options(&o);
+	ngot = 0;
+	swipe(2, 0, 600, 8, 0);
+	i32 natural = 0;
+	for (int i = 0; i < ngot; i++)
+		if (got[i].type == EV_GESTURE && got[i].code == GESTURE_SCROLL)
+			natural += got[i].dy;
+	selftest_report("gesture.natural_scroll", plain > 0 && natural == -plain, "dy %d vs %d", plain,
+			natural);
+	o.natural_scroll = false;
+	o.tap_to_click = false;
+	input_set_options(&o);
+	ngot = 0;
+	swipe(1, 0, 0, 1, 0);
+	bool no_click = !saw(EV_BUTTON, 1);
+	o.tap_to_click = true;
+	o.typing_block_ms = 250;
+	input_set_options(&o);
+	struct input_event key = { .type = EV_KEY, .code = 'a', .value = 1, .time_ns = time_ns() };
+	input_report(&key);
+	ngot = 0;
+	swipe(1, 200, 120, 6, 0);
+	selftest_report("gesture.tap_off_and_typing_block", no_click && !saw(EV_POINTER, 0),
+			"tap-to-click off: no click; touch right after a key ignored");
+	o.typing_block_ms = 250;
+	input_set_options(&o); /* defaults */
 
 	extern void tty_key_event(const struct input_event *ev);
 	input_set_sink(tty_key_event); /* give input back to the console */
