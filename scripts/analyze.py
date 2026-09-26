@@ -30,7 +30,7 @@ def fmt(x, nd=1):
     if x is None:
         return "NOT RUN"
     if isinstance(x, float) and not x.is_integer():
-        return f"{x:.{nd}f}"
+        return f"{x:,.{nd}f}"
     return f"{int(x):,}"
 
 

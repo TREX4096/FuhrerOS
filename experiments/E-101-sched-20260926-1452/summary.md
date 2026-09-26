@@ -17,7 +17,7 @@
 | fairness (Jain x1000) | 999 (0%) | 999 (0%) | 999 (0%) | 999 (0%) |
 | ctx switches/s | 144 (0%) | 142 (8%) | 773 (0%) | 313 (4%) |
 | sched overhead ns/s | 75,143 (61%) | 68,015 (56%) | 226,598 (23%) | 115,760 (92%) |
-| system class at end | IDLE | IDLE | IDLE | IDLE |
+| system class (mid-run) | IDLE | IDLE | IDLE | IDLE |
 
 ## Scheduler — scenario `mixed` (median of 3 runs; CV%)
 
@@ -31,7 +31,7 @@
 | fairness (Jain x1000) | 999 (0%) | 999 (0%) | 999 (0%) | 999 (0%) |
 | ctx switches/s | 185 (1%) | 184 (51%) | 1,802 (4%) | 1,728 (5%) |
 | sched overhead ns/s | 58,153 (79%) | 69,922 (21%) | 400,091 (42%) | 826,326 (64%) |
-| system class at end | IDLE | IDLE | IDLE | IDLE |
+| system class (mid-run) | IDLE | IDLE | IDLE | IDLE |
 
 ![Interactive wake-up latency P99](sched-wake_p99_us.svg)
 

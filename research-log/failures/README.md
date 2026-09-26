@@ -15,5 +15,6 @@
 | [F-111](F-111-launcher-on-super-press.md) | Super+T opened the launcher |
 | [F-112](F-112-exit-reap-races.md) | Two task-exit races |
 | [F-113](F-113-cache-cpu-includes-io.md) | Cache CPU time included disk waits |
+| [F-114](F-114-readahead-metadata-interleave.md) | Read-ahead never triggered on sequential file reads |
 
 Failures F-001..F-006 of the Linux-based prototype are in linux-prototype/research-log/failures/.
