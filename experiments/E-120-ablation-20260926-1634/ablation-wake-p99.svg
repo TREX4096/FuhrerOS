@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" font-family="sans-serif" font-size="12">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="450.0" y="24" text-anchor="middle" font-size="15" font-weight="bold">Ablations — interactive wake-up latency P99</text>
+<text x="18" y="190.0" transform="rotate(-90 18 190.0)" text-anchor="middle">microseconds (lower is better)</text>
+<line x1="80" x2="880" y1="330.0" y2="330.0" stroke="#e5e5e5"/>
+<text x="74" y="334.0" text-anchor="end" fill="#555">0</text>
+<line x1="80" x2="880" y1="274.0" y2="274.0" stroke="#e5e5e5"/>
+<text x="74" y="278.0" text-anchor="end" fill="#555">7,136</text>
+<line x1="80" x2="880" y1="218.0" y2="218.0" stroke="#e5e5e5"/>
+<text x="74" y="222.0" text-anchor="end" fill="#555">14,271</text>
+<line x1="80" x2="880" y1="162.0" y2="162.0" stroke="#e5e5e5"/>
+<text x="74" y="166.0" text-anchor="end" fill="#555">21,407</text>
+<line x1="80" x2="880" y1="106.0" y2="106.0" stroke="#e5e5e5"/>
+<text x="74" y="110.0" text-anchor="end" fill="#555">28,542</text>
+<line x1="80" x2="880" y1="50.0" y2="50.0" stroke="#e5e5e5"/>
+<text x="74" y="54.0" text-anchor="end" fill="#555">35,678</text>
+<rect x="88.9" y="86.5" width="69.1" height="243.5" fill="#5B6C8F"><title>A1-controller-off / wake p99 (us): 31,024.0</title></rect>
+<text x="124.4" y="346" text-anchor="middle">A1-controller-off</text>
+<rect x="177.8" y="188.4" width="69.1" height="141.6" fill="#5B6C8F"><title>A2-profiling-off / wake p99 (us): 18,045.0</title></rect>
+<text x="213.3" y="346" text-anchor="middle">A2-profiling-off</text>
+<rect x="266.7" y="92.3" width="69.1" height="237.7" fill="#5B6C8F"><title>A3-profile-no-switch / wake p99 (us): 30,283.0</title></rect>
+<text x="302.2" y="346" text-anchor="middle">A3-profile-no-switch</text>
+<rect x="355.6" y="320.5" width="69.1" height="9.5" fill="#5B6C8F"><title>A4-adaptive / wake p99 (us): 1,207.0</title></rect>
+<text x="391.1" y="346" text-anchor="middle">A4-adaptive</text>
+<rect x="444.4" y="320.6" width="69.1" height="9.4" fill="#5B6C8F"><title>A5-adaptive-cache / wake p99 (us): 1,193.0</title></rect>
+<text x="480.0" y="346" text-anchor="middle">A5-adaptive-cache</text>
+<rect x="533.3" y="320.9" width="69.1" height="9.1" fill="#5B6C8F"><title>A6-window25 / wake p99 (us): 1,163.0</title></rect>
+<text x="568.9" y="346" text-anchor="middle">A6-window25</text>
+<rect x="622.2" y="212.3" width="69.1" height="117.7" fill="#5B6C8F"><title>A6-window500 / wake p99 (us): 15,003.0</title></rect>
+<text x="657.8" y="346" text-anchor="middle">A6-window500</text>
+<rect x="711.1" y="321.0" width="69.1" height="9.0" fill="#5B6C8F"><title>A7-hyst1 / wake p99 (us): 1,151.0</title></rect>
+<text x="746.7" y="346" text-anchor="middle">A7-hyst1</text>
+<rect x="800.0" y="228.0" width="69.1" height="102.0" fill="#5B6C8F"><title>A7-hyst5 / wake p99 (us): 13,001.0</title></rect>
+<text x="835.6" y="346" text-anchor="middle">A7-hyst5</text>
+<rect x="80" y="380" width="12" height="12" fill="#5B6C8F"/>
+<text x="96" y="390">wake p99 (us)</text>
+</svg>

@@ -68,7 +68,7 @@ tiling, Super+O the overview.
 | M13 adaptive scheduler | ✅ | profiler + adaptive policy; see results |
 | M14 adaptive storage | ✅ | adaptive buffer cache; see results |
 | M15 network + browser foundation | ✅ / ⚠️ | HTTP client/server, FuhrerWeb viewer; no TLS, not a browser engine |
-| M16 research evaluation | ✅ | experiments E-1xx: [docs/experiments.md](docs/experiments.md) |
+| M16 research evaluation | ✅ | final runs E-117..E-120 (KVM), RQ1–RQ7 answered: [docs/experiments.md](docs/experiments.md) |
 | M17 desktop stress | ⚠️ partial | desktop + benchmarks exercised; no porting of real browser/compiler |
 | M18 real hardware | ⏳ | ISO is a hybrid BIOS/UEFI image; **not tried on hardware** |
 

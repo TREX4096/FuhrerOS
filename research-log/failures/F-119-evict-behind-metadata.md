@@ -6,5 +6,5 @@
 **Observed:** Hit rate the same as LRU (755 vs 745 per mille); median read latency 141 µs (read-ahead: 6 µs).
 **Root cause:** On every hit in adaptive-sequential mode, `get()` re-set `b->readahead = true`, and it did so for metadata blocks too. `touch()` then treated a block with that flag as a consumed stream block and moved it to the cold end (evict-behind). The inode and indirect blocks, needed by every read of the stream, were therefore evicted and re-read synchronously. The re-set flag also counted each hit as another "used prefetch".
 **Fix:** `touch()` gets an explicit `data` argument; evict-behind applies only to file-data blocks. The read-ahead flag is cleared when a prefetched block is first used, so `readahead_used` counts each prefetch once.
-**Regression test:** Adaptive vs readahead sequential throughput and `readahead_used <= readahead_issued` in the cache suite from E-117 on.
+**Regression test:** Adaptive vs readahead sequential throughput and `readahead_used <= readahead_issued` in the cache suite from E-118 on.
 **Lesson:** The same mistake as F-114, on the eviction side. Every cache heuristic that acts on "the stream" must separate data from metadata.

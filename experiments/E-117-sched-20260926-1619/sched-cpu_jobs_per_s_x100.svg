@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" font-family="sans-serif" font-size="12">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="450.0" y="24" text-anchor="middle" font-size="15" font-weight="bold">Batch throughput (jobs/s x100)</text>
+<text x="18" y="190.0" transform="rotate(-90 18 190.0)" text-anchor="middle">value</text>
+<line x1="80" x2="880" y1="330.0" y2="330.0" stroke="#e5e5e5"/>
+<text x="74" y="334.0" text-anchor="end" fill="#555">0</text>
+<line x1="80" x2="880" y1="274.0" y2="274.0" stroke="#e5e5e5"/>
+<text x="74" y="278.0" text-anchor="end" fill="#555">225,318</text>
+<line x1="80" x2="880" y1="218.0" y2="218.0" stroke="#e5e5e5"/>
+<text x="74" y="222.0" text-anchor="end" fill="#555">450,637</text>
+<line x1="80" x2="880" y1="162.0" y2="162.0" stroke="#e5e5e5"/>
+<text x="74" y="166.0" text-anchor="end" fill="#555">675,955</text>
+<line x1="80" x2="880" y1="106.0" y2="106.0" stroke="#e5e5e5"/>
+<text x="74" y="110.0" text-anchor="end" fill="#555">901,273</text>
+<line x1="80" x2="880" y1="50.0" y2="50.0" stroke="#e5e5e5"/>
+<text x="74" y="54.0" text-anchor="end" fill="#555">1,126,592</text>
+<rect x="120.0" y="86.5" width="78.0" height="243.5" fill="#5B6C8F"><title>batch / B0 round-robin: 979,645.0</title></rect>
+<rect x="200.0" y="88.9" width="78.0" height="241.1" fill="#C9A66B"><title>batch / B1 priority: 970,108.0</title></rect>
+<rect x="280.0" y="88.0" width="78.0" height="242.0" fill="#7FA37A"><title>batch / B2 low-latency: 973,626.0</title></rect>
+<rect x="360.0" y="86.9" width="78.0" height="243.1" fill="#B5646B"><title>batch / B3 adaptive: 978,091.0</title></rect>
+<text x="280.0" y="346" text-anchor="middle">batch</text>
+<rect x="520.0" y="91.4" width="78.0" height="238.6" fill="#5B6C8F"><title>mixed / B0 round-robin: 960,004.0</title></rect>
+<rect x="600.0" y="90.4" width="78.0" height="239.6" fill="#C9A66B"><title>mixed / B1 priority: 964,124.0</title></rect>
+<rect x="680.0" y="91.7" width="78.0" height="238.3" fill="#7FA37A"><title>mixed / B2 low-latency: 958,827.0</title></rect>
+<rect x="760.0" y="94.2" width="78.0" height="235.8" fill="#B5646B"><title>mixed / B3 adaptive: 948,594.0</title></rect>
+<text x="680.0" y="346" text-anchor="middle">mixed</text>
+<rect x="80" y="380" width="12" height="12" fill="#5B6C8F"/>
+<text x="96" y="390">B0 round-robin</text>
+<rect x="207.0" y="380" width="12" height="12" fill="#C9A66B"/>
+<text x="223.0" y="390">B1 priority</text>
+<rect x="311.5" y="380" width="12" height="12" fill="#7FA37A"/>
+<text x="327.5" y="390">B2 low-latency</text>
+<rect x="438.5" y="380" width="12" height="12" fill="#B5646B"/>
+<text x="454.5" y="390">B3 adaptive</text>
+</svg>
