@@ -78,7 +78,8 @@ cat >"$EXP/config.json" <<EOF
   "workloads": "$(IFS=,; echo "${WLS[*]}")",
   "sampling_interval_ms": 1000,
   "hysteresis": 3,
-  "min_dwell_ms": 3000
+  "min_dwell_ms": 3000,
+  "policy_map": "v2"
 }
 EOF
 

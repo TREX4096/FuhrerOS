@@ -1,0 +1,710 @@
+[START] fuhrerd 0.4.0 mode=adaptive interval_ms=1000 hysteresis=3
+
+[MODE] adaptive -> static:specialized
+
+[ADAPT] time=2026-09-26T07:05:55 mode=static
+PID=2076 COMM=sshd-session
+IOPS=21 avg_io=65536 CPU=13% queue_depth=0.0 rx_pps=216 tx_pps=144
+class=IO_RANDOM
+policy: NORMAL -> SPECIALIZED
+old=NORMAL new=SPECIALIZED
+reason=static_mode
+switch_ms=34.810 status=ok
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:normal
+
+[ADAPT] time=2026-09-26T07:08:18 mode=static
+PID=1984 COMM=sshd
+IOPS=11 avg_io=8192 CPU=12% queue_depth=0.1 rx_pps=137 tx_pps=105
+class=IO_SEQUENTIAL
+policy: SPECIALIZED -> NORMAL
+old=SPECIALIZED new=NORMAL
+reason=static_mode
+switch_ms=22.022 status=ok
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> adaptive
+
+[ADAPT] time=2026-09-26T07:10:47 mode=adaptive
+PID=2343 COMM=fuhrer-bench
+IOPS=934 avg_io=4096 CPU=8% queue_depth=0.8 rx_pps=0 tx_pps=0
+class=IO_RANDOM
+policy: NORMAL -> SPECIALIZED
+old=NORMAL new=SPECIALIZED
+reason=high_small_io
+switch_ms=79.853 status=ok
+
+[MODE] adaptive -> adaptive
+
+[ADAPT] time=2026-09-26T07:11:03 mode=adaptive
+PID=2356 COMM=fuhrer-bench
+IOPS=1172 avg_io=698760 CPU=3% queue_depth=5.5 rx_pps=0 tx_pps=0
+class=IO_SEQUENTIAL
+policy: SPECIALIZED -> BATCHED
+old=SPECIALIZED new=BATCHED
+reason=large_sequential_io
+switch_ms=57.016 status=ok
+
+[MODE] adaptive -> adaptive
+
+[ADAPT] time=2026-09-26T07:11:25 mode=adaptive
+PID=2367 COMM=fuhrer-bench
+IOPS=18723 avg_io=4695 CPU=8% queue_depth=324.7 rx_pps=0 tx_pps=0
+class=IO_RANDOM
+policy: BATCHED -> SPECIALIZED
+old=BATCHED new=SPECIALIZED
+reason=high_small_io
+switch_ms=449.380 status=ok
+
+[MODE] adaptive -> adaptive
+
+[ADAPT] time=2026-09-26T07:11:47 mode=adaptive
+PID=2402 COMM=fuhrer-bench
+IOPS=1490 avg_io=523937 CPU=4% queue_depth=7.2 rx_pps=0 tx_pps=0
+class=IO_SEQUENTIAL
+policy: SPECIALIZED -> BATCHED
+old=SPECIALIZED new=BATCHED
+reason=large_sequential_io
+switch_ms=62.018 status=ok
+
+[MODE] adaptive -> adaptive
+
+[MODE] adaptive -> adaptive
+
+[MODE] adaptive -> adaptive
+
+[ADAPT] time=2026-09-26T07:12:36 mode=adaptive
+PID=2474 COMM=fuhrer-bench
+IOPS=0 avg_io=0 CPU=33% queue_depth=0.0 rx_pps=1 tx_pps=1
+class=IO_RANDOM
+policy: BATCHED -> SPECIALIZED
+old=BATCHED new=SPECIALIZED
+reason=cached_small_io
+switch_ms=117.682 status=ok
+
+[MODE] adaptive -> adaptive
+
+[ADAPT] time=2026-09-26T07:12:52 mode=adaptive
+PID=2486 COMM=fuhrer-bench
+IOPS=0 avg_io=0 CPU=36% queue_depth=0.0 rx_pps=0 tx_pps=0
+class=IO_SEQUENTIAL
+policy: SPECIALIZED -> BATCHED
+old=SPECIALIZED new=BATCHED
+reason=cached_large_io
+switch_ms=57.965 status=ok
+
+[MODE] adaptive -> static:specialized
+
+[ADAPT] time=2026-09-26T07:13:04 mode=static
+PID=1984 COMM=sshd
+IOPS=0 avg_io=0 CPU=10% queue_depth=0.0 rx_pps=161 tx_pps=121
+class=IO_RANDOM
+policy: BATCHED -> SPECIALIZED
+old=BATCHED new=SPECIALIZED
+reason=static_mode
+switch_ms=63.379 status=ok
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:batched
+
+[ADAPT] time=2026-09-26T07:15:13 mode=static
+PID=1984 COMM=sshd
+IOPS=0 avg_io=0 CPU=15% queue_depth=0.0 rx_pps=138 tx_pps=105
+class=IO_SEQUENTIAL
+policy: SPECIALIZED -> BATCHED
+old=SPECIALIZED new=BATCHED
+reason=static_mode
+switch_ms=59.549 status=ok
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:normal
+
+[ADAPT] time=2026-09-26T07:20:15 mode=static
+PID=1984 COMM=sshd
+IOPS=0 avg_io=0 CPU=17% queue_depth=0.0 rx_pps=157 tx_pps=121
+class=IO_SEQUENTIAL
+policy: BATCHED -> NORMAL
+old=BATCHED new=NORMAL
+reason=static_mode
+switch_ms=82.218 status=ok
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:specialized
+
+[ADAPT] time=2026-09-26T07:24:48 mode=static
+PID=1984 COMM=sshd
+IOPS=48 avg_io=7282 CPU=11% queue_depth=0.1 rx_pps=143 tx_pps=101
+class=IO_SEQUENTIAL
+policy: NORMAL -> SPECIALIZED
+old=NORMAL new=SPECIALIZED
+reason=static_mode
+switch_ms=69.679 status=ok
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:normal
+
+[ADAPT] time=2026-09-26T07:26:56 mode=static
+PID=1984 COMM=sshd
+IOPS=8 avg_io=4096 CPU=12% queue_depth=0.0 rx_pps=96 tx_pps=73
+class=INTERACTIVE
+policy: SPECIALIZED -> NORMAL
+old=SPECIALIZED new=NORMAL
+reason=static_mode
+switch_ms=21.829 status=ok
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:batched
+
+[ADAPT] time=2026-09-26T07:29:20 mode=static
+PID=1984 COMM=sshd
+IOPS=11 avg_io=4096 CPU=15% queue_depth=0.0 rx_pps=147 tx_pps=107
+class=IO_SEQUENTIAL
+policy: NORMAL -> BATCHED
+old=NORMAL new=BATCHED
+reason=static_mode
+switch_ms=41.457 status=ok
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:normal
+
+[ADAPT] time=2026-09-26T07:31:59 mode=static
+PID=1984 COMM=sshd
+IOPS=11 avg_io=4096 CPU=15% queue_depth=0.0 rx_pps=134 tx_pps=102
+class=IO_SEQUENTIAL
+policy: BATCHED -> NORMAL
+old=BATCHED new=NORMAL
+reason=static_mode
+switch_ms=112.537 status=ok
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> adaptive
+
+[ADAPT] time=2026-09-26T07:35:07 mode=adaptive
+PID=3810 COMM=fuhrer-bench
+IOPS=642 avg_io=4096 CPU=6% queue_depth=0.8 rx_pps=0 tx_pps=0
+class=IO_RANDOM
+policy: NORMAL -> SPECIALIZED
+old=NORMAL new=SPECIALIZED
+reason=high_small_io
+switch_ms=111.227 status=ok
+
+[MODE] adaptive -> adaptive
+
+[ADAPT] time=2026-09-26T07:35:24 mode=adaptive
+PID=3822 COMM=fuhrer-bench
+IOPS=1083 avg_io=838861 CPU=4% queue_depth=4.4 rx_pps=1 tx_pps=1
+class=IO_SEQUENTIAL
+policy: SPECIALIZED -> BATCHED
+old=SPECIALIZED new=BATCHED
+reason=large_sequential_io
+switch_ms=60.924 status=ok
+
+[MODE] adaptive -> adaptive
+
+[ADAPT] time=2026-09-26T07:35:46 mode=adaptive
+PID=3833 COMM=fuhrer-bench
+IOPS=18017 avg_io=4306 CPU=9% queue_depth=260.6 rx_pps=0 tx_pps=0
+class=IO_RANDOM
+policy: BATCHED -> SPECIALIZED
+old=BATCHED new=SPECIALIZED
+reason=high_small_io
+switch_ms=450.216 status=ok
+
+[MODE] adaptive -> adaptive
+
+[ADAPT] time=2026-09-26T07:36:02 mode=adaptive
+PID=3866 COMM=fuhrer-bench
+IOPS=1463 avg_io=524288 CPU=6% queue_depth=7.1 rx_pps=0 tx_pps=0
+class=IO_SEQUENTIAL
+policy: SPECIALIZED -> BATCHED
+old=SPECIALIZED new=BATCHED
+reason=large_sequential_io
+switch_ms=60.970 status=ok
+
+[MODE] adaptive -> adaptive
+
+[MODE] adaptive -> adaptive
+
+[MODE] adaptive -> adaptive
+
+[ADAPT] time=2026-09-26T07:36:52 mode=adaptive
+PID=3938 COMM=fuhrer-bench
+IOPS=0 avg_io=0 CPU=33% queue_depth=0.0 rx_pps=0 tx_pps=0
+class=IO_RANDOM
+policy: BATCHED -> SPECIALIZED
+old=BATCHED new=SPECIALIZED
+reason=cached_small_io
+switch_ms=146.401 status=ok
+
+[MODE] adaptive -> adaptive
+
+[ADAPT] time=2026-09-26T07:37:07 mode=adaptive
+PID=3950 COMM=fuhrer-bench
+IOPS=0 avg_io=0 CPU=37% queue_depth=0.0 rx_pps=0 tx_pps=0
+class=IO_SEQUENTIAL
+policy: SPECIALIZED -> BATCHED
+old=SPECIALIZED new=BATCHED
+reason=cached_large_io
+switch_ms=56.626 status=ok
+
+[MODE] adaptive -> static:specialized
+
+[ADAPT] time=2026-09-26T07:37:19 mode=static
+PID=1984 COMM=sshd
+IOPS=27 avg_io=13653 CPU=11% queue_depth=0.2 rx_pps=189 tx_pps=135
+class=IO_RANDOM
+policy: BATCHED -> SPECIALIZED
+old=BATCHED new=SPECIALIZED
+reason=static_mode
+switch_ms=72.329 status=ok
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:normal
+
+[ADAPT] time=2026-09-26T07:39:36 mode=static
+PID=1984 COMM=sshd
+IOPS=11 avg_io=4096 CPU=12% queue_depth=0.0 rx_pps=138 tx_pps=101
+class=IO_SEQUENTIAL
+policy: SPECIALIZED -> NORMAL
+old=SPECIALIZED new=NORMAL
+reason=static_mode
+switch_ms=24.207 status=ok
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:batched
+
+[ADAPT] time=2026-09-26T07:42:01 mode=static
+PID=1984 COMM=sshd
+IOPS=16 avg_io=10240 CPU=12% queue_depth=0.1 rx_pps=107 tx_pps=79
+class=INTERACTIVE
+policy: NORMAL -> BATCHED
+old=NORMAL new=BATCHED
+reason=static_mode
+switch_ms=47.114 status=ok
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:batched
+
+[MODE] static -> adaptive
+
+[ADAPT] time=2026-09-26T07:44:37 mode=adaptive
+PID=4340 COMM=bench-guest.sh
+IOPS=40 avg_io=75878 CPU=1% queue_depth=0.1 rx_pps=0 tx_pps=0
+class=IDLE
+policy: BATCHED -> NORMAL
+old=BATCHED new=NORMAL
+reason=low_activity
+switch_ms=119.508 status=ok
+
+[ADAPT] time=2026-09-26T07:44:40 mode=adaptive
+PID=4347 COMM=fuhrer-bench
+IOPS=911 avg_io=4096 CPU=6% queue_depth=0.9 rx_pps=0 tx_pps=0
+class=IO_RANDOM
+policy: NORMAL -> SPECIALIZED
+old=NORMAL new=SPECIALIZED
+reason=high_small_io
+switch_ms=46.418 status=ok
+
+[MODE] adaptive -> adaptive
+
+[ADAPT] time=2026-09-26T07:44:56 mode=adaptive
+PID=4359 COMM=fuhrer-bench
+IOPS=725 avg_io=1048576 CPU=3% queue_depth=3.8 rx_pps=0 tx_pps=0
+class=IO_SEQUENTIAL
+policy: SPECIALIZED -> BATCHED
+old=SPECIALIZED new=BATCHED
+reason=large_sequential_io
+switch_ms=55.955 status=ok
+
+[MODE] adaptive -> adaptive
+
+[ADAPT] time=2026-09-26T07:45:18 mode=adaptive
+PID=4371 COMM=fuhrer-bench
+IOPS=18930 avg_io=4361 CPU=8% queue_depth=281.1 rx_pps=0 tx_pps=0
+class=IO_RANDOM
+policy: BATCHED -> SPECIALIZED
+old=BATCHED new=SPECIALIZED
+reason=high_small_io
+switch_ms=533.090 status=ok
+
+[MODE] adaptive -> adaptive
+
+[ADAPT] time=2026-09-26T07:45:35 mode=adaptive
+PID=4404 COMM=fuhrer-bench
+IOPS=1560 avg_io=524617 CPU=5% queue_depth=7.1 rx_pps=0 tx_pps=0
+class=IO_SEQUENTIAL
+policy: SPECIALIZED -> BATCHED
+old=SPECIALIZED new=BATCHED
+reason=large_sequential_io
+switch_ms=55.409 status=ok
+
+[MODE] adaptive -> adaptive
+
+[MODE] adaptive -> adaptive
+
+[MODE] adaptive -> adaptive
+
+[ADAPT] time=2026-09-26T07:46:26 mode=adaptive
+PID=4476 COMM=fuhrer-bench
+IOPS=0 avg_io=0 CPU=32% queue_depth=0.0 rx_pps=0 tx_pps=0
+class=IO_RANDOM
+policy: BATCHED -> SPECIALIZED
+old=BATCHED new=SPECIALIZED
+reason=cached_small_io
+switch_ms=210.150 status=ok
+
+[MODE] adaptive -> adaptive
+
+[ADAPT] time=2026-09-26T07:46:41 mode=adaptive
+PID=4489 COMM=fuhrer-bench
+IOPS=0 avg_io=0 CPU=37% queue_depth=0.0 rx_pps=0 tx_pps=0
+class=IO_SEQUENTIAL
+policy: SPECIALIZED -> BATCHED
+old=SPECIALIZED new=BATCHED
+reason=cached_large_io
+switch_ms=53.968 status=ok
+
+[MODE] adaptive -> static:normal
+
+[ADAPT] time=2026-09-26T07:46:53 mode=static
+PID=1984 COMM=sshd
+IOPS=9 avg_io=4096 CPU=10% queue_depth=0.0 rx_pps=193 tx_pps=147
+class=IO_RANDOM
+policy: BATCHED -> NORMAL
+old=BATCHED new=NORMAL
+reason=static_mode
+switch_ms=35.353 status=ok
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:specialized
+
+[ADAPT] time=2026-09-26T07:53:16 mode=static
+PID=18 COMM=rcu_preempt
+IOPS=9 avg_io=4096 CPU=15% queue_depth=0.4 rx_pps=113 tx_pps=85
+class=INTERACTIVE
+policy: NORMAL -> SPECIALIZED
+old=NORMAL new=SPECIALIZED
+reason=static_mode
+switch_ms=216.036 status=ok
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:batched
+
+[ADAPT] time=2026-09-26T07:56:13 mode=static
+PID=4907 COMM=sshd-session
+IOPS=2 avg_io=4096 CPU=13% queue_depth=0.0 rx_pps=33 tx_pps=24
+class=INTERACTIVE
+policy: SPECIALIZED -> BATCHED
+old=SPECIALIZED new=BATCHED
+reason=static_mode
+switch_ms=175.928 status=ok
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:batched
+
+[MODE] static -> static:specialized
+
+[ADAPT] time=2026-09-26T08:02:18 mode=static
+PID=18 COMM=rcu_preempt
+IOPS=11 avg_io=11264 CPU=11% queue_depth=0.1 rx_pps=74 tx_pps=57
+class=INTERACTIVE
+policy: BATCHED -> SPECIALIZED
+old=BATCHED new=SPECIALIZED
+reason=static_mode
+switch_ms=472.888 status=ok
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:specialized
+
+[MODE] static -> static:normal
+
+[ADAPT] time=2026-09-26T08:04:52 mode=static
+PID=1984 COMM=sshd
+IOPS=16 avg_io=4915 CPU=12% queue_depth=0.1 rx_pps=80 tx_pps=57
+class=INTERACTIVE
+policy: SPECIALIZED -> NORMAL
+old=SPECIALIZED new=NORMAL
+reason=static_mode
+switch_ms=34.093 status=ok
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+
+[MODE] static -> static:normal
+

@@ -1,0 +1,14 @@
+{
+  "tool": "fuhrer-bench",
+  "workload": "net",
+  "kernel": "6.12.111-0-virt",
+  "ncpus": 4,
+  "daemon_policy_at_start": 1,
+  "daemon_mode_at_start": 2,
+  "timestamp": 1790407903,
+  "mode": "latency",
+  "duration_s": 10,
+  "msg": 64,
+  "rtt_per_s": 31447,
+  "rtt_us": {"n": 314470, "mean": 31.3819, "stdev": 38.0981, "p50": 22.672, "p95": 63.297, "p99": 144.946, "max": 2796.46}
+}

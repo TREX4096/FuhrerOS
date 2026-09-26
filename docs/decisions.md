@@ -107,7 +107,12 @@ count; measured in ablation A5 / Graph 4), 10 s (too slow for transitions).
 **Validation:** `benchmark.sh --suite ablation` runs 100/1000/5000 ms and
 observe-mode overhead at 10/100/1000 ms.
 
-**Status:** Adopted, pending ablation results.
+**Result (E-002):** fuhrerd used 0.087 % of CPU at 1 s, 0.69 % at 100 ms,
+5.1 % at 10 ms (CPU benchmark −2 %, −1 %, −9 % vs profiler off). Reaction
+time: 1 s interval → 3 s; 100 ms → 1 s; 5 s → never within a 10 s phase.
+
+**Status:** Adopted and supported by E-002. 100 ms is a defensible
+alternative if faster reaction matters more than 0.6 % CPU.
 
 ---
 
@@ -145,7 +150,26 @@ confirmed or overturned by M5 static benchmarks (`benchmark.sh --suite main`,
 column "B3 best static"). The map is configuration (`map.CLASS = policy`), not
 code.
 
-**Status:** Provisional — REQUIRES VERIFICATION by E-series experiments.
+**Status (rev. 1):** Provisional — REQUIRES VERIFICATION by E-series experiments.
+
+### D-006 revision 2 (after E-002)
+
+**Evidence:** In E-002 SPECIALIZED was the best static policy for random
+read, random write, sequential read (775 vs 95.5 MB/s batched) and
+sequential write (876 vs 66 MB/s). BATCHED under CPU-bound load: 828 Mops/s
+(CV 94 %) vs 1,885 normal; the knobs-only batched run showed +4 %, within
+noise. No evidence that BATCHED helps anything on this platform.
+
+**Decision:** `IO_SEQUENTIAL → SPECIALIZED`, `CPU_BOUND → NORMAL`. Others are unchanged.
+BATCHED remains available as a static policy and for future platforms,
+where buffered sequential I/O may behave differently (bare metal, NVMe).
+
+**Caveat:** The platform (nested virtualisation, a qcow2 on a vhdx) penalises
+the page cache path heavily. This map is therefore **platform-specific**, which is itself an
+argument for measuring the map per platform (M5 → config) rather than
+hard-coding it.
+
+**Validation:** E-003.
 
 ---
 
@@ -307,3 +331,26 @@ desktop time scales, but would at sub-second scales.
 **Next:** measure transient throughput loss around switches (Graph 3).
 
 **Status:** Recorded; systematic measurement in the ablation suite.
+
+---
+
+## D-015 — Self-booting disk image for the bare-metal milestone
+
+**Problem:** Direct kernel boot (D-003) proves nothing about booting on real
+hardware.
+
+**Decision:** `scripts/build-bootable.sh` converts the image into a raw GPT
+disk: a 1 MiB BIOS-boot partition, a 64 MiB ESP (FAT32) and an ext4 root, with GRUB 2.12 installed
+for both `i386-pc` and `x86_64-efi` (removable path, no NVRAM). This runs in a
+privileged builder container using loop devices, and only writes under `$FU_OUT`.
+`--kernel lts` adds Alpine's generic LTS kernel and common firmware, because
+`linux-virt` lacks most physical-hardware drivers.
+
+**Evidence:** Booted in QEMU through its own bootloader. Under SeaBIOS: PASS.
+Under OVMF UEFI: PASS (serial log shows `BdsDxe → GNU GRUB 2.12 →
+FUHREROS-BOOT-COMPLETE`). The LTS variant has not been boot-tested on bare metal: **NOT RUN**.
+
+**Tradeoffs:** Writing to a physical device is deliberately left manual,
+because it overwrites a whole disk.
+
+**Status:** Adopted; bare-metal validation pending.

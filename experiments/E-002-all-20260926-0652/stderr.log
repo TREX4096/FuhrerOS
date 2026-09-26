@@ -1,0 +1,44 @@
+[1;34m[fuhreros][0m experiment /mnt/d/SEM7/FuhrerOS/experiments/E-002-all-20260926-0652
+[1;34m[fuhreros][0m B0: native Linux (fuhrer.disable=1)
+Acceleration: KVM
+[1;34m[fuhreros][0m creating VM disk /home/fuhrer4096/.cache/fuhreros/out/vm-bench-base.qcow2 (backing: fuhreros-base.qcow2, 40G)
+[1;34m[fuhreros][0m booting (pid 6202), serial log: /home/fuhrer4096/.cache/fuhreros/out/vm-bench-base.serial.log
+[1;34m[fuhreros][0m guest up in 31s (ssh after 32s)
+[1;34m[fuhreros][0m B1/B2/B3: FuhrerOS static and adaptive
+Acceleration: KVM
+[1;34m[fuhreros][0m booting (pid 6741), serial log: /home/fuhrer4096/.cache/fuhreros/out/vm-bench-base.serial.log
+[1;34m[fuhreros][0m guest up in 19s (ssh after 19s)
+Acceleration: KVM
+[1;34m[fuhreros][0m booting (pid 9223), serial log: /home/fuhrer4096/.cache/fuhreros/out/vm-bench-base.serial.log
+[1;34m[fuhreros][0m guest up in 34s (ssh after 34s)
+[1;34m[fuhreros][0m transition: batched rep1
+[1;34m[fuhreros][0m transition: normal rep1
+[1;34m[fuhreros][0m transition: adaptive rep1
+[1;34m[fuhreros][0m transition: specialized rep1
+[1;34m[fuhreros][0m transition: normal rep2
+[1;34m[fuhreros][0m transition: specialized rep2
+[1;34m[fuhreros][0m transition: batched rep2
+[1;34m[fuhreros][0m transition: adaptive rep2
+[1;34m[fuhreros][0m transition: normal rep3
+[1;34m[fuhreros][0m transition: batched rep3
+[1;34m[fuhreros][0m transition: adaptive rep3
+[1;34m[fuhreros][0m transition: specialized rep3
+Acceleration: KVM
+[1;34m[fuhreros][0m booting (pid 9609), serial log: /home/fuhrer4096/.cache/fuhreros/out/vm-bench-base.serial.log
+[1;34m[fuhreros][0m guest up in 18s (ssh after 18s)
+[1;34m[fuhreros][0m ablation adaptive-default rep1
+[1;34m[fuhreros][0m ablation interval-100 rep1
+[1;34m[fuhreros][0m ablation interval-5000 rep1
+[1;34m[fuhreros][0m ablation hyst-1 rep1
+[1;34m[fuhreros][0m ablation hyst-5 rep1
+[1;34m[fuhreros][0m ablation adaptive-default rep2
+[1;34m[fuhreros][0m ablation interval-100 rep2
+[1;34m[fuhreros][0m ablation interval-5000 rep2
+[1;34m[fuhreros][0m ablation hyst-1 rep2
+[1;34m[fuhreros][0m ablation hyst-5 rep2
+[1;34m[fuhreros][0m ablation adaptive-default rep3
+[1;34m[fuhreros][0m ablation interval-100 rep3
+[1;34m[fuhreros][0m ablation interval-5000 rep3
+[1;34m[fuhreros][0m ablation hyst-1 rep3
+[1;34m[fuhreros][0m ablation hyst-5 rep3
+./scripts/benchmark.sh: line 228: unexpected EOF while looking for matching `"'

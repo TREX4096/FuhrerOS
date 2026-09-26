@@ -42,7 +42,11 @@ LABEL = {"B0": "B0 Linux", "normal": "B1 static normal", "batched": "static batc
          "lib-batched": "lib-only batched", "lib-specialized": "lib-only specialized"}
 POLICY_NAMES = {0: "NORMAL", 1: "BATCHED", 2: "SPECIALIZED", -1: "none"}
 # Policy the default map should reach in each transition phase.
-EXPECTED = {"idle": 0, "cpu": 1, "randread": 2, "seqread": 1}
+# E-002 used the original map (cpu->BATCHED, seqread->BATCHED); later runs use
+# the revised map (D-006 rev. 2). The config's "policy_map" field selects.
+EXPECTED_V1 = {"idle": 0, "cpu": 1, "randread": 2, "seqread": 1}
+EXPECTED_V2 = {"idle": 0, "cpu": 0, "randread": 2, "seqread": 2}
+EXPECTED = EXPECTED_V1
 PALETTE = ["#5B6C8F", "#8FA3BF", "#C9A66B", "#7FA37A", "#B5646B", "#6BA3A8", "#9C7FB5"]
 
 
@@ -197,15 +201,32 @@ def read_timeline(path):
     return rows
 
 
-def adaptation_stats(rows):
+def expected_from_conf(path):
+    """Expected policy per transition phase, from the fuhrer.conf actually used."""
+    exp = dict(EXPECTED)
+    ids = {"normal": 0, "batched": 1, "specialized": 2}
+    phase = {"IO_RANDOM": "randread", "IO_SEQUENTIAL": "seqread", "CPU_BOUND": "cpu", "IDLE": "idle"}
+    try:
+        for line in open(path, encoding="utf-8"):
+            k, _, v = line.partition("=")
+            k, v = k.strip(), v.strip().lower()
+            if k.startswith("map.") and k[4:] in phase and v in ids:
+                exp[phase[k[4:]]] = ids[v]
+    except OSError:
+        pass
+    return exp
+
+
+def adaptation_stats(rows, expected=None):
     """Seconds from each phase start until the daemon reached the expected policy."""
+    expected = expected or EXPECTED
     delays, phase_start, cur, reached = {}, None, None, False
     switches = sum(1 for a, b in zip(rows, rows[1:]) if a[3] != b[3])
     for t, ph, _, pol in rows:
         if ph != cur:
             cur, phase_start, reached = ph, t - 1, False
         key = ph if ph not in delays else ph + "#2"
-        if not reached and pol == EXPECTED.get(ph, -9):
+        if not reached and pol == expected.get(ph, -9):
             delays[key] = t - phase_start
             reached = True
     per_phase = {}
@@ -218,6 +239,8 @@ def main():
     exp = sys.argv[1]
     raw = os.path.join(exp, "raw", "fuhrer-exp")
     cfg = load(os.path.join(exp, "config.json")) or {}
+    global EXPECTED
+    EXPECTED = EXPECTED_V2 if cfg.get("policy_map") == "v2" else EXPECTED_V1
     result = {"experiment": cfg.get("experiment"), "config": cfg}
     md = [f"# {cfg.get('experiment', 'Experiment')} — suite `{cfg.get('suite')}`", "",
           f"- Date: {cfg.get('date')}  commit `{cfg.get('commit')}`",
@@ -367,16 +390,18 @@ def main():
     abl = {}
     for d in sorted(glob.glob(os.path.join(raw, "abl-*"))):
         v = os.path.basename(d)[4:]
+        # The map in force is read from the config file the run actually used.
+        expv = expected_from_conf(os.path.join(exp, "raw", f"ablation-{v}.conf"))
         for p in sorted(glob.glob(os.path.join(d, "transition", "rep*.timeline.csv"))):
             rows = read_timeline(p)
             if rows:
-                dl, sw, pm = adaptation_stats(rows)
+                dl, sw, pm = adaptation_stats(rows, expv)
                 abl.setdefault(v, []).append({"delays_s": dl, "switches": sw, "phase_mean": pm})
     if abl:
         result["ablation"] = abl
         md += ["## Adaptation ablations (A4 default, A5 sampling interval, A7 hysteresis)", "",
-               "| variant | reps | switches (median) | time-to-SPECIALIZED in randread (s) | "
-               "time-to-BATCHED in seqread (s) | randread MB/s | seqread MB/s |", "|---" * 7 + "|"]
+               "| variant | reps | switches (median) | time-to-policy randread (s) | "
+               "time-to-policy seqread (s) | randread MB/s | seqread MB/s |", "|---" * 7 + "|"]
         for v, reps in abl.items():
             med = lambda xs: statistics.median(xs) if xs else None
             md.append(f"| {v} | {len(reps)} | {fmt(med([r['switches'] for r in reps]))} | "

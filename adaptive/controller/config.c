@@ -35,12 +35,13 @@ void fu_config_default(struct fu_config *c)
 	c->scan_procs = 1;
 	c->mode = FU_MODE_ADAPTIVE;
 	c->static_policy = FU_POLICY_NORMAL;
-	/* Default class -> policy map (D-006). M5 static benchmarks are meant
-	 * to confirm or overturn each row. */
+	/* Default class -> policy map (D-006, revised from E-002: SPECIALIZED
+	 * was the best static policy for random *and* sequential I/O; BATCHED
+	 * showed no reliable benefit for CPU-bound work). */
 	c->class_policy[FU_CLASS_IDLE] = FU_POLICY_NORMAL;
 	c->class_policy[FU_CLASS_INTERACTIVE] = FU_POLICY_NORMAL;
-	c->class_policy[FU_CLASS_CPU_BOUND] = FU_POLICY_BATCHED;
-	c->class_policy[FU_CLASS_IO_SEQUENTIAL] = FU_POLICY_BATCHED;
+	c->class_policy[FU_CLASS_CPU_BOUND] = FU_POLICY_NORMAL;
+	c->class_policy[FU_CLASS_IO_SEQUENTIAL] = FU_POLICY_SPECIALIZED;
 	c->class_policy[FU_CLASS_IO_RANDOM] = FU_POLICY_SPECIALIZED;
 	c->class_policy[FU_CLASS_NETWORK_HEAVY] = FU_POLICY_SPECIALIZED;
 	c->class_policy[FU_CLASS_MIXED] = FU_POLICY_NORMAL;

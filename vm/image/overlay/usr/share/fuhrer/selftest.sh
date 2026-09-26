@@ -34,6 +34,7 @@ check sshd          sh -c 'rc-service sshd status'
 # --- M1/M2: FuhrerOS runtime ---
 check fuhrerd       sh -c 'rc-service fuhrerd status'
 check fuhrer-status sh -c 'fuhrer status | grep -E "^Policy engine"'
+check status-nonroot sh -c 'su fuhrer -s /bin/sh -c "fuhrer status" | grep -E "^Runtime: +ACTIVE"'
 check fuhrer-profile sh -c 'fuhrer profile -n 1 -i 200 | tail -1'
 check shm-state     sh -c 'test -s /run/fuhrer/state.shm && echo published'
 check unit-adaptive /usr/libexec/fuhrer/test_adaptive

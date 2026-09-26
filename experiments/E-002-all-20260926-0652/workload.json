@@ -1,0 +1,11 @@
+{
+  "randread":  "fuhrer-bench storage rand read 4KiB qd32, file 1.5x guest RAM, caches dropped",
+  "seqread":   "fuhrer-bench storage seq read 1MiB qd4, caches dropped",
+  "randwrite": "fuhrer-bench storage rand write 4KiB qd32 (+fdatasync at end)",
+  "seqwrite":  "fuhrer-bench storage seq write 1MiB qd4 (+fdatasync at end)",
+  "cpu":       "fuhrer-bench cpu, 1 thread per vCPU, xorshift/multiply loop, 1s slices",
+  "memory":    "fuhrer-bench memory 256MiB STREAM triad + pointer chase",
+  "netlat":    "fuhrer-bench net loopback TCP 64B ping-pong, TCP_NODELAY",
+  "netbw":     "fuhrer-bench net loopback TCP 128KiB writes",
+  "transition":"fuhrer-bench transition idle->cpu->randread->seqread->idle, phase=time_s"
+}

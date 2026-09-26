@@ -1,0 +1,12 @@
+{
+  "tool": "fuhrer-bench",
+  "workload": "memory",
+  "kernel": "6.12.111-0-virt",
+  "ncpus": 4,
+  "daemon_policy_at_start": 0,
+  "daemon_mode_at_start": 2,
+  "timestamp": 1790406611,
+  "size": 2.68435e+08,
+  "triad_gbps": {"n": 452, "mean": 12.5699, "stdev": 1.72619, "p50": 13.0135, "p95": 14.2588, "p99": 14.4525, "max": 14.681},
+  "pointer_chase_ns": 170.911
+}

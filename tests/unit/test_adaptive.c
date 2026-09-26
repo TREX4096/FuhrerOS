@@ -158,6 +158,10 @@ static void test_engine(void)
 	fu_config_default(&c);
 	c.hysteresis = 3;
 	c.min_dwell_ms = 5000;
+	/* Pin the map: this tests the engine, not the default map (D-006). */
+	c.class_policy[FU_CLASS_IO_RANDOM] = FU_POLICY_SPECIALIZED;
+	c.class_policy[FU_CLASS_IO_SEQUENTIAL] = FU_POLICY_BATCHED;
+	c.class_policy[FU_CLASS_IDLE] = FU_POLICY_NORMAL;
 	struct fu_engine e;
 	struct fu_decision d;
 	fu_engine_init(&e, &c, FU_POLICY_NORMAL, 100.0);

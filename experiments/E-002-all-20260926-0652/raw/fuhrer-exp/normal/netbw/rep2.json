@@ -1,0 +1,12 @@
+{
+  "tool": "fuhrer-bench",
+  "workload": "net",
+  "kernel": "6.12.111-0-virt",
+  "ncpus": 4,
+  "daemon_policy_at_start": 0,
+  "daemon_mode_at_start": 2,
+  "timestamp": 1790408521,
+  "mode": "throughput",
+  "duration_s": 10,
+  "mbps": 2463.19
+}

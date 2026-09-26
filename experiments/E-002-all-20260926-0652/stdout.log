@@ -1,0 +1,253 @@
+preparing 5889 MiB data file
+  [B0 rep1] storage rand-read bs=4096 depth=32 backend=normal: 934 IOPS, 3.83 MB/s
+  [B0 rep1] storage seq-read bs=1048576 depth=4 backend=normal: 30 IOPS, 31.27 MB/s
+  [B0 rep1] storage rand-write bs=4096 depth=32 backend=normal: 7266 IOPS, 29.76 MB/s
+  [B0 rep1] storage seq-write bs=1048576 depth=4 backend=normal: 27 IOPS, 28.27 MB/s
+  [B0 rep1] cpu threads=4: median 1828.6 Mops/s (p5..max spread stdev 205.28)
+  [B0 rep1] memory size=256 MiB: triad median 12.97 GB/s, random-access latency 215.5 ns
+  [B0 rep1] net latency msg=64: 22802 round-trips/s, RTT us p50=24.2 p95=86.2 p99=225.3
+  [B0 rep1] net throughput: 2712.5 MB/s
+  [B0 rep2] storage rand-read bs=4096 depth=32 backend=normal: 1070 IOPS, 4.38 MB/s
+  [B0 rep2] storage seq-read bs=1048576 depth=4 backend=normal: 89 IOPS, 92.94 MB/s
+  [B0 rep2] storage rand-write bs=4096 depth=32 backend=normal: 11892 IOPS, 48.71 MB/s
+  [B0 rep2] storage seq-write bs=1048576 depth=4 backend=normal: 95 IOPS, 99.29 MB/s
+  [B0 rep2] cpu threads=4: median 2104.3 Mops/s (p5..max spread stdev 407.86)
+  [B0 rep2] memory size=256 MiB: triad median 12.54 GB/s, random-access latency 210.4 ns
+  [B0 rep2] net latency msg=64: 27265 round-trips/s, RTT us p50=22.9 p95=68.0 p99=170.7
+  [B0 rep2] net throughput: 3188.5 MB/s
+  [B0 rep3] storage rand-read bs=4096 depth=32 backend=normal: 1126 IOPS, 4.61 MB/s
+  [B0 rep3] storage seq-read bs=1048576 depth=4 backend=normal: 75 IOPS, 78.62 MB/s
+  [B0 rep3] storage rand-write bs=4096 depth=32 backend=normal: 13767 IOPS, 56.39 MB/s
+  [B0 rep3] storage seq-write bs=1048576 depth=4 backend=normal: 59 IOPS, 61.99 MB/s
+  [B0 rep3] cpu threads=4: median 1583.5 Mops/s (p5..max spread stdev 320.83)
+  [B0 rep3] memory size=256 MiB: triad median 12.76 GB/s, random-access latency 201.4 ns
+  [B0 rep3] net latency msg=64: 27876 round-trips/s, RTT us p50=23.6 p95=72.9 p99=173.4
+  [B0 rep3] net throughput: 3120.6 MB/s
+  [knobs-specialized rep1] storage rand-read bs=4096 depth=32 backend=normal: 1258 IOPS, 5.15 MB/s
+  [knobs-specialized rep1] storage seq-read bs=1048576 depth=4 backend=normal: 74 IOPS, 77.77 MB/s
+  [knobs-specialized rep1] storage rand-write bs=4096 depth=32 backend=normal: 11873 IOPS, 48.63 MB/s
+  [knobs-specialized rep1] storage seq-write bs=1048576 depth=4 backend=normal: 74 IOPS, 77.22 MB/s
+  [knobs-specialized rep1] cpu threads=4: median 1984.9 Mops/s (p5..max spread stdev 147.10)
+  [knobs-specialized rep1] memory size=256 MiB: triad median 12.29 GB/s, random-access latency 195.0 ns
+  [knobs-specialized rep1] net latency msg=64: 32274 round-trips/s, RTT us p50=22.6 p95=60.5 p99=135.2
+  [knobs-specialized rep1] net throughput: 2831.0 MB/s
+  [normal rep1] storage rand-read bs=4096 depth=32 backend=normal: 928 IOPS, 3.80 MB/s
+  [normal rep1] storage seq-read bs=1048576 depth=4 backend=normal: 104 IOPS, 108.91 MB/s
+  [normal rep1] storage rand-write bs=4096 depth=32 backend=normal: 17088 IOPS, 69.99 MB/s
+  [normal rep1] storage seq-write bs=1048576 depth=4 backend=normal: 68 IOPS, 71.36 MB/s
+  [normal rep1] cpu threads=4: median 1994.6 Mops/s (p5..max spread stdev 137.88)
+  [normal rep1] memory size=256 MiB: triad median 13.01 GB/s, random-access latency 170.9 ns
+  [normal rep1] net latency msg=64: 32800 round-trips/s, RTT us p50=22.5 p95=59.2 p99=134.2
+  [normal rep1] net throughput: 3106.8 MB/s
+  [adaptive rep1] storage rand-read bs=4096 depth=32 backend=auto: 13334 IOPS, 54.62 MB/s
+  [adaptive rep1] storage seq-read bs=1048576 depth=4 backend=auto: 99 IOPS, 103.38 MB/s
+  [adaptive rep1] storage rand-write bs=4096 depth=32 backend=auto: 12476 IOPS, 51.10 MB/s
+  [adaptive rep1] storage seq-write bs=1048576 depth=4 backend=auto: 70 IOPS, 73.54 MB/s
+  [adaptive rep1] cpu threads=4: median 1853.9 Mops/s (p5..max spread stdev 245.67)
+  [adaptive rep1] memory size=256 MiB: triad median 12.80 GB/s, random-access latency 172.5 ns
+  [adaptive rep1] net latency msg=64: 25655 round-trips/s, RTT us p50=23.0 p95=74.4 p99=191.0
+  [adaptive rep1] net throughput: 3196.0 MB/s
+  [specialized rep1] storage rand-read bs=4096 depth=32 backend=specialized: 15016 IOPS, 61.51 MB/s
+  [specialized rep1] storage seq-read bs=1048576 depth=4 backend=specialized: 739 IOPS, 775.42 MB/s
+  [specialized rep1] storage rand-write bs=4096 depth=32 backend=specialized: 12397 IOPS, 50.78 MB/s
+  [specialized rep1] storage seq-write bs=1048576 depth=4 backend=specialized: 851 IOPS, 892.12 MB/s
+  [specialized rep1] cpu threads=4: median 2109.9 Mops/s (p5..max spread stdev 42.16)
+  [specialized rep1] memory size=256 MiB: triad median 12.68 GB/s, random-access latency 181.2 ns
+  [specialized rep1] net latency msg=64: 34091 round-trips/s, RTT us p50=22.5 p95=54.7 p99=120.6
+  [specialized rep1] net throughput: 2966.9 MB/s
+  [knobs-batched rep1] storage rand-read bs=4096 depth=32 backend=normal: 1033 IOPS, 4.23 MB/s
+  [knobs-batched rep1] storage seq-read bs=1048576 depth=4 backend=normal: 81 IOPS, 84.73 MB/s
+  [knobs-batched rep1] storage rand-write bs=4096 depth=32 backend=normal: 13721 IOPS, 56.20 MB/s
+  [knobs-batched rep1] storage seq-write bs=1048576 depth=4 backend=normal: 72 IOPS, 75.26 MB/s
+  [knobs-batched rep1] cpu threads=4: median 1953.8 Mops/s (p5..max spread stdev 143.62)
+  [knobs-batched rep1] memory size=256 MiB: triad median 13.61 GB/s, random-access latency 253.5 ns
+  [knobs-batched rep1] net latency msg=64: 25835 round-trips/s, RTT us p50=25.7 p95=82.3 p99=192.4
+  [knobs-batched rep1] net throughput: 3058.5 MB/s
+  [batched rep1] storage rand-read bs=4096 depth=32 backend=batched: 7935 IOPS, 32.50 MB/s
+  [batched rep1] storage seq-read bs=1048576 depth=4 backend=batched: 92 IOPS, 96.46 MB/s
+  [batched rep1] storage rand-write bs=4096 depth=32 backend=batched: 11193 IOPS, 45.85 MB/s
+  [batched rep1] storage seq-write bs=1048576 depth=4 backend=batched: 63 IOPS, 66.15 MB/s
+  [batched rep1] cpu threads=4: median 1980.2 Mops/s (p5..max spread stdev 227.13)
+  [batched rep1] memory size=256 MiB: triad median 13.43 GB/s, random-access latency 218.2 ns
+  [batched rep1] net latency msg=64: 32760 round-trips/s, RTT us p50=22.5 p95=57.5 p99=130.1
+  [batched rep1] net throughput: 3008.0 MB/s
+  [lib-specialized rep1] storage rand-read bs=4096 depth=32 backend=specialized: 12291 IOPS, 50.34 MB/s
+  [lib-specialized rep1] storage seq-read bs=1048576 depth=4 backend=specialized: 817 IOPS, 856.75 MB/s
+  [lib-specialized rep1] storage rand-write bs=4096 depth=32 backend=specialized: 12865 IOPS, 52.69 MB/s
+  [lib-specialized rep1] storage seq-write bs=1048576 depth=4 backend=specialized: 784 IOPS, 821.67 MB/s
+  [lib-specialized rep1] cpu threads=4: median 2067.7 Mops/s (p5..max spread stdev 166.35)
+  [lib-specialized rep1] memory size=256 MiB: triad median 13.52 GB/s, random-access latency 174.9 ns
+  [lib-specialized rep1] net latency msg=64: 31665 round-trips/s, RTT us p50=22.5 p95=61.8 p99=143.0
+  [lib-specialized rep1] net throughput: 2866.9 MB/s
+  [lib-batched rep1] storage rand-read bs=4096 depth=32 backend=batched: 8403 IOPS, 34.42 MB/s
+  [lib-batched rep1] storage seq-read bs=1048576 depth=4 backend=batched: 84 IOPS, 87.60 MB/s
+  [lib-batched rep1] storage rand-write bs=4096 depth=32 backend=batched: 5126 IOPS, 21.00 MB/s
+  [lib-batched rep1] storage seq-write bs=1048576 depth=4 backend=batched: 65 IOPS, 67.71 MB/s
+  [lib-batched rep1] cpu threads=4: median 1719.6 Mops/s (p5..max spread stdev 292.95)
+  [lib-batched rep1] memory size=256 MiB: triad median 12.42 GB/s, random-access latency 181.3 ns
+  [lib-batched rep1] net latency msg=64: 27100 round-trips/s, RTT us p50=23.2 p95=79.9 p99=191.4
+  [lib-batched rep1] net throughput: 2985.6 MB/s
+  [specialized rep2] storage rand-read bs=4096 depth=32 backend=specialized: 14860 IOPS, 60.87 MB/s
+  [specialized rep2] storage seq-read bs=1048576 depth=4 backend=specialized: 919 IOPS, 964.08 MB/s
+  [specialized rep2] storage rand-write bs=4096 depth=32 backend=specialized: 11653 IOPS, 47.73 MB/s
+  [specialized rep2] storage seq-write bs=1048576 depth=4 backend=specialized: 836 IOPS, 876.37 MB/s
+  [specialized rep2] cpu threads=4: median 2073.9 Mops/s (p5..max spread stdev 98.96)
+  [specialized rep2] memory size=256 MiB: triad median 13.46 GB/s, random-access latency 317.2 ns
+  [specialized rep2] net latency msg=64: 33197 round-trips/s, RTT us p50=22.4 p95=56.9 p99=131.8
+  [specialized rep2] net throughput: 2982.6 MB/s
+  [lib-batched rep2] storage rand-read bs=4096 depth=32 backend=batched: 8531 IOPS, 34.94 MB/s
+  [lib-batched rep2] storage seq-read bs=1048576 depth=4 backend=batched: 73 IOPS, 76.63 MB/s
+  [lib-batched rep2] storage rand-write bs=4096 depth=32 backend=batched: 12200 IOPS, 49.97 MB/s
+  [lib-batched rep2] storage seq-write bs=1048576 depth=4 backend=batched: 80 IOPS, 84.13 MB/s
+  [lib-batched rep2] cpu threads=4: median 1952.7 Mops/s (p5..max spread stdev 74.74)
+  [lib-batched rep2] memory size=256 MiB: triad median 13.50 GB/s, random-access latency 302.7 ns
+  [lib-batched rep2] net latency msg=64: 26064 round-trips/s, RTT us p50=23.0 p95=75.0 p99=186.5
+  [lib-batched rep2] net throughput: 3111.4 MB/s
+  [batched rep2] storage rand-read bs=4096 depth=32 backend=batched: 7721 IOPS, 31.63 MB/s
+  [batched rep2] storage seq-read bs=1048576 depth=4 backend=batched: 91 IOPS, 95.49 MB/s
+  [batched rep2] storage rand-write bs=4096 depth=32 backend=batched: 9372 IOPS, 38.39 MB/s
+  [batched rep2] storage seq-write bs=1048576 depth=4 backend=batched: 76 IOPS, 79.91 MB/s
+  [batched rep2] cpu threads=4: median 507.1 Mops/s (p5..max spread stdev 118.51)
+  [batched rep2] memory size=256 MiB: triad median 12.14 GB/s, random-access latency 364.2 ns
+  [batched rep2] net latency msg=64: 31447 round-trips/s, RTT us p50=22.7 p95=63.3 p99=144.9
+  [batched rep2] net throughput: 2943.9 MB/s
+  [lib-specialized rep2] storage rand-read bs=4096 depth=32 backend=specialized: 13895 IOPS, 56.91 MB/s
+  [lib-specialized rep2] storage seq-read bs=1048576 depth=4 backend=specialized: 636 IOPS, 666.42 MB/s
+  [lib-specialized rep2] storage rand-write bs=4096 depth=32 backend=specialized: 4607 IOPS, 18.87 MB/s
+  [lib-specialized rep2] storage seq-write bs=1048576 depth=4 backend=specialized: 424 IOPS, 444.08 MB/s
+  [lib-specialized rep2] cpu threads=4: median 946.8 Mops/s (p5..max spread stdev 181.04)
+  [lib-specialized rep2] memory size=256 MiB: triad median 5.37 GB/s, random-access latency 854.7 ns
+  [lib-specialized rep2] net latency msg=64: 19334 round-trips/s, RTT us p50=30.4 p95=117.9 p99=320.2
+  [lib-specialized rep2] net throughput: 2843.4 MB/s
+  [adaptive rep2] storage rand-read bs=4096 depth=32 backend=auto: 9634 IOPS, 39.46 MB/s
+  [adaptive rep2] storage seq-read bs=1048576 depth=4 backend=auto: 82 IOPS, 86.33 MB/s
+  [adaptive rep2] storage rand-write bs=4096 depth=32 backend=auto: 12517 IOPS, 51.27 MB/s
+  [adaptive rep2] storage seq-write bs=1048576 depth=4 backend=auto: 63 IOPS, 66.00 MB/s
+  [adaptive rep2] cpu threads=4: median 1723.1 Mops/s (p5..max spread stdev 421.70)
+  [adaptive rep2] memory size=256 MiB: triad median 12.16 GB/s, random-access latency 185.7 ns
+  [adaptive rep2] net latency msg=64: 25692 round-trips/s, RTT us p50=24.6 p95=80.5 p99=200.1
+  [adaptive rep2] net throughput: 2839.4 MB/s
+  [knobs-specialized rep2] storage rand-read bs=4096 depth=32 backend=normal: 984 IOPS, 4.03 MB/s
+  [knobs-specialized rep2] storage seq-read bs=1048576 depth=4 backend=normal: 88 IOPS, 91.84 MB/s
+  [knobs-specialized rep2] storage rand-write bs=4096 depth=32 backend=normal: 11009 IOPS, 45.09 MB/s
+  [knobs-specialized rep2] storage seq-write bs=1048576 depth=4 backend=normal: 74 IOPS, 78.07 MB/s
+  [knobs-specialized rep2] cpu threads=4: median 1999.9 Mops/s (p5..max spread stdev 124.70)
+  [knobs-specialized rep2] memory size=256 MiB: triad median 12.45 GB/s, random-access latency 271.6 ns
+  [knobs-specialized rep2] net latency msg=64: 28662 round-trips/s, RTT us p50=22.7 p95=70.4 p99=175.7
+  [knobs-specialized rep2] net throughput: 2432.0 MB/s
+  [normal rep2] storage rand-read bs=4096 depth=32 backend=normal: 842 IOPS, 3.45 MB/s
+  [normal rep2] storage seq-read bs=1048576 depth=4 backend=normal: 86 IOPS, 90.11 MB/s
+  [normal rep2] storage rand-write bs=4096 depth=32 backend=normal: 8818 IOPS, 36.12 MB/s
+  [normal rep2] storage seq-write bs=1048576 depth=4 backend=normal: 79 IOPS, 82.90 MB/s
+  [normal rep2] cpu threads=4: median 1885.2 Mops/s (p5..max spread stdev 218.26)
+  [normal rep2] memory size=256 MiB: triad median 13.08 GB/s, random-access latency 309.5 ns
+  [normal rep2] net latency msg=64: 29712 round-trips/s, RTT us p50=22.6 p95=67.0 p99=158.6
+  [normal rep2] net throughput: 2463.2 MB/s
+  [knobs-batched rep2] storage rand-read bs=4096 depth=32 backend=normal: 928 IOPS, 3.80 MB/s
+  [knobs-batched rep2] storage seq-read bs=1048576 depth=4 backend=normal: 82 IOPS, 85.50 MB/s
+  [knobs-batched rep2] storage rand-write bs=4096 depth=32 backend=normal: 9031 IOPS, 36.99 MB/s
+  [knobs-batched rep2] storage seq-write bs=1048576 depth=4 backend=normal: 75 IOPS, 78.31 MB/s
+  [knobs-batched rep2] cpu threads=4: median 1961.2 Mops/s (p5..max spread stdev 137.47)
+  [knobs-batched rep2] memory size=256 MiB: triad median 11.90 GB/s, random-access latency 229.8 ns
+  [knobs-batched rep2] net latency msg=64: 29200 round-trips/s, RTT us p50=23.3 p95=70.9 p99=159.5
+  [knobs-batched rep2] net throughput: 2718.6 MB/s
+  [adaptive rep3] storage rand-read bs=4096 depth=32 backend=auto: 13935 IOPS, 57.08 MB/s
+  [adaptive rep3] storage seq-read bs=1048576 depth=4 backend=auto: 96 IOPS, 101.17 MB/s
+  [adaptive rep3] storage rand-write bs=4096 depth=32 backend=auto: 9594 IOPS, 39.29 MB/s
+  [adaptive rep3] storage seq-write bs=1048576 depth=4 backend=auto: 81 IOPS, 85.42 MB/s
+  [adaptive rep3] cpu threads=4: median 2003.0 Mops/s (p5..max spread stdev 209.03)
+  [adaptive rep3] memory size=256 MiB: triad median 13.39 GB/s, random-access latency 222.7 ns
+  [adaptive rep3] net latency msg=64: 27843 round-trips/s, RTT us p50=23.5 p95=75.0 p99=175.3
+  [adaptive rep3] net throughput: 3266.1 MB/s
+  [lib-batched rep3] storage rand-read bs=4096 depth=32 backend=batched: 8595 IOPS, 35.21 MB/s
+  [lib-batched rep3] storage seq-read bs=1048576 depth=4 backend=batched: 65 IOPS, 67.82 MB/s
+  [lib-batched rep3] storage rand-write bs=4096 depth=32 backend=batched: 5707 IOPS, 23.38 MB/s
+  [lib-batched rep3] storage seq-write bs=1048576 depth=4 backend=batched: 34 IOPS, 35.79 MB/s
+  [lib-batched rep3] cpu threads=4: median 643.4 Mops/s (p5..max spread stdev 112.22)
+  [lib-batched rep3] memory size=256 MiB: triad median 2.92 GB/s, random-access latency 1087.5 ns
+  [lib-batched rep3] net latency msg=64: 5170 round-trips/s, RTT us p50=38.1 p95=278.0 p99=5155.2
+  [lib-batched rep3] net throughput: 629.9 MB/s
+  [normal rep3] storage rand-read bs=4096 depth=32 backend=normal: 334 IOPS, 1.37 MB/s
+  [normal rep3] storage seq-read bs=1048576 depth=4 backend=normal: 29 IOPS, 30.62 MB/s
+  [normal rep3] storage rand-write bs=4096 depth=32 backend=normal: 3574 IOPS, 14.64 MB/s
+  [normal rep3] storage seq-write bs=1048576 depth=4 backend=normal: 30 IOPS, 31.94 MB/s
+  [normal rep3] cpu threads=4: median 681.3 Mops/s (p5..max spread stdev 88.35)
+  [normal rep3] memory size=256 MiB: triad median 4.63 GB/s, random-access latency 653.8 ns
+  [normal rep3] net latency msg=64: 8822 round-trips/s, RTT us p50=35.5 p95=231.5 p99=1322.9
+  [normal rep3] net throughput: 1780.4 MB/s
+  [knobs-specialized rep3] storage rand-read bs=4096 depth=32 backend=normal: 588 IOPS, 2.41 MB/s
+  [knobs-specialized rep3] storage seq-read bs=1048576 depth=4 backend=normal: 49 IOPS, 51.32 MB/s
+  [knobs-specialized rep3] storage rand-write bs=4096 depth=32 backend=normal: 7771 IOPS, 31.83 MB/s
+  [knobs-specialized rep3] storage seq-write bs=1048576 depth=4 backend=normal: 64 IOPS, 66.82 MB/s
+  [knobs-specialized rep3] cpu threads=4: median 1596.8 Mops/s (p5..max spread stdev 487.18)
+  [knobs-specialized rep3] memory size=256 MiB: triad median 4.95 GB/s, random-access latency 1009.0 ns
+  [knobs-specialized rep3] net latency msg=64: 4894 round-trips/s, RTT us p50=37.7 p95=262.1 p99=5913.6
+  [knobs-specialized rep3] net throughput: 730.7 MB/s
+  [batched rep3] storage rand-read bs=4096 depth=32 backend=batched: 2445 IOPS, 10.02 MB/s
+  [batched rep3] storage seq-read bs=1048576 depth=4 backend=batched: 23 IOPS, 23.79 MB/s
+  [batched rep3] storage rand-write bs=4096 depth=32 backend=batched: 3664 IOPS, 15.01 MB/s
+  [batched rep3] storage seq-write bs=1048576 depth=4 backend=batched: 29 IOPS, 29.94 MB/s
+  [batched rep3] cpu threads=4: median 827.8 Mops/s (p5..max spread stdev 130.87)
+  [batched rep3] memory size=256 MiB: triad median 2.89 GB/s, random-access latency 1481.3 ns
+  [batched rep3] net latency msg=64: 5553 round-trips/s, RTT us p50=36.8 p95=214.7 p99=5217.1
+  [batched rep3] net throughput: 669.9 MB/s
+  [knobs-batched rep3] storage rand-read bs=4096 depth=32 backend=normal: 376 IOPS, 1.54 MB/s
+  [knobs-batched rep3] storage seq-read bs=1048576 depth=4 backend=normal: 25 IOPS, 25.97 MB/s
+  [knobs-batched rep3] storage rand-write bs=4096 depth=32 backend=normal: 2658 IOPS, 10.89 MB/s
+  [knobs-batched rep3] storage seq-write bs=1048576 depth=4 backend=normal: 26 IOPS, 27.25 MB/s
+  [knobs-batched rep3] cpu threads=4: median 790.8 Mops/s (p5..max spread stdev 165.56)
+  [knobs-batched rep3] memory size=256 MiB: triad median 5.85 GB/s, random-access latency 665.4 ns
+  [knobs-batched rep3] net latency msg=64: 9261 round-trips/s, RTT us p50=36.4 p95=255.1 p99=1206.7
+  [knobs-batched rep3] net throughput: 1094.8 MB/s
+  [specialized rep3] storage rand-read bs=4096 depth=32 backend=specialized: 6302 IOPS, 25.81 MB/s
+  [specialized rep3] storage seq-read bs=1048576 depth=4 backend=specialized: 440 IOPS, 461.37 MB/s
+  [specialized rep3] storage rand-write bs=4096 depth=32 backend=specialized: 4680 IOPS, 19.17 MB/s
+  [specialized rep3] storage seq-write bs=1048576 depth=4 backend=specialized: 593 IOPS, 622.06 MB/s
+  [specialized rep3] cpu threads=4: median 876.1 Mops/s (p5..max spread stdev 101.70)
+  [specialized rep3] memory size=256 MiB: triad median 4.59 GB/s, random-access latency 667.2 ns
+  [specialized rep3] net latency msg=64: 6966 round-trips/s, RTT us p50=37.2 p95=304.2 p99=2076.8
+  [specialized rep3] net throughput: 1286.5 MB/s
+  [lib-specialized rep3] storage rand-read bs=4096 depth=32 backend=specialized: 5782 IOPS, 23.68 MB/s
+  [lib-specialized rep3] storage seq-read bs=1048576 depth=4 backend=specialized: 739 IOPS, 775.09 MB/s
+  [lib-specialized rep3] storage rand-write bs=4096 depth=32 backend=specialized: 6933 IOPS, 28.40 MB/s
+  [lib-specialized rep3] storage seq-write bs=1048576 depth=4 backend=specialized: 651 IOPS, 682.15 MB/s
+  [lib-specialized rep3] cpu threads=4: median 853.2 Mops/s (p5..max spread stdev 159.23)
+  [lib-specialized rep3] memory size=256 MiB: triad median 6.22 GB/s, random-access latency 472.6 ns
+  [lib-specialized rep3] net latency msg=64: 10278 round-trips/s, RTT us p50=36.6 p95=265.0 p99=1027.7
+  [lib-specialized rep3] net throughput: 1192.5 MB/s
+  [batched rep1] transition: idle -> cpu -> randread -> seqread -> idle, 10s each; timeline /var/tmp/fuhrer-exp/batched/transition/rep1.timeline.csv
+  [batched rep1] done: backend switches seen by libfuhrer: 0
+  [normal rep1] transition: idle -> cpu -> randread -> seqread -> idle, 10s each; timeline /var/tmp/fuhrer-exp/normal/transition/rep1.timeline.csv
+  [normal rep1] done: backend switches seen by libfuhrer: 0
+  [adaptive rep1] transition: idle -> cpu -> randread -> seqread -> idle, 10s each; timeline /var/tmp/fuhrer-exp/adaptive/transition/rep1.timeline.csv
+  [adaptive rep1] done: backend switches seen by libfuhrer: 1
+  [specialized rep1] transition: idle -> cpu -> randread -> seqread -> idle, 10s each; timeline /var/tmp/fuhrer-exp/specialized/transition/rep1.timeline.csv
+  [specialized rep1] done: backend switches seen by libfuhrer: 0
+  [normal rep2] transition: idle -> cpu -> randread -> seqread -> idle, 10s each; timeline /var/tmp/fuhrer-exp/normal/transition/rep2.timeline.csv
+  [normal rep2] done: backend switches seen by libfuhrer: 0
+  [specialized rep2] transition: idle -> cpu -> randread -> seqread -> idle, 10s each; timeline /var/tmp/fuhrer-exp/specialized/transition/rep2.timeline.csv
+  [specialized rep2] done: backend switches seen by libfuhrer: 0
+  [batched rep2] transition: idle -> cpu -> randread -> seqread -> idle, 10s each; timeline /var/tmp/fuhrer-exp/batched/transition/rep2.timeline.csv
+  [batched rep2] done: backend switches seen by libfuhrer: 0
+  [adaptive rep2] transition: idle -> cpu -> randread -> seqread -> idle, 10s each; timeline /var/tmp/fuhrer-exp/adaptive/transition/rep2.timeline.csv
+  [adaptive rep2] done: backend switches seen by libfuhrer: 1
+  [normal rep3] transition: idle -> cpu -> randread -> seqread -> idle, 10s each; timeline /var/tmp/fuhrer-exp/normal/transition/rep3.timeline.csv
+  [normal rep3] done: backend switches seen by libfuhrer: 0
+  [batched rep3] transition: idle -> cpu -> randread -> seqread -> idle, 10s each; timeline /var/tmp/fuhrer-exp/batched/transition/rep3.timeline.csv
+  [batched rep3] done: backend switches seen by libfuhrer: 0
+  [adaptive rep3] transition: idle -> cpu -> randread -> seqread -> idle, 10s each; timeline /var/tmp/fuhrer-exp/adaptive/transition/rep3.timeline.csv
+  [adaptive rep3] done: backend switches seen by libfuhrer: 1
+  [specialized rep3] transition: idle -> cpu -> randread -> seqread -> idle, 10s each; timeline /var/tmp/fuhrer-exp/specialized/transition/rep3.timeline.csv
+  [specialized rep3] done: backend switches seen by libfuhrer: 0
+  [off rep1] cpu threads=4: median 2104.3 Mops/s (p5..max spread stdev 200.13)
+  [observe-1000 rep1] cpu threads=4: median 2011.6 Mops/s (p5..max spread stdev 184.41)
+  [observe-100 rep1] cpu threads=4: median 2008.3 Mops/s (p5..max spread stdev 206.73)
+  [observe-10 rep1] cpu threads=4: median 1695.8 Mops/s (p5..max spread stdev 339.41)
+  [off rep2] cpu threads=4: median 2096.8 Mops/s (p5..max spread stdev 46.08)
+  [observe-1000 rep2] cpu threads=4: median 2055.1 Mops/s (p5..max spread stdev 106.22)
+  [observe-100 rep2] cpu threads=4: median 2074.2 Mops/s (p5..max spread stdev 77.21)
+  [observe-10 rep2] cpu threads=4: median 2007.4 Mops/s (p5..max spread stdev 75.94)
+  [off rep3] cpu threads=4: median 2040.6 Mops/s (p5..max spread stdev 59.10)
+  [observe-1000 rep3] cpu threads=4: median 2104.8 Mops/s (p5..max spread stdev 38.05)
+  [observe-100 rep3] cpu threads=4: median 2071.3 Mops/s (p5..max spread stdev 93.06)
+  [observe-10 rep3] cpu threads=4: median 1909.0 Mops/s (p5..max spread stdev 109.68)
