@@ -221,8 +221,8 @@ static void render(struct gwin *g)
 {
 	g_fill(g, 0, 0, g->w, g->h, RGB(0xf4, 0xf5, 0xf7));
 	/* toolbar */
-	g_fill(g, 0, 0, g->w, 40, RGB(0x22, 0x28, 0x36));
-	g_round(g, 8, 7, g->w - 16, 26, 8, editing_url ? RGB(0x33, 0x3d, 0x52) : RGB(0x2b, 0x33, 0x44));
+	g_fill(g, 0, 0, g->w, 40, T_BG2);
+	g_round(g, 8, 7, g->w - 16, 26, 8, editing_url ? g_mix(T_BG, T_ACCENT, 60) : T_BG);
 	g_text(g, 20, 12, urlbar, T_FG);
 	if (editing_url)
 		g_fill(g, 20 + (int)strlen(urlbar) * FONT_W, 12, 2, 16, T_ACCENT);

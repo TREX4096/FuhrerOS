@@ -25,15 +25,19 @@
 #define M_SHIFT 1
 #define M_CTRL 2
 
-/* shared theme */
-#define T_BG RGB(0x1a, 0x1f, 0x2b)
-#define T_BG2 RGB(0x22, 0x28, 0x36)
-#define T_FG RGB(0xe6, 0xea, 0xf2)
-#define T_DIM RGB(0x8c, 0x96, 0xa8)
-#define T_ACCENT RGB(0x4f, 0x9d, 0xff)
-#define T_GOOD RGB(0x7f, 0xd1, 0x8b)
-#define T_WARN RGB(0xf2, 0xc1, 0x5b)
-#define T_BAD RGB(0xe0, 0x5a, 0x5a)
+/* shared theme: the desktop's current colours (dark/light + accent),
+ * fetched by gwin_open and refreshed when a WEV_THEME event arrives */
+extern struct fu_theme fu_theme;
+#define T_BG fu_theme.bg
+#define T_BG2 fu_theme.bg2
+#define T_FG fu_theme.fg
+#define T_DIM fu_theme.dim
+#define T_ACCENT fu_theme.accent
+#define T_GOOD fu_theme.good
+#define T_WARN fu_theme.warn
+#define T_BAD fu_theme.bad
+#define T_BORDER fu_theme.border
+void theme_refresh(void);
 
 struct gwin {
 	int id;
@@ -62,6 +66,7 @@ void g_char(struct gwin *g, int x, int y, unsigned char ch, uint32_t fg, uint32_
 int g_text(struct gwin *g, int x, int y, const char *s, uint32_t fg);
 void g_textn(struct gwin *g, int x, int y, const char *s, int n, uint32_t fg);
 void g_text_big(struct gwin *g, int x, int y, const char *s, uint32_t fg, int scale);
+uint32_t g_mix(uint32_t a, uint32_t b, int t); /* t/255 of b over a */
 void g_bar(struct gwin *g, int x, int y, int w, int h, int pct, uint32_t c);
 void g_button(struct gwin *g, const struct button *b);
 bool button_hit(const struct button *b, int x, int y);

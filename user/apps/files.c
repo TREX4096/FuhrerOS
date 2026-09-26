@@ -65,9 +65,11 @@ static void open_entry(int i)
 	snprintf(status, sizeof(status), "opened %s in the editor", ents[i].name);
 }
 
-int main(void)
+int main(int argc, char **argv)
 {
 	struct gwin g;
+	if (argc > 1)
+		strlcpy(cwd, argv[1], sizeof(cwd));
 	if (gwin_open(&g, 640, 480, "Files") < 0)
 		return 1;
 	chdir(cwd);
@@ -90,10 +92,10 @@ int main(void)
 		for (int r = 0; r < rows && top + r < nents; r++) {
 			int i = top + r, y = 74 + r * 20;
 			if (i == sel)
-				g_fill(&g, 6, y - 2, g.w - 12, 20, RGB(0x2f, 0x3b, 0x55));
+				g_fill(&g, 6, y - 2, g.w - 12, 20, g_mix(T_BG, T_ACCENT, 70));
 			bool dir = ents[i].type == VT_DIR;
 			g_round(&g, 14, y + 2, 12, 12, 3, dir ? T_WARN : T_DIM);
-			g_text(&g, 34, y, ents[i].name, dir ? T_FG : RGB(0xc8, 0xd0, 0xde));
+			g_text(&g, 34, y, ents[i].name, dir ? T_ACCENT : T_FG);
 			char sz[32];
 			if (dir)
 				strlcpy(sz, "folder", sizeof(sz));

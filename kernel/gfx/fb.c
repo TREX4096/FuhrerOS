@@ -65,6 +65,39 @@ void surf_blend_fill(struct surface *s, int x, int y, int w, int h, u32 c, u8 al
 	}
 }
 
+static const struct logo_image *logo_pick(int height)
+{
+	const struct logo_image *best = &logo_images[0];
+	for (int i = 0; i < logo_image_count; i++)
+		if (logo_images[i].h <= height)
+			best = &logo_images[i];
+	return best;
+}
+
+int logo_width(int height) { return logo_pick(height)->w; }
+
+int surf_logo(struct surface *s, int x, int y, int height, u32 fg, u32 accent)
+{
+	const struct logo_image *l = logo_pick(height);
+	for (int j = 0; j < l->h; j++) {
+		int py = y + j;
+		if (py < 0 || py >= (int)s->h)
+			continue;
+		u32 *row = s->px + (size_t)py * s->stride;
+		for (int i = 0; i < l->w; i++) {
+			int px = x + i;
+			if (px < 0 || px >= (int)s->w)
+				continue;
+			u8 a = l->fg[j * l->w + i], b = l->accent[j * l->w + i];
+			if (a)
+				row[px] = blend(row[px], fg, a);
+			if (b)
+				row[px] = blend(row[px], accent, b);
+		}
+	}
+	return l->w;
+}
+
 void surf_round_rect(struct surface *s, int x, int y, int w, int h, int r, u32 c)
 {
 	for (int j = 0; j < h; j++) {

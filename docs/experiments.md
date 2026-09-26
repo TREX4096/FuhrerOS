@@ -137,8 +137,11 @@ least 27 × 10 s of benchmarks.
 
 - **RQ1: Can runtime workload characteristics select beneficial policies?**
   Yes, within these workloads.
-  - The profiler put the I/O worker in IO_BOUND and the probe in INTERACTIVE
-    in every mixed run (per-task classes are in the run summaries).
+  - In all five adaptive mixed runs of E-117, the profiler put the I/O
+    worker in IO_BOUND, the probe in INTERACTIVE and the CPU workers in
+    CPU_BOUND (per-task classes are in the run summaries). Under
+    round-robin the starved I/O worker looks INTERACTIVE, so the class
+    depends on the policy in force.
   - The class-based parameters gave B2-level latency with no manual policy
     choice.
   - A2 and A3 show that both parts are needed.

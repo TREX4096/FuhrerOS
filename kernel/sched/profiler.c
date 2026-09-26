@@ -24,6 +24,10 @@ static u64 window_start_ns;
 static u64 last_window_ns;
 static u64 profiler_cycles;	/* TSC cycles spent classifying (overhead) */
 static u64 windows;
+static enum task_class sys_cls = CLASS_IDLE, sys_from = CLASS_IDLE;
+static enum task_class sys_cand = CLASS_IDLE;
+static u32 sys_streak;
+static u64 sys_changes, sys_change_ns;
 
 #define ADAPT_LOG 128
 static struct adapt_event alog[ADAPT_LOG];
@@ -147,7 +151,43 @@ void profiler_tick(void)
 			t->prof.confidence = (u8)(agree * 100 / 8);
 		}
 	}
+	/* system-level class changes (Control Center: "last transition"), with
+	 * the same hysteresis as tasks: without it the class flipped between
+	 * IDLE and INTERACTIVE on every window while someone typed (173
+	 * "transitions" in 84 s of light use). */
+	if (enabled) {
+		enum task_class sc = profiler_system_class(NULL, NULL);
+		if (sc == sys_cls) {
+			sys_streak = 0;
+		} else if (sc == sys_cand && ++sys_streak >= hysteresis) {
+			sys_from = sys_cls;
+			sys_cls = sc;
+			sys_changes++;
+			sys_change_ns = now;
+			sys_streak = 0;
+		} else if (sc != sys_cand) {
+			sys_cand = sc;
+			sys_streak = 1;
+			if (hysteresis <= 1) {
+				sys_from = sys_cls;
+				sys_cls = sc;
+				sys_changes++;
+				sys_change_ns = now;
+				sys_streak = 0;
+			}
+		}
+	}
 	profiler_cycles += rdtsc() - c0;
+}
+
+enum task_class profiler_stable_class(void) { return sys_cls; }
+
+void profiler_system_transitions(u64 *count, u64 *last_ns, enum task_class *from, enum task_class *to)
+{
+	*count = sys_changes;
+	*last_ns = sys_change_ns;
+	*from = sys_from;
+	*to = sys_cls;
 }
 
 /* System-level view: the class holding most CPU time in the last window,

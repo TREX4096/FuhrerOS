@@ -146,11 +146,11 @@ int main(int argc, char **argv)
 			top = cy;
 		if (cy >= top + rows)
 			top = cy - rows + 1;
-		g_fill(&g, 0, 0, g.w, g.h, RGB(0x16, 0x1a, 0x24));
+		g_fill(&g, 0, 0, g.w, g.h, T_BG);
 		for (int r = 0; r < rows && top + r < nlines; r++) {
 			char num[8];
 			snprintf(num, sizeof(num), "%4d", top + r + 1);
-			g_text(&g, 4, 6 + r * FONT_H, num, RGB(0x4a, 0x54, 0x68));
+			g_text(&g, 4, 6 + r * FONT_H, num, T_DIM);
 			g_text(&g, 48, 6 + r * FONT_H, text[top + r], T_FG);
 		}
 		int ccx = MIN(cx, (int)strlen(text[cy]));

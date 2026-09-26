@@ -30,6 +30,19 @@ void surf_blit(struct surface *dst, int dx, int dy, const struct surface *src, i
 	       int w, int h);
 void surf_round_rect(struct surface *s, int x, int y, int w, int h, int r, u32 c);
 
+/* The FuhrerOS wordmark (kernel/gfx/logo.c, generated from logo.png by
+ * tools/logo2c.py): two alpha masks, tinted at draw time. */
+struct logo_image {
+	u16 w, h;
+	const u8 *fg;		/* "FUHRER" */
+	const u8 *accent;	/* "OS" */
+};
+extern const struct logo_image logo_images[];
+extern const int logo_image_count;
+/* Draw the largest stored size whose height <= `height`; returns its width. */
+int surf_logo(struct surface *s, int x, int y, int height, u32 fg, u32 accent);
+int logo_width(int height);
+
 /* Early text console on the framebuffer. */
 void fbcon_init(void);
 void fbcon_write(const char *s, size_t n);

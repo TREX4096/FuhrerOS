@@ -114,6 +114,15 @@ static void gen_adapt(struct pbuf *p)
 	enum task_class c = profiler_system_class(&conf, &why);
 	pb_printf(p, "system_class: %s\nconfidence: %u\nreason: %s\npolicy: %s\n",
 		  task_class_name(c), conf, why, sched_policy_name());
+	u64 nsys, last_ns;
+	enum task_class from, to;
+	profiler_system_transitions(&nsys, &last_ns, &from, &to);
+	pb_printf(p, "stable_class: %s\nsystem_transitions: %lu\nlast_transition_ms_ago: %lu\nlast_transition: %s->%s\n",
+		  task_class_name(profiler_stable_class()), nsys,
+		  last_ns ? (time_ns() - last_ns) / 1000000 : 0, task_class_name(from), task_class_name(to));
+	u64 hz = tsc_frequency();
+	pb_printf(p, "profiler_overhead_ns: %lu\nprofiler_windows: %lu\n",
+		  hz ? profiler_overhead_cycles() * 1000000000UL / hz : 0, profiler_windows());
 	static struct adapt_event ev[64];
 	u32 total;
 	u32 n = adapt_log_read(ev, 64, &total);

@@ -45,7 +45,7 @@ int main(void)
 				g_text(&g, 20, y, l, T_DIM);
 			} else {
 				if (row == selected) {
-					g_fill(&g, 16, y - 1, g.w - 32, 17, RGB(0x2f, 0x3b, 0x55));
+					g_fill(&g, 16, y - 1, g.w - 32, 17, g_mix(T_BG, T_ACCENT, 70));
 					sel_pid = atoi(l + 6); /* PID column */
 				}
 				g_text(&g, 20, y, l, T_FG);

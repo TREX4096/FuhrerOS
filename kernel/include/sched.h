@@ -200,6 +200,10 @@ void profiler_enable(bool on);
 bool profiler_enabled(void);
 const char *task_class_name(enum task_class c);
 enum task_class profiler_system_class(u8 *confidence, const char **reason);
+/* The system class after hysteresis (what the desktop shows). */
+enum task_class profiler_stable_class(void);
+/* System-level class changes since boot and the time of the last one. */
+void profiler_system_transitions(u64 *count, u64 *last_ns, enum task_class *from, enum task_class *to);
 struct adapt_event {
 	u64 time_ns;
 	int tid;

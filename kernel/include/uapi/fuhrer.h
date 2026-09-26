@@ -185,7 +185,51 @@ struct fu_screen {
 };
 
 enum { WEV_NONE, WEV_KEY, WEV_MOUSE_MOVE, WEV_MOUSE_BUTTON, WEV_SCROLL, WEV_CLOSE, WEV_RESIZE,
-       WEV_FOCUS, WEV_TIMER };
+       WEV_FOCUS, WEV_TIMER, WEV_THEME /* theme changed: re-read with DESK_THEME */ };
+
+/* SYS_DESKTOP_CTL operations (a = op) */
+enum {
+	DESK_START = 1,
+	DESK_WALLPAPER = 2,	/* b = index */
+	DESK_RUNNING = 3,
+	DESK_TERMINAL = 4,
+	DESK_GET_CFG = 5,	/* b = struct fu_desk_cfg * */
+	DESK_SET_CFG = 6,	/* b = const struct fu_desk_cfg * */
+	DESK_THEME = 7,		/* b = struct fu_theme * (colours for apps) */
+	DESK_NOTIFY = 8,	/* b = title, c = body */
+	DESK_REBOOT = 98,
+	DESK_POWEROFF = 99,
+};
+
+/* What a touchpad gesture does (Settings -> Touchpad). */
+enum { GA_NONE, GA_WS_PREV, GA_WS_NEXT, GA_OVERVIEW, GA_DESKTOP, GA_APP_PREV, GA_APP_NEXT,
+       GA_LAUNCHER, GA_CONTROL, GA_COUNT };
+/* Configurable gestures, index into fu_desk_cfg.gesture[] */
+enum { GS_THREE_LEFT, GS_THREE_RIGHT, GS_THREE_UP, GS_THREE_DOWN, GS_THREE_TAP, GS_FOUR_LEFT,
+       GS_FOUR_RIGHT, GS_FOUR_UP, GS_FOUR_DOWN, GS_FOUR_TAP, GS_COUNT };
+enum { MODE_FLOATING, MODE_TILING, MODE_FOCUS };
+
+#define DESK_MAX_WS 9
+struct fu_desk_cfg {
+	uint8_t dark;			/* 1 dark, 0 light */
+	uint8_t accent;			/* index into the accent palette */
+	uint8_t wallpaper;
+	uint8_t workspaces;		/* 1..DESK_MAX_WS */
+	uint8_t tap_to_click;
+	uint8_t natural_scroll;
+	uint8_t adapt_notify;		/* toast on workload-class changes */
+	uint8_t reduce_motion;
+	uint16_t typing_block_ms;	/* ignore the touchpad this long after a key (0 = off) */
+	uint8_t pointer_speed;		/* 1..8 */
+	uint8_t scroll_speed;		/* 1..8 */
+	uint8_t gesture[GS_COUNT];	/* GA_* */
+	char ws_name[DESK_MAX_WS][16];
+};
+
+struct fu_theme {
+	uint32_t dark;
+	uint32_t bg, bg2, fg, dim, accent, good, warn, bad, border;
+};
 struct fu_wevent {
 	uint32_t type;
 	int32_t win;
