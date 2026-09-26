@@ -22,6 +22,7 @@ static volatile int ready;
 static uint64_t wake[MAXS], disp[MAXS];
 static volatile int ns;
 static uint32_t ip;
+static uint16_t web_port; /* per run: a previous run's server may still hold a fixed port */
 
 static void probe(void *a)
 {
@@ -84,7 +85,7 @@ static void web(void *a)
 	static char buf[4096];
 	while (!stop) {
 		int s = socket(AF_INET, SOCK_STREAM);
-		if (connect(s, ip, 8081) < 0) {
+		if (connect(s, ip, web_port) < 0) {
 			web_fail++;
 			close(s);
 			sleep_ms(20);
@@ -161,7 +162,10 @@ int main(int argc, char **argv)
 		close(f);
 		sync();
 	}
-	const char *hargv[] = { "/bin/httpd", "8081", "/www", NULL };
+	web_port = (uint16_t)(8100 + getpid() % 800);
+	char ports[8];
+	snprintf(ports, sizeof(ports), "%u", web_port);
+	const char *hargv[] = { "/bin/httpd", ports, "/www", NULL };
 	pid_t httpd = spawn("/bin/httpd", hargv, NULL);
 	sleep_ms(300);
 
