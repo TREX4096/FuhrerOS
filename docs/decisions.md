@@ -61,7 +61,7 @@ was not established is marked **UNKNOWN — REQUIRES VERIFICATION**.
 | MIXED / UNKNOWN / IDLE | 12 | 8 ms | no |
 | CPU_BOUND | 20 | 30 ms | no |
 
-Tasks waiting > 100 ms in the run queue are lifted to priority 12 (anti-starvation). User base priority shifts the band by (base−16)/4.
+Tasks waiting > 100 ms in the run queue are lifted to priority 4 for one quantum (anti-starvation; was 12 until F-115). User base priority shifts the band by (base−16)/4.
 **Status:** Adopted; evaluated in E-10x.
 
 ## D-110 — System-level class weighted by activity, not CPU time

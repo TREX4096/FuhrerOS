@@ -162,9 +162,12 @@ static void readahead(struct blkdev *d, u64 from, u32 count)
 		b->referenced = false;
 		b->io_pending = true;
 		list_push_back(&hash[hidx(d, b->blockno)], &b->hash_node);
-		/* prefetched blocks start at the cold end unless the stream uses them */
+		/* Prefetched blocks go to the hot end: at the cold end the next
+		 * read-ahead batch evicted them before the stream reached them
+		 * (E-106: 110k issued, 6k used). Consumed stream blocks still go
+		 * cold via evict-behind in touch(). */
 		list_remove(&b->lru_node);
-		list_push_front(&lru, &b->lru_node);
+		list_push_back(&lru, &b->lru_node);
 		b->req = (struct blk_req){ .sector = b->blockno * SECTORS_PER_BLOCK,
 					   .count = SECTORS_PER_BLOCK, .buf = b->phys,
 					   .complete = ra_complete };

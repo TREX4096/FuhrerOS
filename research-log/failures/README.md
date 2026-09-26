@@ -16,5 +16,7 @@
 | [F-112](F-112-exit-reap-races.md) | Two task-exit races |
 | [F-113](F-113-cache-cpu-includes-io.md) | Cache CPU time included disk waits |
 | [F-114](F-114-readahead-metadata-interleave.md) | Read-ahead never triggered on sequential file reads |
+| [F-115](F-115-adaptive-starvation.md) | Adaptive scheduler starved a sleeping thread for seconds |
+| [F-116](F-116-readahead-self-eviction.md) | Read-ahead evicted its own prefetched blocks |
 
 Failures F-001..F-006 of the Linux-based prototype are in linux-prototype/research-log/failures/.

@@ -10,8 +10,11 @@
 //   MIXED/UNKNOWN  12     8 ms  no             neutral
 //   CPU_BOUND      20    30 ms  no             fewer context switches
 //
-// Anti-starvation: a task waiting more than aging_ms in the run queue is
-// temporarily lifted to priority 12 so CPU-bound work always progresses.
+// Anti-starvation: a task waiting more than 100 ms in the run queue is
+// temporarily lifted to the INTERACTIVE level (4) for one quantum, so no
+// task can be starved by a higher class that never blocks. (Lifting only
+// to 12 left IDLE/MIXED tasks starving behind non-blocking IO_BOUND tasks
+// for seconds: F-115.)
 // Base priority (user "nice") shifts the band by (base-16)/4.
 #include "policy.hpp"
 
@@ -95,15 +98,16 @@ class Adaptive final : public Policy {
 		task *boost[16];
 		int n = 0;
 		q_.for_each([&](task *t) {
-			if (n < 16 && t->prio > 12 && now - t->enqueue_ns > limit)
+			if (n < 16 && t->prio > kBoostPrio && now - t->enqueue_ns > limit)
 				boost[n++] = t;
 		});
 		for (int i = 0; i < n; i++) {
 			q_.remove(boost[i]);
-			boost[i]->prio = 12;
+			boost[i]->prio = kBoostPrio;
 			q_.push_back(boost[i]);
 		}
 	}
+	static constexpr int kBoostPrio = 4;
 	u32 aging_ticks_ = 0;
 };
 

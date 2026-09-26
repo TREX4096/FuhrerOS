@@ -27,7 +27,7 @@ tasks migrate to the new policy's queue.
 
 Adaptive parameters (D-109): INTERACTIVE 4 / 3 ms / preempt; IO_BOUND
 8 / 5 ms / preempt; MIXED·IDLE·UNKNOWN 12 / 8 ms; CPU_BOUND 20 / 30 ms.
-Tasks waiting > 100 ms are lifted to priority 12.
+Tasks waiting > 100 ms are lifted to the INTERACTIVE level (priority 4) for one quantum. (Until F-115 they were lifted only to 12, which left IDLE/MIXED tasks starving behind non-blocking IO_BOUND tasks.)
 
 ## Profiler (D-108)
 Per task and window (default 100 ms): CPU time, times scheduled, voluntary

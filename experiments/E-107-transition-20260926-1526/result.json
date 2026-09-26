@@ -1,0 +1,2514 @@
+{
+ "config": {
+  "experiment": "E-107",
+  "suite": "transition",
+  "date": "2026-09-26T15:26:26Z",
+  "commit": "ba10d0c-dirty",
+  "kernel": "FuhrerOS 0.1.0 (own kernel)",
+  "host": "Linux 6.6.87.2-microsoft-standard-WSL2 x86_64",
+  "host_cpu": "AMD Ryzen 5 7520U with Radeon Graphics",
+  "host_note": "Windows 11 -> WSL2 -> QEMU; KVM nested inside WSL2 when accel=kvm",
+  "qemu": "QEMU emulator version 10.2.1 (Debian 1:10.2.1+ds-1ubuntu3.1)",
+  "accel": "kvm",
+  "vcpus": 4,
+  "vcpus_used_by_kernel": 1,
+  "memory_mb": 4096,
+  "disk": "virtio-blk, FFS0 raw image, host cache=writeback",
+  "network": "virtio-net, QEMU user-mode (slirp)",
+  "suite_script": "rootfs/etc/bench/transition.sh"
+ },
+ "transition": {
+  "summary": [
+   {
+    "policy": "adaptive",
+    "phase_seconds": 8,
+    "detect_ms_cpu": 306,
+    "detect_ms_random-io": 291,
+    "detect_ms_sequential-io": 307,
+    "detect_ms_network": 4378,
+    "detect_ms_interactive": 521
+   },
+   {
+    "policy": "round_robin",
+    "phase_seconds": 8,
+    "detect_ms_cpu": 291,
+    "detect_ms_random-io": 285,
+    "detect_ms_sequential-io": 284,
+    "detect_ms_network": 284,
+    "detect_ms_interactive": 295
+   }
+  ],
+  "timeline": [
+   {
+    "t_ms": 250,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 90,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 2226
+   },
+   {
+    "t_ms": 557,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 90,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 1887
+   },
+   {
+    "t_ms": 850,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 90,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 1950
+   },
+   {
+    "t_ms": 1161,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 90,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 1860
+   },
+   {
+    "t_ms": 1471,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 90,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 2074
+   },
+   {
+    "t_ms": 1778,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 90,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 2306
+   },
+   {
+    "t_ms": 2070,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 90,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 2361
+   },
+   {
+    "t_ms": 2368,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 90,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 1583
+   },
+   {
+    "t_ms": 2696,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 90,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 2007
+   },
+   {
+    "t_ms": 3087,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 90,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 1833
+   },
+   {
+    "t_ms": 3407,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 90,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 1939
+   },
+   {
+    "t_ms": 3705,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 90,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 1992
+   },
+   {
+    "t_ms": 3995,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 90,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 2443
+   },
+   {
+    "t_ms": 4282,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 90,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 2394
+   },
+   {
+    "t_ms": 4572,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 90,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 1030
+   },
+   {
+    "t_ms": 4939,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 90,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 2075
+   },
+   {
+    "t_ms": 5263,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 91,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 3041
+   },
+   {
+    "t_ms": 5580,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 90,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 2691
+   },
+   {
+    "t_ms": 5898,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 90,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 2286
+   },
+   {
+    "t_ms": 6204,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 91,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 1671
+   },
+   {
+    "t_ms": 6576,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 90,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 1740
+   },
+   {
+    "t_ms": 6904,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 90,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 2699
+   },
+   {
+    "t_ms": 7245,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 90,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 2509
+   },
+   {
+    "t_ms": 7577,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 90,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 1600
+   },
+   {
+    "t_ms": 7892,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 90,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 2458
+   },
+   {
+    "t_ms": 8215,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 90,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 2622
+   },
+   {
+    "t_ms": 8536,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 233
+   },
+   {
+    "t_ms": 8828,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 257
+   },
+   {
+    "t_ms": 9110,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 64,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 259
+   },
+   {
+    "t_ms": 9395,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 258
+   },
+   {
+    "t_ms": 9677,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 270
+   },
+   {
+    "t_ms": 9966,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 268
+   },
+   {
+    "t_ms": 10273,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 66,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 279
+   },
+   {
+    "t_ms": 10556,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 66,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 281
+   },
+   {
+    "t_ms": 10839,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 64,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 261
+   },
+   {
+    "t_ms": 11123,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 266
+   },
+   {
+    "t_ms": 11424,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 262
+   },
+   {
+    "t_ms": 11706,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 64,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 258
+   },
+   {
+    "t_ms": 11995,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 266
+   },
+   {
+    "t_ms": 12293,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 264
+   },
+   {
+    "t_ms": 12580,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 261
+   },
+   {
+    "t_ms": 12870,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 263
+   },
+   {
+    "t_ms": 13154,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 268
+   },
+   {
+    "t_ms": 13438,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 277
+   },
+   {
+    "t_ms": 13724,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 264
+   },
+   {
+    "t_ms": 14007,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 262
+   },
+   {
+    "t_ms": 14293,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 267
+   },
+   {
+    "t_ms": 14580,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 267
+   },
+   {
+    "t_ms": 14863,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 269
+   },
+   {
+    "t_ms": 15152,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 271
+   },
+   {
+    "t_ms": 15440,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 263
+   },
+   {
+    "t_ms": 15724,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 273
+   },
+   {
+    "t_ms": 16007,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 267
+   },
+   {
+    "t_ms": 16309,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 66,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "random",
+    "ops": 270
+   },
+   {
+    "t_ms": 16629,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 229
+   },
+   {
+    "t_ms": 16936,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 73,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 206
+   },
+   {
+    "t_ms": 17222,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 97,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 332
+   },
+   {
+    "t_ms": 17512,
+    "phase": "sequential-io",
+    "class": "INTERACTIVE",
+    "conf": 71,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 274
+   },
+   {
+    "t_ms": 17805,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 72,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 248
+   },
+   {
+    "t_ms": 18089,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 72,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 226
+   },
+   {
+    "t_ms": 18371,
+    "phase": "sequential-io",
+    "class": "INTERACTIVE",
+    "conf": 81,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 303
+   },
+   {
+    "t_ms": 18711,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 71,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 289
+   },
+   {
+    "t_ms": 18997,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 72,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 202
+   },
+   {
+    "t_ms": 19284,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 71,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 231
+   },
+   {
+    "t_ms": 19569,
+    "phase": "sequential-io",
+    "class": "INTERACTIVE",
+    "conf": 62,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 353
+   },
+   {
+    "t_ms": 19860,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 68,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 202
+   },
+   {
+    "t_ms": 20148,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 96,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 193
+   },
+   {
+    "t_ms": 20433,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 70,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 202
+   },
+   {
+    "t_ms": 20722,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 71,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 216
+   },
+   {
+    "t_ms": 21009,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 96,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 217
+   },
+   {
+    "t_ms": 21292,
+    "phase": "sequential-io",
+    "class": "INTERACTIVE",
+    "conf": 57,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 198
+   },
+   {
+    "t_ms": 21580,
+    "phase": "sequential-io",
+    "class": "INTERACTIVE",
+    "conf": 72,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 204
+   },
+   {
+    "t_ms": 21871,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 66,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 231
+   },
+   {
+    "t_ms": 22158,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 96,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 171
+   },
+   {
+    "t_ms": 22448,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 97,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 225
+   },
+   {
+    "t_ms": 22737,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 66,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 179
+   },
+   {
+    "t_ms": 23042,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 72,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 196
+   },
+   {
+    "t_ms": 23452,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 71,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 181
+   },
+   {
+    "t_ms": 23764,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 70,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 200
+   },
+   {
+    "t_ms": 24055,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 56,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 215
+   },
+   {
+    "t_ms": 24347,
+    "phase": "sequential-io",
+    "class": "INTERACTIVE",
+    "conf": 63,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 200
+   },
+   {
+    "t_ms": 28726,
+    "phase": "network",
+    "class": "IO_BOUND",
+    "conf": 76,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 43515
+   },
+   {
+    "t_ms": 29014,
+    "phase": "network",
+    "class": "IO_BOUND",
+    "conf": 93,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 2712
+   },
+   {
+    "t_ms": 29346,
+    "phase": "network",
+    "class": "IO_BOUND",
+    "conf": 93,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 2632
+   },
+   {
+    "t_ms": 29653,
+    "phase": "network",
+    "class": "IO_BOUND",
+    "conf": 93,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 1400
+   },
+   {
+    "t_ms": 29973,
+    "phase": "network",
+    "class": "IO_BOUND",
+    "conf": 93,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 2792
+   },
+   {
+    "t_ms": 30263,
+    "phase": "network",
+    "class": "IO_BOUND",
+    "conf": 93,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 2784
+   },
+   {
+    "t_ms": 30548,
+    "phase": "network",
+    "class": "IO_BOUND",
+    "conf": 93,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 2592
+   },
+   {
+    "t_ms": 30836,
+    "phase": "network",
+    "class": "IO_BOUND",
+    "conf": 93,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 2768
+   },
+   {
+    "t_ms": 31127,
+    "phase": "network",
+    "class": "IO_BOUND",
+    "conf": 93,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 2704
+   },
+   {
+    "t_ms": 31449,
+    "phase": "network",
+    "class": "IO_BOUND",
+    "conf": 93,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 2320
+   },
+   {
+    "t_ms": 31758,
+    "phase": "network",
+    "class": "IO_BOUND",
+    "conf": 93,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 2488
+   },
+   {
+    "t_ms": 32048,
+    "phase": "network",
+    "class": "IO_BOUND",
+    "conf": 93,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 2784
+   },
+   {
+    "t_ms": 32341,
+    "phase": "network",
+    "class": "IO_BOUND",
+    "conf": 93,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 2712
+   },
+   {
+    "t_ms": 32660,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 100,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 58
+   },
+   {
+    "t_ms": 33183,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 100,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 58
+   },
+   {
+    "t_ms": 33684,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 100,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 58
+   },
+   {
+    "t_ms": 34191,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 100,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 58
+   },
+   {
+    "t_ms": 34705,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 100,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 58
+   },
+   {
+    "t_ms": 35206,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 100,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 59
+   },
+   {
+    "t_ms": 35707,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 100,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 58
+   },
+   {
+    "t_ms": 36227,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 100,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 58
+   },
+   {
+    "t_ms": 36763,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 100,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 58
+   },
+   {
+    "t_ms": 37265,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 100,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 58
+   },
+   {
+    "t_ms": 37774,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 100,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 58
+   },
+   {
+    "t_ms": 38276,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 100,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 59
+   },
+   {
+    "t_ms": 38803,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 100,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 58
+   },
+   {
+    "t_ms": 39304,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 100,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 58
+   },
+   {
+    "t_ms": 39805,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 100,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 58
+   },
+   {
+    "t_ms": 40306,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 100,
+    "sched": "adaptive",
+    "cache": "adaptive",
+    "io_class": "sequential",
+    "ops": 58
+   },
+   {
+    "t_ms": 260,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 95,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2866
+   },
+   {
+    "t_ms": 562,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 95,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2807
+   },
+   {
+    "t_ms": 852,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 96,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2851
+   },
+   {
+    "t_ms": 1143,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 96,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2517
+   },
+   {
+    "t_ms": 1444,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 95,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2679
+   },
+   {
+    "t_ms": 1746,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 95,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2821
+   },
+   {
+    "t_ms": 2039,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 95,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2836
+   },
+   {
+    "t_ms": 2345,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 95,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2932
+   },
+   {
+    "t_ms": 2648,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 95,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2843
+   },
+   {
+    "t_ms": 2952,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 96,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2915
+   },
+   {
+    "t_ms": 3251,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 95,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2393
+   },
+   {
+    "t_ms": 3548,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 95,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2758
+   },
+   {
+    "t_ms": 3843,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 96,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2556
+   },
+   {
+    "t_ms": 4137,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 95,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2816
+   },
+   {
+    "t_ms": 4433,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 95,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2282
+   },
+   {
+    "t_ms": 4763,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 95,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2632
+   },
+   {
+    "t_ms": 5063,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 95,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2604
+   },
+   {
+    "t_ms": 5412,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 96,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2128
+   },
+   {
+    "t_ms": 5765,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 95,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 1841
+   },
+   {
+    "t_ms": 6106,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 96,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 1954
+   },
+   {
+    "t_ms": 6401,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 94,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2695
+   },
+   {
+    "t_ms": 6702,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 95,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 1939
+   },
+   {
+    "t_ms": 7024,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 95,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2763
+   },
+   {
+    "t_ms": 7328,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 95,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2784
+   },
+   {
+    "t_ms": 7633,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 96,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 1924
+   },
+   {
+    "t_ms": 7939,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 95,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2742
+   },
+   {
+    "t_ms": 8234,
+    "phase": "cpu",
+    "class": "CPU_BOUND",
+    "conf": 95,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2829
+   },
+   {
+    "t_ms": 8523,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 232
+   },
+   {
+    "t_ms": 8808,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 64,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 255
+   },
+   {
+    "t_ms": 9092,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 261
+   },
+   {
+    "t_ms": 9381,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 266
+   },
+   {
+    "t_ms": 9668,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 66,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 267
+   },
+   {
+    "t_ms": 9956,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 264
+   },
+   {
+    "t_ms": 10243,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 270
+   },
+   {
+    "t_ms": 10527,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 260
+   },
+   {
+    "t_ms": 10812,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 66,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 269
+   },
+   {
+    "t_ms": 11096,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 66,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 269
+   },
+   {
+    "t_ms": 11395,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 266
+   },
+   {
+    "t_ms": 11678,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 66,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 269
+   },
+   {
+    "t_ms": 11998,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 266
+   },
+   {
+    "t_ms": 12286,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 270
+   },
+   {
+    "t_ms": 12570,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 265
+   },
+   {
+    "t_ms": 12853,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 271
+   },
+   {
+    "t_ms": 13137,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 268
+   },
+   {
+    "t_ms": 13425,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 66,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 266
+   },
+   {
+    "t_ms": 13711,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 265
+   },
+   {
+    "t_ms": 13997,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 256
+   },
+   {
+    "t_ms": 14285,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 272
+   },
+   {
+    "t_ms": 14571,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 66,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 266
+   },
+   {
+    "t_ms": 14855,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 270
+   },
+   {
+    "t_ms": 15136,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 269
+   },
+   {
+    "t_ms": 15422,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 263
+   },
+   {
+    "t_ms": 15735,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 244
+   },
+   {
+    "t_ms": 16064,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 66,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 263
+   },
+   {
+    "t_ms": 16380,
+    "phase": "random-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 267
+   },
+   {
+    "t_ms": 16664,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 263
+   },
+   {
+    "t_ms": 16948,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 261
+   },
+   {
+    "t_ms": 17233,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 260
+   },
+   {
+    "t_ms": 17516,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 255
+   },
+   {
+    "t_ms": 17810,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 249
+   },
+   {
+    "t_ms": 18090,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 251
+   },
+   {
+    "t_ms": 18394,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 64,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 251
+   },
+   {
+    "t_ms": 18680,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 250
+   },
+   {
+    "t_ms": 18967,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 64,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 249
+   },
+   {
+    "t_ms": 19253,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 251
+   },
+   {
+    "t_ms": 19538,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 249
+   },
+   {
+    "t_ms": 19822,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 251
+   },
+   {
+    "t_ms": 20110,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 250
+   },
+   {
+    "t_ms": 20399,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 64,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 251
+   },
+   {
+    "t_ms": 20683,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 251
+   },
+   {
+    "t_ms": 20969,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 251
+   },
+   {
+    "t_ms": 21261,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 251
+   },
+   {
+    "t_ms": 21546,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 251
+   },
+   {
+    "t_ms": 21831,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 251
+   },
+   {
+    "t_ms": 22142,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 64,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 251
+   },
+   {
+    "t_ms": 22425,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 250
+   },
+   {
+    "t_ms": 22707,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 251
+   },
+   {
+    "t_ms": 22990,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 250
+   },
+   {
+    "t_ms": 23278,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 251
+   },
+   {
+    "t_ms": 23561,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 249
+   },
+   {
+    "t_ms": 23845,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 249
+   },
+   {
+    "t_ms": 24128,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 64,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 251
+   },
+   {
+    "t_ms": 24414,
+    "phase": "sequential-io",
+    "class": "IO_BOUND",
+    "conf": 65,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 250
+   },
+   {
+    "t_ms": 24737,
+    "phase": "network",
+    "class": "IO_BOUND",
+    "conf": 91,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2590
+   },
+   {
+    "t_ms": 25022,
+    "phase": "network",
+    "class": "IO_BOUND",
+    "conf": 91,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2696
+   },
+   {
+    "t_ms": 25305,
+    "phase": "network",
+    "class": "IO_BOUND",
+    "conf": 91,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2728
+   },
+   {
+    "t_ms": 25607,
+    "phase": "network",
+    "class": "IO_BOUND",
+    "conf": 91,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 1904
+   },
+   {
+    "t_ms": 25907,
+    "phase": "network",
+    "class": "IO_BOUND",
+    "conf": 91,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2336
+   },
+   {
+    "t_ms": 26197,
+    "phase": "network",
+    "class": "IO_BOUND",
+    "conf": 91,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2680
+   },
+   {
+    "t_ms": 26483,
+    "phase": "network",
+    "class": "IO_BOUND",
+    "conf": 91,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2760
+   },
+   {
+    "t_ms": 26810,
+    "phase": "network",
+    "class": "IO_BOUND",
+    "conf": 91,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2400
+   },
+   {
+    "t_ms": 27116,
+    "phase": "network",
+    "class": "IO_BOUND",
+    "conf": 91,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2544
+   },
+   {
+    "t_ms": 27403,
+    "phase": "network",
+    "class": "IO_BOUND",
+    "conf": 91,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2808
+   },
+   {
+    "t_ms": 27688,
+    "phase": "network",
+    "class": "IO_BOUND",
+    "conf": 91,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2424
+   },
+   {
+    "t_ms": 27997,
+    "phase": "network",
+    "class": "IO_BOUND",
+    "conf": 91,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2400
+   },
+   {
+    "t_ms": 28284,
+    "phase": "network",
+    "class": "IO_BOUND",
+    "conf": 91,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2744
+   },
+   {
+    "t_ms": 28589,
+    "phase": "network",
+    "class": "IO_BOUND",
+    "conf": 90,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 1736
+   },
+   {
+    "t_ms": 28974,
+    "phase": "network",
+    "class": "IO_BOUND",
+    "conf": 91,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 1904
+   },
+   {
+    "t_ms": 29284,
+    "phase": "network",
+    "class": "IO_BOUND",
+    "conf": 91,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2048
+   },
+   {
+    "t_ms": 29642,
+    "phase": "network",
+    "class": "IO_BOUND",
+    "conf": 91,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2392
+   },
+   {
+    "t_ms": 29932,
+    "phase": "network",
+    "class": "IO_BOUND",
+    "conf": 91,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2480
+   },
+   {
+    "t_ms": 30227,
+    "phase": "network",
+    "class": "IO_BOUND",
+    "conf": 91,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 1944
+   },
+   {
+    "t_ms": 30519,
+    "phase": "network",
+    "class": "IO_BOUND",
+    "conf": 91,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2784
+   },
+   {
+    "t_ms": 30804,
+    "phase": "network",
+    "class": "IO_BOUND",
+    "conf": 91,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2712
+   },
+   {
+    "t_ms": 31110,
+    "phase": "network",
+    "class": "IO_BOUND",
+    "conf": 91,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2376
+   },
+   {
+    "t_ms": 31393,
+    "phase": "network",
+    "class": "IO_BOUND",
+    "conf": 91,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2256
+   },
+   {
+    "t_ms": 31689,
+    "phase": "network",
+    "class": "IO_BOUND",
+    "conf": 89,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2184
+   },
+   {
+    "t_ms": 31982,
+    "phase": "network",
+    "class": "IO_BOUND",
+    "conf": 91,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2736
+   },
+   {
+    "t_ms": 32270,
+    "phase": "network",
+    "class": "IO_BOUND",
+    "conf": 91,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2712
+   },
+   {
+    "t_ms": 32556,
+    "phase": "network",
+    "class": "IO_BOUND",
+    "conf": 91,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 2832
+   },
+   {
+    "t_ms": 32841,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 94,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 58
+   },
+   {
+    "t_ms": 33137,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 100,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 58
+   },
+   {
+    "t_ms": 33431,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 100,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 58
+   },
+   {
+    "t_ms": 33718,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 100,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 58
+   },
+   {
+    "t_ms": 34010,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 100,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 58
+   },
+   {
+    "t_ms": 34325,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 100,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 58
+   },
+   {
+    "t_ms": 34631,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 100,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 58
+   },
+   {
+    "t_ms": 34934,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 100,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 58
+   },
+   {
+    "t_ms": 35220,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 100,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 58
+   },
+   {
+    "t_ms": 35506,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 100,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 58
+   },
+   {
+    "t_ms": 35852,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 100,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 58
+   },
+   {
+    "t_ms": 36179,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 100,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 58
+   },
+   {
+    "t_ms": 36468,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 97,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 58
+   },
+   {
+    "t_ms": 36757,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 100,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 58
+   },
+   {
+    "t_ms": 37054,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 100,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 58
+   },
+   {
+    "t_ms": 37344,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 100,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 58
+   },
+   {
+    "t_ms": 37634,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 100,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 58
+   },
+   {
+    "t_ms": 37940,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 100,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 58
+   },
+   {
+    "t_ms": 38233,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 100,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 58
+   },
+   {
+    "t_ms": 38525,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 96,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 58
+   },
+   {
+    "t_ms": 38820,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 100,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 58
+   },
+   {
+    "t_ms": 39112,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 100,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 58
+   },
+   {
+    "t_ms": 39404,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 100,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 58
+   },
+   {
+    "t_ms": 39723,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 100,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 58
+   },
+   {
+    "t_ms": 40014,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 100,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 59
+   },
+   {
+    "t_ms": 40308,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 100,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 58
+   },
+   {
+    "t_ms": 40603,
+    "phase": "interactive",
+    "class": "INTERACTIVE",
+    "conf": 100,
+    "sched": "round_robin",
+    "cache": "lru",
+    "io_class": "unknown",
+    "ops": 58
+   }
+  ]
+ }
+}
