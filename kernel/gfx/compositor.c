@@ -1955,6 +1955,15 @@ i64 sys_win(u64 nr, u64 a, u64 b, u64 c, u64 d, u64 e)
 			fill_theme(&t);
 			return copy_to_user((void *)b, &t, sizeof(t));
 		}
+		case DESK_WORKSPACE: {
+			if (!running || (int)b < 0 || (int)b >= cfg.workspaces)
+				return -E_INVAL;
+			u64 f = irq_save();
+			switch_workspace((int)b);
+			irq_restore(f);
+			kick();
+			return 0;
+		}
 		case DESK_NOTIFY: {
 			char t[40], l1[56] = "";
 			if (strncpy_from_user(t, (const char *)b, sizeof(t)) < 0)

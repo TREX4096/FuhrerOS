@@ -197,6 +197,7 @@ enum {
 	DESK_SET_CFG = 6,	/* b = const struct fu_desk_cfg * */
 	DESK_THEME = 7,		/* b = struct fu_theme * (colours for apps) */
 	DESK_NOTIFY = 8,	/* b = title, c = body */
+	DESK_WORKSPACE = 9,	/* b = workspace index (benchmarks, scripts) */
 	DESK_REBOOT = 98,
 	DESK_POWEROFF = 99,
 };

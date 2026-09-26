@@ -61,6 +61,6 @@ timeout "${FUHRER_EXP_TIMEOUT:-3600}" "${QEMU[@]}"
 rc=$?
 set -e
 log "guest finished (qemu exit $rc)"
-grep -aoE '(SCHEDBENCH|IOBENCH|TRANSITION|TL) \{.*\}' "$EXP/serial.log" | sed -E 's/^([A-Z]+) /{"kind":"\1","data":/; s/$/}/' >"$EXP/results.jsonl" || true
+grep -aoE '(SCHEDBENCH|IOBENCH|TRANSITION|TL|FUBENCH|DESKSTRESS) \{.*\}' "$EXP/serial.log" | sed -E 's/^([A-Z]+) /{"kind":"\1","data":/; s/$/}/' >"$EXP/results.jsonl" || true
 log "$(wc -l <"$EXP/results.jsonl") result records"
 python3 "$REPO/scripts/analyze.py" "$EXP"

@@ -242,6 +242,51 @@ def main():
                "interactive→INTERACTIVE).", "", "![timeline](transition-timeline.svg)", ""]
         result["transition"] = {"summary": tr, "timeline": tl}
 
+    fb = [r["data"] for r in recs if r["kind"] == "FUBENCH"]
+    if fb:
+        order, g = [], {}
+        for d in fb:
+            k = (d["group"], d["name"])
+            if k not in g:
+                order.append(k)
+            g.setdefault(k, []).append(d)
+        md += ["## Micro-benchmarks (NEW_EXPLANATION §35)", "",
+               "| group | benchmark | median | unit | runs | CV% | note |", "|---|---|---|---|---|---|---|"]
+        for k in order:
+            runs = g[k]
+            if any(d.get("status") == "NOT RUN" for d in runs):
+                md.append(f"| {k[0]} | {k[1]} | NOT RUN | | | | {runs[0].get('note', '')} |")
+                continue
+            xs = [d["value"] for d in runs]
+            md.append(f"| {k[0]} | {k[1]} | {fmt(med(xs), 0)} | {runs[0]['unit']} | {len(xs)} | "
+                      f"{cv(xs):.0f} | {runs[-1].get('note', '')} |")
+        md.append("")
+        result["fubench"] = fb
+
+    ds = [r["data"] for r in recs if r["kind"] == "DESKSTRESS"]
+    if ds:
+        g = {}
+        for d in ds:
+            g.setdefault(d["policy"], []).append(d)
+        pols = [p for p in POLICIES if p in g]
+        rows = [("dispatch_p50_us", "probe dispatch p50 (us)"), ("dispatch_p99_us", "probe dispatch p99 (us)"),
+                ("wake_p99_us", "probe wake p99 (us)"), ("build_jobs_per_s_x100", "build-proxy jobs/s (x100)"),
+                ("copy_mb_per_s_x100", "file copy MB/s (x100)"), ("web_req_per_s_x100", "HTTP requests/s (x100)"),
+                ("net_mb_per_s_x100", "TCP stream MB/s (x100)"), ("ctx_switches_per_s", "ctx switches/s")]
+        md += [f"## Desktop stress (M17; median of {len(g[pols[0]])} runs; CV%)", "",
+               "| metric | " + " | ".join(LABEL.get(p, p) for p in pols) + " |", "|---" * (len(pols) + 1) + "|"]
+        for key, label in rows:
+            cells = []
+            for p in pols:
+                xs = [d[key] for d in g[p] if key in d]
+                cells.append(f"{fmt(med(xs), 0)} ({cv(xs):.0f}%)" if xs else "NOT RUN")
+            md.append(f"| {label} | " + " | ".join(cells) + " |")
+        md.append("| system class (mid-run) | " + " | ".join(
+            "/".join(sorted({d.get("system_class", "?") for d in g[p]})) for p in pols) + " |")
+        md += ["", "Media playback: NOT RUN (no audio/video path). The build workload is a CPU-bound proxy: "
+               "no compiler has been ported.", ""]
+        result["deskstress"] = ds
+
     md += ["## Threats to validity", "",
            "- Nested virtualisation (Windows → WSL2 → KVM): absolute times are not bare-metal times; "
            "comparisons are between policies within one boot.",
