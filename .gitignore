@@ -1,7 +1,5 @@
-.env
-out/
 build/
-*.qcow2
+.env
 *.img
+*.iso
 *.o
-__pycache__/
